@@ -10,9 +10,10 @@
       {{ token && refresh_token ? auth?.name : '点击注册' }}
     </n-button> -->
 
-    <n-button @click="showModal = true">
+    <n-button class="w-32" @click="showModal = true">
       {{ token && refresh_token ? auth?.name : '点击登录' }}
     </n-button>
+
     <n-modal
       v-model:show="showModal"
       :mask-closable="false"

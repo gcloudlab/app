@@ -134,7 +134,6 @@ const handleValidateButtonClick = (e: MouseEvent) => {
       window.$message.success('验证成功');
     } else {
       console.log(errors);
-
       window.$message.error('验证失败');
     }
   });
