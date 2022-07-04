@@ -5,7 +5,7 @@ export const themeOverrides: GlobalThemeOverrides = {
     // primaryColor: 'cyan',
   },
   Button: {
-    textColor: '#000',
+    // textColor: '#000',
   },
   Modal: {
     boxShadow: '5px 5px 5px rgba(0, 0, 0, 1)',

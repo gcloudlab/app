@@ -1,9 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  content: [],
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx,vue}'],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        login: 'url("https://img-yesmore.vercel.app/test/wallhaven-4verz8_1920x1080.png")',
+      },
+    },
   },
   plugins: [],
 };

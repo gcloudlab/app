@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router/index';
 import piniaStore from './store';
-import './assets/style/tailwindcss.css';
+import './assets/style/tailwindcss.scss';
 
 const app = createApp(App);
 app.use(router);

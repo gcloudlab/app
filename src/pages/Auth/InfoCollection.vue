@@ -1,7 +1,7 @@
 <template>
-  <n-form ref="formRef" :model="model" :rules="rules">
-    <n-form-item path="age" label="年龄">
-      <n-input v-model:value="model.age" @keydown.enter.prevent />
+  <n-form class="mt-6" ref="formRef" :model="model" :rules="rules" label-placement="left">
+    <n-form-item path="name" label="昵称">
+      <n-input v-model:value="model.name" @keydown.enter.prevent />
     </n-form-item>
     <n-form-item path="password" label="密码">
       <n-input
@@ -11,19 +11,12 @@
         @keydown.enter.prevent
       />
     </n-form-item>
-    <n-form-item ref="rPasswordFormItemRef" first path="reenteredPassword" label="重复密码">
-      <n-input
-        v-model:value="model.reenteredPassword"
-        :disabled="!model.password"
-        type="password"
-        @keydown.enter.prevent
-      />
-    </n-form-item>
+
     <n-row :gutter="[0, 24]">
       <n-col :span="24">
         <div style="display: flex; justify-content: flex-end">
           <n-button
-            :disabled="model.age === null"
+            :disabled="model.name === null"
             round
             type="primary"
             @click="handleValidateButtonClick"
@@ -34,11 +27,6 @@
       </n-col>
     </n-row>
   </n-form>
-
-  <pre
-    >{{ JSON.stringify(model, null, 2) }}
-</pre
-  >
 </template>
 
 <script setup lang="ts">
@@ -57,7 +45,7 @@ import {
 } from 'naive-ui';
 
 interface ModelType {
-  age: string | null;
+  name: string | null;
   password: string | null;
   reenteredPassword: string | null;
 }
@@ -66,34 +54,15 @@ const formRef = ref<FormInst | null>(null);
 const rPasswordFormItemRef = ref<FormItemInst | null>(null);
 
 const model = ref<ModelType>({
-  age: null,
+  name: null,
   password: null,
   reenteredPassword: null,
 });
-function validatePasswordStartWith(rule: FormItemRule, value: string): boolean {
-  return (
-    !!model.value.password &&
-    model.value.password.startsWith(value) &&
-    model.value.password.length >= value.length
-  );
-}
-function validatePasswordSame(rule: FormItemRule, value: string): boolean {
-  return value === model.value.password;
-}
 const rules: FormRules = {
-  age: [
+  name: [
     {
       required: true,
-      validator(rule: FormItemRule, value: string) {
-        if (!value) {
-          return new Error('需要年龄');
-        } else if (!/^\d*$/.test(value)) {
-          return new Error('年龄应该为整数');
-        } else if (Number(value) < 18) {
-          return new Error('年龄应该超过十八岁');
-        }
-        return true;
-      },
+      message: '请输入昵称',
       trigger: ['input', 'blur'],
     },
   ],
@@ -101,23 +70,6 @@ const rules: FormRules = {
     {
       required: true,
       message: '请输入密码',
-    },
-  ],
-  reenteredPassword: [
-    {
-      required: true,
-      message: '请再次输入密码',
-      trigger: ['input', 'blur'],
-    },
-    {
-      validator: validatePasswordStartWith,
-      message: '两次密码输入不一致',
-      trigger: 'input',
-    },
-    {
-      validator: validatePasswordSame,
-      message: '两次密码输入不一致',
-      trigger: ['blur', 'password-input'],
     },
   ],
 };
