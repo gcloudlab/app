@@ -6,7 +6,7 @@ $white: #fff;
 $black: #000;
 $gray: #ccc;
 $salmon: #e8716d;
-$smoky-black: rgba(#222222, 0.85);
+$smoky-black: rgba(#87878736, 0.5);
 
 $ff: 'Montserrat', sans-serif;
 $ff-body: 12px;
@@ -60,14 +60,13 @@ $ff-medium: 500;
 /**
   * Page background
   */
-.user {
+.auth {
   display: flex;
   justify-content: center;
   align-items: center;
 
   width: 100%;
   height: 100vh;
-  background: #ccc;
   background-size: cover;
 
   &_options-container {
@@ -80,73 +79,59 @@ $ff-medium: 500;
     justify-content: space-between;
     width: 100%;
     background-color: $smoky-black;
-    border-radius: $bdrds;
   }
 }
 
 /**
-  * Registered and Unregistered user box and text
+  * Registered and Unregistered auth box and text
   */
-.user_options-registered,
-.user_options-unregistered {
+.auth_options-registered,
+.auth_options-unregistered {
   width: 50%;
   padding: 75px 45px;
-
   color: $white;
   font-weight: $ff-light;
 }
 
-.user_registered-title,
-.user_unregistered-title {
+.auth_registered-title,
+.auth_unregistered-title {
   margin-bottom: 15px;
   font-size: 1.66rem;
   line-height: 1em;
 }
-.user_unregistered-text,
-.user_registered-text {
+.auth_unregistered-text,
+.auth_registered-text {
   font-size: 0.83rem;
   line-height: 1.4em;
 }
 
-.user_registered-login,
-.user_unregistered-signup {
+.auth_registered-login,
+.auth_unregistered-signup {
   margin-top: 30px;
-  border: 1px solid $gray;
-  border-radius: $bdrds;
   padding: 10px 30px;
-
-  color: $white;
-  text-transform: uppercase;
   line-height: 1em;
   letter-spacing: 0.2rem;
-
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-
-  &:hover {
-    color: $smoky-black;
-    background-color: $gray;
-  }
 }
 
 /**
   * Login and signup forms
   */
-.user_options-forms {
+.auth_options-forms {
+  z-index: 999;
   position: absolute;
   top: 50%;
   left: 30px;
 
   width: calc(50% - 30px);
-  min-height: 420px;
+  max-height: 150%;
+  min-height: 410px;
   background-color: $white;
-  border-radius: $bdrds;
   box-shadow: 2px 0 15px rgba($black, 0.25);
-  overflow: hidden;
 
   transform: translate3d(100%, -50%, 0);
   transition: transform 0.4s ease-in-out;
 
-  .user_forms-login {
+  .auth_forms-login {
     transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
   }
 
@@ -223,8 +208,8 @@ $ff-medium: 500;
     }
   }
 
-  .user_forms-signup,
-  .user_forms-login {
+  .auth_forms-signup,
+  .auth_forms-login {
     position: absolute;
     top: 70px;
     left: 40px;
@@ -234,15 +219,20 @@ $ff-medium: 500;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.5s ease-in-out;
+
+    h1 {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+        Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
   }
-  .user_forms-signup {
+  .auth_forms-signup {
     transform: translate3d(120px, 0, 0);
 
     .forms_buttons {
       justify-content: flex-end;
     }
   }
-  .user_forms-login {
+  .auth_forms-login {
     transform: translate3d(0, 0, 0);
     opacity: 1;
     visibility: visible;
@@ -252,18 +242,16 @@ $ff-medium: 500;
 /**
   * Triggers
   */
-.user_options-forms {
+.auth_options-forms {
   &.bounceLeft {
     animation: bounceLeft 1s forwards;
   }
 
-  .user_forms-signup {
+  .auth_forms-signup {
     animation: showSignUp 1s forwards;
   }
 
-  .user_forms-login {
-    // opacity: 0;
-    // visibility: hidden;
+  .auth_forms-login {
     transform: translate3d(0, 0, 0);
   }
 
@@ -275,26 +263,26 @@ $ff-medium: 500;
   * Responsive 990px
   */
 @media screen and (max-width: 990px) {
-  .user_options-forms {
+  .auth_options-forms {
     min-height: 350px;
 
     .forms_buttons {
       flex-direction: column;
     }
 
-    .user_forms-login {
+    .auth_forms-login {
       .forms_buttons-action {
         margin-top: 30px;
       }
     }
 
-    .user_forms-signup,
-    .user_forms-login {
+    .auth_forms-signup,
+    .auth_forms-login {
       top: 40px;
     }
 
-    .user_options-registered,
-    .user_options-unregistered {
+    .auth_options-registered,
+    .auth_options-unregistered {
       padding: 50px 45px;
     }
   }

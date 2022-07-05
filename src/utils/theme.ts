@@ -2,7 +2,8 @@ import { NConfigProvider, GlobalThemeOverrides } from 'naive-ui';
 
 export const themeOverrides: GlobalThemeOverrides = {
   common: {
-    // primaryColor: 'cyan',
+    primaryColor: '#00b0b3',
+    primaryColorHover: '#00b0b3',
   },
   Button: {
     // textColor: '#000',
