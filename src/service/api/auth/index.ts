@@ -1,6 +1,11 @@
 //login.ts
 import axios from '@/service/axios';
-import { UserLoginResponse, UserLoginRequestProps, UserRegisterRequestProps } from '@/models/auth';
+import {
+  UserLoginResponse,
+  UserLoginRequestProps,
+  UserRegisterRequestProps,
+  UserRegisterResponse,
+} from '@/models/auth';
 
 /**
  * @description: 用户登录案例
@@ -15,7 +20,7 @@ export const userLoginService = async (
 
 export const userRegisterService = async (
   params: UserRegisterRequestProps
-): Promise<UserLoginResponse> => {
+): Promise<UserRegisterResponse> => {
   return await axios.post('/user/register', params);
 };
 

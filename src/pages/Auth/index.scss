@@ -6,7 +6,7 @@ $white: #fff;
 $black: #000;
 $gray: #ccc;
 $salmon: #e8716d;
-$smoky-black: rgba(#87878736, 0.5);
+$smoky-black: rgba(#9e9e9e36, 0.5);
 
 $ff: 'Montserrat', sans-serif;
 $ff-body: 12px;
@@ -124,7 +124,7 @@ $ff-medium: 500;
 
   width: calc(50% - 30px);
   max-height: 150%;
-  min-height: 410px;
+  min-height: 420px;
   background-color: $white;
   box-shadow: 2px 0 15px rgba($black, 0.25);
 
@@ -264,7 +264,7 @@ $ff-medium: 500;
   */
 @media screen and (max-width: 990px) {
   .auth_options-forms {
-    min-height: 350px;
+    min-height: 410px;
 
     .forms_buttons {
       flex-direction: column;

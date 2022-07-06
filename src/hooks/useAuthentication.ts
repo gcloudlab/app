@@ -17,11 +17,11 @@ export const useAuth = () => {
     mainStore.onLogoutAction();
   };
 
-  const onRegister = async (registerInfo: UserRegisterRequestProps | null) => {
-    if (registerInfo) await mainStore.onRegisterAction(registerInfo);
+  const onRegister = (registerInfo: UserRegisterRequestProps | null) => {
+    if (registerInfo) mainStore.onRegisterAction(registerInfo);
   };
-  const onGetCode = (email: string) => {
-    if (email) mainStore.onMailCodeAction(email);
+  const onGetCode = async (email: string) => {
+    if (email) return await mainStore.onMailCodeAction(email);
   };
 
   return { token, onLogin, onLogout, onRegister, onGetCode, error };

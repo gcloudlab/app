@@ -11,27 +11,18 @@
       <n-input v-model:value="model.name" placeholder="请输入你的昵称" @keydown.enter.prevent />
     </n-form-item>
     <n-form-item v-if="signType === 'signup'" path="email" label="邮箱">
-      <n-input
-        v-model:value="model.email"
-        @input="handlePasswordInput"
-        placeholder="请输入邮箱"
-        @keydown.enter.prevent
-      />
+      <n-input v-model:value="model.email" placeholder="请输入邮箱" @keydown.enter.prevent />
     </n-form-item>
     <n-form-item v-if="signType === 'signup'" path="code" label="验证码">
-      <n-input
-        v-model:value="model.code"
-        @input="handlePasswordInput"
-        placeholder="请输入验证码"
-        @keydown.enter.prevent
-      />
-      <n-button class="ml-3" type="default">发送验证码</n-button>
+      <n-input v-model:value="model.code" placeholder="请输入验证码" @keydown.enter.prevent />
+      <n-button class="ml-3" type="default" :disabled="codeLock !== 60" @click="handleSendCode">{{
+        codeLock === 60 ? '发送验证码' : `已发送 ${codeLock}s`
+      }}</n-button>
     </n-form-item>
     <n-form-item path="password" label="密码">
       <n-input
         v-model:value="model.password"
         type="password"
-        @input="handlePasswordInput"
         placeholder="请输入密码"
         @keydown.enter.prevent
       />
@@ -40,7 +31,7 @@
       <button type="button" class="forms_buttons-forgot">
         {{ signType === 'signin' ? '忘记密码? 我也帮不了你' : '赶紧找个小本本把密码记住' }}
       </button>
-      <n-button type="default" round class="w-20" @click="handleValidateButtonClick">
+      <n-button type="default" round @click="handleValidate">
         {{ signType === 'signin' ? '登陆' : '注册' }}
       </n-button>
     </div>
@@ -49,18 +40,11 @@
 
 <script setup lang="ts">
 import { PropType, ref, toRefs } from 'vue';
-import {
-  FormInst,
-  FormItemInst,
-  FormItemRule,
-  FormRules,
-  NInput,
-  NFormItem,
-  NButton,
-  NCol,
-  NRow,
-  NForm,
-} from 'naive-ui';
+import { useRouter } from 'vue-router';
+import { FormInst, FormItemRule, FormRules, NInput, NFormItem, NButton, NForm } from 'naive-ui';
+import { useAuth } from '@/hooks';
+import { validateEmail } from '@/utils/email';
+import { useStorage } from '@/utils/useStorage';
 
 export interface ModelType {
   name: string | null;
@@ -80,23 +64,27 @@ const props = defineProps({
     default: 'signin',
   },
 });
+let emits = defineEmits(['afterSignup']);
 
+const router = useRouter();
+const { onLogin, onRegister, onGetCode } = useAuth();
 const formRef = ref<FormInst | null>(null);
-const rPasswordFormItemRef = ref<FormItemInst | null>(null);
-
+const userStorage = useStorage('user');
 const model = ref<ModelType>({
-  name: null,
+  name: userStorage?.name ?? null,
   password: null,
   email: null,
   code: null,
 });
+const codeLock = ref<number>(60);
+const timer = ref();
 const rules: FormRules = {
   name: [
     {
       required: true,
       trigger: ['input', 'blur'],
       validator(rule: FormItemRule, value: string) {
-        if (value && value.length < 6) {
+        if (!value || value.length < 6) {
           return new Error('昵称长度至少6位');
         }
         return true;
@@ -107,7 +95,7 @@ const rules: FormRules = {
     {
       required: true,
       validator(rule: FormItemRule, value: string) {
-        if (value && value.length < 6) {
+        if (!value || value.length < 6) {
           return new Error('密码长度至少6位');
         }
         return true;
@@ -118,36 +106,85 @@ const rules: FormRules = {
     {
       required: true,
       validator(rule: FormItemRule, value: string) {
-        if (value && value.length < 6) {
-          return new Error('请输入正确邮箱格式');
+        if (!validateEmail(value)) {
+          return new Error('请输入有效邮箱');
+        }
+        return true;
+      },
+    },
+  ],
+  code: [
+    {
+      required: true,
+      validator(rule: FormItemRule, value: string) {
+        if (!value || value.length < 6) {
+          return new Error('验证码长度错误');
         }
         return true;
       },
     },
   ],
 };
-
-const handlePasswordInput = () => {
-  if (model.value.email) {
-    rPasswordFormItemRef.value?.validate({ trigger: 'password-input' });
+const handleValidate = () => {
+  formRef.value?.validate(errors => {
+    if (!errors) {
+      handleSubmit();
+    } else {
+      window.$message.error('请正确填写');
+    }
+  });
+};
+const handleSubmit = async () => {
+  if (props.signType === 'signin') {
+    await handleSignin();
+  } else if (props.signType === 'signup') {
+    handleSignup();
+  } else {
+    window.$message.warning('请填写完整');
   }
 };
-const handleValidateButtonClick = (e: MouseEvent) => {
-  console.log(model.value);
-
-  e.preventDefault();
-  if (model.value.name && model.value.email && model.value.password && model.value.code) {
-    formRef.value?.validate(errors => {
-      if (!errors) {
-        window.$message.success('验证成功');
-      } else {
-        // console.log(errors);
-        window.$message.error('验证失败');
-      }
-    });
+const handleSendCode = async () => {
+  if (
+    props.signType === 'signup' &&
+    codeLock.value === 60 &&
+    model.value.email &&
+    validateEmail(model.value.email)
+  ) {
+    if (await onGetCode(model.value.email)) {
+      timer.value = setInterval(() => {
+        codeLock.value -= 1;
+        if (codeLock.value <= 0) {
+          clearInterval(timer.value);
+          codeLock.value = 60;
+        }
+      }, 1000);
+    }
   } else {
-    window.$message.error('请填写完整');
+    window.$message.warning('请填写有效邮箱');
   }
+};
+const handleSignin = async () => {
+  if (model.value.name && model.value.password) {
+    await onLogin({
+      name: model.value.name,
+      password: model.value.password,
+    });
+    router.back();
+  }
+};
+const handleSignup = () => {
+  if (model.value.name && model.value.password && model.value.email && model.value.code) {
+    onRegister({
+      name: model.value.name,
+      password: model.value.password,
+      email: model.value.email,
+      code: model.value.code,
+    });
+    afterSignup();
+  }
+};
+const afterSignup = () => {
+  emits('afterSignup', 'signin');
 };
 toRefs(props);
 </script>

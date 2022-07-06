@@ -2,8 +2,17 @@ export type UserTokenType = string;
 
 export interface UserLoginResponse {
   data: {
+    msg: string;
     token: UserTokenType;
     refresh_token: UserTokenType;
+    email: string;
+  };
+  status: number;
+}
+
+export interface UserRegisterResponse {
+  data: {
+    msg: string;
   };
   status: number;
 }

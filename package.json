@@ -1,5 +1,5 @@
 {
-  "name": "gcloud-app",
+  "name": "app",
   "version": "0.0.2",
   "license": "GPL-3.0",
   "scripts": {
@@ -14,13 +14,15 @@
   "dependencies": {
     "@types/qs": "^6.9.7",
     "axios": "^0.24.0",
+    "lodash": "^4.17.21",
     "naive-ui": "^2.30.8",
     "nprogress": "^0.2.0",
     "pinia": "^2.0.0-rc.10",
     "qs": "^6.10.3",
     "vfonts": "^0.1.0",
     "vue": "^3.2.2",
-    "vue-router": "4"
+    "vue-router": "4",
+    "vue3-lottie": "^2.2.5"
   },
   "devDependencies": {
     "@babel/types": "^7.16.0",
