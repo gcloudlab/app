@@ -60,7 +60,7 @@ axiosInstance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     const token = useStorage('token');
     if (token !== '') {
-      config.headers!['Authorization'] = `Bearer ${token}`;
+      config.headers!['Authorization'] = `${token}`;
     }
     return config;
   },

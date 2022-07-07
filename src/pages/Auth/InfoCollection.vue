@@ -43,6 +43,8 @@ import { PropType, ref, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 import { FormInst, FormItemRule, FormRules, NInput, NFormItem, NButton, NForm } from 'naive-ui';
 import { useAuth } from '@/hooks';
+import { storeToRefs } from 'pinia';
+import { useAuthOutsideStore } from '@/store/modules/auth';
 import { validateEmail } from '@/utils/email';
 import { useStorage } from '@/utils/useStorage';
 
@@ -64,14 +66,16 @@ const props = defineProps({
     default: 'signin',
   },
 });
-let emits = defineEmits(['afterSignup']);
+const emits = defineEmits(['afterSignup']);
 
 const router = useRouter();
+
+const authStore = useAuthOutsideStore();
 const { onLogin, onRegister, onGetCode } = useAuth();
+
 const formRef = ref<FormInst | null>(null);
-const userStorage = useStorage('user');
 const model = ref<ModelType>({
-  name: userStorage?.name ?? null,
+  name: authStore.user_auth?.name || null,
   password: null,
   email: null,
   code: null,
@@ -169,7 +173,9 @@ const handleSignin = async () => {
       name: model.value.name,
       password: model.value.password,
     });
-    router.back();
+    if (authStore.user_status) {
+      router.back();
+    }
   }
 };
 const handleSignup = () => {

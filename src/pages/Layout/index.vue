@@ -1,21 +1,31 @@
 <template>
   <div>
-    <n-button class="w-32" type="primary" @click="router.push('/sign')">
-      {{ token && refresh_token ? auth?.name : '点击登录' }}
+    <n-button class="" type="primary" @click="router.push('/sign')">
+      {{ sign_status ? `已登陆：${auth?.name}-${auth?.email}` : '点击登录' }}
     </n-button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { onMounted } from 'vue';
+import { useRouter, onBeforeRouteLeave } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { useAuthOutsideStore } from '../../store/modules/auth';
-import { useToken } from '../../hooks/';
+import { useAuthOutsideStore } from '@/store/modules/auth';
+import { useAuth } from '@/hooks/';
+import { NButton } from 'naive-ui';
 
 const router = useRouter();
-const mainStore = useAuthOutsideStore();
-const { auth } = storeToRefs(mainStore);
-const { token, refresh_token } = useToken();
+const authStore = useAuthOutsideStore();
+const { onGetUserDetailAndCheckAuth } = useAuth();
+onBeforeRouteLeave(leaveGuard => {
+  if (leaveGuard.path !== '/sign') {
+    onGetUserDetailAndCheckAuth();
+  }
+});
+onMounted(() => {
+  onGetUserDetailAndCheckAuth();
+});
+const { auth, sign_status } = storeToRefs(authStore);
 </script>
 
 <style lang="scss" scoped></style>

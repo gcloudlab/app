@@ -5,6 +5,7 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'Layout',
     component: () => import('@/pages/Layout/index.vue'),
+    // children: [],
   },
   {
     path: '/sign',

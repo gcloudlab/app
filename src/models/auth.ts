@@ -5,7 +5,6 @@ export interface UserLoginResponse {
     msg: string;
     token: UserTokenType;
     refresh_token: UserTokenType;
-    email: string;
   };
   status: number;
 }
@@ -22,10 +21,21 @@ export interface UserLoginRequestProps {
   password: string;
 }
 
-export interface UserInfo {
+export interface UserDetailResponse {
+  data: {
+    name: string;
+    identity?: string;
+    email?: string;
+    avatar?: string;
+    msg?: string;
+  };
+  status: number;
+}
+
+export interface UserDetail {
   name: string;
+  identity?: string;
   email?: string;
-  password?: string;
   avatar?: string;
 }
 
@@ -34,4 +44,12 @@ export interface UserRegisterRequestProps {
   email?: string;
   code?: string;
   password?: string;
+}
+
+export interface RefreshAuthResponse {
+  data: {
+    token: UserTokenType;
+    refresh_token: UserTokenType;
+  };
+  status: number;
 }
