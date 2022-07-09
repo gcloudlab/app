@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { NButton } from 'naive-ui';
-import InfoCollection from './InfoCollection.vue';
+import InfoCollection from './info-collection.vue';
 import './index.scss';
 
 import SpaceJson from '@/assets/lotties/space.json';

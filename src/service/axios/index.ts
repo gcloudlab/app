@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { showMessage } from './status';
-import { useStorage } from '@/utils/useStorage';
+import { useStorage } from '@/utils/use-storage';
 
 // 如果请求花费了超过 `timeout` 的时间，请求将被中断
 axios.defaults.timeout = 5000;

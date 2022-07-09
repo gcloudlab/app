@@ -4,13 +4,19 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Layout',
-    component: () => import('@/pages/Layout/index.vue'),
-    // children: [],
+    component: () => import('@/pages/layout/index.vue'),
+    children: [
+      {
+        path: '/share',
+        name: 'Share',
+        component: () => import('@/pages/share/index.vue'),
+      },
+    ],
   },
   {
     path: '/sign',
     name: 'Sign',
-    component: () => import('@/pages/Auth/index.vue'),
+    component: () => import('@/pages/auth/index.vue'),
   },
 ];
 

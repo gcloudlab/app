@@ -13,7 +13,7 @@ import {
   UserDetailResponse,
   UserDetail,
 } from '@/models/auth';
-import { useStorage } from '@/utils/useStorage';
+import { useStorage } from '@/utils/use-storage';
 
 const initialState = {
   // auth: useStorage('user'),
@@ -27,6 +27,7 @@ export interface AuthState {
   refresh_token?: string | null;
   code?: string;
   sign_status?: boolean;
+  online_status?: boolean;
 }
 
 export const useAuthStore = defineStore({
@@ -38,12 +39,14 @@ export const useAuthStore = defineStore({
       refresh_token: initialState.refresh_token || '',
       code: '',
       sign_status: false,
+      online_status: false,
     } as AuthState),
   getters: {
     user_auth: state => state.auth,
     user_token: state => state.token,
     user_refresh_token: state => state.refresh_token,
     user_status: state => state.sign_status,
+    user_online: state => state.online_status,
   },
   actions: {
     async onLoginAction(loginInfo: UserLoginRequestProps) {
@@ -64,10 +67,11 @@ export const useAuthStore = defineStore({
       }
     },
     onLogoutAction() {
-      this.token = '';
-      this.refresh_token = '';
-      this.auth = null;
+      delete this.token;
+      delete this.refresh_token;
+      delete this.auth;
       this.sign_status = false;
+      this.online_status = false;
       localStorage.clear();
     },
     onRegisterAction(registerInfo: UserRegisterRequestProps) {
@@ -120,6 +124,7 @@ export const useAuthStore = defineStore({
             avatar: res.data.avatar,
           };
           this.sign_status = true;
+          this.online_status = true;
           return true;
         } else if (res.data.msg === 'expired token') {
           window.$message.warning('登陆已过期');
@@ -127,8 +132,10 @@ export const useAuthStore = defineStore({
           localStorage.removeItem('token');
           localStorage.removeItem('sign_status');
           this.sign_status = false;
+          this.online_status = false;
         } else if (res.data.msg === 'not found') {
           this.sign_status = false;
+          this.online_status = false;
           window.$message.warning('找不到用户');
         }
         return false;

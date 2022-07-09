@@ -43,10 +43,8 @@ import { PropType, ref, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 import { FormInst, FormItemRule, FormRules, NInput, NFormItem, NButton, NForm } from 'naive-ui';
 import { useAuth } from '@/hooks';
-import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { validateEmail } from '@/utils/email';
-import { useStorage } from '@/utils/useStorage';
 
 export interface ModelType {
   name: string | null;
