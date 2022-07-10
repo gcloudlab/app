@@ -1,15 +1,28 @@
-import { NConfigProvider, GlobalThemeOverrides } from 'naive-ui';
+import { NConfigProvider, GlobalThemeOverrides, MessageProviderProps } from 'naive-ui';
+
+export const primaryColor = '#00b0b3';
+export const infoColor = '#f570b0';
 
 export const themeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: '#00b0b3',
+    primaryColor: primaryColor, // 薄荷
+    infoColor: infoColor,
     // primaryColorHover: '#00b0b3',
   },
   Button: {
     // textColor: '#ccc',
     // textColorHover: '#ccc',
-    colorHoverPrimary: '#00b0b3',
+    colorHoverPrimary: primaryColor,
     textColorSuccess: '#333639',
+    textColorInfo: infoColor,
+    colorHoverInfo: infoColor,
+    colorFocusInfo: infoColor,
+    colorPressedInfo: infoColor,
+    colorDisabledInfo: infoColor,
+    borderInfo: `1px dashed ${infoColor}`,
+    borderHoverInfo: `1px solid ${infoColor}`,
+    borderFocusInfo: `1px solid ${infoColor}`,
+    borderPressedInfo: `1px solid ${infoColor}`,
   },
   Modal: {
     boxShadow: '5px 5px 5px rgba(0, 0, 0, 1)',
@@ -18,4 +31,15 @@ export const themeOverrides: GlobalThemeOverrides = {
     colorWarning: 'grey',
     peers: {},
   },
+  Tabs: {
+    tabTextColorActiveLine: primaryColor,
+  },
+};
+
+export type MessageThemeOverrides = NonNullable<MessageProviderProps['themeOverrides']>;
+export const messageThemeOverrides: MessageThemeOverrides = {
+  colorWarning: '#e2e52a',
+  // textColorWarning: '#e2e52a',
+  // iconColorWarning: 'cyan',
+  boxShadowWarning: '2px 2px 4px #b6b6b6',
 };

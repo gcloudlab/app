@@ -17,8 +17,8 @@
         </n-badge>
       </template>
       <template #header>
-        <n-text> {{ auth?.name || '未注册用户' }} </n-text> <br />
-        <n-text> {{ auth?.email }} </n-text>
+        <n-text> 用户：{{ auth?.name || '未注册用户' }} </n-text> <br />
+        <n-text> Email：{{ auth?.email }} </n-text>
         <!-- <Button type="success"></Button> -->
       </template>
       <div class="sign">
@@ -38,8 +38,9 @@ import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { NAvatar, NPopover, NBadge, NButton, NText } from 'naive-ui';
-import Button from '@/components/button/index.vue';
+// import Button from '@/components/button/index.vue';
 import { useAuth } from '@/hooks';
+import Loading from '@/components/loading/index.vue';
 
 export interface AvatarProps {
   src: string;
