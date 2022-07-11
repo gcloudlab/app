@@ -1,5 +1,9 @@
 <template>
-  <div>share</div>
+  <div>
+    <transition name="fade-in">
+      <button>1221412</button>
+    </transition>
+  </div>
 </template>
 
 <script setup lang="ts"></script>

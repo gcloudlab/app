@@ -1,4 +1,3 @@
-//login.ts
 import axios from '@/service/axios';
 import {
   UserLoginResponse,

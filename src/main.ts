@@ -7,6 +7,7 @@ import Vue3Lottie from 'vue3-lottie';
 import 'vue3-lottie/dist/style.css';
 import '@/assets/style/tailwindcss.scss';
 import '@/assets/style/themeOverride.scss';
+import '@/assets/style/transition.scss';
 
 const app = createApp(App);
 app.use(Vue3Lottie);

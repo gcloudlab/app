@@ -5,7 +5,13 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     name: 'Layout',
     component: () => import('@/pages/layout/index.vue'),
+    redirect: '/home',
     children: [
+      {
+        path: '/home',
+        name: 'Home',
+        component: () => import('@/pages/home/index.vue'),
+      },
       {
         path: '/share',
         name: 'Share',

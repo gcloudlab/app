@@ -9,7 +9,13 @@
       :tab-style="{}"
     >
       <template #prefix>
-        <n-image width="100" src="https://img-yesmore.vercel.app/gcloud/gcloud-log.png" />
+        <transition name="fade-in">
+          <n-image
+            width="100"
+            preview-disabled
+            src="https://img-yesmore.vercel.app/gcloud/gcloud-log.png"
+          />
+        </transition>
       </template>
       <n-tab
         v-for="item in tabs"
@@ -34,7 +40,7 @@ import Avatar from '@/components/avatar/index.vue';
 
 const router = useRouter();
 const tabs = ref([
-  { name: 'home', label: '主页', path: '/' },
+  { name: 'home', label: '主页', path: '/home' },
   { name: 'share', label: '分享', path: '/share' },
   { name: 'community', label: '社区', path: '/community' },
 ]);
