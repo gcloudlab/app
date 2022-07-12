@@ -8,18 +8,26 @@ const transformFileList = (fileList: FileListResponseData[]): FileListData[] => 
     let folder = folders[i];
     files[i] = {
       id: folder.id,
+      parent_id: folder.parent_id,
       identity: folder.identity,
       name: folder.name,
       files: [],
-      file_count: 0,
+      count: 0,
+      size: 0,
     };
     child_files.map(file => {
-      if (
-        folder.name === '图片' &&
-        (file.ext === '.png' || file.ext === '.jpg' || file.ext === '.jpeg')
-      ) {
+      // 找父文件夹
+      if (file.parent_id === folder.id) {
         files[i].files?.push(file);
-        files[i].file_count++;
+        // files[i].count += 1;
+        files[i].size += file.size;
+      } else if (
+        file.parent_id === 0 &&
+        file.ext !== '' &&
+        files.find(f => f.id === file.id) === undefined
+      ) {
+        // 没有父文件夹的文件
+        files.push(file);
       }
     });
   }

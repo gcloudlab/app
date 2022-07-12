@@ -1,5 +1,6 @@
 export interface FileListResponseData {
   id: number;
+  parent_id: number;
   identity: string;
   repository_identity?: string;
   name: string;
@@ -16,10 +17,7 @@ export interface FileListResponse {
   status: number;
 }
 
-export interface FileListData {
-  id: number;
-  identity: string;
-  name: string;
+export interface FileListData extends FileListResponseData {
   files?: FileListResponseData[];
-  file_count: number;
+  count?: number;
 }

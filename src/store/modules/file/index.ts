@@ -17,8 +17,7 @@ export const useFileStore = defineStore({
       user_files: [],
     } as FileState),
   getters: {
-    get_files_count: state =>
-      state.user_files.map(folder => folder.file_count).reduce((a, b) => a + b, 0),
+    get_files_count: state => state.files_count,
     get_user_files: state => state.user_files,
   },
   actions: {
@@ -26,8 +25,11 @@ export const useFileStore = defineStore({
       try {
         let res = await getFileList();
         if (res.status === 200) {
-          this.files_count = res.data.count;
           this.user_files = transformFileList(res.data.list);
+          this.files_count = this.user_files.reduce((prev, cur) => {
+            if (cur.files) return prev + cur.files?.length || 0;
+            return prev + 1;
+          }, 0);
         }
       } catch (error) {
         window.$message.error('出错了');

@@ -15,6 +15,7 @@ const { onGetFileList } = useFiles();
 onMounted(async () => {
   await onGetFileList();
   console.log(fileStore.get_user_files);
+  console.log(fileStore.get_files_count);
 });
 
 const { files_count, user_files } = storeToRefs(fileStore);
