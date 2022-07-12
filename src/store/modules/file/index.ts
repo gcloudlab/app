@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import piniaStore from '@/store';
 import { getFileList } from '@/service/api/file';
 import type { FileListData, FileListResponseData } from '@/models/file';
-import transformFileList from '@/utils/transform-file-list';
+import generateTree from '@/utils/transform-file-list';
 
 export interface FileState {
   files_count: number;
@@ -25,9 +25,9 @@ export const useFileStore = defineStore({
       try {
         let res = await getFileList();
         if (res.status === 200) {
-          this.user_files = transformFileList(res.data.list);
+          this.user_files = generateTree(res.data.list, 0);
           this.files_count = this.user_files.reduce((prev, cur) => {
-            if (cur.files) return prev + cur.files?.length || 0;
+            if (cur.children && cur.children.length !== 0) return prev + cur.children.length;
             return prev + 1;
           }, 0);
         }

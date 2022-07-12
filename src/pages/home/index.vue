@@ -1,11 +1,22 @@
 <template>
-  <div class="home">home: {{ files_count }}</div>
-  {{ user_files }}
+  <div class="home">
+    <n-tree
+      block-line
+      :data="user_files"
+      key-field="identity"
+      label-field="name"
+      children-field="children"
+      :checkable="true"
+      expand-on-click
+      selectable
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import { NTree } from 'naive-ui';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { useFiles } from '@/hooks/useFiles';
 

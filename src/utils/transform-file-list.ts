@@ -1,37 +1,48 @@
-import type { FileListData, FileListResponseData } from '@/models/file';
+import type { FileListData } from '@/models/file';
 
-const transformFileList = (fileList: FileListResponseData[]): FileListData[] => {
-  let files: FileListData[] = [];
-  const folders = fileList.filter(file => file.ext === '');
-  const child_files = fileList.filter(file => file.ext !== '');
-  for (let i = 0; i < folders.length; i++) {
-    let folder = folders[i];
-    files[i] = {
-      id: folder.id,
-      parent_id: folder.parent_id,
-      identity: folder.identity,
-      name: folder.name,
-      files: [],
-      count: 0,
-      size: 0,
-    };
-    child_files.map(file => {
-      // 找父文件夹
-      if (file.parent_id === folder.id) {
-        files[i].files?.push(file);
-        // files[i].count += 1;
-        files[i].size += file.size;
-      } else if (
-        file.parent_id === 0 &&
-        file.ext !== '' &&
-        files.find(f => f.id === file.id) === undefined
-      ) {
-        // 没有父文件夹的文件
-        files.push(file);
-      }
+const transformToFileTree = (fileList: FileListData[]): FileListData[] => {
+  return fileList.filter(folder => {
+    folder.children = fileList.filter(file => {
+      return file.id === file.parent_id;
     });
-  }
-  return files;
+    return folder.parent_id === 0;
+  });
 };
 
-export default transformFileList;
+const generateTree = (list: FileListData[], rootId: number) => {
+  if (!Array.isArray(list)) {
+    new Error('type only Array');
+    return list;
+  }
+  const objMap: any = {}; // 暂存数组以 id 为 key的映射关系
+  const result = []; // 结果
+
+  for (const item of list) {
+    const id = item.id;
+    const parentId = item.parent_id;
+
+    // 该元素有可能已经放入map中，（找不到该项的parentId时 会先放入map
+    objMap[id] = !objMap[id] ? item : { ...item, ...objMap[id] };
+
+    const treeItem = objMap[id]; // 找到映射关系那一项（注意这里是引用）
+
+    if (parentId === rootId) {
+      // 已经到根元素则将映射结果放进结果集
+      result.push(treeItem);
+    } else {
+      // 若父元素不存在，初始化父元素
+      if (!objMap[parentId]) {
+        objMap[parentId] = {};
+      }
+
+      // 若无该根元素则放入map中
+      if (!objMap[parentId]['children']) {
+        objMap[parentId]['children'] = [];
+      }
+      objMap[parentId]['children'].push(treeItem);
+    }
+  }
+  return result;
+};
+
+export default generateTree;

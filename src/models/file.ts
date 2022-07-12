@@ -18,6 +18,6 @@ export interface FileListResponse {
 }
 
 export interface FileListData extends FileListResponseData {
-  files?: FileListResponseData[];
+  children?: FileListResponseData[];
   count?: number;
 }
