@@ -16,6 +16,8 @@ const generateTree = (list: FileListData[], rootId: number) => {
   }
   const objMap: any = {}; // 暂存数组以 id 为 key的映射关系
   const result = []; // 结果
+  const other = [];
+  let otherSize = 0;
 
   for (const item of list) {
     const id = item.id;
@@ -26,13 +28,16 @@ const generateTree = (list: FileListData[], rootId: number) => {
 
     const treeItem = objMap[id]; // 找到映射关系那一项（注意这里是引用）
 
-    if (parentId === rootId) {
+    if (parentId === rootId && item.ext === '') {
       // 已经到根元素则将映射结果放进结果集
-      result.push(treeItem);
+      result.push({ ...treeItem, isRoot: true });
+    } else if (parentId === rootId && item.ext !== '') {
+      other.push(treeItem);
+      otherSize += treeItem.size;
     } else {
       // 若父元素不存在，初始化父元素
       if (!objMap[parentId]) {
-        objMap[parentId] = {};
+        objMap[parentId] = { size: 0 };
       }
 
       // 若无该根元素则放入map中
@@ -40,9 +45,15 @@ const generateTree = (list: FileListData[], rootId: number) => {
         objMap[parentId]['children'] = [];
       }
       objMap[parentId]['children'].push(treeItem);
+      objMap[parentId]['size'] += treeItem.size;
     }
   }
-  return result;
+
+  return [
+    ...result,
+    { name: '其他文件', identity: 'other', size: otherSize, isRoot: true, children: other },
+    // { name: '所有文件', identity: 'all', size: 0, isRoot: true, children: list },
+  ];
 };
 
 export default generateTree;

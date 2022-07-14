@@ -9,19 +9,19 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '/home',
-        name: 'Home',
+        name: 'home',
         component: () => import('@/pages/home/index.vue'),
       },
       {
         path: '/share',
-        name: 'Share',
+        name: 'share',
         component: () => import('@/pages/share/index.vue'),
       },
     ],
   },
   {
     path: '/sign',
-    name: 'Sign',
+    name: 'sign',
     component: () => import('@/pages/auth/index.vue'),
   },
 ];

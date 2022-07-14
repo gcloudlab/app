@@ -4,6 +4,7 @@
       <template #trigger>
         <n-badge :show="showStatus" dot :type="status">
           <n-avatar
+            class="animate__animated animate__fadeIn faster"
             :src="src"
             :size="size"
             :fallback-src="fallbackSrc"
@@ -40,7 +41,6 @@ import { useAuthOutsideStore } from '@/store/modules/auth';
 import { NAvatar, NPopover, NBadge, NButton, NText } from 'naive-ui';
 // import Button from '@/components/button/index.vue';
 import { useAuth } from '@/hooks';
-import Loading from '@/components/loading/index.vue';
 
 export interface AvatarProps {
   src: string;

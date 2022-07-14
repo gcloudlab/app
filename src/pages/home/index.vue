@@ -1,35 +1,25 @@
 <template>
-  <div class="home">
-    <n-tree
-      block-line
-      :data="user_files"
-      key-field="identity"
-      label-field="name"
-      children-field="children"
-      :checkable="true"
-      expand-on-click
-      selectable
-    />
+  <div class="home flex">
+    <div class="file-tree-bar w-48 md:w-56">
+      <FileList />
+    </div>
+    <div>1</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import { NTree } from 'naive-ui';
 import { useFileOutsideStore } from '@/store/modules/file';
-import { useFiles } from '@/hooks/useFiles';
+import FileList from './file-list.vue';
 
 const fileStore = useFileOutsideStore();
-const { onGetFileList } = useFiles();
-
-onMounted(async () => {
-  await onGetFileList();
-  console.log(fileStore.get_user_files);
-  console.log(fileStore.get_files_count);
-});
 
 const { files_count, user_files } = storeToRefs(fileStore);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.file-tree-bar {
+  /* min-height: 90vh; */
+  background: rgba(210, 210, 210, 0.324);
+}
+</style>

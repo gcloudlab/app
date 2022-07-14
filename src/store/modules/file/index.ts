@@ -7,6 +7,7 @@ import generateTree from '@/utils/transform-file-list';
 export interface FileState {
   files_count: number;
   user_files: FileListData[];
+  files_size: number;
 }
 
 export const useFileStore = defineStore({
@@ -15,6 +16,7 @@ export const useFileStore = defineStore({
     ({
       files_count: 0,
       user_files: [],
+      files_size: 0,
     } as FileState),
   getters: {
     get_files_count: state => state.files_count,
@@ -30,6 +32,11 @@ export const useFileStore = defineStore({
             if (cur.children && cur.children.length !== 0) return prev + cur.children.length;
             return prev + 1;
           }, 0);
+          this.files_size = res.data.list.reduce((prev, cur) => {
+            if (cur && cur.size !== 0) return prev + cur.size;
+            return prev + 1;
+          }, 0);
+          // console.log(this.user_files, this.files_size);
         }
       } catch (error) {
         window.$message.error('出错了');

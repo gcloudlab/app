@@ -2,20 +2,19 @@
   <div class="layout-header shadow">
     <n-tabs
       class="header-tabs px-4 py-2"
+      :value="(currentRoute as string)"
       type="line"
       size="medium"
-      default-value="home"
       :bar-width="0"
-      :tab-style="{}"
     >
       <template #prefix>
-        <transition name="fade-in">
-          <n-image
-            width="100"
-            preview-disabled
-            src="https://img-yesmore.vercel.app/gcloud/gcloud-log.png"
-          />
-        </transition>
+        <n-image
+          class="animate__animated animate__fadeIn faster"
+          width="100"
+          preview-disabled
+          @click="router.push('/home')"
+          src="https://img-yesmore.vercel.app/gcloud/gcloud-log.png"
+        />
       </template>
       <n-tab
         v-for="item in tabs"
@@ -39,6 +38,8 @@ import { NTabs, NTab, NImage } from 'naive-ui';
 import Avatar from '@/components/avatar/index.vue';
 
 const router = useRouter();
+
+const currentRoute = ref(router.currentRoute.value.name ?? 'home');
 const tabs = ref([
   { name: 'home', label: '主页', path: '/home' },
   { name: 'share', label: '分享', path: '/share' },
