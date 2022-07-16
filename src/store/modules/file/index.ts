@@ -3,6 +3,7 @@ import piniaStore from '@/store';
 import { getFileList } from '@/service/api/file';
 import type { FileListData, FileListResponseData } from '@/models/file';
 import generateTree from '@/utils/transform-file-list';
+import { onError } from '@/utils/messages';
 
 export interface FileState {
   files_count: number;
@@ -21,6 +22,7 @@ export const useFileStore = defineStore({
   getters: {
     get_files_count: state => state.files_count,
     get_user_files: state => state.user_files,
+    get_user_files_size: state => state.files_size,
   },
   actions: {
     async onGetFileListAction() {
@@ -32,14 +34,19 @@ export const useFileStore = defineStore({
             if (cur.children && cur.children.length !== 0) return prev + cur.children.length;
             return prev + 1;
           }, 0);
-          this.files_size = res.data.list.reduce((prev, cur) => {
-            if (cur && cur.size !== 0) return prev + cur.size;
-            return prev + 1;
-          }, 0);
+          this.files_size = Number(
+            (
+              res.data.list.reduce((prev, cur) => {
+                if (cur && cur.size !== 0) return prev + cur.size;
+                return prev + 1;
+              }, 0) /
+              10 ** 6
+            ).toFixed(2)
+          );
           // console.log(this.user_files, this.files_size);
         }
       } catch (error) {
-        window.$message.error('出错了');
+        onError();
       }
     },
   },

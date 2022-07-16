@@ -1,12 +1,18 @@
 import { NConfigProvider, GlobalThemeOverrides, MessageProviderProps } from 'naive-ui';
 
-export const primaryColor = '#00b0b3';
-export const infoColor = '#f570b0';
+export const primaryColor = '#00b0b3'; // 薄荷
+export const infoColor = '#66b0ff'; // 蓝
+export const successColor = '#00b850'; // 死绿
+export const warningColor = '#f06c33'; // 砖红
+export const errorColor = '#ff6666'; // 酒红
 
 export const themeOverrides: GlobalThemeOverrides = {
   common: {
-    primaryColor: primaryColor, // 薄荷
+    primaryColor: primaryColor,
     infoColor: infoColor,
+    successColor: successColor,
+    warningColor: warningColor,
+    errorColor: errorColor,
     // primaryColorHover: '#00b0b3',
   },
   Button: {
@@ -42,4 +48,5 @@ export const messageThemeOverrides: MessageThemeOverrides = {
   // textColorWarning: '#e2e52a',
   // iconColorWarning: 'cyan',
   boxShadowWarning: '2px 2px 4px #b6b6b6',
+  boxShadowError: '2px 2px 4px #b6b6b6',
 };

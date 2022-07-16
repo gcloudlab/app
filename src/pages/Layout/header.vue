@@ -13,7 +13,7 @@
           width="100"
           preview-disabled
           @click="router.push('/home')"
-          src="https://img-yesmore.vercel.app/gcloud/gcloud-log.png"
+          src="./src/assets/gcloud.png"
         />
       </template>
       <n-tab
@@ -25,26 +25,36 @@
         {{ item.label }}
       </n-tab>
       <template #suffix>
-        <Avatar src="xx.jps" size="large" bordered objectFit="cover" :showStatus="true" />
+        <Avatar
+          :src="auth?.avatar || 'default.png'"
+          size="large"
+          bordered
+          objectFit="contain"
+          :showStatus="true"
+        />
       </template>
     </n-tabs>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
 import { NTabs, NTab, NImage } from 'naive-ui';
 import Avatar from '@/components/avatar/index.vue';
+import { useAuthOutsideStore } from '@/store/modules/auth';
 
 const router = useRouter();
+const authStore = useAuthOutsideStore();
+const currentRoute = computed(() => router.currentRoute.value.name ?? 'home');
 
-const currentRoute = ref(router.currentRoute.value.name ?? 'home');
 const tabs = ref([
   { name: 'home', label: '主页', path: '/home' },
   { name: 'share', label: '分享', path: '/share' },
   { name: 'community', label: '社区', path: '/community' },
 ]);
+const { auth } = storeToRefs(authStore);
 </script>
 
 <style lang="scss">

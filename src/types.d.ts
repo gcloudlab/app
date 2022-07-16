@@ -6,6 +6,7 @@ declare global {
   interface Window {
     $message: {
       success: (content: ContentType, options?: MessageOptions) => MessageReactive;
+      info: (content: ContentType, options?: MessageOptions) => MessageReactive;
       warning: (content: ContentType, options?: MessageOptions) => MessageReactive;
       error: (content: ContentType, options?: MessageOptions) => MessageReactive;
     };

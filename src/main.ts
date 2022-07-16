@@ -4,10 +4,6 @@ import App from './App.vue';
 import router from './router/index';
 import piniaStore from './store';
 import Vue3Lottie from 'vue3-lottie';
-import 'vue3-lottie/dist/style.css';
-import '@/assets/style/tailwindcss.scss';
-import '@/assets/style/themeOverride.scss';
-import 'animate.css';
 
 const app = createApp(App);
 app.use(Vue3Lottie);

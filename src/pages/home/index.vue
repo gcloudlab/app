@@ -1,25 +1,43 @@
 <template>
   <div class="home flex">
-    <div class="file-tree-bar w-48 md:w-56">
-      <FileList />
+    <div class="file-tree-bar w-48 md:w-60 animate__animated animate__fadeIn faster">
+      <FileMenu @selectedKeys="handleSelectedKeys" @expandedKeys="handleExpandedKeys" />
+      <Overview />
+      <OnlineUsers />
     </div>
-    <div>1</div>
+    <div class="main-container shadow-inner w-screen p-4 z-10">
+      <FileList :values="expendMenuValue" />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { useFileOutsideStore } from '@/store/modules/file';
+import { TreeOption } from 'naive-ui';
+import FileMenu from './file-menu.vue';
+import Overview from './overview.vue';
+import OnlineUsers from './community-status.vue';
 import FileList from './file-list.vue';
+import { ref } from 'vue';
 
-const fileStore = useFileOutsideStore();
+const expendMenuValue = ref<TreeOption>();
 
-const { files_count, user_files } = storeToRefs(fileStore);
+const handleSelectedKeys = (value: TreeOption) => {
+  // console.log('---selected key', value);
+};
+const handleExpandedKeys = (value: TreeOption) => {
+  // console.log('---expand key', value);
+  expendMenuValue.value = value;
+};
 </script>
 
 <style lang="scss" scoped>
+.file-tree-bar,
+.main-container {
+  min-height: calc(100vh - 57px);
+}
 .file-tree-bar {
-  /* min-height: 90vh; */
-  background: rgba(210, 210, 210, 0.324);
+}
+.main-container {
+  background: rgb(255, 255, 255);
 }
 </style>

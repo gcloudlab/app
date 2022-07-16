@@ -7,13 +7,9 @@ import {
   RefreshAuthService,
   getUserDetailByTokenService,
 } from '@/service/api/auth';
-import {
-  UserLoginRequestProps,
-  UserRegisterRequestProps,
-  UserDetailResponse,
-  UserDetail,
-} from '@/models/auth';
+import { UserLoginRequestProps, UserRegisterRequestProps, UserDetail } from '@/models/auth';
 import { useStorage } from '@/utils/use-storage';
+import { onError, onSuccess, onWarning, onInfo } from '@/utils/messages';
 
 const initialState = {
   // auth: useStorage('user'),
@@ -34,7 +30,9 @@ export const useAuthStore = defineStore({
   id: 'auth',
   state: () =>
     ({
-      auth: {},
+      auth: {
+        avatar: 'https://avatars.githubusercontent.com/u/89140804?v=4',
+      },
       token: initialState.token || '',
       refresh_token: initialState.refresh_token || '',
       code: '',
@@ -59,11 +57,11 @@ export const useAuthStore = defineStore({
           useStorage('refresh_token', this.refresh_token);
         } else if (res.data.msg === '用户名或密码错误') {
           this.sign_status = false;
-          window.$message.error('不要让我知道你忘记密码了');
+          onError('不要让我知道你忘记密码了');
         }
       } catch (error) {
         this.sign_status = false;
-        window.$message.error('出错了');
+        onError();
       }
     },
     onLogoutAction() {
@@ -79,35 +77,36 @@ export const useAuthStore = defineStore({
         userRegisterService(registerInfo).then(async res => {
           if (res.data.msg === '注册成功') {
             this.auth = {
+              ...this.auth,
               name: registerInfo.name,
               email: registerInfo.email,
             };
-            window.$message.success('注册成功, 请登录');
+            onSuccess('注册成功');
           } else if (res.data.msg === '无效验证码') {
-            window.$message.error('无效验证码');
+            onError('无效验证码');
           } else if (res.data.msg === '验证码错误') {
-            window.$message.error('验证码错误');
+            onError('验证码错误');
           } else if (res.data.msg === '用户名已存在') {
-            window.$message.error('用户名已存在');
+            onError('用户名已存在');
           }
         });
       } catch (error) {
-        window.$message.error('出错了，再试一次');
+        onError('出错了，再试一次');
       }
     },
     async onMailCodeAction(email: string) {
       try {
         const res = await sendMailCodeService(email);
         if (res.data.msg === 'registered') {
-          window.$message.error('邮箱已注册');
+          onError('邮箱已注册');
           return false;
         } else {
-          window.$message.success('发送成功, 请注意查收邮箱');
+          onInfo('请注意查收邮箱');
           return true;
         }
       } catch (error) {
         this.sign_status = false;
-        window.$message.error('获取验证码失败');
+        onError('获取验证码失败');
       }
     },
     async onRefreshTokenAction() {
@@ -118,29 +117,29 @@ export const useAuthStore = defineStore({
         const res = await getUserDetailByTokenService();
         if (res.data.msg === 'success') {
           this.auth = {
+            ...this.auth,
             name: res.data.name,
             email: res.data.email,
             identity: res.data.identity,
-            avatar: res.data.avatar,
+            // avatar: res.data.avatar,
           };
           this.sign_status = true;
           this.online_status = true;
           return true;
-        } else if (res.data.msg === 'expired token') {
-          window.$message.warning('登陆已过期');
-          localStorage.removeItem('user');
+        } else if (res.data.msg === 'not found') {
+          onWarning('找不到用户');
           localStorage.removeItem('token');
           localStorage.removeItem('sign_status');
           this.sign_status = false;
           this.online_status = false;
-        } else if (res.data.msg === 'not found') {
-          this.sign_status = false;
-          this.online_status = false;
-          window.$message.warning('找不到用户');
         }
         return false;
       } catch (error) {
-        // window.$message.error('出错了');
+        onWarning('请重新登陆');
+        localStorage.removeItem('sign_status');
+        this.sign_status = false;
+        this.online_status = false;
+        // onError('出错了');
       }
     },
   },
