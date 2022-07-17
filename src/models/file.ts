@@ -1,12 +1,14 @@
 export interface FileListResponseData {
   id: number;
   parent_id: number;
-  identity: string;
+  identity?: string;
   repository_identity?: string;
   name: string;
   path?: string;
   size: number;
   ext?: string;
+  type?: string;
+  updated_at?: string;
 }
 
 export interface FileListResponse {
@@ -19,5 +21,5 @@ export interface FileListResponse {
 
 export interface FileListData extends FileListResponseData {
   children?: FileListResponseData[];
-  count?: number;
+  isFolder?: boolean;
 }
