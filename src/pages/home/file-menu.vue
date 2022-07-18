@@ -73,5 +73,11 @@ const { files_count, user_files } = storeToRefs(fileStore);
     border: none;
     color: #00b0b3;
   }
+  .n-tree .n-tree-node-content .n-tree-node-content__text {
+    width: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 </style>

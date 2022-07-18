@@ -1,5 +1,5 @@
 <template>
-  <div class="file-list">
+  <div class="file-list ml-2">
     <n-data-table
       size="small"
       :columns="columns"
@@ -82,7 +82,7 @@ const columns: DataTableColumns = [
   //   width: 10,
   // },
   {
-    title: '文件名',
+    title: '文件名称',
     key: 'name',
     width: 15,
     ellipsis: {
@@ -105,12 +105,12 @@ const columns: DataTableColumns = [
   {
     title: '类型',
     key: 'type',
-    width: 10,
+    width: 4,
   },
   {
     title: '大小',
     key: 'size',
-    width: 10,
+    width: 4,
     sorter: (row1: any, row2: any) => row1.size - row2.size,
     render(row) {
       return transformSize(row.size as number);
@@ -119,7 +119,7 @@ const columns: DataTableColumns = [
   {
     title: '日期',
     key: 'updated_at',
-    width: 10,
+    width: 5,
     defaultSortOrder: 'descend',
     sorter: (row1: any, row2: any) => compareDate(row1.updated_at, row2.updated_at),
   },
