@@ -3,7 +3,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'Layout',
+    name: 'layout',
     component: () => import('@/pages/layout/index.vue'),
     redirect: '/home',
     children: [
