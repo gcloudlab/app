@@ -27,7 +27,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/sign',
     name: 'sign',
-    component: () => import('@/pages/auth/index.vue'),
+    component: () => import('@/pages/Auth/index.vue'),
   },
 ];
 
