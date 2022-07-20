@@ -17,6 +17,11 @@ const routes: RouteRecordRaw[] = [
         name: 'share',
         component: () => import('@/pages/share/index.vue'),
       },
+      {
+        path: '/picture',
+        name: 'picture',
+        component: () => import('@/pages/picture/index.vue'),
+      },
     ],
   },
   {

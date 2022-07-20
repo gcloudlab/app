@@ -6,7 +6,7 @@
       <OnlineUsers />
     </div>
     <div class="main-container shadow-inner w-screen z-10">
-      <div class="main-nav flex items-center ml-2">
+      <div class="main-nav bg-gray-100 flex items-center shadow" v-if="folder_routes.length > 1">
         <Button class="px-3" @click="handleBackToPreFolder" size="small">
           <ChevronBack class="w-4" />
         </Button>
@@ -34,8 +34,13 @@
             @selectedKeys="handleSelectedKeys"
             @expandedKeys="handleExpandedKeys"
           />
+          <Vue3Lottie v-if="folder_routes.length === 1" :animationData="EmojiJson" :height="200" />
         </div>
-        <FileDetail v-show="currentClickedFile" class="flex-none" :file="currentClickedFile" />
+        <FileDetail
+          v-show="currentClickedFile && folder_routes.length > 1"
+          class="flex-none"
+          :file="currentClickedFile"
+        />
       </div>
     </div>
   </div>
@@ -58,6 +63,7 @@ import { FileListData } from '@/models/file';
 import Button from '@/components/button/index.vue';
 import { ChevronBack, AppsSharp, Menu } from '@vicons/ionicons5';
 import { transformSize } from '@/utils/transform-size';
+import EmojiJson from '@/assets/lotties/emoji.json';
 
 const fileStore = useFileOutsideStore();
 const { onAddToFolderRoutes, onRemoveFromFolderRoutes, onJumpToFile } = useFiles();

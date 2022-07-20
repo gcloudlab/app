@@ -1,5 +1,5 @@
 <template>
-  <div class="file-list ml-2">
+  <div class="file-list">
     <n-data-table
       size="small"
       :columns="columns"

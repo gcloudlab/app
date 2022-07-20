@@ -53,6 +53,7 @@ const tabs = ref([
   { name: 'home', label: '主页', path: '/home' },
   { name: 'share', label: '分享', path: '/share' },
   { name: 'community', label: '社区', path: '/community' },
+  { name: 'picture', label: '学习资料', path: '/picture' },
 ]);
 const { auth } = storeToRefs(authStore);
 </script>
