@@ -1,0 +1,289 @@
+/**
+ * General variables
+ */
+$bdrds: 3px;
+$white: #fff;
+$black: #000;
+$gray: #ccc;
+$salmon: #e8716d;
+$smoky-black: rgba(#9e9e9e36, 0.5);
+
+$ff: 'Montserrat', sans-serif;
+$ff-body: 12px;
+$ff-light: 300;
+$ff-regular: 400;
+$ff-medium: 500;
+
+/**
+  * Bounce to the left side
+  */
+@keyframes bounceLeft {
+  0% {
+    transform: translate3d(100%, -50%, 0);
+  }
+
+  50% {
+    transform: translate3d(-30px, -50%, 0);
+  }
+
+  100% {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+/**
+  * Bounce to the left side
+  */
+@keyframes bounceRight {
+  0% {
+    transform: translate3d(0, -50%, 0);
+  }
+
+  50% {
+    transform: translate3d(calc(100% + 30px), -50%, 0);
+  }
+
+  100% {
+    transform: translate3d(100%, -50%, 0);
+  }
+}
+/**
+  * Show Sign Up form
+  */
+@keyframes showSignUp {
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/**
+  * Page background
+  */
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+
+  &_options-container {
+    position: relative;
+    width: 80%;
+  }
+
+  &_options-text {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $smoky-black;
+  }
+}
+
+/**
+  * Registered and Unregistered auth box and text
+  */
+.auth_options-registered,
+.auth_options-unregistered {
+  width: 50%;
+  padding: 75px 45px;
+  color: $white;
+  font-weight: $ff-light;
+}
+
+.auth_registered-title,
+.auth_unregistered-title {
+  margin-bottom: 15px;
+  font-size: 1.66rem;
+  line-height: 1em;
+}
+.auth_unregistered-text,
+.auth_registered-text {
+  font-size: 0.83rem;
+  line-height: 1.4em;
+}
+
+.auth_registered-login,
+.auth_unregistered-signup {
+  margin-top: 30px;
+  padding: 10px 30px;
+  line-height: 1em;
+  letter-spacing: 0.2rem;
+}
+
+/**
+  * Login and signup forms
+  */
+.auth_options-forms {
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 30px;
+
+  width: calc(50% - 30px);
+  max-height: 150%;
+  min-height: 420px;
+  background-color: $white;
+  box-shadow: 2px 0 15px rgba($black, 0.25);
+
+  transform: translate3d(100%, -50%, 0);
+  transition: transform 0.4s ease-in-out;
+
+  .auth_forms-login {
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+  }
+
+  .forms {
+    &_title {
+      margin-bottom: 45px;
+
+      font-size: 1.5rem;
+      font-weight: $ff-medium;
+      line-height: 1em;
+      text-transform: uppercase;
+      color: $salmon;
+      letter-spacing: 0.1rem;
+    }
+    &_field {
+      &:not(:last-of-type) {
+        margin-bottom: 20px;
+      }
+    }
+
+    &_field-input {
+      width: 100%;
+      border-bottom: 1px solid $gray;
+      padding: 6px 20px 6px 6px;
+
+      font-family: $ff;
+      font-size: 1rem;
+      font-weight: $ff-light;
+      color: darken($gray, 30%);
+      letter-spacing: 0.1rem;
+
+      transition: border-color 0.2s ease-in-out;
+
+      &:focus {
+        border-color: darken($gray, 30%);
+      }
+    }
+    &_buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 35px;
+
+      &-forgot {
+        font-family: $ff;
+        letter-spacing: 0.1rem;
+        color: $gray;
+        text-decoration: underline;
+
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+          color: darken($gray, 10%);
+        }
+      }
+      &-action {
+        background-color: $salmon;
+        border-radius: $bdrds;
+        padding: 10px 35px;
+
+        font-size: 1rem;
+        font-family: $ff;
+        font-weight: $ff-light;
+        color: $white;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+
+        transition: background-color 0.2s ease-in-out;
+
+        &:hover {
+          background-color: darken($salmon, 10%);
+        }
+      }
+    }
+  }
+
+  .auth_forms-signup,
+  .auth_forms-login {
+    position: absolute;
+    top: 70px;
+    left: 40px;
+
+    width: calc(100% - 80px);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.5s ease-in-out;
+
+    h1 {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+        Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+  }
+  .auth_forms-signup {
+    transform: translate3d(120px, 0, 0);
+
+    .forms_buttons {
+      justify-content: flex-end;
+    }
+  }
+  .auth_forms-login {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/**
+  * Triggers
+  */
+.auth_options-forms {
+  &.bounceLeft {
+    animation: bounceLeft 1s forwards;
+  }
+
+  .auth_forms-signup {
+    animation: showSignUp 1s forwards;
+  }
+
+  .auth_forms-login {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &.bounceRight {
+    animation: bounceRight 1s forwards;
+  }
+}
+/**
+  * Responsive 990px
+  */
+@media screen and (max-width: 990px) {
+  .auth_options-forms {
+    min-height: 410px;
+
+    .forms_buttons {
+      flex-direction: column;
+    }
+
+    .auth_forms-login {
+      .forms_buttons-action {
+        margin-top: 30px;
+      }
+    }
+
+    .auth_forms-signup,
+    .auth_forms-login {
+      top: 40px;
+    }
+
+    .auth_options-registered,
+    .auth_options-unregistered {
+      padding: 50px 45px;
+    }
+  }
+}

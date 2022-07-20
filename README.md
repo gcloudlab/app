@@ -3,15 +3,15 @@
 <p align="center">😎 简单 & 免费的开源云盘</p>
 
 <div style='' align="center">
-    <img src="https://img.shields.io/github/stars/yesmore/gcloud.svg?logo=github&style=flat-square" alt="star"/>
-	<img src="https://img.shields.io/github/license/yesmore/gcloud?style=flat-square" alt="GPL"/>
+    <img src="https://img.shields.io/github/stars/yesmore/gcloud-app.svg?logo=github&style=flat-square" alt="star"/>
+	<img src="https://img.shields.io/github/license/yesmore/gcloud-app?style=flat-square" alt="GPL"/>
 </div>
 
 ## 关于 GCloud
 
 > 项目开发中
 
-`GCloud` 是使用 Vue3 + [Go](https://golang.org/)（后端）开发的云盘应用，具备云盘的基本功能，且开源免费。另外，`GCloud` 是作为学习 Go 语言的项目而存在，所以不具备大容量存储功能（存储上限为 200MB），开发者可以 `fork` 此项目并自行开通无上限的存储功能（基于腾讯云对象存储COS，详见 [COS开通方法](/dev/README.md)）共个人使用、学习等。祝您体验愉快~
+`GCloud` 是使用 Vue3 + [Go](https://golang.org/)（后端）开发的云盘应用，具备云盘的基本功能，且开源免费。另外，`GCloud` 是作为学习 Go 语言的项目而存在，所以不具备大容量存储功能（存储上限为 200MB），开发者可以 `fork` 此项目并自行开通无上限的存储功能（基于腾讯云对象存储COS，详见 [COS开通方法]([/dev/README.md](https://github.com/yesmore/gcloud-server/blob/master/dev/README.md))）共个人使用、学习等。祝您体验愉快~
 
 ## 功能特性
 

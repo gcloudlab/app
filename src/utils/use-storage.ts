@@ -3,7 +3,7 @@ export const useStorage = (key: string, initialValue: any = null) => {
     localStorage.setItem(key, JSON.stringify(initialValue));
   } else {
     const storedValue = localStorage.getItem(key);
-    if (storedValue) {
+    if (storedValue && storedValue !== '') {
       return JSON.parse(storedValue);
     }
   }

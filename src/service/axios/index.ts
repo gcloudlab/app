@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import qs from 'qs';
 import { showMessage } from './status';
+import { useStorage } from '@/utils/use-storage';
 
 // 如果请求花费了超过 `timeout` 的时间，请求将被中断
 axios.defaults.timeout = 5000;
@@ -31,8 +31,10 @@ axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
     if (response.headers.authorization) {
       localStorage.setItem('token', response.headers.authorization);
+      useStorage('token', response.headers.authorization);
     } else if (response.data && response.data.token) {
       localStorage.setItem('token', response.data.token);
+      useStorage('token', response.data.token);
     }
 
     if (response.status === 200) {
@@ -56,9 +58,9 @@ axiosInstance.interceptors.response.use(
 // axios实例拦截请求
 axiosInstance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
-    const token = localStorage.getItem('token');
+    const token = useStorage('token');
     if (token !== '') {
-      config.headers!['Authorization'] = `Bearer ${token}`;
+      config.headers!['Authorization'] = `${token}`;
     }
     return config;
   },

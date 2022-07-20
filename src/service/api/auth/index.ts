@@ -1,12 +1,13 @@
-//login.ts
 import axios from '@/service/axios';
-import { UserLoginResponse, UserLoginRequestProps, UserRegisterRequestProps } from '@/models/auth';
+import {
+  UserLoginResponse,
+  UserLoginRequestProps,
+  UserRegisterRequestProps,
+  UserRegisterResponse,
+  RefreshAuthResponse,
+  UserDetailResponse,
+} from '@/models/auth';
 
-/**
- * @description: 用户登录案例
- * @params {ILogin} params
- * @return {Promise}
- */
 export const userLoginService = async (
   params: UserLoginRequestProps
 ): Promise<UserLoginResponse> => {
@@ -15,10 +16,18 @@ export const userLoginService = async (
 
 export const userRegisterService = async (
   params: UserRegisterRequestProps
-): Promise<UserLoginResponse> => {
+): Promise<UserRegisterResponse> => {
   return await axios.post('/user/register', params);
 };
 
 export const sendMailCodeService = async (email: string): Promise<any> => {
   return await axios.post('/mail/code/send/register', { email });
+};
+
+export const RefreshAuthService = async (): Promise<RefreshAuthResponse> => {
+  return await axios.post('/refresh/authorization');
+};
+
+export const getUserDetailByTokenService = async (): Promise<UserDetailResponse> => {
+  return await axios.get('/user/detail');
 };

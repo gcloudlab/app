@@ -1,18 +1,28 @@
 <template>
-  <div>
-    <Auth />
+  <div class="layout">
+    <Header />
+    <router-view />
   </div>
 </template>
 
 <script setup lang="ts">
-import Auth from '@/pages/Auth/index.vue';
-import { storeToRefs } from 'pinia';
-import { useAuthOutsideStore } from '../../store/modules/auth';
-import { useToken } from '../../hooks/';
+import { onMounted } from 'vue';
+import { onBeforeRouteLeave } from 'vue-router';
+import { useAuth } from '@/hooks';
+import { useFiles } from '@/hooks/useFiles';
+import Header from './header.vue';
 
-const mainStore = useAuthOutsideStore();
-const { auth } = storeToRefs(mainStore);
-const { token, refresh_token } = useToken();
+const { onGetFileList } = useFiles();
+const { onGetUserDetailAndCheckAuth } = useAuth();
+onBeforeRouteLeave(leaveGuard => {
+  if (leaveGuard.path !== '/sign') {
+    onGetUserDetailAndCheckAuth();
+  }
+});
+onMounted(async () => {
+  onGetUserDetailAndCheckAuth();
+  await onGetFileList();
+});
 </script>
 
 <style lang="scss" scoped></style>

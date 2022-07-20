@@ -1,5 +1,5 @@
 <template>
-  <n-message-provider>
+  <n-message-provider placement="top-right" :theme-overrides="messageThemeOverrides">
     <MessageApi />
   </n-message-provider>
   <n-config-provider :theme-overrides="themeOverrides">
@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { themeOverrides } from '@/utils/theme';
 import { NConfigProvider, NMessageProvider } from 'naive-ui';
-import MessageApi from '@/components/MessageApi.vue';
+import MessageApi from '@/components/message-api.vue';
+import { themeOverrides, messageThemeOverrides } from '@/assets/style/theme';
 </script>
