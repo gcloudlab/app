@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { PropType, reactive, toRefs, h, VueElement, ref, nextTick } from 'vue';
-import { DataTableColumns, DataTableCreateSummary, NDataTable, TreeOption } from 'naive-ui';
+import { DataTableColumns, NDataTable, TreeOption } from 'naive-ui';
 import { FileListData } from '@/models/file';
 import { compareDate } from '@/utils/date';
 import ShowOrEdit from './file-edit';

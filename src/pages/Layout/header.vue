@@ -17,6 +17,7 @@
         />
       </template>
       <n-tab
+        class="cursor-pointer"
         v-for="item in tabs"
         :key="item.name"
         :name="item.name"
@@ -51,6 +52,7 @@ const currentRoute = computed(() => router.currentRoute.value.name ?? 'home');
 
 const tabs = ref([
   { name: 'home', label: '主页', path: '/home' },
+  { name: 'down', label: '下载', path: '/down' },
   { name: 'share', label: '分享', path: '/share' },
   { name: 'community', label: '社区', path: '/community' },
   { name: 'picture', label: '学习资料', path: '/picture' },

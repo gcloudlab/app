@@ -5,12 +5,13 @@
       <div class="analysize px-3 text-sm flex justify-start items-center">
         <div class="flex-none">存储：</div>
         <n-progress
+          class="w-12"
           type="line"
           :stroke-width="6"
           indicator-placement="inside"
-          :color="themeVars.primaryColor"
+          :color="themeVars.errorColor"
           :indicator-text-color="themeVars.infoColor"
-          :rail-color="themeVars.errorColor"
+          :rail-color="themeVars.primaryColor"
           :percentage="Number((files_size / 2 / 10 ** 6).toFixed(2))"
           processing
         />
@@ -23,15 +24,15 @@
         </div>
         {{ transformSize(files_size).slice(-2) }}
       </div>
-      <div class="analysize text-sm p-3 flex justify-center items-center">
+      <div class="analysize text-sm p-3 flex justify-start items-center">
         <div class="flex-none">文件：</div>
         <n-progress
           type="line"
           :stroke-width="6"
           indicator-placement="inside"
-          :color="themeVars.successColor"
-          :percentage="files_count"
-          :rail-color="themeVars.errorColor"
+          :color="themeVars.errorColor"
+          :percentage="files_count / 10"
+          :rail-color="themeVars.primaryColor"
           processing
         />
         <div class="pl-2"><n-number-animation :from="0" :to="files_count" /></div>
@@ -56,4 +57,10 @@ const themeVars = useThemeVars();
 const { files_count, files_size } = storeToRefs(fileStore);
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.overview {
+  .n-progress.n-progress--line {
+    max-width: 120px;
+  }
+}
+</style>

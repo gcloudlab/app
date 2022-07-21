@@ -18,7 +18,10 @@ export const themeOverrides: GlobalThemeOverrides = {
   Button: {
     // textColor: '#ccc',
     // textColorHover: '#ccc',
+    colorPrimary: primaryColor,
     colorHoverPrimary: primaryColor,
+    colorFocusPrimary: primaryColor,
+    colorPressedPrimary: primaryColor,
     textColorSuccess: '#333639',
     textColorInfo: infoColor,
     colorHoverInfo: infoColor,

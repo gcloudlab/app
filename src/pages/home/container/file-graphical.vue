@@ -1,10 +1,12 @@
 <template>
-  <div class="file-graphical m-3">
-    <div class="file-warpper flex flex-wrap justify-start animate__animated animate__fadeIn faster">
+  <div class="file-graphical">
+    <div
+      class="file-warpper mt-3 flex flex-wrap justify-start animate__animated animate__fadeIn faster"
+    >
       <div
         v-for="file in values.children"
         :key="file.id"
-        class="flex flex-col justify-end items-center w-14 mx-4 mb-3 hover:bg-gray-100 hover:shadow hover:rounded-lg"
+        class="flex flex-col justify-end items-center w-16 mx-3 mb-3 hover:bg-gray-100 hover:shadow hover:rounded-lg"
       >
         <Folder
           v-if="file?.type === '文件夹'"
@@ -40,7 +42,7 @@
           :style="{ backgroundColor: 'white', color: 'black' }"
         >
           <template #trigger>
-            <p class="truncate w-14 mt-1 text-center text-xs">{{ file.name }}</p>
+            <p class="truncate w-16 mt-1 text-center text-xs">{{ file.name }}</p>
           </template>
           {{ file.name }}
         </n-tooltip>

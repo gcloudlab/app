@@ -1,10 +1,14 @@
 <template>
   <div class="home flex">
+    <!-- sider -->
     <div class="file-tree-bar w-48 md:w-60 animate__animated animate__fadeIn faster">
-      <FileMenu @selectedKeys="handleSelectedKeys" @expandedKeys="handleExpandedKeys" />
-      <Overview />
-      <OnlineUsers />
+      <n-scrollbar style="max-height: calc(100vh - 57px)">
+        <FileMenu @selectedKeys="handleSelectedKeys" @expandedKeys="handleExpandedKeys" />
+        <Overview />
+        <OnlineUsers />
+      </n-scrollbar>
     </div>
+    <!-- main -->
     <div class="main-container shadow-inner w-screen z-10">
       <div class="main-nav bg-gray-100 flex items-center shadow" v-if="folder_routes.length > 1">
         <Button class="px-3" @click="handleBackToPreFolder" size="small">
@@ -18,23 +22,26 @@
         </n-button>
         <FileFolderRoute :routes="folder_routes" />
         <n-tag :bordered="false" size="small" type="warning">
-          {{ folder_routes.at(-1)!.size === -1 ? `${transformSize(files_size)}` : `${transformSize(folder_routes.at(-1)!.size)}` }}
+          共{{ folder_routes.at(-1)!.size === -1 ? `${transformSize(files_size)}` : `${transformSize(folder_routes.at(-1)!.size)}` }}
         </n-tag>
+        <n-button class="ml-auto px-3" size="small">下载</n-button>
       </div>
       <div class="main-bar flex">
         <div class="main-files-bar flex-auto">
-          <FileList
-            v-if="fileViewType === 'list'"
-            :values="folder_routes.at(-1)"
-            @expandedKeys="handleExpandedKeys"
-          />
-          <FileGraphical
-            v-else-if="fileViewType === 'graphical'"
-            :values="folder_routes.at(-1)"
-            @selectedKeys="handleSelectedKeys"
-            @expandedKeys="handleExpandedKeys"
-          />
-          <Vue3Lottie v-if="folder_routes.length === 1" :animationData="EmojiJson" :height="200" />
+          <n-scrollbar style="max-height: calc(100vh - 57px)">
+            <FileList
+              v-if="fileViewType === 'list' && folder_routes.length > 1"
+              :values="folder_routes.at(-1)"
+              @expandedKeys="handleExpandedKeys"
+            />
+            <FileGraphical
+              v-else-if="fileViewType === 'graphical' && folder_routes.length > 1"
+              :values="folder_routes.at(-1)"
+              @selectedKeys="handleSelectedKeys"
+              @expandedKeys="handleExpandedKeys"
+            />
+            <Attention v-if="folder_routes.length === 1" />
+          </n-scrollbar>
         </div>
         <FileDetail
           v-show="currentClickedFile && folder_routes.length > 1"
@@ -51,19 +58,19 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { useFiles } from '@/hooks/useFiles';
-import { TreeOption, NTag, NButton } from 'naive-ui';
-import FileMenu from './file-menu.vue';
-import Overview from './overview.vue';
-import OnlineUsers from './community-status.vue';
-import FileList from './file-list.vue';
-import FileGraphical from './file-graphical.vue';
-import FileDetail from './file-detail.vue';
-import FileFolderRoute from './file-folder-route.vue';
+import { TreeOption, NTag, NButton, NScrollbar } from 'naive-ui';
+import FileMenu from './sidebar/file-menu.vue';
+import Overview from './sidebar/overview.vue';
+import OnlineUsers from './sidebar/community-status.vue';
+import FileList from './container/file-list.vue';
+import FileGraphical from './container/file-graphical.vue';
+import FileDetail from './container/file-detail.vue';
+import FileFolderRoute from './container/file-folder-route.vue';
 import { FileListData } from '@/models/file';
 import Button from '@/components/button/index.vue';
 import { ChevronBack, AppsSharp, Menu } from '@vicons/ionicons5';
 import { transformSize } from '@/utils/transform-size';
-import EmojiJson from '@/assets/lotties/emoji.json';
+import Attention from './main-nav/index.vue';
 
 const fileStore = useFileOutsideStore();
 const { onAddToFolderRoutes, onRemoveFromFolderRoutes, onJumpToFile } = useFiles();
