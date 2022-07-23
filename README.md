@@ -1,4 +1,4 @@
-<p align="center"><img width="60%" align="center" src="https://img-yesmore.vercel.app/gcloud/gcloud-log.png"></p>
+<p align="center"><img width="60%" align="center" src="./src/assets/gcloud.png"></p>
 
 <p align="center">😎 简单 & 免费的开源云盘</p>
 
@@ -21,6 +21,12 @@
 - 🎨 **不限速**
 
 详见文档 [API](/docs/API.md).
+
+### TODOs
+
+- [ ] 增加文件分享功能
+- [ ] 增加文件分享链接功能
+- [ ] 公共文件夹
 
 ## 开发者须知
 

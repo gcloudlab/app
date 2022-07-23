@@ -3,13 +3,15 @@ import piniaStore from '@/store';
 import { getFileList } from '@/service/api/file';
 import type { FileListData } from '@/models/file';
 import generateTree from '@/utils/transform-file-list';
-import { onError } from '@/utils/messages';
+import { onError, onWarning } from '@/utils/messages';
+import type { UploadFileInfo } from 'naive-ui';
 
 export interface FileState {
   files_count: number;
   user_files: FileListData[];
   files_size: number;
   folder_routes: FileListData[];
+  upload_files: UploadFileInfo[];
 }
 
 export const useFileStore = defineStore({
@@ -20,12 +22,15 @@ export const useFileStore = defineStore({
       user_files: [],
       files_size: -1,
       folder_routes: [{ id: -1, name: '主菜单', size: -1, parent_id: 0 }],
+      upload_files: [],
     } as FileState),
   getters: {
     get_files_count: state => state.files_count,
     get_user_files: state => state.user_files,
     get_user_files_size: state => state.files_size,
     get_folder_routes: state => state.folder_routes,
+    get_upload_files: state => state.upload_files,
+    get_uploading_files_count: state => state.upload_files.length,
   },
   actions: {
     async onGetFileListAction() {
@@ -88,6 +93,30 @@ export const useFileStore = defineStore({
             ...parentFolders,
           ];
         }
+      }
+    },
+    onUploadFilesAction(payload: UploadFileInfo) {
+      // 如果在，则改变状态
+      if (this.upload_files.find(i => i.name === payload.name)) {
+        this.upload_files.map(i => {
+          if (i.name === payload.name) {
+            i.status = payload.status;
+          }
+        });
+        return;
+      }
+      if (payload.status === 'removed') {
+        this.upload_files = this.upload_files.filter(i => i.status !== 'removed');
+        return;
+      } else {
+        this.upload_files.push(payload);
+      }
+    },
+    onRemoveUploadFileAction(payload?: UploadFileInfo) {
+      if (payload) {
+        this.upload_files = this.upload_files.filter(i => i.name !== payload.name);
+      } else {
+        this.upload_files = [];
       }
     },
   },

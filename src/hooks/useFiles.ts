@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 import { useFileOutsideStore } from '@/store/modules/file';
-import type { FileListData, FileListResponseData } from '@/models/file';
+import type { FileListData } from '@/models/file';
+import type { UploadFileInfo } from 'naive-ui';
 
 const fileStore = useFileOutsideStore();
 
@@ -22,6 +23,12 @@ export const useFiles = () => {
   const onJumpToFile = (payload: FileListData) => {
     fileStore.onJumpToFileAction(payload);
   };
+  const onUploadFiles = (payload: UploadFileInfo) => {
+    fileStore.onUploadFilesAction(payload);
+  };
+  const onRemoveUploadFile = (payload?: UploadFileInfo) => {
+    fileStore.onRemoveUploadFileAction(payload);
+  };
 
   return {
     onGetFileList,
@@ -29,5 +36,7 @@ export const useFiles = () => {
     onRemoveFromFolderRoutes,
     onJumpToFolder,
     onJumpToFile,
+    onUploadFiles,
+    onRemoveUploadFile,
   };
 };

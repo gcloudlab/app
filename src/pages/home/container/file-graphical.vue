@@ -1,7 +1,7 @@
 <template>
   <div class="file-graphical">
     <div
-      class="file-warpper mt-3 flex flex-wrap justify-start animate__animated animate__fadeIn faster"
+      class="file-warpper mt-4 flex flex-wrap justify-start animate__animated animate__fadeIn faster"
     >
       <div
         v-for="file in values.children"

@@ -1,9 +1,12 @@
-import { themeOverrides } from './assets/style/theme';
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router/index';
 import piniaStore from './store';
 import Vue3Lottie from 'vue3-lottie';
+
+const meta = document.createElement('meta');
+meta.name = 'naive-ui-style';
+document.head.appendChild(meta);
 
 const app = createApp(App);
 app.use(Vue3Lottie);

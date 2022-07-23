@@ -2,7 +2,7 @@
   <n-message-provider placement="top-right" :theme-overrides="messageThemeOverrides">
     <MessageApi />
   </n-message-provider>
-  <n-config-provider :theme-overrides="themeOverrides">
+  <n-config-provider :theme-overrides="themeOverrides" preflight-style-disabled>
     <router-view></router-view>
   </n-config-provider>
 </template>
