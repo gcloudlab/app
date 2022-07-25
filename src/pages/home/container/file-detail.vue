@@ -19,11 +19,12 @@
         <p v-show="file.isFolder">文件数量：{{ file.children?.length }}</p>
         <p>文件类型：{{ file.type }}</p>
         <p v-show="file.updated_at">修改日期：{{ file.updated_at }}</p>
-        <p v-show="!file.isFolder">
-          文件路径：<a class="hover:text-gray-200" :href="file.path" target="_blank">点击下载</a>
+        <p v-if="!file.isFolder">
+          文件链接：<a class="hover:text-gray-200" :href="file.path" target="_blank">点击下载</a>
         </p>
+        <p v-else>链接：<a class="hover:text-gray-200">下载文件夹</a></p>
       </n-card>
-      <DragUpload class="w-full h-48" :title="`上传到${folder_routes.at(-1)?.name}`" />
+      <DragUpload class="w-full h-48" :title="`上传到「${folder_routes.at(-1)?.name}」`" />
     </n-scrollbar>
   </div>
 </template>

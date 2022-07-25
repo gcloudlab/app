@@ -23,3 +23,10 @@ export interface FileListData extends FileListResponseData {
   children?: FileListResponseData[];
   isFolder?: boolean;
 }
+
+export interface SaveFileToUserRepoOption {
+  repositoryIdentity: string;
+  parentId: number;
+  ext: string;
+  name: string;
+}

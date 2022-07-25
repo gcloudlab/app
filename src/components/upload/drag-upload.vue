@@ -7,8 +7,8 @@
       abstract
       directory-dnd
       show-download-button
-      :action="action"
       :max="max"
+      :custom-request="customRequest"
       @update:file-list="handleFileListChange"
       :on-remove="handleRemoveUploadFile"
       :on-error="handleUploadError"
@@ -21,12 +21,26 @@
           class="flex flex-col justify-center items-center p-1 text-center hover:bg-gray-300 cursor-pointer transition-all duration-150"
         >
           <CloudUploadOutline class="animate-pulse w-9 text-gray-500 mt-2" />
-          <p depth="1" class="my-1">{{ title }}</p>
+          <p depth="2" class="my-1">{{ title }}</p>
           <n-p depth="3" style="margin: 8px 0 0 0"> {{ description }} </n-p>
         </div>
       </n-upload-trigger>
       <!-- download list -->
       <n-collapse class="upload-list" accordion>
+        <n-popselect
+          v-if="folder_routes.length === 1"
+          v-model:value="uploadFolderName"
+          :options="origin_folders"
+          size="medium"
+          scrollable
+          trigger="click"
+          :on-update:value="handleUpdateUploadFolder"
+        >
+          <n-button quaternary type="primary" size="small" class="w-full">
+            上传到：{{ uploadFolderName }}
+          </n-button>
+        </n-popselect>
+
         <!-- 上传列表 -->
         <n-collapse-item name="1" :arrow="false">
           <template #header-extra>
@@ -91,11 +105,15 @@ import {
   NUploadFileList,
   UploadInst,
   NButton,
+  NPopselect,
+  UploadCustomRequestOptions,
 } from 'naive-ui';
 import { useFiles } from '@/hooks/useFiles';
 import { CloudUploadOutline } from '@vicons/ionicons5';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { onError, onWarning } from '@/utils/messages';
+import type { FileListData } from '@/models/file';
+import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
 
 const props = defineProps({
   action: {
@@ -109,7 +127,7 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: '点击上传',
+    default: '选择文件上传',
   },
   description: {
     type: String,
@@ -117,13 +135,19 @@ const props = defineProps({
   },
 });
 const fileStore = useFileOutsideStore();
-const { onUploadFiles, onRemoveUploadFile } = useFiles();
+const { onAddUploadFiles, onRemoveUploadFile, onUploadFile } = useFiles();
 const uploadRef = ref<UploadInst | null>(null);
 const fileList = ref<UploadFileInfo[]>([]);
+const uploadFolder = ref<SelectBaseOption>();
+const uploadFolderName = ref<string>('未分类（默认）');
 
+const handleUpdateUploadFolder = (value: number, option: SelectBaseOption) => {
+  uploadFolderName.value = option.label as string;
+  uploadFolder.value = fileStore.get_origin_folders.filter(item => item.value === value)[0];
+};
 const handleUploadChange = (data: { fileList: UploadFileInfo[]; file: UploadFileInfo }) => {
   fileList.value = data.fileList;
-  onUploadFiles(data.file);
+  onAddUploadFiles(data.file);
 };
 const handleRemoveUploadFile = (data: { fileList: UploadFileInfo[]; file: UploadFileInfo }) => {
   onRemoveUploadFile(data.file);
@@ -144,8 +168,42 @@ const handleClearUploadFile = () => {
 const handleFileListChange = () => {
   // console.log('是的，file-list 的值变了');
 };
+const customRequest = ({
+  file,
+  data,
+  headers,
+  action,
+  onFinish,
+  onError,
+  onProgress,
+}: UploadCustomRequestOptions) => {
+  const formData = new FormData();
+  if (data) {
+    Object.keys(data).forEach(key => {
+      formData.append(key, data[key as keyof UploadCustomRequestOptions['data']]);
+    });
+  }
+  formData.append(file.name, file.file as File);
+  console.log(file.file);
 
-const { upload_files } = storeToRefs(fileStore);
+  onUploadFile({
+    headers: headers as Record<string, string>,
+    body: file.file as File,
+    onUploadProgress: ({ percent }: any) => {
+      onProgress({ percent: Math.ceil(percent) });
+    },
+  })
+    .then(res => {
+      console.log('---upload res', res);
+      onFinish();
+    })
+    .catch(err => {
+      console.log('---upload err', err);
+      onError();
+    });
+};
+
+const { upload_files, folder_routes, origin_folders } = storeToRefs(fileStore);
 toRefs(props);
 </script>
 
@@ -153,7 +211,7 @@ toRefs(props);
 .drag-upload {
   .n-collapse .n-collapse-item .n-collapse-item__header {
     padding: 6px;
-    border-bottom: 1px dashed #ccc;
+
     border-radius: 4px;
     transition: background 0.2s;
     &:hover {

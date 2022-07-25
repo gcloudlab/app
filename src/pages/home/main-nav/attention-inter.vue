@@ -1,7 +1,7 @@
 <template>
   <div class="upload-attention text-center">
-    <n-alert class="" title="上传须知" type="success" :show-icon="false">
-      由于经费有限，<strong>每次上传文件限制50Mb以内，默认总容量200Mb</strong>， 蟹蟹您的支持。
+    <n-alert title="和谐冲浪" type="success" class="h-full" :show-icon="false">
+      请注意遵守互联网冲浪规范，杜绝上传违规文件等内容，逮到了你跑得脱，马脑阔。
     </n-alert>
   </div>
 </template>

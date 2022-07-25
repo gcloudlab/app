@@ -49,7 +49,7 @@ const generateTree = (list: FileListData[], rootId: number) => {
     return [
       ...result,
       {
-        name: '其他文件',
+        name: '未分类',
         identity: 'other',
         size: otherSize,
         isFolder: true,
@@ -95,6 +95,16 @@ const fileType = (ext: string) => {
     default:
       return '未知';
   }
+};
+
+export const transformOriginFileList = (list: FileListData[]) => {
+  const folderList = list.filter(item => item.ext === '');
+  return folderList.map(item => {
+    return {
+      label: item.name,
+      value: item.id,
+    };
+  });
 };
 
 export default generateTree;

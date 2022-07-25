@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 import piniaStore from '@/store';
-import { getFileList } from '@/service/api/file';
-import type { FileListData } from '@/models/file';
-import generateTree from '@/utils/transform-file-list';
+import { getFileList, uploadFile } from '@/service/api/file';
+import type { FileListData, SaveFileToUserRepoOption } from '@/models/file';
+import generateTree, { transformOriginFileList } from '@/utils/transform-file-list';
 import { onError, onWarning } from '@/utils/messages';
 import type { UploadFileInfo } from 'naive-ui';
+import { saveFileToUserRepo } from '@/service/api/file';
 
 export interface FileState {
   files_count: number;
@@ -12,6 +13,10 @@ export interface FileState {
   files_size: number;
   folder_routes: FileListData[];
   upload_files: UploadFileInfo[];
+  origin_folders: {
+    label: string;
+    value: number;
+  }[];
 }
 
 export const useFileStore = defineStore({
@@ -23,6 +28,7 @@ export const useFileStore = defineStore({
       files_size: -1,
       folder_routes: [{ id: -1, name: '主菜单', size: -1, parent_id: 0 }],
       upload_files: [],
+      origin_folders: [],
     } as FileState),
   getters: {
     get_files_count: state => state.files_count,
@@ -31,14 +37,16 @@ export const useFileStore = defineStore({
     get_folder_routes: state => state.folder_routes,
     get_upload_files: state => state.upload_files,
     get_uploading_files_count: state => state.upload_files.length,
+    get_origin_folders: state => state.origin_folders,
   },
   actions: {
     async onGetFileListAction() {
       try {
         let res = await getFileList();
         if (res.status === 200) {
+          this.origin_folders = transformOriginFileList(res.data.list);
           this.user_files = generateTree(res.data.list, 0);
-          console.log('--store-all files', this.user_files);
+          console.log('--store-all files', this.user_files, this.origin_folders);
           this.files_count = this.user_files.reduce((prev, cur) => {
             if (cur.children && cur.children.length !== 0) return prev + cur.children.length;
             return prev + 1;
@@ -95,7 +103,7 @@ export const useFileStore = defineStore({
         }
       }
     },
-    onUploadFilesAction(payload: UploadFileInfo) {
+    onAddUploadFilesAction(payload: UploadFileInfo) {
       // 如果在，则改变状态
       if (this.upload_files.find(i => i.name === payload.name)) {
         this.upload_files.map(i => {
@@ -118,6 +126,16 @@ export const useFileStore = defineStore({
       } else {
         this.upload_files = [];
       }
+    },
+    async onUploadFileAction(payload: File) {
+      return await uploadFile(payload);
+    },
+    async onUploadFilesToUserAction(payload: SaveFileToUserRepoOption) {
+      try {
+        const res = await saveFileToUserRepo(payload);
+        if (res.data.msg === 'success') {
+        }
+      } catch (e) {}
     },
   },
 });
