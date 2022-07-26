@@ -21,7 +21,7 @@ const props = defineProps({
 const { onJumpToFolder, onRemoveFromFolderRoutes } = useFiles();
 
 const handleClickFolder = (folder: FileListData) => {
-  console.log('--click folder', folder.name);
+  // console.log('--click folder', folder.name);
   if (folder.name === '主菜单') {
     onRemoveFromFolderRoutes();
   }

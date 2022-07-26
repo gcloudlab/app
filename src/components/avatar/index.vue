@@ -65,7 +65,7 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   size: 'medium',
   color: 'whitesmoke',
   lazy: false,
-  fallbackSrc: './src/assets/logo.png',
+  fallbackSrc: 'https://img-yesmore.vercel.app//gcloud/logo.png',
   bordered: true,
   objectFit: 'cover',
   round: false,

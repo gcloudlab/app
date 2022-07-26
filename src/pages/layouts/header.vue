@@ -13,7 +13,7 @@
           width="100"
           preview-disabled
           @click="router.push('/home')"
-          src="./src/assets/gcloud.png"
+          src="https://img-yesmore.vercel.app//gcloud/gcloudx.png"
         />
       </template>
       <n-tab

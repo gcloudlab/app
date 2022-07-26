@@ -3,12 +3,13 @@
     <n-upload
       v-model:file-list="upload_files"
       ref="upload"
+      action="/api/file/upload"
+      :headers="headers"
       multiple
       abstract
       directory-dnd
       show-download-button
       :max="max"
-      :custom-request="customRequest"
       @update:file-list="handleFileListChange"
       :on-remove="handleRemoveUploadFile"
       :on-error="handleUploadError"
@@ -111,9 +112,10 @@ import {
 import { useFiles } from '@/hooks/useFiles';
 import { CloudUploadOutline } from '@vicons/ionicons5';
 import { useFileOutsideStore } from '@/store/modules/file';
-import { onError, onWarning } from '@/utils/messages';
+import { onError, onSuccess, onWarning } from '@/utils/messages';
 import type { FileListData } from '@/models/file';
 import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
+import { useStorage } from '@/utils/use-storage';
 
 const props = defineProps({
   action: {
@@ -138,8 +140,14 @@ const fileStore = useFileOutsideStore();
 const { onAddUploadFiles, onRemoveUploadFile, onUploadFile } = useFiles();
 const uploadRef = ref<UploadInst | null>(null);
 const fileList = ref<UploadFileInfo[]>([]);
-const uploadFolder = ref<SelectBaseOption>();
-const uploadFolderName = ref<string>('未分类（默认）');
+const uploadFolder = ref<SelectBaseOption>({
+  value: 0,
+  label: '未分类',
+});
+const uploadFolderName = ref<string>('未分类');
+const headers = {
+  Authorization: useStorage('token'),
+};
 
 const handleUpdateUploadFolder = (value: number, option: SelectBaseOption) => {
   uploadFolderName.value = option.label as string;
@@ -158,7 +166,11 @@ const handleUploadError = (options: { file: UploadFileInfo; event?: ProgressEven
   return options.file;
 };
 const handleUploadFinish = (options: { file: UploadFileInfo; event?: ProgressEvent }) => {
-  onWarning(`上传完成：${options.file.name}`);
+  if ((event?.currentTarget as XMLHttpRequest).status === 200) {
+    onSuccess(`上传完成：${options.file.name}`);
+    let res = JSON.parse((event?.currentTarget as XMLHttpRequest).response);
+    console.log(options, res);
+  }
   return options.file;
 };
 const handleClearUploadFile = () => {
@@ -168,40 +180,32 @@ const handleClearUploadFile = () => {
 const handleFileListChange = () => {
   // console.log('是的，file-list 的值变了');
 };
-const customRequest = ({
-  file,
-  data,
-  headers,
-  action,
-  onFinish,
-  onError,
-  onProgress,
-}: UploadCustomRequestOptions) => {
-  const formData = new FormData();
-  if (data) {
-    Object.keys(data).forEach(key => {
-      formData.append(key, data[key as keyof UploadCustomRequestOptions['data']]);
-    });
-  }
-  formData.append(file.name, file.file as File);
-  console.log(file.file);
+// const customRequest = ({
+//   file,
+//   headers,
+//   onFinish,
+//   onError,
+//   onProgress,
+// }: UploadCustomRequestOptions) => {
+//   let formData = new FormData();
+//   formData.append(file.name, file.file as File);
+//   console.log('---file', file, formData.get(file.name), headers);
 
-  onUploadFile({
-    headers: headers as Record<string, string>,
-    body: file.file as File,
-    onUploadProgress: ({ percent }: any) => {
-      onProgress({ percent: Math.ceil(percent) });
-    },
-  })
-    .then(res => {
-      console.log('---upload res', res);
-      onFinish();
-    })
-    .catch(err => {
-      console.log('---upload err', err);
-      onError();
-    });
-};
+//   onUploadFile({
+//     body: formData.get(file.name),
+//     onUploadProgress: ({ percent }: any) => {
+//       onProgress({ percent: Math.ceil(percent) });
+//     },
+//   })
+//     .then(res => {
+//       console.log('---upload res', res);
+//       onFinish();
+//     })
+//     .catch(err => {
+//       console.log('---upload err', err);
+//       onError();
+//     });
+// };
 
 const { upload_files, folder_routes, origin_folders } = storeToRefs(fileStore);
 toRefs(props);

@@ -6,7 +6,11 @@ export const getFileList = async (): Promise<FileListResponse> => {
 };
 
 export const uploadFile = async (options: any): Promise<SaveFileToUserRepoOption> => {
-  return await axios.post('/file/upload', options);
+  return await axios.post('/file/upload', options, {
+    headers: {
+      // 'Content-Type': `multipart/form-data;boundary=----WebKitFormBoundary`,
+    },
+  });
 };
 export const saveFileToUserRepo = async (option: SaveFileToUserRepoOption) => {
   return await axios.post('/user/repository/save', option);
