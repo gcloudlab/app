@@ -24,10 +24,10 @@
         :on-update:expanded-keys="handleExpandedKeys"
         :on-update:selected-keys="handleSelectedKeys"
       />
-      <div v-else-if="files_count === -1" class="p-4">
+      <Empty v-else-if="files_count === 0" description="空空如也"> </Empty>
+      <div v-else class="p-4">
         <n-skeleton text :repeat="4" :sharp="false" />
       </div>
-      <Empty v-else description="空空如也"> </Empty>
     </n-scrollbar>
   </div>
 </template>

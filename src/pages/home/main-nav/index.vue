@@ -8,7 +8,7 @@
           'flex flex-col justify-between bg-gradient-to-t from-green-100',
         ]"
       >
-        <DragUpload class="w-full" action="" />
+        <DragUpload class="w-full" title="立即上传" />
       </div>
       <Vue3Lottie class="robot w-48 sm:w-48 md:w-56 row-span-2" :animationData="RobotJson" />
       <div :class="[...boardClasses, 'row-span-2']">去分享</div>

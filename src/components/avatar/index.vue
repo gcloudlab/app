@@ -7,7 +7,7 @@
             class="animate__animated animate__fadeIn faster"
             :src="src"
             :size="size"
-            :fallback-src="fallbackSrc"
+            :fallback-src="defaultAvatar"
             :lazy="lazy"
             :bordered="bordered"
             :object-fit="objectFit"
@@ -34,12 +34,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue';
+import { computed, toRefs, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { NAvatar, NPopover, NBadge, NButton, NText } from 'naive-ui';
-// import Button from '@/components/button/index.vue';
+import defaultLogo from '@/assets/logo.png';
 import { useAuth } from '@/hooks';
 
 export interface AvatarProps {
@@ -60,12 +60,13 @@ const authStore = useAuthOutsideStore();
 const { auth, sign_status, online_status } = storeToRefs(authStore);
 const { onLogout } = useAuth();
 
+const defaultAvatar = ref(defaultLogo);
 const props = withDefaults(defineProps<AvatarProps>(), {
   animate: '',
   size: 'medium',
   color: 'whitesmoke',
   lazy: false,
-  fallbackSrc: 'https://img-yesmore.vercel.app//gcloud/logo.png',
+  // fallbackSrc: defaultAvatar.value,
   bordered: true,
   objectFit: 'cover',
   round: false,

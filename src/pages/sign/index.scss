@@ -78,7 +78,10 @@ $ff-medium: 500;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    background-color: $smoky-black;
+    backdrop-filter: saturate(150%) blur(8px);
+    -webkit-backdrop-filter: saturate(150%) blur(8px);
+    background-color: rgba(0, 0, 0, 0.2);
+    // background-color: $smoky-black;
   }
 }
 
@@ -126,8 +129,9 @@ $ff-medium: 500;
   max-height: 150%;
   min-height: 420px;
   background-color: $white;
-  box-shadow: 2px 0 15px rgba($black, 0.25);
-
+  box-shadow: 10px 10px 1px #ffffff82;
+  backdrop-filter: saturate(150%) blur(8px);
+  -webkit-backdrop-filter: saturate(150%) blur(8px);
   transform: translate3d(100%, -50%, 0);
   transition: transform 0.4s ease-in-out;
 

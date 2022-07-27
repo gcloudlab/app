@@ -11,9 +11,9 @@
       show-download-button
       :max="max"
       @update:file-list="handleFileListChange"
-      :on-remove="handleRemoveUploadFile"
-      :on-error="handleUploadError"
-      :on-finish="handleUploadFinish"
+      :onRemove="handleRemoveUploadFile"
+      :onError="handleUploadError"
+      :onFinish="handleUploadFinish"
       @change="handleUploadChange"
     >
       <n-upload-trigger #="{ handleClick }" abstract>
@@ -21,16 +21,15 @@
           @click="handleClick"
           class="flex flex-col justify-center items-center p-1 text-center hover:bg-gray-300 cursor-pointer transition-all duration-150"
         >
-          <CloudUploadOutline class="animate-pulse w-9 text-gray-500 mt-2" />
-          <p depth="2" class="my-1">{{ title }}</p>
+          <CloudUploadOutline class="animate-pulse w-9 text-gray-500 mt-3" />
+          <p depth="2" class="my-1 text-sm">{{ title }}</p>
           <n-p depth="3" style="margin: 8px 0 0 0"> {{ description }} </n-p>
         </div>
       </n-upload-trigger>
       <!-- download list -->
       <n-collapse class="upload-list" accordion>
         <n-popselect
-          v-if="folder_routes.length === 1"
-          v-model:value="uploadFolderName"
+          v-model:value="uploadFolder.value"
           :options="origin_folders"
           size="medium"
           scrollable
@@ -38,7 +37,7 @@
           :on-update:value="handleUpdateUploadFolder"
         >
           <n-button quaternary type="primary" size="small" class="w-full">
-            上传到：{{ uploadFolderName }}
+            上传到：{{ uploadFolder.label }}
           </n-button>
         </n-popselect>
 
@@ -67,7 +66,7 @@
           </n-scrollbar>
         </n-collapse-item>
         <!-- 下载列表 -->
-        <n-collapse-item name="2" :arrow="false">
+        <!-- <n-collapse-item name="2" :arrow="false">
           <template #header-extra>
             <div class="flex items-center mr-3">
               <svg v-if="upload_files.length > 0" class="animate-ping w-2 h-2 text-green-800">
@@ -86,7 +85,7 @@
               <span>下载列表</span>
             </div>
           </template>
-        </n-collapse-item>
+        </n-collapse-item> -->
       </n-collapse>
     </n-upload>
   </div>
@@ -116,6 +115,7 @@ import { onError, onSuccess, onWarning } from '@/utils/messages';
 import type { FileListData } from '@/models/file';
 import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
 import { useStorage } from '@/utils/use-storage';
+import { FileInfo } from 'naive-ui/es/upload/src/interface';
 
 const props = defineProps({
   action: {
@@ -129,25 +129,29 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: '选择文件上传',
+    default: '',
   },
   description: {
     type: String,
     default: '',
   },
+  currentFolder: {
+    type: Object,
+  },
 });
 const fileStore = useFileOutsideStore();
-const { onAddUploadFiles, onRemoveUploadFile, onUploadFile } = useFiles();
+const { onAddUploadFiles, onRemoveUploadFile, onUploadFilesToUser } = useFiles();
 const uploadRef = ref<UploadInst | null>(null);
 const fileList = ref<UploadFileInfo[]>([]);
 const uploadFolder = ref<SelectBaseOption>({
-  value: 0,
-  label: '未分类',
+  value: props.currentFolder?.value ?? 0,
+  label: props.currentFolder?.label ?? '未分类',
 });
 const uploadFolderName = ref<string>('未分类');
 const headers = {
   Authorization: useStorage('token'),
 };
+console.log(uploadFolder.value);
 
 const handleUpdateUploadFolder = (value: number, option: SelectBaseOption) => {
   uploadFolderName.value = option.label as string;
@@ -165,13 +169,20 @@ const handleUploadError = (options: { file: UploadFileInfo; event?: ProgressEven
   onError(`上传失败：${options.file.name}`);
   return options.file;
 };
-const handleUploadFinish = (options: { file: UploadFileInfo; event?: ProgressEvent }) => {
+const handleUploadFinish = async (options: { file: FileInfo; event?: ProgressEvent }) => {
   if ((event?.currentTarget as XMLHttpRequest).status === 200) {
-    onSuccess(`上传完成：${options.file.name}`);
-    let res = JSON.parse((event?.currentTarget as XMLHttpRequest).response);
-    console.log(options, res);
+    // onSuccess(`上传完成：${options.file.name}`);
+    const res = JSON.parse((event?.currentTarget as XMLHttpRequest).response);
+    if (res.msg === 'success') {
+      await onUploadFilesToUser({
+        repositoryIdentity: res.identity,
+        parentId: uploadFolder.value.value as number,
+        ext: res.ext,
+        name: res.name,
+      });
+    }
   }
-  return options.file;
+  return;
 };
 const handleClearUploadFile = () => {
   uploadRef.value?.clear();

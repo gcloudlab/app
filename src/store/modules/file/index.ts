@@ -120,7 +120,7 @@ export const useFileStore = defineStore({
         this.upload_files.push(payload);
       }
     },
-    onRemoveUploadFileAction(payload?: UploadFileInfo) {
+    onRemoveUploadFileAction(payload?: UploadFileInfo | SaveFileToUserRepoOption) {
       if (payload) {
         this.upload_files = this.upload_files.filter(i => i.name !== payload.name);
       } else {
@@ -134,8 +134,20 @@ export const useFileStore = defineStore({
       try {
         const res = await saveFileToUserRepo(payload);
         if (res.data.msg === 'success') {
+          this.onRemoveUploadFileAction(payload);
+          await this.onGetFileListAction();
+        } else if (res.data.msg === 'exist') {
+          onError('已存在同名文件');
+          this.upload_files.map(i => {
+            if (i.name === payload.name) {
+              i.status = 'error';
+            }
+          });
+          // this.onRemoveUploadFileAction(payload);
         }
-      } catch (e) {}
+      } catch (e) {
+        onError('上传失败，请重试');
+      }
     },
   },
 });

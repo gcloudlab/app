@@ -24,7 +24,7 @@
         </p>
         <p v-else>链接：<a class="hover:text-gray-200">下载文件夹</a></p>
       </n-card>
-      <DragUpload class="w-full h-48" :title="`上传到「${folder_routes.at(-1)?.name}」`" />
+      <DragUpload class="w-full h-48" />
     </n-scrollbar>
   </div>
 </template>

@@ -13,7 +13,7 @@
           width="100"
           preview-disabled
           @click="router.push('/home')"
-          src="https://img-yesmore.vercel.app//gcloud/gcloudx.png"
+          :src="logoUrl"
         />
       </template>
       <n-tab
@@ -45,6 +45,7 @@ import { useRouter } from 'vue-router';
 import { NTabs, NTab, NImage } from 'naive-ui';
 import Avatar from '@/components/avatar/index.vue';
 import { useAuthOutsideStore } from '@/store/modules/auth';
+import Logo from '@/assets/gcloud.png';
 
 const router = useRouter();
 const authStore = useAuthOutsideStore();
@@ -57,16 +58,24 @@ const tabs = ref([
   { name: 'community', label: '社区', path: '/community' },
   { name: 'picture', label: '学习资料', path: '/picture' },
 ]);
+const logoUrl = ref(Logo);
 const { auth } = storeToRefs(authStore);
 </script>
 
 <style lang="scss">
-.header-tabs {
-  /* background: #000; */
-  .n-tabs-nav.n-tabs-nav--line-type .n-tabs-nav__prefix,
-  .n-tabs-nav.n-tabs-nav--line-type .n-tabs-nav__suffix,
-  .n-tabs-nav.n-tabs-nav--line-type .n-tabs-nav-scroll-content {
-    border-bottom: none;
+.layout-header {
+  /* background: rgba(253, 243, 243, 0.299); */
+  .n-tabs {
+    /* background: rgba(255, 255, 255, 0); */
+    backdrop-filter: saturate(150%) blur(8px);
+    -webkit-backdrop-filter: saturate(150%) blur(8px);
+  }
+  .header-tabs {
+    .n-tabs-nav.n-tabs-nav--line-type .n-tabs-nav__prefix,
+    .n-tabs-nav.n-tabs-nav--line-type .n-tabs-nav__suffix,
+    .n-tabs-nav.n-tabs-nav--line-type .n-tabs-nav-scroll-content {
+      border-bottom: none;
+    }
   }
 }
 </style>
