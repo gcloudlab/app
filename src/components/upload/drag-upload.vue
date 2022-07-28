@@ -26,7 +26,7 @@
           <n-p depth="3" style="margin: 8px 0 0 0"> {{ description }} </n-p>
         </div>
       </n-upload-trigger>
-      <!-- download list -->
+
       <n-collapse class="upload-list" accordion>
         <n-popselect
           v-model:value="uploadFolder.value"
@@ -36,11 +36,11 @@
           trigger="click"
           :on-update:value="handleUpdateUploadFolder"
         >
+          <template #empty> 未创建文件夹 </template>
           <n-button quaternary type="primary" size="small" class="w-full">
             上传到：{{ uploadFolder.label }}
           </n-button>
         </n-popselect>
-
         <!-- 上传列表 -->
         <n-collapse-item name="1" :arrow="false">
           <template #header-extra>
@@ -151,7 +151,6 @@ const uploadFolderName = ref<string>('未分类');
 const headers = {
   Authorization: useStorage('token'),
 };
-console.log(uploadFolder.value);
 
 const handleUpdateUploadFolder = (value: number, option: SelectBaseOption) => {
   uploadFolderName.value = option.label as string;
@@ -169,12 +168,12 @@ const handleUploadError = (options: { file: UploadFileInfo; event?: ProgressEven
   onError(`上传失败：${options.file.name}`);
   return options.file;
 };
-const handleUploadFinish = async (options: { file: FileInfo; event?: ProgressEvent }) => {
+const handleUploadFinish = (options: { file: FileInfo; event?: ProgressEvent }) => {
   if ((event?.currentTarget as XMLHttpRequest).status === 200) {
     // onSuccess(`上传完成：${options.file.name}`);
     const res = JSON.parse((event?.currentTarget as XMLHttpRequest).response);
     if (res.msg === 'success') {
-      await onUploadFilesToUser({
+      onUploadFilesToUser({
         repositoryIdentity: res.identity,
         parentId: uploadFolder.value.value as number,
         ext: res.ext,
@@ -182,7 +181,7 @@ const handleUploadFinish = async (options: { file: FileInfo; event?: ProgressEve
       });
     }
   }
-  return;
+  return options.file;
 };
 const handleClearUploadFile = () => {
   uploadRef.value?.clear();
@@ -230,17 +229,29 @@ toRefs(props);
     border-radius: 4px;
     transition: background 0.2s;
     &:hover {
-      background-color: #fafafa;
+      background-color: #00b0b381;
     }
   }
   .n-collapse .n-collapse-item {
     margin-top: 0;
+    border: none;
   }
   .n-collapse .n-collapse-item .n-collapse-item__content-wrapper .n-collapse-item__content-inner {
     padding: 0;
   }
   .n-upload-file-list .n-upload-file .n-upload-file-info {
     padding: 0;
+  }
+  .n-upload-file-list
+    .n-upload-file.n-upload-file--error-status
+    .n-upload-file-info
+    .n-upload-file-info__name {
+    span {
+      width: 83%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
 }
 </style>

@@ -15,7 +15,7 @@ import { NBreadcrumb, NBreadcrumbItem } from 'naive-ui';
 const props = defineProps({
   routes: {
     type: Array as PropType<FileListData[]>,
-    default: [{ name: '主目录' }],
+    default: [{ name: '主菜单' }],
   },
 });
 const { onJumpToFolder, onRemoveFromFolderRoutes } = useFiles();

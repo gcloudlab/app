@@ -6,6 +6,7 @@ import generateTree, { transformOriginFileList } from '@/utils/transform-file-li
 import { onError, onWarning } from '@/utils/messages';
 import type { UploadFileInfo } from 'naive-ui';
 import { saveFileToUserRepo } from '@/service/api/file';
+import useTimer from '@/hooks/useTimer';
 
 export interface FileState {
   files_count: number;
@@ -17,6 +18,7 @@ export interface FileState {
     label: string;
     value: number;
   }[];
+  fetching: boolean;
 }
 
 export const useFileStore = defineStore({
@@ -29,6 +31,7 @@ export const useFileStore = defineStore({
       folder_routes: [{ id: -1, name: '主菜单', size: -1, parent_id: 0 }],
       upload_files: [],
       origin_folders: [],
+      fetching: false,
     } as FileState),
   getters: {
     get_files_count: state => state.files_count,
@@ -42,6 +45,7 @@ export const useFileStore = defineStore({
   actions: {
     async onGetFileListAction() {
       try {
+        this.fetching = true;
         let res = await getFileList();
         if (res.status === 200) {
           this.origin_folders = transformOriginFileList(res.data.list);
@@ -55,11 +59,11 @@ export const useFileStore = defineStore({
             if (cur && cur.size !== 0) return prev + cur.size;
             return prev + 1;
           }, 0);
-
+          this.fetching = false;
           // console.log(this.user_files, this.files_size);
         }
       } catch (error) {
-        onError();
+        useTimer(() => (this.fetching = false), 3);
       }
     },
     onAddToFolderRoutesAction(payload: FileListData) {

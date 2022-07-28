@@ -6,7 +6,7 @@
       <div
         v-for="file in values.children"
         :key="file.id"
-        class="flex flex-col justify-end items-center w-16 mx-3 mb-3 hover:bg-gray-100 hover:shadow hover:rounded-lg"
+        class="flex flex-col justify-end items-center w-16 mx-3 mb-3 transition-all duration-100 hover:bg-gray-100 hover:shadow hover:rounded-lg"
       >
         <Folder
           v-if="file?.type === '文件夹'"
@@ -48,12 +48,12 @@
         </n-tooltip>
       </div>
     </div>
-    <DropDown
+    <!-- <DropDown
       :show="showDropdownRef"
       :position="{ x: xRef, y: yRef }"
       @select="handleSelectDropDownItem"
       @clickoutside="handleClidkOutside"
-    />
+    /> -->
   </div>
 </template>
 

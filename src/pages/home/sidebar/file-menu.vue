@@ -4,7 +4,7 @@
       <n-input class="mr-0" v-model:value="pattern" size="small" placeholder="搜索文件" />
       <Button @click="isChecked = !isChecked" size="small">操作</Button>
     </div>
-    <n-scrollbar style="height: 180px">
+    <n-scrollbar style="height: 240px">
       <n-tree
         v-if="files_count > 0"
         class="mt-2 tree md:w-60"
@@ -24,10 +24,10 @@
         :on-update:expanded-keys="handleExpandedKeys"
         :on-update:selected-keys="handleSelectedKeys"
       />
-      <Empty v-else-if="files_count === 0" description="空空如也"> </Empty>
-      <div v-else class="p-4">
-        <n-skeleton text :repeat="4" :sharp="false" />
+      <div v-else-if="fetching" class="p-4">
+        <n-skeleton text :repeat="6" :sharp="false" />
       </div>
+      <Empty v-else description="空空如也"> </Empty>
     </n-scrollbar>
   </div>
 </template>
@@ -63,7 +63,7 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
     // },
   };
 };
-const { files_count, user_files } = storeToRefs(fileStore);
+const { files_count, user_files, fetching } = storeToRefs(fileStore);
 </script>
 
 <style lang="scss">

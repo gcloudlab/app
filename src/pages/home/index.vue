@@ -14,10 +14,15 @@
         <Button class="px-3" @click="handleBackToPreFolder" size="small">
           <ChevronBack class="w-4" />
         </Button>
-        <n-button class="mr-3 px-1" size="small" @click="handleChangeViewType">
+        <n-button class="px-1" size="small" @click="handleChangeViewType">
           <template #icon>
             <AppsSharp v-if="fileViewType === 'list'" />
             <Menu v-else />
+          </template>
+        </n-button>
+        <n-button class="mr-3 px-1" size="small">
+          <template #icon>
+            <Refresh />
           </template>
         </n-button>
         <FileFolderRoute :routes="folder_routes" />
@@ -68,7 +73,7 @@ import FileDetail from './container/file-detail.vue';
 import FileFolderRoute from './container/file-folder-route.vue';
 import { FileListData } from '@/models/file';
 import Button from '@/components/button/index.vue';
-import { ChevronBack, AppsSharp, Menu } from '@vicons/ionicons5';
+import { ChevronBack, AppsSharp, Menu, Refresh } from '@vicons/ionicons5';
 import { transformSize } from '@/utils/transform-size';
 import Attention from './main-nav/index.vue';
 

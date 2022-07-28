@@ -33,7 +33,7 @@ export const useFiles = () => {
     return await fileStore.onUploadFileAction(payloads);
   };
   const onUploadFilesToUser = async (payload: SaveFileToUserRepoOption) => {
-    return await fileStore.onUploadFilesToUserAction(payload);
+    await fileStore.onUploadFilesToUserAction(payload);
   };
 
   return {
