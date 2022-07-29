@@ -30,3 +30,8 @@ export interface SaveFileToUserRepoOption {
   ext: string;
   name: string;
 }
+
+export interface CreateFolderOption {
+  parent_id: number;
+  name: string;
+}

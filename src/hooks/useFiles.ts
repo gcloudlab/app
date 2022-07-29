@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import { useFileOutsideStore } from '@/store/modules/file';
-import type { FileListData, SaveFileToUserRepoOption } from '@/models/file';
+import type { CreateFolderOption, FileListData, SaveFileToUserRepoOption } from '@/models/file';
 import type { UploadFileInfo } from 'naive-ui';
 
 const fileStore = useFileOutsideStore();
@@ -35,6 +35,9 @@ export const useFiles = () => {
   const onUploadFilesToUser = async (payload: SaveFileToUserRepoOption) => {
     await fileStore.onUploadFilesToUserAction(payload);
   };
+  const onCreateFolder = async (payload: CreateFolderOption) => {
+    await fileStore.onCreateFolderAction(payload);
+  };
 
   return {
     onGetFileList,
@@ -46,5 +49,6 @@ export const useFiles = () => {
     onRemoveUploadFile,
     onUploadFilesToUser,
     onUploadFile,
+    onCreateFolder,
   };
 };

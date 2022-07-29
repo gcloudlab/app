@@ -45,7 +45,7 @@
               @selectedKeys="handleSelectedKeys"
               @expandedKeys="handleExpandedKeys"
             />
-            <Attention v-if="folder_routes.length === 1" />
+            <MainNav v-if="folder_routes.length === 1" />
           </n-scrollbar>
         </div>
         <FileDetail
@@ -59,23 +59,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { useFiles } from '@/hooks/useFiles';
-import { TreeOption, NTag, NButton, NScrollbar } from 'naive-ui';
-import FileMenu from './sidebar/file-menu.vue';
-import Overview from './sidebar/overview.vue';
-import OnlineUsers from './sidebar/community-status.vue';
-import FileList from './container/file-list.vue';
-import FileGraphical from './container/file-graphical.vue';
-import FileDetail from './container/file-detail.vue';
-import FileFolderRoute from './container/file-folder-route.vue';
 import { FileListData } from '@/models/file';
-import Button from '@/components/button/index.vue';
-import { ChevronBack, AppsSharp, Menu, Refresh } from '@vicons/ionicons5';
 import { transformSize } from '@/utils/transform-size';
-import Attention from './main-nav/index.vue';
+import { TreeOption, NTag, NButton, NScrollbar } from 'naive-ui';
+import { ChevronBack, AppsSharp, Menu, Refresh } from '@vicons/ionicons5';
+
+const FileMenu = defineAsyncComponent(() => import('./sidebar/file-menu.vue'));
+const Overview = defineAsyncComponent(() => import('./sidebar/overview.vue'));
+const OnlineUsers = defineAsyncComponent(() => import('./sidebar/community-status.vue'));
+const FileList = defineAsyncComponent(() => import('./container/file-list.vue'));
+const FileGraphical = defineAsyncComponent(() => import('./container/file-graphical.vue'));
+const FileDetail = defineAsyncComponent(() => import('./container/file-detail.vue'));
+const FileFolderRoute = defineAsyncComponent(() => import('./container/file-folder-route.vue'));
+const MainNav = defineAsyncComponent(() => import('./main-nav/index.vue'));
+const Button = defineAsyncComponent(() => import('@/components/commons/button/index.vue'));
 
 const fileStore = useFileOutsideStore();
 const { onAddToFolderRoutes, onRemoveFromFolderRoutes, onJumpToFile } = useFiles();

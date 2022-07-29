@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import piniaStore from '@/store';
-import { getFileList, uploadFile } from '@/service/api/file';
-import type { FileListData, SaveFileToUserRepoOption } from '@/models/file';
+import { createFolder, getFileList, uploadFile } from '@/service/api/file';
+import type { CreateFolderOption, FileListData, SaveFileToUserRepoOption } from '@/models/file';
 import generateTree, { transformOriginFileList } from '@/utils/transform-file-list';
 import { onError, onWarning } from '@/utils/messages';
 import type { UploadFileInfo } from 'naive-ui';
@@ -63,7 +63,10 @@ export const useFileStore = defineStore({
           // console.log(this.user_files, this.files_size);
         }
       } catch (error) {
-        useTimer(() => (this.fetching = false), 3);
+        useTimer(() => {
+          this.fetching = false;
+          this.files_count = 0;
+        }, 3);
       }
     },
     onAddToFolderRoutesAction(payload: FileListData) {
@@ -132,7 +135,11 @@ export const useFileStore = defineStore({
       }
     },
     async onUploadFileAction(payload: File) {
-      return await uploadFile(payload);
+      try {
+        await uploadFile(payload);
+      } catch (err) {
+        console.log(err);
+      }
     },
     async onUploadFilesToUserAction(payload: SaveFileToUserRepoOption) {
       try {
@@ -151,6 +158,18 @@ export const useFileStore = defineStore({
         }
       } catch (e) {
         onError('上传失败，请重试');
+      }
+    },
+    async onCreateFolderAction(payload: CreateFolderOption) {
+      try {
+        const res = await createFolder(payload);
+        if (res.data.msg === 'success') {
+          await this.onGetFileListAction();
+        } else if (res.data.msg === '文件名已存在') {
+          onWarning('文件夹已存在');
+        }
+      } catch (e) {
+        onError('创建失败，请重试');
       }
     },
   },

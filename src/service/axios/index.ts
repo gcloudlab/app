@@ -1,12 +1,12 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { showMessage } from './status';
+import { showMessage, StatusType } from './status';
 import { useStorage } from '@/utils/use-storage';
+import { onWarning, onError } from '@/utils/messages';
 
 // 如果请求花费了超过 `timeout` 的时间，请求将被中断
 axios.defaults.timeout = 5000;
 // 表示跨域请求时是否需要使用凭证
 axios.defaults.withCredentials = false;
-// axios.defaults.headers.common['token'] =  AUTH_TOKEN
 // 允许跨域
 axios.defaults.headers.post['Access-Control-Allow-Origin-Type'] = '*';
 
@@ -16,14 +16,6 @@ const axiosInstance: AxiosInstance = axios.create({
     Accept: 'application/json',
     'Content-Type': 'application/json;charset=UTF-8',
   },
-  // transformRequest: [
-  //   function (data) {
-  //     //由于使用的 form-data传数据所以要格式化
-  //     delete data.Authorization;
-  //     data = qs.stringify(data);
-  //     return data;
-  //   },
-  // ],
 });
 
 // axios实例拦截响应
@@ -38,24 +30,20 @@ axiosInstance.interceptors.response.use(
     }
 
     if (response.status === 200) {
-      return response;
+      return Promise.resolve(response);
     }
-    showMessage(response.status);
-    return response;
+    onError(showMessage(response.status as StatusType));
+    return Promise.reject(response);
   },
-  // 请求失败
   (error: any) => {
     const { response } = error;
-    if (response) {
-      // 请求已发出，但是不在2xx的范围
-      showMessage(response.status);
-      return Promise.reject(response.data);
+    if (/^5/.test(response.status)) {
+      onError(showMessage(response.status as StatusType));
     }
-    // Message.warning("网络连接异常,请稍后再试!");
+    return Promise.reject(error);
   }
 );
 
-// axios实例拦截请求
 axiosInstance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     const token = useStorage('token');

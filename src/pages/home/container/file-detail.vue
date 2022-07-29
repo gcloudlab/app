@@ -34,7 +34,7 @@ import { PropType, toRefs } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { NCard, NImage, NScrollbar } from 'naive-ui';
-import DragUpload from '@/components/upload/drag-upload.vue';
+import DragUpload from '@/components/upload/trigger-upload.vue';
 import { FileListData } from '@/models/file';
 import { transformSize } from '@/utils/transform-size';
 import { Folder, DocumentTextOutline } from '@vicons/ionicons5';

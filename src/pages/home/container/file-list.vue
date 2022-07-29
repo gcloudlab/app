@@ -26,14 +26,23 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, reactive, toRefs, h, VueElement, ref, nextTick } from 'vue';
+import {
+  PropType,
+  reactive,
+  toRefs,
+  h,
+  VueElement,
+  ref,
+  nextTick,
+  defineAsyncComponent,
+} from 'vue';
 import { DataTableColumns, NDataTable, TreeOption } from 'naive-ui';
 import { FileListData } from '@/models/file';
 import { compareDate } from '@/utils/date';
 import ShowOrEdit from './file-edit';
 import { transformSize } from '@/utils/transform-size';
-import Empty from '@/components/empty/index.vue';
-import DropDown from '@/components/drop-down/index.vue';
+const Empty = defineAsyncComponent(() => import('@/components/empty/index.vue'));
+const DropDown = defineAsyncComponent(() => import('@/components/drop-down/index.vue'));
 
 const props = defineProps({
   values: {

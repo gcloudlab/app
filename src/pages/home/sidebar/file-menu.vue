@@ -27,7 +27,8 @@
       <div v-else-if="fetching" class="p-4">
         <n-skeleton text :repeat="6" :sharp="false" />
       </div>
-      <Empty v-else description="空空如也"> </Empty>
+      <Empty class="animate__animated animate__fadeIn faster" v-else description="空空如也">
+      </Empty>
     </n-scrollbar>
   </div>
 </template>
@@ -38,8 +39,8 @@ import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { NTree, NInput, NIcon, TreeOption, NSkeleton, NScrollbar } from 'naive-ui';
 import { Folder } from '@vicons/ionicons5';
-import Button from '@/components/button/index.vue';
-import Empty from '@/components/empty/index.vue';
+import Button from '@/components/commons/button/index.vue';
+import Empty from '@/components/commons/empty/index.vue';
 
 const emits = defineEmits(['checkedKeys', 'expandedKeys', 'selectedKeys']);
 const fileStore = useFileOutsideStore();

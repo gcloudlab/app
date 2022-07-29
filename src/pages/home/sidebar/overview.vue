@@ -1,7 +1,10 @@
 <template>
   <div class="overview">
     <n-divider class="text-sm m-0" title-placement="left"> 总览 </n-divider>
-    <div v-if="files_count !== -1 || !fetching" class="pb-2">
+    <div
+      v-if="files_count !== -1 || !fetching"
+      class="pb-2 animate__animated animate__fadeIn faster"
+    >
       <div class="analysize px-3 text-sm flex justify-start items-center">
         <div class="flex-none">存储：</div>
         <n-progress

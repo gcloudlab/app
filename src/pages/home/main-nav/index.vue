@@ -23,10 +23,10 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import DragUpload from '@/components/upload/drag-upload.vue';
-import AttentionInter from './attention-inter.vue';
 import RobotJson from '@/assets/lotties/robot.json';
 import { useFileOutsideStore } from '@/store/modules/file';
+import DragUpload from '@/components/upload/trigger-upload.vue';
+import AttentionInter from './attention-inter.vue';
 
 const fileStore = useFileOutsideStore();
 

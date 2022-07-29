@@ -28,19 +28,22 @@
       </n-upload-trigger>
 
       <n-collapse class="upload-list" accordion>
-        <n-popselect
-          v-model:value="uploadFolder.value"
-          :options="origin_folders"
-          size="medium"
-          scrollable
-          trigger="click"
-          :on-update:value="handleUpdateUploadFolder"
-        >
-          <template #empty> 未创建文件夹 </template>
-          <n-button quaternary type="primary" size="small" class="w-full">
-            上传到：{{ uploadFolder.label }}
-          </n-button>
-        </n-popselect>
+        <div class="flex justify-between">
+          <n-popselect
+            v-model:value="uploadFolder.value"
+            :options="origin_folders"
+            size="medium"
+            scrollable
+            trigger="click"
+            :on-update:value="handleUpdateUploadFolder"
+          >
+            <template #empty> 未创建文件夹 </template>
+            <n-button quaternary type="primary" size="small" class="">
+              文件夹：{{ uploadFolder.label }}
+            </n-button>
+          </n-popselect>
+          <CreateFolder :folder="uploadFolder" />
+        </div>
         <!-- 上传列表 -->
         <n-collapse-item name="1" :arrow="false">
           <template #header-extra>
@@ -92,7 +95,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs } from 'vue';
+import { ref, toRefs, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   NUpload,
@@ -106,16 +109,15 @@ import {
   UploadInst,
   NButton,
   NPopselect,
-  UploadCustomRequestOptions,
 } from 'naive-ui';
 import { useFiles } from '@/hooks/useFiles';
 import { CloudUploadOutline } from '@vicons/ionicons5';
 import { useFileOutsideStore } from '@/store/modules/file';
-import { onError, onSuccess, onWarning } from '@/utils/messages';
-import type { FileListData } from '@/models/file';
+import { onError } from '@/utils/messages';
 import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
 import { useStorage } from '@/utils/use-storage';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
+const CreateFolder = defineAsyncComponent(() => import('@/components/create-folder/index.vue'));
 
 const props = defineProps({
   action: {
@@ -190,32 +192,6 @@ const handleClearUploadFile = () => {
 const handleFileListChange = () => {
   // console.log('是的，file-list 的值变了');
 };
-// const customRequest = ({
-//   file,
-//   headers,
-//   onFinish,
-//   onError,
-//   onProgress,
-// }: UploadCustomRequestOptions) => {
-//   let formData = new FormData();
-//   formData.append(file.name, file.file as File);
-//   console.log('---file', file, formData.get(file.name), headers);
-
-//   onUploadFile({
-//     body: formData.get(file.name),
-//     onUploadProgress: ({ percent }: any) => {
-//       onProgress({ percent: Math.ceil(percent) });
-//     },
-//   })
-//     .then(res => {
-//       console.log('---upload res', res);
-//       onFinish();
-//     })
-//     .catch(err => {
-//       console.log('---upload err', err);
-//       onError();
-//     });
-// };
 
 const { upload_files, folder_routes, origin_folders } = storeToRefs(fileStore);
 toRefs(props);

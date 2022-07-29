@@ -24,6 +24,7 @@ export const themeOverrides: GlobalThemeOverrides = {
     colorPressedPrimary: primaryColor,
     textColorSuccess: '#333639',
     textColorInfo: infoColor,
+    textColorPrimary: primaryColor,
     colorHoverInfo: infoColor,
     colorFocusInfo: infoColor,
     colorPressedInfo: infoColor,
@@ -34,7 +35,7 @@ export const themeOverrides: GlobalThemeOverrides = {
     borderPressedInfo: `1px solid ${infoColor}`,
   },
   Modal: {
-    boxShadow: '5px 5px 5px rgba(0, 0, 0, 1)',
+    // boxShadow: '5px 5px 5px rgba(0, 0, 0, 1)',
   },
   Badge: {
     colorWarning: 'grey',

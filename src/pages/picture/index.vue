@@ -3,7 +3,7 @@
     <div class="picture mt-3">
       <div class="picture-bar flex flex-wrap justify-around items-end">
         <div
-          class="picture-item sm:w-80 sm:h-80 md:w-64 md:h-64 mx-0.5 mb-3"
+          class="picture-item w-80 h-80 sm:w-80 sm:h-80 md:w-64 md:h-64 mx-0.5 mb-3"
           v-for="(item, index) in pictures?.photoList"
           :key="index"
         >
@@ -15,7 +15,7 @@
             fallback-src="./src/assets/logo.png"
           >
             <template #placeholder>
-              <div class="sm:w-80 sm:h-80 md:w-64 md:h-64">
+              <div class="w-80 h-80 sm:w-80 sm:h-80 md:w-64 md:h-64">
                 <n-skeleton width="100%" height="100%" :sharp="false" size="large" />
               </div>
             </template>

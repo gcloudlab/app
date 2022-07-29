@@ -18,13 +18,16 @@ const generateTree = (list: FileListData[], rootId: number) => {
     // 该元素有可能已经放入map中，（找不到该项的parentId时 会先放入map
     objMap[id] = !objMap[id] ? item : { ...item, ...objMap[id] };
 
-    const treeItem = objMap[id]; // 找到映射关系那一项（注意这里是引用）
+    let treeItem = objMap[id]; // 找到映射关系那一项（注意这里是引用）
     treeItem.updated_at = transformDate(treeItem.updated_at);
     treeItem.type = fileType(treeItem.ext);
+    if (treeItem.type === '文件夹') {
+      treeItem = { children: [], ...treeItem };
+    }
 
     if (parentId === rootId && item.ext === '') {
       // 已经到根元素则将映射结果放进结果集
-      result.push(treeItem);
+      result.push({ children: [], ...treeItem, isFolder: true });
     } else if (parentId === rootId && item.ext !== '') {
       // 未分类文件
       other.push({ ...treeItem, type: fileType(treeItem.ext), isFolder: false });
@@ -41,7 +44,7 @@ const generateTree = (list: FileListData[], rootId: number) => {
       }
       objMap[parentId]['children'].push({ ...treeItem, isFolder: objMap[parentId]?.ext === '' });
       objMap[parentId]['size'] += treeItem.size;
-      objMap[parentId]['isFolder'] = true;
+      // objMap[parentId]['isFolder'] = true;
     }
   }
 

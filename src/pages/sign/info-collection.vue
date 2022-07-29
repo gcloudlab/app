@@ -41,13 +41,12 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs } from 'vue';
+import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { FormInst, FormItemRule, FormRules, NInput, NFormItem, NButton, NForm } from 'naive-ui';
 import { useAuth } from '@/hooks';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { validateEmail } from '@/utils/email';
-import Loading from '@/components/loading/index.vue';
 
 export interface ModelType {
   name: string | null;
@@ -59,6 +58,7 @@ export type SignType = 'signup' | 'signin';
 export interface InfoCollectionProps {
   signType: SignType;
 }
+const Loading = defineAsyncComponent(() => import('@/components/loading/index.vue'));
 
 const props = defineProps({
   signType: {

@@ -135,10 +135,10 @@ export const useAuthStore = defineStore({
         }
         return false;
       } catch (error) {
-        onWarning('请重新登陆');
         localStorage.removeItem('sign_status');
         this.sign_status = false;
         this.online_status = false;
+        // onWarning('请重新登陆');
         // onError('出错了');
       }
     },
