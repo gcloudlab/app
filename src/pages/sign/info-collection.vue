@@ -58,7 +58,7 @@ export type SignType = 'signup' | 'signin';
 export interface InfoCollectionProps {
   signType: SignType;
 }
-const Loading = defineAsyncComponent(() => import('@/components/loading/index.vue'));
+const Loading = defineAsyncComponent(() => import('@/components/commons/loading/index.vue'));
 
 const props = defineProps({
   signType: {

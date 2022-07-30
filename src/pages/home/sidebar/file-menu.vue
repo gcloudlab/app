@@ -34,13 +34,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, h } from 'vue';
+import { ref, h, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { NTree, NInput, NIcon, TreeOption, NSkeleton, NScrollbar } from 'naive-ui';
 import { Folder } from '@vicons/ionicons5';
 import Button from '@/components/commons/button/index.vue';
-import Empty from '@/components/commons/empty/index.vue';
+const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
 const emits = defineEmits(['checkedKeys', 'expandedKeys', 'selectedKeys']);
 const fileStore = useFileOutsideStore();
