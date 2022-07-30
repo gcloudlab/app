@@ -1,5 +1,10 @@
 import axios from '@/service/axios';
-import { CreateFolderOption, FileListResponse, SaveFileToUserRepoOption } from '@/models/file';
+import {
+  CreateFolderOption,
+  FileListResponse,
+  SaveFileToUserRepoOption,
+  UpdateFileNameOption,
+} from '@/models/file';
 
 export const getFileList = async (): Promise<FileListResponse> => {
   return await axios.get('/user/file/list');
@@ -13,4 +18,8 @@ export const saveFileToUserRepo = async (option: SaveFileToUserRepoOption) => {
 };
 export const createFolder = async (option: CreateFolderOption) => {
   return await axios.post('/user/folder/create', option);
+};
+export const deleteFile = async (fileId: string) => {};
+export const updateFileName = async (option: UpdateFileNameOption) => {
+  return await axios.post('/user/file/name/update', option);
 };

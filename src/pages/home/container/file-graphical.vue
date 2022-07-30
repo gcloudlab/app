@@ -42,28 +42,32 @@
           :style="{ backgroundColor: 'white', color: 'black' }"
         >
           <template #trigger>
-            <p class="truncate w-16 mt-1 text-center text-xs">{{ file.name }}</p>
+            <p class="truncate w-16 mt-1 text-center text-xs" @click="handleSelectedKeys(file)">
+              <ShowOrEdit :value="file.name" :onUpdateValue="handleUpadeteName" />
+            </p>
           </template>
           {{ file.name }}
         </n-tooltip>
       </div>
     </div>
-    <!-- <DropDown
+    <DropDown
       :show="showDropdownRef"
       :position="{ x: xRef, y: yRef }"
       @select="handleSelectDropDownItem"
       @clickoutside="handleClidkOutside"
-    /> -->
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs } from 'vue';
+import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
 import { NImage, NSkeleton, NTooltip } from 'naive-ui';
+import { useFiles } from '@/hooks/useFiles';
 import { FileListData } from '@/models/file';
 import { Folder, DocumentTextOutline } from '@vicons/ionicons5';
-import DropDown from '@/components/drop-down/index.vue';
+import ShowOrEdit from './file-edit';
 // import Loading from '@/components/loading/index.vue';
+const DropDown = defineAsyncComponent(() => import('@/components/commons/drop-down/index.vue'));
 
 const props = defineProps({
   values: {
@@ -73,15 +77,27 @@ const props = defineProps({
   },
 });
 const emits = defineEmits(['selectedKeys', 'expandedKeys']);
+const { onUpdateFileName } = useFiles();
 const showDropdownRef = ref(false);
 const xRef = ref(0);
 const yRef = ref(0);
+const currentFileRef = ref<FileListData | null>(null);
 
 const handleSelectedKeys = (file: FileListData) => {
+  currentFileRef.value = file;
   emits('selectedKeys', file);
 };
 const handleExpandedKeys = (file: FileListData) => {
   emits('expandedKeys', file);
+};
+const handleUpadeteName = (v: string) => {
+  if (v !== currentFileRef.value?.name && currentFileRef.value && currentFileRef.value.identity) {
+    currentFileRef.value.name = v;
+    onUpdateFileName({
+      identity: currentFileRef.value.identity,
+      name: v,
+    });
+  }
 };
 const handleSelectDropDownItem = (value: string) => {
   console.log('--drop select', value);

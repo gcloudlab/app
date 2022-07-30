@@ -19,7 +19,7 @@
       <n-upload-trigger #="{ handleClick }" abstract>
         <div
           @click="handleClick"
-          class="flex flex-col justify-center items-center p-1 text-center hover:bg-gray-300 cursor-pointer transition-all duration-150"
+          class="flex flex-col justify-center items-center p-1 text-center hover:bg-green-100 cursor-pointer transition-all duration-150"
         >
           <CloudUploadOutline class="animate-pulse w-9 text-gray-500 mt-3" />
           <p depth="2" class="my-1 text-sm">{{ title }}</p>
@@ -45,7 +45,7 @@
           <CreateFolder :folder="uploadFolder" />
         </div>
         <!-- 上传列表 -->
-        <n-collapse-item name="1" :arrow="false">
+        <n-collapse-item v-if="upload_files.length > 0" name="1" :arrow="false">
           <template #header-extra>
             <div class="flex items-center mr-3">
               <svg v-if="upload_files.length > 0" class="animate-ping w-2 h-2 text-green-800">
@@ -201,7 +201,6 @@ toRefs(props);
 .drag-upload {
   .n-collapse .n-collapse-item .n-collapse-item__header {
     padding: 6px;
-
     border-radius: 4px;
     transition: background 0.2s;
     &:hover {

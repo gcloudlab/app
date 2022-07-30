@@ -35,3 +35,7 @@ export interface CreateFolderOption {
   parent_id: number;
   name: string;
 }
+export interface UpdateFileNameOption {
+  identity: string;
+  name: string;
+}

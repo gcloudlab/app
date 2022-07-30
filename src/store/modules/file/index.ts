@@ -1,7 +1,12 @@
 import { defineStore } from 'pinia';
 import piniaStore from '@/store';
-import { createFolder, getFileList, uploadFile } from '@/service/api/file';
-import type { CreateFolderOption, FileListData, SaveFileToUserRepoOption } from '@/models/file';
+import { createFolder, getFileList, updateFileName, uploadFile } from '@/service/api/file';
+import type {
+  CreateFolderOption,
+  FileListData,
+  SaveFileToUserRepoOption,
+  UpdateFileNameOption,
+} from '@/models/file';
 import generateTree, { transformOriginFileList } from '@/utils/transform-file-list';
 import { onError, onWarning } from '@/utils/messages';
 import type { UploadFileInfo } from 'naive-ui';
@@ -60,7 +65,6 @@ export const useFileStore = defineStore({
             return prev + 1;
           }, 0);
           this.fetching = false;
-          // console.log(this.user_files, this.files_size);
         }
       } catch (error) {
         useTimer(() => {
@@ -170,6 +174,18 @@ export const useFileStore = defineStore({
         }
       } catch (e) {
         onError('创建失败，请重试');
+      }
+    },
+    async onUpdateFileNameAction(payload: UpdateFileNameOption) {
+      try {
+        const res = await updateFileName(payload);
+        if (res.data.msg === 'success') {
+          await this.onGetFileListAction();
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (error) {
+        onError('请重试');
       }
     },
   },

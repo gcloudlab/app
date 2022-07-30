@@ -29,4 +29,10 @@ const props = defineProps({
 toRefs(props);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.attention {
+  .n-alert .n-alert-body .n-alert-body__title {
+    font-size: 14px;
+  }
+}
+</style>

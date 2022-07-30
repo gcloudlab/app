@@ -19,7 +19,8 @@
         @keyup.enter="onPositiveClick"
       />
       <p class="mt-3 ml-1">
-        在 <span class="font-bold">{{ folder?.label }}</span>
+        在
+        <span class="font-bold">{{ folder?.label === '未分类' ? '主目录' : folder?.label }}</span>
         中新建文件夹
       </p>
     </n-modal>

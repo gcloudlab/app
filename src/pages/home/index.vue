@@ -20,16 +20,16 @@
             <Menu v-else />
           </template>
         </n-button>
-        <n-button class="mr-3 px-1" size="small">
+        <n-button class="px-1" size="small" @click="onGetFileList">
           <template #icon>
             <Refresh />
           </template>
         </n-button>
+        <n-button class="mr-3 px-2 text-xs" size="small">批量下载</n-button>
         <FileFolderRoute :routes="folder_routes" />
         <n-tag :bordered="false" size="small" type="warning">
           共{{ folder_routes.at(-1)!.size === -1 ? `${transformSize(files_size)}` : `${transformSize(folder_routes.at(-1)!.size)}` }}
         </n-tag>
-        <n-button class="ml-auto px-3" size="small">下载</n-button>
       </div>
       <div class="main-bar flex">
         <div class="main-files-bar flex-auto">
@@ -37,6 +37,7 @@
             <FileList
               v-if="fileViewType === 'list' && folder_routes.length > 1"
               :values="folder_routes.at(-1)"
+              @selectedKeys="handleSelectedKeys"
               @expandedKeys="handleExpandedKeys"
             />
             <FileGraphical
@@ -79,7 +80,7 @@ const MainNav = defineAsyncComponent(() => import('./main-nav/index.vue'));
 const Button = defineAsyncComponent(() => import('@/components/commons/button/index.vue'));
 
 const fileStore = useFileOutsideStore();
-const { onAddToFolderRoutes, onRemoveFromFolderRoutes, onJumpToFile } = useFiles();
+const { onGetFileList, onAddToFolderRoutes, onRemoveFromFolderRoutes, onJumpToFile } = useFiles();
 const expendMenuValue = ref<TreeOption | FileListData>();
 const fileViewType = ref<'list' | 'graphical'>('graphical');
 const currentClickedFile = ref<FileListData>();

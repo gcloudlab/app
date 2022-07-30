@@ -38,11 +38,12 @@ import {
 } from 'vue';
 import { DataTableColumns, NDataTable, TreeOption } from 'naive-ui';
 import { FileListData } from '@/models/file';
+import { useFiles } from '@/hooks/useFiles';
 import { compareDate } from '@/utils/date';
 import ShowOrEdit from './file-edit';
 import { transformSize } from '@/utils/transform-size';
-const Empty = defineAsyncComponent(() => import('@/components/empty/index.vue'));
-const DropDown = defineAsyncComponent(() => import('@/components/drop-down/index.vue'));
+const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
+const DropDown = defineAsyncComponent(() => import('@/components/commons/drop-down/index.vue'));
 
 const props = defineProps({
   values: {
@@ -50,8 +51,9 @@ const props = defineProps({
     default: {},
   },
 });
-const emits = defineEmits(['expandedKeys']);
+const emits = defineEmits(['expandedKeys', 'selectedKeys']);
 
+const { onUpdateFileName } = useFiles();
 const showDropdownRef = ref(false);
 const xRef = ref(0);
 const yRef = ref(0);
@@ -101,12 +103,19 @@ const columns: DataTableColumns = [
       return h(ShowOrEdit as unknown as VueElement, {
         value: row.name,
         style: row.type === '文件夹' && { color: '#00b850', cursor: 'pointer' },
-        onUpdateValue(v: any) {
+        onUpdateValue(v: string) {
           // data.value[index].name = v
-          if (v && row.name !== v) {
+          if (v && row.name !== v && row.identity) {
             row.name = v;
-            console.log('--update', v);
+            onUpdateFileName({
+              identity: row.identity as string,
+              name: v,
+            });
           }
+        },
+        onClick() {
+          emits('selectedKeys', row);
+          console.log('--click');
         },
       });
     },

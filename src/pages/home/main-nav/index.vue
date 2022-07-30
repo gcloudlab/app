@@ -1,20 +1,15 @@
 <template>
   <div class="main-nav">
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 m-3 gap-3">
-      <div
-        :class="[
-          ...boardClasses,
-          'row-span-3',
-          'flex flex-col justify-between bg-gradient-to-t from-green-100',
-        ]"
-      >
-        <DragUpload class="w-full" title="立即上传" />
+    <div class="flex flex-wrap grid-cols-2 sm:grid-cols-2 m-3 gap-2">
+      <div :class="[...boardClasses, 'flex-1  bg-gradient-to-t from-green-100 col-auto']">
+        <DragUpload class="" title="立即上传" />
       </div>
-      <Vue3Lottie class="robot w-48 sm:w-48 md:w-56 row-span-2" :animationData="RobotJson" />
-      <div :class="[...boardClasses, 'row-span-2']">去分享</div>
-      <div :class="[...boardClasses, 'h-24']">去分享1</div>
-      <div :class="[...boardClasses, '']">去分享2</div>
-      <div :class="[...boardClasses, 'col-span-3']">
+      <Vue3Lottie class="robot w-48 md:w-56" :animationData="RobotJson" />
+      <div :class="[...boardClasses, 'h-28 w-full']">去分享去分享去分享</div>
+      <div :class="[...boardClasses]">去分享1111</div>
+      <div :class="[...boardClasses]">去分享2</div>
+      <div :class="[...boardClasses, 'h-28 flex-grow']">hello</div>
+      <div :class="[...boardClasses]">
         <AttentionInter />
       </div>
     </div>
@@ -30,7 +25,7 @@ import AttentionInter from './attention-inter.vue';
 
 const fileStore = useFileOutsideStore();
 
-const boardClasses = ['rounded', 'shadow'];
+const boardClasses = ['rounded', 'shadow', 'hover:shadow-md', 'transition-all', 'duration-200'];
 
 const { upload_files } = storeToRefs(fileStore);
 </script>
