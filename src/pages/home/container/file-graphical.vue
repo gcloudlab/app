@@ -65,9 +65,8 @@ import { NImage, NSkeleton, NTooltip } from 'naive-ui';
 import { useFiles } from '@/hooks/useFiles';
 import { FileListData } from '@/models/file';
 import { Folder, DocumentTextOutline } from '@vicons/ionicons5';
-import ShowOrEdit from './file-edit';
-// import Loading from '@/components/loading/index.vue';
 const DropDown = defineAsyncComponent(() => import('@/components/commons/drop-down/index.vue'));
+const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
 
 const props = defineProps({
   values: {
@@ -91,7 +90,12 @@ const handleExpandedKeys = (file: FileListData) => {
   emits('expandedKeys', file);
 };
 const handleUpadeteName = (v: string) => {
-  if (v !== currentFileRef.value?.name && currentFileRef.value && currentFileRef.value.identity) {
+  if (
+    v &&
+    v !== currentFileRef.value?.name &&
+    currentFileRef.value &&
+    currentFileRef.value.identity
+  ) {
     currentFileRef.value.name = v;
     onUpdateFileName({
       identity: currentFileRef.value.identity,

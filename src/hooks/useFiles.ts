@@ -46,6 +46,9 @@ export const useFiles = () => {
   const onUpdateFileName = async (payload: UpdateFileNameOption) => {
     await fileStore.onUpdateFileNameAction(payload);
   };
+  const onDeleteFile = async (files: FileListData[]) => {
+    await fileStore.onDeleteFileAction(files);
+  };
 
   return {
     onGetFileList,
@@ -59,5 +62,6 @@ export const useFiles = () => {
     onUploadFile,
     onCreateFolder,
     onUpdateFileName,
+    onDeleteFile,
   };
 };

@@ -19,7 +19,9 @@ export const saveFileToUserRepo = async (option: SaveFileToUserRepoOption) => {
 export const createFolder = async (option: CreateFolderOption) => {
   return await axios.post('/user/folder/create', option);
 };
-export const deleteFile = async (fileId: string) => {};
+export const deleteFile = async (fileId: string) => {
+  return await axios.delete(`/user/file/delete`, { data: { identity: fileId } });
+};
 export const updateFileName = async (option: UpdateFileNameOption) => {
   return await axios.post('/user/file/name/update', option);
 };

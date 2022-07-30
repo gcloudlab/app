@@ -1,7 +1,7 @@
 export interface FileListResponseData {
   id: number;
   parent_id: number;
-  identity?: string;
+  identity: string;
   repository_identity?: string;
   name: string;
   path?: string;

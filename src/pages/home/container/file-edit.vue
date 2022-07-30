@@ -1,3 +1,4 @@
+<script lang="ts">
 import { defineComponent, nextTick, ref, h } from 'vue';
 import { NInput } from 'naive-ui';
 
@@ -10,11 +11,11 @@ const ShowOrEdit = defineComponent({
     const isEdit = ref(false);
     const inputRef = ref<HTMLInputElement | null>(null);
     const inputValue = ref(props.value);
-    const timeOut = ref<number>();
+    // const timeOut = ref<number>();
     // const time = 200;
 
     function handleOnDblClick() {
-      clearTimeout(timeOut.value);
+      // clearTimeout(timeOut.value);
       isEdit.value = true;
       nextTick(() => {
         inputRef.value?.focus();
@@ -29,6 +30,14 @@ const ShowOrEdit = defineComponent({
     function handleChange() {
       props.onUpdateValue && props.onUpdateValue(inputValue.value);
       isEdit.value = false;
+    }
+    function handleBlur() {
+      isEdit.value = false;
+    }
+    function handleEnter(e: KeyboardEvent) {
+      if (e.key === 'Enter') {
+        handleChange();
+      }
     }
     return () =>
       h(
@@ -46,11 +55,16 @@ const ShowOrEdit = defineComponent({
               value: inputValue.value,
               size: 'small',
               placeholder: '重命名',
+              style: {
+                width: '100%',
+                display: 'inline-block',
+              },
               onUpdateValue: (v: string) => {
                 inputValue.value = v;
               },
-              // onChange: handleChange,
-              onBlur: handleChange,
+              onKeyup: handleEnter,
+              onChange: handleChange,
+              onBlur: handleBlur,
             })
           : props.value
       );
@@ -58,3 +72,4 @@ const ShowOrEdit = defineComponent({
 });
 
 export default ShowOrEdit;
+</script>

@@ -1,4 +1,4 @@
-<p align="center"><img width="60%" align="center" src="./src/assets/gcloud.png"></p>
+<p align="center"><img width="60%" align="center" src="/src/assets/gcloud.png"></p>
 
 <p align="center">😎 简单 & 免费的开源云盘</p>
 

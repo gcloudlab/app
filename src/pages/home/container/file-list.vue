@@ -40,10 +40,10 @@ import { DataTableColumns, NDataTable, TreeOption } from 'naive-ui';
 import { FileListData } from '@/models/file';
 import { useFiles } from '@/hooks/useFiles';
 import { compareDate } from '@/utils/date';
-import ShowOrEdit from './file-edit';
 import { transformSize } from '@/utils/transform-size';
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 const DropDown = defineAsyncComponent(() => import('@/components/commons/drop-down/index.vue'));
+const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
 
 const props = defineProps({
   values: {

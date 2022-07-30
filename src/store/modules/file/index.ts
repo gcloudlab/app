@@ -1,6 +1,12 @@
 import { defineStore } from 'pinia';
 import piniaStore from '@/store';
-import { createFolder, getFileList, updateFileName, uploadFile } from '@/service/api/file';
+import {
+  createFolder,
+  deleteFile,
+  getFileList,
+  updateFileName,
+  uploadFile,
+} from '@/service/api/file';
 import type {
   CreateFolderOption,
   FileListData,
@@ -33,7 +39,7 @@ export const useFileStore = defineStore({
       files_count: -1,
       user_files: [],
       files_size: -1,
-      folder_routes: [{ id: -1, name: '主菜单', size: -1, parent_id: 0 }],
+      folder_routes: [{ id: -1, name: '主菜单', size: -1, parent_id: 0, identity: 'root' }],
       upload_files: [],
       origin_folders: [],
       fetching: false,
@@ -78,7 +84,10 @@ export const useFileStore = defineStore({
       else if (this.folder_routes[this.folder_routes.length - 1]?.id === payload.parent_id) {
         this.folder_routes.push(payload);
       } else {
-        this.folder_routes = [{ id: -1, name: '主菜单', size: -1, parent_id: 0 }, payload];
+        this.folder_routes = [
+          { id: -1, name: '主菜单', size: -1, parent_id: 0, identity: 'root' },
+          payload,
+        ];
       }
     },
     onRemoveFromFolderRoutesAction(payload?: FileListData) {
@@ -100,7 +109,7 @@ export const useFileStore = defineStore({
         let parent_id = payload.parent_id;
         if (parent_id === 0) {
           this.folder_routes = [
-            { id: -1, name: '主菜单', size: -1, parent_id: 0 },
+            { id: -1, name: '主菜单', size: -1, parent_id: 0, identity: 'root' },
             this.user_files[this.user_files.length - 1],
           ];
           return;
@@ -108,7 +117,7 @@ export const useFileStore = defineStore({
         let parentFolders = findParents(this.user_files, parent_id);
         if (parentFolders && parentFolders.length > 0) {
           this.folder_routes = [
-            { id: -1, name: '主菜单', size: -1, parent_id: 0 },
+            { id: -1, name: '主菜单', size: -1, parent_id: 0, identity: 'root' },
             ...parentFolders,
           ];
         }
@@ -187,6 +196,24 @@ export const useFileStore = defineStore({
       } catch (error) {
         onError('请重试');
       }
+    },
+    async onDeleteFileAction(files: FileListData[]) {
+      Promise.all(files.map(file => deleteFile(file.identity)))
+        .then(res => {
+          if (res.find(i => i.data.msg === 'success')) {
+            this.onGetFileListAction().then(() => {
+              files.map(file => {
+                this.onJumpToFileAction(file);
+              });
+            });
+            console.log('---删除', res);
+          } else {
+            onWarning('删除失败');
+          }
+        })
+        .catch(err => {
+          onError('请重试');
+        });
     },
   },
 });
