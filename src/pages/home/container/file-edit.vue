@@ -45,6 +45,7 @@ const ShowOrEdit = defineComponent({
         {
           // onClick: handleOnClick,
           onDblclick: handleOnDblClick,
+          class: 'truncate w-16',
           style: {
             userSelect: 'none',
           },

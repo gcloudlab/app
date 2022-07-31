@@ -147,6 +147,7 @@ export const useFileStore = defineStore({
         this.upload_files = [];
       }
     },
+    // use less
     async onUploadFileAction(payload: File) {
       try {
         await uploadFile(payload);
@@ -159,7 +160,15 @@ export const useFileStore = defineStore({
         const res = await saveFileToUserRepo(payload);
         if (res.data.msg === 'success') {
           this.onRemoveUploadFileAction(payload);
-          await this.onGetFileListAction();
+          this.onGetFileListAction().then(() => {
+            this.onJumpToFileAction({
+              parent_id: payload.parentId,
+              id: -1,
+              identity: payload.repositoryIdentity,
+              name: payload.name,
+              size: 0,
+            });
+          });
         } else if (res.data.msg === 'exist') {
           onError('已存在同名文件');
           this.upload_files.map(i => {
@@ -198,15 +207,14 @@ export const useFileStore = defineStore({
       }
     },
     async onDeleteFileAction(files: FileListData[]) {
-      Promise.all(files.map(file => deleteFile(file.identity)))
+      Promise.all(files.map(file => (file !== null ? deleteFile(file.identity) : null)))
         .then(res => {
-          if (res.find(i => i.data.msg === 'success')) {
+          if (res.find(i => i !== null && i.data.msg === 'success')) {
             this.onGetFileListAction().then(() => {
               files.map(file => {
-                this.onJumpToFileAction(file);
+                file && this.onJumpToFileAction(file);
               });
             });
-            console.log('---删除', res);
           } else {
             onWarning('删除失败');
           }

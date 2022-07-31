@@ -3,6 +3,7 @@
     <div class="flex">
       <n-input class="mr-0" v-model:value="pattern" size="small" placeholder="搜索文件" />
       <Button @click="isChecked = !isChecked" size="small">操作</Button>
+      <Button v-if="isChecked" @click="handleDelete" type="error" size="small">删除</Button>
     </div>
     <n-scrollbar style="height: 240px">
       <n-tree
@@ -40,22 +41,31 @@ import { useFileOutsideStore } from '@/store/modules/file';
 import { NTree, NInput, NIcon, TreeOption, NSkeleton, NScrollbar } from 'naive-ui';
 import { Folder } from '@vicons/ionicons5';
 import Button from '@/components/commons/button/index.vue';
+
+export interface FileTreeOption {
+  keys: Array<string | number>;
+  option: Array<TreeOption | null>;
+}
+
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
-const emits = defineEmits(['checkedKeys', 'expandedKeys', 'selectedKeys']);
+const emits = defineEmits(['checkedKeys', 'expandedKeys', 'selectedKeys', 'delete']);
 const fileStore = useFileOutsideStore();
 const isChecked = ref(false);
 const pattern = ref('');
 const renderSwitcherIcon = () => h(NIcon, null, { default: () => h(Folder) });
 
 const handleCheckedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
-  emits('checkedKeys', { keys, option });
+  emits('checkedKeys', option);
 };
 const handleExpandedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
   emits('expandedKeys', option[option.length - 1]);
 };
 const handleSelectedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
   emits('selectedKeys', option[0]);
+};
+const handleDelete = () => {
+  emits('delete', true);
 };
 const nodeProps = ({ option }: { option: TreeOption }) => {
   return {

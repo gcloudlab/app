@@ -70,6 +70,8 @@ const fileType = (ext: string) => {
     case 'jpg':
     case 'png':
     case 'gif':
+    case 'bmp':
+    case 'jpeg':
       return '图片';
     case 'doc':
     case 'docx':

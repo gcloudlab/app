@@ -39,6 +39,8 @@ axiosInstance.interceptors.response.use(
     const { response } = error;
     if (/^5/.test(response.status)) {
       onError(showMessage(response.status as StatusType));
+    } else if (response.status === 413) {
+      onWarning('文件大小超出限制(10Mb)');
     }
     return Promise.reject(error);
   }

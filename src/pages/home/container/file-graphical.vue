@@ -15,7 +15,7 @@
         />
         <div v-else-if="file?.type === '图片'" @click="handleSelectedKeys(file)">
           <n-image
-            class="w-12 shadow-md rounded"
+            class="w-14 shadow-md rounded-sm"
             lazy
             :src="file.path"
             object-fit="contain"

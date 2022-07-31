@@ -3,7 +3,7 @@ import { NConfigProvider, GlobalThemeOverrides, MessageProviderProps } from 'nai
 export const primaryColor = '#00b0b3'; // 薄荷
 export const infoColor = '#66b0ff'; // 蓝
 export const successColor = '#00b850'; // 死绿
-export const warningColor = '#f06c33'; // 砖红
+export const warningColor = '#eed477'; // 砖红
 export const errorColor = '#ff6666'; // 酒红
 
 export const themeOverrides: GlobalThemeOverrides = {
@@ -25,6 +25,8 @@ export const themeOverrides: GlobalThemeOverrides = {
     textColorSuccess: '#333639',
     textColorInfo: infoColor,
     textColorPrimary: primaryColor,
+    textColorWarning: warningColor,
+    textColorError: errorColor,
     colorHoverInfo: infoColor,
     colorFocusInfo: infoColor,
     colorPressedInfo: infoColor,

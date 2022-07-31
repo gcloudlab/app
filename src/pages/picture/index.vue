@@ -12,7 +12,7 @@
             :src="item"
             object-fit="cover"
             lazy
-            fallback-src="./src/assets/logo.png"
+            :fallback-src="Logo"
           >
             <template #placeholder>
               <div class="w-80 h-80 sm:w-80 sm:h-80 md:w-64 md:h-64">
@@ -33,9 +33,11 @@ import usePicture, { PictureResponse } from '@/hooks/usePicture';
 import { onMounted, ref } from 'vue';
 import { NImage, NSkeleton, NScrollbar } from 'naive-ui';
 import Menu from './menu.vue';
+import defaultLogo from '@/assets/logo.png';
 
 const pictures = ref<PictureResponse | null>();
 const currentPage = ref(1);
+const Logo = ref(defaultLogo);
 
 onMounted(async () => {
   handleGetPictures();

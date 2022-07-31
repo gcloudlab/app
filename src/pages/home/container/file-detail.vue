@@ -34,16 +34,14 @@
           文件链接：<a class="hover:text-gray-200" :href="file.path" target="_blank">点击下载</a>
         </p>
         <p v-else>链接：<a class="hover:text-gray-200">下载文件夹</a></p>
-        <!-- <n-button
+        <n-button
           class="w-full mt-1"
-          strong
+          circle
+          dashed
           type="warning"
           size="small"
-          @click="handleUpdateName"
+          @click="handleDeleteFile"
         >
-          重命名
-        </n-button> -->
-        <n-button class="w-full mt-1" strong type="error" size="small" @click="handleDeleteFile">
           删除
         </n-button>
       </n-card>
