@@ -1,5 +1,5 @@
 <template>
-  <div class="auth bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500">
+  <div class="auth bg-gradient-to-r from-cyan-500">
     <div class="auth_options-container">
       <div class="auth_options-text rounded-lg shadow-md">
         <div class="auth_options-unregistered">
@@ -8,17 +8,17 @@
           <p class="auth_unregistered-text">
             tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
           </p>
-          <n-button type="primary" round class="auth_unregistered-signup" @click="onChangeToSignup">
+          <n-button type="warning" round class="auth_unregistered-signup" @click="onChangeToSignup">
             去注册
           </n-button>
-          <n-button type="info" round class="ml-3" @click="router.back()">返回</n-button>
+          <n-button type="warning" round class="ml-3" @click="router.back()">返回</n-button>
         </div>
 
         <div class="auth_options-registered">
           <h1 class="auth_unregistered-title font-black tracking-wide">GCloud 云盘</h1>
           <h2 class="leading-10">已有账号请移步登陆</h2>
           <p class="auth_registered-text">左拐不送。</p>
-          <n-button type="primary" round class="auth_registered-login" @click="onChangeToSignin">
+          <n-button type="warning" round class="auth_registered-login" @click="onChangeToSignin">
             去登陆
           </n-button>
         </div>

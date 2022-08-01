@@ -56,7 +56,7 @@ const tabs = ref([
   { name: 'down', label: '下载', path: '/down' },
   { name: 'share', label: '分享', path: '/share' },
   { name: 'community', label: '社区', path: '/community' },
-  { name: 'picture', label: '学习资料', path: '/picture' },
+  // { name: 'picture', label: '学习资料', path: '/picture' },
 ]);
 const logoUrl = ref(Logo);
 const { auth } = storeToRefs(authStore);

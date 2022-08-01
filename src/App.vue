@@ -8,7 +8,10 @@
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue';
 import { NConfigProvider, NMessageProvider } from 'naive-ui';
-import MessageApi from '@/components/message-api.vue';
 import { themeOverrides, messageThemeOverrides } from '@/assets/style/theme';
+const MessageApi = defineAsyncComponent(
+  () => import('@/components/commons/message/message-api.vue')
+);
 </script>

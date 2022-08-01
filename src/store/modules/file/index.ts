@@ -207,9 +207,9 @@ export const useFileStore = defineStore({
       }
     },
     async onDeleteFileAction(files: FileListData[]) {
-      Promise.all(files.map(file => (file !== null ? deleteFile(file.identity) : null)))
+      Promise.allSettled(files.map(file => (file !== null ? deleteFile(file.identity) : null)))
         .then(res => {
-          if (res.find(i => i !== null && i.data.msg === 'success')) {
+          if (res.find(i => i !== null && (i as any).data.msg === 'success')) {
             this.onGetFileListAction().then(() => {
               files.map(file => {
                 file && this.onJumpToFileAction(file);

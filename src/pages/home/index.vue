@@ -79,7 +79,7 @@ import { FileListData } from '@/models/file';
 import { transformSize } from '@/utils/transform-size';
 import { TreeOption, NTag, NButton, NScrollbar } from 'naive-ui';
 import { ChevronBack, AppsSharp, Menu, Refresh } from '@vicons/ionicons5';
-
+import MainNav from './main-nav/index.vue';
 const FileMenu = defineAsyncComponent(() => import('./sidebar/file-menu.vue'));
 const Overview = defineAsyncComponent(() => import('./sidebar/overview.vue'));
 const OnlineUsers = defineAsyncComponent(() => import('./sidebar/community-status.vue'));
@@ -87,7 +87,6 @@ const FileList = defineAsyncComponent(() => import('./container/file-list.vue'))
 const FileGraphical = defineAsyncComponent(() => import('./container/file-graphical.vue'));
 const FileDetail = defineAsyncComponent(() => import('./container/file-detail.vue'));
 const FileFolderRoute = defineAsyncComponent(() => import('./container/file-folder-route.vue'));
-const MainNav = defineAsyncComponent(() => import('./main-nav/index.vue'));
 const Button = defineAsyncComponent(() => import('@/components/commons/button/index.vue'));
 
 const fileStore = useFileOutsideStore();
