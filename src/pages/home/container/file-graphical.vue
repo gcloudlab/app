@@ -43,7 +43,7 @@
         >
           <template #trigger>
             <p class="truncate w-16 mt-1 text-center text-xs" @click="handleSelectedKeys(file)">
-              <ShowOrEdit :value="file.name" :onUpdateValue="handleUpadeteName" />
+              <ShowOrEdit truncate :value="file.name" :onUpdateValue="handleUpadeteName" />
             </p>
           </template>
           {{ file.name }}

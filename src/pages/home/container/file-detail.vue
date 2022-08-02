@@ -5,7 +5,7 @@
         class="leading-7"
         hoverable
         :bordered="false"
-        content-style="background-color: #00b0b3; border-radius: 5px;color: white;"
+        content-style="background-color: #008c8f; border-radius: 5px;color: white;"
         @click="handleSelect(file)"
       >
         <n-image
@@ -16,11 +16,11 @@
         />
         <DocumentTextOutline v-else-if="!file.isFolder" class="w-12 text-gray-100" />
         <Folder v-else class="w-12 text-yellow-500" />
-        <div class="flex justify-start items-center">
-          <div>名称：</div>
+        <div class="flex justify-start items-center flex-wrap">
+          <span class="">名称：</span>
           <ShowOrEdit
             v-if="file.type === '文件夹'"
-            class="inline-block flex-1"
+            class="inline-block"
             :value="file.name"
             :onUpdateValue="handleUpdateName"
           />
@@ -30,12 +30,22 @@
         <p v-show="file.isFolder">文件数量：{{ file.children?.length }}</p>
         <p>文件类型：{{ file.type }}</p>
         <p v-show="file.updated_at">修改日期：{{ file.updated_at }}</p>
-        <p v-if="!file.isFolder">
-          文件链接：<a class="hover:text-gray-200" :href="file.path" target="_blank">点击下载</a>
-        </p>
-        <p v-else>链接：<a class="hover:text-gray-200">下载文件夹</a></p>
+        <div class="flex justify-around">
+          <n-button class="w-1/2" type="info" circle size="small" @click="handleDownload(file)">
+            下载
+          </n-button>
+          <n-button
+            class="ml-2 w-1/2"
+            type="success"
+            circle
+            size="small"
+            @click="handleShare(file)"
+          >
+            分享
+          </n-button>
+        </div>
         <n-button
-          class="w-full mt-1"
+          class="w-full mt-2"
           circle
           dashed
           type="warning"
@@ -60,6 +70,7 @@ import { FileListData } from '@/models/file';
 import { transformSize } from '@/utils/transform-size';
 import { Folder, DocumentTextOutline } from '@vicons/ionicons5';
 import DragUpload from '@/components/upload/trigger-upload.vue';
+import downloadByUrl from '@/utils/download-by-url';
 const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
 
 const props = defineProps({
@@ -93,7 +104,19 @@ const handleUpdateName = (v: string) => {
 const handleDeleteFile = () => {
   onDeleteFile([props.file]);
 };
-
+const handleDownload = (file: FileListData) => {
+  if (file.type !== '文件夹') {
+    downloadByUrl(file.path, file.name);
+  } else {
+  }
+};
+const handleShare = (file: FileListData) => {
+  if (file.type !== '文件夹') {
+    console.log('分享文件');
+  } else {
+    console.log('分享文件夹');
+  }
+};
 // const { folder_routes } = storeToRefs(fileStore);
 toRefs(props);
 </script>

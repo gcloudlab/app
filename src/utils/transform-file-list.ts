@@ -98,7 +98,7 @@ const fileType = (ext: string) => {
     case '':
       return '文件夹';
     default:
-      return '未知';
+      return ext;
   }
 };
 

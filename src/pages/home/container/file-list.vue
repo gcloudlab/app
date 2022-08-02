@@ -1,21 +1,24 @@
 <template>
   <div class="file-list">
-    <n-data-table
-      size="small"
-      :columns="columns"
-      :row-props="rowProps"
-      :data="values.children"
-      row-class-name="animate__animated animate__fadeIn faster"
-      :row-key="rowKeys"
-      children-key="donnot-need-children"
-      :bordered="false"
-      :pagination="pagination"
-      :default-expand-all="true"
-    >
-      <template name="empty">
-        <Empty description="空空如也"> </Empty>
-      </template>
-    </n-data-table>
+    <n-scrollbar style="max-height: calc(100vh - 57px)">
+      <n-data-table
+        size="small"
+        :columns="columns"
+        :row-props="rowProps"
+        :data="values.children"
+        row-class-name="animate__animated animate__fadeIn faster"
+        :row-key="rowKeys"
+        children-key="donnot-need-children"
+        :bordered="false"
+        :pagination="false"
+        :default-expand-all="true"
+      >
+        <template name="empty">
+          <Empty description="空空如也"> </Empty>
+        </template>
+      </n-data-table>
+    </n-scrollbar>
+
     <DropDown
       :show="showDropdownRef"
       :position="{ x: xRef, y: yRef }"
@@ -36,7 +39,7 @@ import {
   nextTick,
   defineAsyncComponent,
 } from 'vue';
-import { DataTableColumns, NDataTable, TreeOption } from 'naive-ui';
+import { DataTableColumns, NDataTable, TreeOption, NScrollbar } from 'naive-ui';
 import { FileListData } from '@/models/file';
 import { useFiles } from '@/hooks/useFiles';
 import { compareDate } from '@/utils/date';
@@ -59,7 +62,7 @@ const xRef = ref(0);
 const yRef = ref(0);
 const pagination = reactive({
   page: 1,
-  pageSize: 10,
+  pageSize: 20,
   showSizePicker: true,
   pageSizes: [10, 15, 20],
   onUpdatePageSize: (pageSize: number) => {
@@ -102,7 +105,8 @@ const columns: DataTableColumns = [
     render(row, index) {
       return h(ShowOrEdit as unknown as VueElement, {
         value: row.name,
-        style: row.type === '文件夹' && { color: '#00b850', cursor: 'pointer' },
+        class: 'ml-2',
+        style: row.type === '文件夹' && { color: 'rgb(234,179,9)', cursor: 'pointer' },
         onUpdateValue(v: string) {
           // data.value[index].name = v
           if (v && row.name !== v && row.identity) {
@@ -156,6 +160,9 @@ toRefs(props);
 
 <style lang="scss">
 .file-list {
+  .n-data-table .n-data-table-td {
+    border-bottom: none;
+  }
   .n-data-table .n-data-table-td.n-data-table-td--hover {
     background-color: transparent;
   }

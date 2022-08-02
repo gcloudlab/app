@@ -20,6 +20,7 @@
         <div
           @click="handleClick"
           class="flex flex-col justify-center items-center p-1 text-center hover:bg-green-100 cursor-pointer transition-all duration-150"
+          :class="[upload_files.length <= 0 ? 'h-5/6' : '']"
         >
           <CloudUploadOutline class="animate-pulse w-9 text-gray-500 mt-3" />
           <p depth="2" class="my-1 text-sm">{{ title }}</p>

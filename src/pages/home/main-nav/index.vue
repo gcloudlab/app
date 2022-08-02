@@ -1,12 +1,18 @@
 <template>
   <div class="main-nav">
-    <div class="flex flex-wrap grid-cols-2 sm:grid-cols-2 m-3 gap-2">
-      <div :class="[...boardClasses, 'flex flex-1 bg-gradient-to-t from-green-100 col-auto']">
+    <div class="flex flex-wrap grid-cols-2 sm:grid-cols-2 m-3 gap-1">
+      <div
+        :class="[
+          ...boardClasses,
+          'flex items-center flex-1 bg-gradient-to-t from-green-100 col-auto',
+        ]"
+      >
         <DragUpload class="w-3/4 h-full shadow-sm" title="立即上传" />
-        <Vue3Lottie class="robot w-1/4" :animationData="RobotJson" />
+        <Vue3Lottie class="robot h-3/4 w-1/4" :animationData="RobotJson" />
       </div>
-      <div :class="[...boardClasses, 'h-28 w-full']">我的分享</div>
-      <div :class="[...boardClasses, 'h-28 w-full']"></div>
+      <div :class="[...boardClasses, 'h-56 w-full  bg-gradient-to-b from-green-100 ']">
+        我的分享
+      </div>
       <div :class="[...boardClasses]">
         <AttentionInter />
       </div>

@@ -5,6 +5,7 @@ import { NInput } from 'naive-ui';
 const ShowOrEdit = defineComponent({
   props: {
     value: [String, Number],
+    truncate: [Boolean],
     onUpdateValue: [Function, Array],
   },
   setup(props) {
@@ -45,7 +46,7 @@ const ShowOrEdit = defineComponent({
         {
           // onClick: handleOnClick,
           onDblclick: handleOnDblClick,
-          class: 'truncate w-16',
+          class: props.truncate ? 'truncate w-16' : '',
           style: {
             userSelect: 'none',
           },

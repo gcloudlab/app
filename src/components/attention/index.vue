@@ -1,6 +1,6 @@
 <template>
   <div class="attention text-center">
-    <n-alert :title="title" :type="type" :show-icon="showIcon">
+    <n-alert class="h-full" :title="title" :type="type" :show-icon="showIcon">
       <slot></slot>
     </n-alert>
   </div>

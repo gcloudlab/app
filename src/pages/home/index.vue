@@ -40,6 +40,7 @@
         <FileFolderRoute :routes="folder_routes" />
         <n-tag :bordered="false" size="small" type="info">
           共{{ folder_routes.at(-1)!.size === -1 ? `${transformSize(files_size)}` : `${transformSize(folder_routes.at(-1)!.size)}` }}
+          ({{ folder_routes.at(-1)?.children?.length }})
         </n-tag>
       </div>
       <div class="main-bar flex">
