@@ -58,6 +58,8 @@ export const useAuthStore = defineStore({
         } else if (res.data.msg === '用户名或密码错误') {
           this.sign_status = false;
           onError('不要让我知道你忘记密码了');
+        } else {
+          onError(res.data.msg);
         }
       } catch (error) {
         this.sign_status = false;
@@ -82,12 +84,8 @@ export const useAuthStore = defineStore({
               email: registerInfo.email,
             };
             onSuccess('注册成功');
-          } else if (res.data.msg === '无效验证码') {
-            onError('无效验证码');
-          } else if (res.data.msg === '验证码错误') {
-            onError('验证码错误');
-          } else if (res.data.msg === '用户名已存在') {
-            onError('用户名已存在');
+          } else {
+            onError(res.data.msg);
           }
         });
       } catch (error) {
