@@ -13,9 +13,13 @@
           class="w-10 text-yellow-500 cursor-pointer"
           @click="handleExpandedKeys(file)"
         />
-        <div v-else-if="file?.type === '图片'" @click="handleSelectedKeys(file)">
+        <div
+          class="image-item-wrapper w-16"
+          v-else-if="file?.type === '图片'"
+          @click="handleSelectedKeys(file)"
+        >
           <n-image
-            class="w-14 shadow-md rounded-sm"
+            class="shadow-lg rounded-sm"
             lazy
             :src="file.path"
             object-fit="contain"
@@ -114,4 +118,10 @@ const handleClidkOutside = (value: boolean) => {
 toRefs(props);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.file-graphical {
+  .image-item-wrapper {
+    max-height: 96px;
+  }
+}
+</style>

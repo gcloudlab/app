@@ -31,7 +31,13 @@
         <p>文件类型：{{ file.type }}</p>
         <p v-show="file.updated_at">修改日期：{{ file.updated_at }}</p>
         <div class="flex justify-around">
-          <n-button class="w-1/2" type="info" circle size="small" @click="handleDownload(file)">
+          <n-button
+            class="w-1/2"
+            type="info"
+            circle
+            size="small"
+            @click.prevent="handleDownload(file)"
+          >
             下载
           </n-button>
           <n-button
@@ -106,7 +112,7 @@ const handleDeleteFile = () => {
 };
 const handleDownload = (file: FileListData) => {
   if (file.type !== '文件夹') {
-    downloadByUrl(file.path, file.name);
+    downloadByUrl(file);
   } else {
   }
 };

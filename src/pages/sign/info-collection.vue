@@ -8,7 +8,12 @@
     label-placement="left"
   >
     <n-form-item path="name" label="昵称">
-      <n-input v-model:value="model.name" placeholder="请输入你的昵称" @keydown.enter.prevent />
+      <n-input
+        v-model:value="model.name"
+        placeholder="请输入你的昵称"
+        @keydown.enter.prevent
+        @keyup.enter="handleValidate"
+      />
     </n-form-item>
     <n-form-item v-if="signType === 'signup'" path="email" label="邮箱">
       <n-input v-model:value="model.email" placeholder="请输入邮箱" @keydown.enter.prevent />
@@ -27,6 +32,7 @@
         type="password"
         placeholder="请输入密码"
         @keydown.enter.prevent
+        @keyup.enter="handleValidate"
       />
     </n-form-item>
     <div class="flex justify-between">

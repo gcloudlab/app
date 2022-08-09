@@ -1,6 +1,6 @@
 {
   "name": "app",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "GPL-3.0",
   "scripts": {
     "dev": "vite --mode development",
@@ -12,10 +12,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@types/file-saver": "^2.0.5",
     "@types/qs": "^6.9.7",
     "@vicons/ionicons5": "^0.12.0",
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
+    "file-saver": "^2.0.5",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "naive-ui": "^2.30.8",
