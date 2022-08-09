@@ -1,7 +1,7 @@
 <template>
   <div class="home flex">
     <!-- sider -->
-    <div class="file-tree-bar w-48 md:w-60 animate__animated animate__fadeIn faster">
+    <div class="file-tree-bar w-52 animate__animated animate__fadeIn faster">
       <n-scrollbar style="max-height: calc(100vh - 57px)">
         <FileMenu
           @selectedKeys="handleSelectedKeys"

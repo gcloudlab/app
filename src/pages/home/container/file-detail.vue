@@ -14,8 +14,8 @@
           :src="file.path"
           fallback-src="./src/assets/logo.png"
         />
-        <DocumentTextOutline v-else-if="!file.isFolder" class="w-12 text-gray-100" />
-        <Folder v-else class="w-12 text-yellow-500" />
+        <Folder v-else-if="file.type === '文件夹'" class="w-12 text-yellow-500" />
+        <DocumentTextOutline v-else class="w-12 text-gray-100" />
         <div class="flex justify-start items-center flex-wrap">
           <span class="">名称：</span>
           <ShowOrEdit

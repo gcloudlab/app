@@ -28,8 +28,7 @@
       <div v-else-if="fetching" class="p-4">
         <n-skeleton text :repeat="6" :sharp="false" />
       </div>
-      <Empty class="animate__animated animate__fadeIn faster" v-else description="空空如也">
-      </Empty>
+      <Empty class="animate__animated animate__fadeIn faster" v-else description="空空如也" />
     </n-scrollbar>
   </div>
 </template>

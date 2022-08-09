@@ -1,4 +1,5 @@
 import type { FileListData } from '@/models/file';
+import _ from 'lodash';
 import { transformDate } from './date';
 
 const generateTree = (list: FileListData[], rootId: number) => {
@@ -6,6 +7,7 @@ const generateTree = (list: FileListData[], rootId: number) => {
     new Error('type only Array');
     return list;
   }
+
   const objMap: any = {}; // 暂存数组以 id 为 key的映射关系
   const result = []; // 结果
   const other = [];
@@ -21,13 +23,10 @@ const generateTree = (list: FileListData[], rootId: number) => {
     let treeItem = objMap[id]; // 找到映射关系那一项（注意这里是引用）
     treeItem.updated_at = transformDate(treeItem.updated_at);
     treeItem.type = fileType(treeItem.ext);
-    if (treeItem.type === '文件夹') {
-      treeItem = { children: [], ...treeItem };
-    }
 
     if (parentId === rootId && item.ext === '') {
       // 已经到根元素则将映射结果放进结果集
-      result.push({ children: [], ...treeItem, isFolder: true });
+      result.push(treeItem);
     } else if (parentId === rootId && item.ext !== '') {
       // 未分类文件
       other.push({ ...treeItem, type: fileType(treeItem.ext), isFolder: false });
@@ -39,16 +38,17 @@ const generateTree = (list: FileListData[], rootId: number) => {
       }
 
       // 若无该根元素则放入map中
-      if (!objMap[parentId]['children']) {
+      if (objMap[parentId]['children'] === undefined) {
         objMap[parentId]['children'] = [];
       }
-      objMap[parentId]['children'].push({ ...treeItem, isFolder: objMap[parentId]?.ext === '' });
+      objMap[parentId]['children'].push(treeItem);
       objMap[parentId]['size'] += treeItem.size;
-      // objMap[parentId]['isFolder'] = true;
+      objMap[parentId]['isFolder'] = objMap[parentId]?.ext === '';
     }
   }
 
   if (other.length > 0) {
+    console.log('---', result);
     return [
       ...result,
       {
@@ -62,6 +62,7 @@ const generateTree = (list: FileListData[], rootId: number) => {
       },
     ];
   }
+
   return result;
 };
 

@@ -61,7 +61,7 @@ export const useFileStore = defineStore({
         if (res.status === 200) {
           this.origin_folders = transformOriginFileList(res.data.list);
           this.user_files = generateTree(res.data.list, 0);
-          console.log('--store-all files', this.user_files, this.origin_folders);
+          console.log('--store-all files', this.origin_folders, this.user_files);
           this.files_count = this.user_files.reduce((prev, cur) => {
             if (cur.children && cur.children.length !== 0) return prev + cur.children.length;
             return prev + 1;
