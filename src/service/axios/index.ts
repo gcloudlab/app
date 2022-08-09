@@ -11,7 +11,8 @@ axios.defaults.withCredentials = false;
 axios.defaults.headers.post['Access-Control-Allow-Origin-Type'] = '*';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_APP_BASE_URL + '/',
+  // baseURL: import.meta.env.VITE_APP_BASE_URL + '/', // Proxy
+  baseURL: 'https://gcloud.aoau.top/', // CORS
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json;charset=UTF-8',
