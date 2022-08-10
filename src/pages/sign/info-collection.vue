@@ -53,6 +53,7 @@ import { FormInst, FormItemRule, FormRules, NInput, NFormItem, NButton, NForm } 
 import { useAuth } from '@/hooks';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { validateEmail } from '@/utils/email';
+import Loading from '@/components/commons/loading/index.vue';
 
 export interface ModelType {
   name: string | null;
@@ -64,7 +65,6 @@ export type SignType = 'signup' | 'signin';
 export interface InfoCollectionProps {
   signType: SignType;
 }
-const Loading = defineAsyncComponent(() => import('@/components/commons/loading/index.vue'));
 
 const props = defineProps({
   signType: {
