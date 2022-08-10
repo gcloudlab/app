@@ -6,7 +6,7 @@
       <div
         v-for="file in values.children"
         :key="file.id"
-        class="flex flex-col justify-end items-center w-16 mx-3 mb-3 transition-all duration-100 hover:bg-gray-100 hover:shadow hover:rounded-lg"
+        class="flex flex-col justify-end items-center w-16 mx-3 mb-5 transition-all duration-100 hover:bg-gray-100 hover:shadow hover:rounded-lg"
       >
         <Folder
           v-if="file?.type === '文件夹'"
@@ -19,10 +19,10 @@
           @click="handleSelectedKeys(file)"
         >
           <n-image
-            class="shadow-lg rounded-sm"
+            class="shadow-lg rounded"
             lazy
             :src="file.path"
-            object-fit="contain"
+            object-fit="fill"
             preview-disabled
             fallback-src="./src/assets/logo.png"
             :intersection-observer-options="{
@@ -121,7 +121,7 @@ toRefs(props);
 <style lang="scss" scoped>
 .file-graphical {
   .image-item-wrapper {
-    max-height: 96px;
+    max-height: 46px;
   }
 }
 </style>

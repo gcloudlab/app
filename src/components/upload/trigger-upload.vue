@@ -3,7 +3,7 @@
     <n-upload
       v-model:file-list="upload_files"
       ref="upload"
-      action="/api/file/upload"
+      :action="uploadAction"
       :headers="headers"
       multiple
       abstract
@@ -43,7 +43,7 @@
               文件夹：{{ uploadFolder.label }}
             </n-button>
           </n-popselect>
-          <CreateFolder :folder="uploadFolder" />
+          <CreateFolder class="float-right" :folder="uploadFolder" />
         </div>
         <!-- 上传列表 -->
         <n-collapse-item v-if="upload_files.length > 0" name="1" :arrow="false">
@@ -65,7 +65,7 @@
               <span>上传列表</span>
             </div>
           </template>
-          <n-scrollbar class="h-54">
+          <n-scrollbar style="max-height: 95px" class="h-54">
             <n-upload-file-list />
           </n-scrollbar>
         </n-collapse-item>
@@ -151,6 +151,7 @@ const uploadFolder = ref<SelectBaseOption>({
   label: props.currentFolder?.label ?? '未分类',
 });
 const uploadFolderName = ref<string>('未分类');
+const uploadAction = ref('https://gcloud.aoau.top/file/upload');
 const headers = {
   Authorization: useStorage('token'),
 };

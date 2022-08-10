@@ -7,7 +7,7 @@
           'flex items-center flex-1 bg-gradient-to-t from-green-100 col-auto',
         ]"
       >
-        <DragUpload class="w-3/4 h-full shadow-sm" title="立即上传" />
+        <DragUpload class="w-full h-full shadow-sm" title="立即上传" />
         <Vue3Lottie class="robot h-3/4 w-1/4" :animationData="RobotJson" />
       </div>
       <div :class="[...boardClasses, 'h-56 w-full  bg-gradient-to-b from-green-100 ']">

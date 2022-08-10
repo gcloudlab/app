@@ -26,7 +26,8 @@ const generateTree = (list: FileListData[], rootId: number) => {
 
     if (parentId === rootId && item.ext === '') {
       // 已经到根元素则将映射结果放进结果集
-      result.push(treeItem);
+      // bug(fixed): 关于此处，为何treeitem放前面，若非如此合并后children为空，猜测是网络原因，因为本地是没问题的
+      result.push(_.assign(treeItem, { isFolder: true, children: [] }));
     } else if (parentId === rootId && item.ext !== '') {
       // 未分类文件
       other.push({ ...treeItem, type: fileType(treeItem.ext), isFolder: false });

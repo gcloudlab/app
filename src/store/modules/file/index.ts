@@ -220,7 +220,7 @@ export const useFileStore = defineStore({
           }
         })
         .catch(err => {
-          onError('请重试');
+          onError('请重试', err);
         });
     },
   },
