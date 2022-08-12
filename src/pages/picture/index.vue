@@ -1,5 +1,5 @@
 <template>
-  <n-scrollbar style="max-height: calc(100vh - 57px)">
+  <n-scrollbar style="max-height: calc(100vh - 60px)">
     <div class="picture mt-3">
       <div class="picture-bar flex flex-wrap justify-around items-end">
         <div

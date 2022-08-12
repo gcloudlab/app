@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <Header />
-    <n-scrollbar style="max-height: calc(100vh - 57px)">
+    <n-scrollbar style="max-height: calc(100vh - 60px)">
       <router-view />
     </n-scrollbar>
   </div>

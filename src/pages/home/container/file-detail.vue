@@ -1,8 +1,8 @@
 <template>
   <div class="file-detail w-52 shadow rounded">
-    <n-scrollbar style="max-height: calc(100vh - 57px)">
+    <n-scrollbar style="max-height: calc(100vh - 60px)">
       <n-card
-        class="leading-7"
+        class="leading-4"
         hoverable
         :bordered="false"
         content-style="background-color: #008c8f; border-radius: 5px;color: white;"
@@ -10,13 +10,14 @@
       >
         <n-image
           v-if="file.type === '图片'"
-          class="w-52 shadow-md rounded"
+          class="shadow-md rounded"
+          width="160"
           :src="file.path"
           fallback-src="./src/assets/logo.png"
         />
         <Folder v-else-if="file.type === '文件夹'" class="w-12 text-yellow-500" />
         <DocumentTextOutline v-else class="w-12 text-gray-100" />
-        <div class="flex justify-start items-center flex-wrap">
+        <div class="flex justify-start items-center flex-wrap mt-2">
           <span class="">名称：</span>
           <ShowOrEdit
             v-if="file.type === '文件夹'"
@@ -33,7 +34,7 @@
         <div class="flex justify-around">
           <n-button
             class="w-1/2"
-            type="info"
+            type="primary"
             circle
             size="small"
             @click.prevent="handleDownload(file)"
@@ -50,16 +51,12 @@
             分享
           </n-button>
         </div>
-        <n-button
-          class="w-full mt-2"
-          circle
-          dashed
-          type="warning"
-          size="small"
-          @click="handleDeleteFile"
-        >
-          删除
-        </n-button>
+        <div class="flex justify-around mt-2">
+          <n-button class="w-1/2" type="info" circle size="small"> 移动到 </n-button>
+          <n-button class="ml-2 w-1/2" type="warning" circle size="small" @click="handleDeleteFile">
+            删除
+          </n-button>
+        </div>
       </n-card>
       <DragUpload class="w-full h-48" />
     </n-scrollbar>

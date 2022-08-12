@@ -7,7 +7,7 @@
           'flex items-center flex-1 bg-gradient-to-t from-green-100 col-auto',
         ]"
       >
-        <DragUpload class="w-full h-full shadow-sm" title="立即上传" />
+        <TriggerUpload class="w-full h-full shadow-sm" title="立即上传" />
         <Vue3Lottie class="robot h-3/4 w-1/4" :animationData="RobotJson" />
       </div>
       <div :class="[...boardClasses, 'h-56 w-full  bg-gradient-to-b from-green-100 ']">
@@ -24,7 +24,7 @@
 import { storeToRefs } from 'pinia';
 import RobotJson from '@/assets/lotties/robot.json';
 import { useFileOutsideStore } from '@/store/modules/file';
-import DragUpload from '@/components/upload/trigger-upload.vue';
+import TriggerUpload from '@/components/upload/trigger-upload.vue';
 import AttentionInter from './attention-inter.vue';
 
 const fileStore = useFileOutsideStore();

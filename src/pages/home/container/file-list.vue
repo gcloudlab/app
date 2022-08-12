@@ -1,6 +1,6 @@
 <template>
   <div class="file-list">
-    <n-scrollbar style="max-height: calc(100vh - 57px)">
+    <n-scrollbar style="max-height: calc(100vh - 60px)">
       <n-data-table
         size="small"
         :columns="columns"

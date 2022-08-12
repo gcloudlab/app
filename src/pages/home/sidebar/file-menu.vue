@@ -2,8 +2,10 @@
   <div class="file-tree">
     <div class="flex">
       <n-input class="mr-0" v-model:value="pattern" size="small" placeholder="搜索文件" />
-      <Button @click="isChecked = !isChecked" size="small">操作</Button>
       <Button v-if="isChecked" @click="handleDelete" type="error" size="small">删除</Button>
+      <Button @click="isChecked = !isChecked" size="small">{{
+        !isChecked ? '选择' : '取消'
+      }}</Button>
     </div>
     <n-scrollbar style="height: 240px">
       <n-tree

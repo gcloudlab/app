@@ -8,46 +8,41 @@
           <p class="auth_unregistered-text">
             tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
           </p>
-          <n-button type="warning" round class="auth_unregistered-signup" @click="onChangeToSignup">
+          <n-button type="primary" round class="auth_unregistered-signup" @click="onChangeToSignup">
             去注册
           </n-button>
-          <n-button type="warning" round class="ml-3" @click="router.back()">返回</n-button>
+          <n-button type="warning" secondary round class="ml-3" @click="router.back()"
+            >返回</n-button
+          >
         </div>
 
         <div class="auth_options-registered">
           <h1 class="auth_unregistered-title font-black tracking-wide">GCloud 云盘</h1>
           <h2 class="leading-10">已有账号请移步登陆</h2>
           <p class="auth_registered-text">左拐不送。</p>
-          <n-button type="warning" round class="auth_registered-login" @click="onChangeToSignin">
+          <n-button type="primary" round class="auth_registered-login" @click="onChangeToSignin">
             去登陆
           </n-button>
         </div>
       </div>
 
-      <div class="auth_options-forms rounded-lg" :class="{ ...formClass }" id="auth_options-forms">
+      <div
+        class="auth_options-forms rounded-lg"
+        style="height: 110%"
+        :class="{ ...formClass }"
+        id="auth_options-forms"
+      >
         <div v-if="formStatus === 'signin'" class="auth_forms-login">
           <div class="flex justify-between">
-            <h1 class="text-2xl antialiased font-medium">登陆</h1>
-            <Vue3Lottie
-              class="mr-0"
-              style="margin-top: -10px"
-              :animationData="SpaceJson"
-              :height="50"
-              :width="50"
-            />
+            <h1 class="text-2xl antialiased font-mono font-extrabold">Sign in</h1>
+            <Vue3Lottie class="mr-0 mt-2" :animationData="SpaceJson" :height="50" :width="50" />
           </div>
           <InfoCollection signType="signin" />
         </div>
         <div v-else class="auth_forms-signup">
-          <div class="flex justify-between">
-            <h1 class="text-2xl antialiased font-medium">注册</h1>
-            <Vue3Lottie
-              class="mr-0"
-              style="margin-top: -10px"
-              :animationData="SpaceJson"
-              :height="50"
-              :width="50"
-            />
+          <div class="flex justify-between" style="margin-top: -30px">
+            <h1 class="text-2xl antialiased font-mono font-extrabold">Sign up</h1>
+            <Vue3Lottie class="mr-0 mt-2" :animationData="SpaceJson" :height="50" :width="50" />
           </div>
           <InfoCollection signType="signup" @afterSignup="onChangeToSignin" />
         </div>

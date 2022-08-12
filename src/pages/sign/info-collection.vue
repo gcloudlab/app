@@ -7,6 +7,17 @@
     :rules="rules"
     label-placement="left"
   >
+    <n-form-item v-if="signType === 'signup'" path="email" label="邮箱">
+      <n-input v-model:value="model.email" placeholder="请输入邮箱" @keydown.enter.prevent />
+    </n-form-item>
+    <n-form-item v-if="signType === 'signup'" path="code" label="验证码">
+      <n-input v-model:value="model.code" placeholder="请输入验证码" @keydown.enter.prevent />
+      <n-button class="ml-3" type="primary" :disabled="codeLock !== 60" @click="handleSendCode">
+        <template v-if="codeLock === 60 && !isSendCode"> 发送验证码 </template>
+        <template v-else-if="codeLock < 60 && !isSendCode"> {{ `已发送 ${codeLock}s` }} </template>
+        <Loading v-else size="small" />
+      </n-button>
+    </n-form-item>
     <n-form-item path="name" label="昵称">
       <n-input
         v-model:value="model.name"
@@ -14,17 +25,6 @@
         @keydown.enter.prevent
         @keyup.enter="handleValidate"
       />
-    </n-form-item>
-    <n-form-item v-if="signType === 'signup'" path="email" label="邮箱">
-      <n-input v-model:value="model.email" placeholder="请输入邮箱" @keydown.enter.prevent />
-    </n-form-item>
-    <n-form-item v-if="signType === 'signup'" path="code" label="验证码">
-      <n-input v-model:value="model.code" placeholder="请输入验证码" @keydown.enter.prevent />
-      <n-button class="ml-3" type="info" :disabled="codeLock !== 60" @click="handleSendCode">
-        <template v-if="codeLock === 60 && !isSendCode"> 发送验证码 </template>
-        <template v-else-if="codeLock < 60 && !isSendCode"> {{ `已发送 ${codeLock}s` }} </template>
-        <Loading v-else size="small" />
-      </n-button>
     </n-form-item>
     <n-form-item path="password" label="密码">
       <n-input
@@ -36,9 +36,9 @@
       />
     </n-form-item>
     <div class="flex justify-between">
-      <button type="button" class="forms_buttons-forgot">
-        {{ signType === 'signin' ? '忘记密码? 我也帮不了你' : '赶紧找个小本本把密码记住' }}
-      </button>
+      <n-button quaternary type="default" class="forms_buttons-forgot" @click="handleTips">
+        {{ signType === 'signin' ? '忘记密码? ' : '小贴士' }}
+      </n-button>
       <n-button class="w-28" type="default" round @click="handleValidate">
         {{ signType === 'signin' ? '登陆' : '注册' }}
       </n-button>
@@ -47,13 +47,15 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
+import { PropType, ref, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 import { FormInst, FormItemRule, FormRules, NInput, NFormItem, NButton, NForm } from 'naive-ui';
 import { useAuth } from '@/hooks';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { validateEmail } from '@/utils/email';
 import Loading from '@/components/commons/loading/index.vue';
+import { onWarning } from '@/utils/messages';
+import { onInfo } from '../../utils/messages';
 
 export interface ModelType {
   name: string | null;
@@ -205,6 +207,13 @@ const handleSignup = () => {
 };
 const afterSignup = () => {
   emits('afterSignup', 'signin');
+};
+const handleTips = () => {
+  if (props.signType === 'signin') {
+    onWarning('哦豁，我也记不得');
+  } else {
+    onInfo('别忘记密码了嗷~');
+  }
 };
 toRefs(props);
 </script>

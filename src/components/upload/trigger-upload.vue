@@ -1,5 +1,5 @@
 <template>
-  <div class="drag-upload">
+  <div class="drag-upload flex flex-col justify-center">
     <n-upload
       v-model:file-list="upload_files"
       ref="upload"
@@ -19,7 +19,7 @@
       <n-upload-trigger #="{ handleClick }" abstract>
         <div
           @click="handleClick"
-          class="flex flex-col justify-center items-center p-1 text-center hover:bg-green-100 cursor-pointer transition-all duration-150"
+          class="w-full flex flex-col justify-center items-center p-1 text-center hover:bg-green-100 cursor-pointer transition-all duration-150"
           :class="[upload_files.length <= 0 ? 'h-5/6' : '']"
         >
           <CloudUploadOutline class="animate-pulse w-9 text-gray-500 mt-3" />
@@ -27,26 +27,25 @@
           <n-p depth="3" style="margin: 8px 0 0 0"> {{ description }} </n-p>
         </div>
       </n-upload-trigger>
-
+      <div class="flex justify-between flex-none">
+        <n-popselect
+          v-model:value="uploadFolder.value"
+          :options="origin_folders"
+          size="medium"
+          scrollable
+          trigger="click"
+          :on-update:value="handleUpdateUploadFolder"
+        >
+          <template #empty> 未创建文件夹 </template>
+          <n-button quaternary type="primary" size="small" class="">
+            文件夹：{{ uploadFolder.label }}
+          </n-button>
+        </n-popselect>
+        <CreateFolder class="float-right" :folder="uploadFolder" />
+      </div>
       <n-collapse class="upload-list" accordion>
-        <div class="flex justify-between">
-          <n-popselect
-            v-model:value="uploadFolder.value"
-            :options="origin_folders"
-            size="medium"
-            scrollable
-            trigger="click"
-            :on-update:value="handleUpdateUploadFolder"
-          >
-            <template #empty> 未创建文件夹 </template>
-            <n-button quaternary type="primary" size="small" class="">
-              文件夹：{{ uploadFolder.label }}
-            </n-button>
-          </n-popselect>
-          <CreateFolder class="float-right" :folder="uploadFolder" />
-        </div>
         <!-- 上传列表 -->
-        <n-collapse-item v-if="upload_files.length > 0" name="1" :arrow="false">
+        <n-collapse-item name="1" :arrow="false">
           <template #header-extra>
             <div class="flex items-center mr-3">
               <svg v-if="upload_files.length > 0" class="animate-ping w-2 h-2 text-green-800">
@@ -61,7 +60,7 @@
             </div>
           </template>
           <template #header>
-            <div class="">
+            <div>
               <span>上传列表</span>
             </div>
           </template>
@@ -70,7 +69,7 @@
           </n-scrollbar>
         </n-collapse-item>
         <!-- 下载列表 -->
-        <!-- <n-collapse-item name="2" :arrow="false">
+        <n-collapse-item name="2" :arrow="false">
           <template #header-extra>
             <div class="flex items-center mr-3">
               <svg v-if="upload_files.length > 0" class="animate-ping w-2 h-2 text-green-800">
@@ -89,7 +88,7 @@
               <span>下载列表</span>
             </div>
           </template>
-        </n-collapse-item> -->
+        </n-collapse-item>
       </n-collapse>
     </n-upload>
   </div>

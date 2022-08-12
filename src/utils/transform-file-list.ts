@@ -49,7 +49,6 @@ const generateTree = (list: FileListData[], rootId: number) => {
   }
 
   if (other.length > 0) {
-    console.log('---', result);
     return [
       ...result,
       {

@@ -1,7 +1,5 @@
 @use './brokenChange.scss';
 @use 'vue3-lottie/dist/style.css';
-@use './themeOverride.scss';
 @use 'animate.css';
 @use './tailwindcss.scss';
-
-$test-color: rgb(253, 70, 70);
+@use './normalize.scss';

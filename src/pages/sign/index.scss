@@ -126,8 +126,8 @@ $ff-medium: 500;
   left: 30px;
 
   width: calc(50% - 30px);
-  max-height: 150%;
-  min-height: 420px;
+  // max-height: 150%;
+  // min-height: 420px;
   background-color: $white;
   box-shadow: 10px 10px 1px #ffffff82;
   backdrop-filter: saturate(150%) blur(8px);

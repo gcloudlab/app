@@ -22,6 +22,7 @@
             class="shadow-lg rounded"
             lazy
             :src="file.path"
+            width="64"
             object-fit="fill"
             preview-disabled
             fallback-src="./src/assets/logo.png"

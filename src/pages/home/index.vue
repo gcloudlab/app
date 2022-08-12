@@ -1,8 +1,8 @@
 <template>
   <div class="home flex">
     <!-- sider -->
-    <div class="file-tree-bar w-52 animate__animated animate__fadeIn faster">
-      <n-scrollbar style="max-height: calc(100vh - 57px)">
+    <div class="file-tree-bar w-60 animate__animated animate__fadeIn faster">
+      <n-scrollbar style="max-height: calc(100vh - 60px)">
         <FileMenu
           @selectedKeys="handleSelectedKeys"
           @expandedKeys="handleExpandedKeys"
@@ -45,7 +45,7 @@
       </div>
       <div class="main-bar flex">
         <div class="main-files-bar flex-auto">
-          <n-scrollbar style="max-height: calc(100vh - 57px)">
+          <n-scrollbar style="max-height: calc(100vh - 60px)">
             <FileList
               v-if="fileViewType === 'list' && folder_routes.length > 1"
               :values="folder_routes.at(-1)"
@@ -134,7 +134,7 @@ const { folder_routes, files_size } = storeToRefs(fileStore);
 <style lang="scss" scoped>
 .file-tree-bar,
 .main-container {
-  min-height: calc(100vh - 57px);
+  min-height: calc(100vh - 60px);
 }
 .main-container {
   background: rgb(255, 255, 255);
