@@ -1,5 +1,20 @@
-<template></template>
+<template>
+  <div class="attention-group flex text-sm">
+    <n-button
+      quaternary
+      type="primary"
+      @click="onInfo(tips, { closable: true, duration: 10000, keepAliveOnHover: true })"
+      >用户须知</n-button
+    >
+  </div>
+</template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue';
+import { onInfo } from '@/utils/messages';
+import { NButton } from 'naive-ui';
 
-<style lang="scss" scoped></style>
+const tips = ref(
+  `  由于经费有限，每次上传文件限制50Mb以内，默认总容量200Mb，蟹蟹您的支持。\n请注意遵守互联网冲浪规范，杜绝上传违规文件等内容，逮到了你跑得脱，马脑阔。`
+);
+</script>

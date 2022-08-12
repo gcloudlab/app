@@ -27,6 +27,7 @@
           注销
         </n-button>
         <n-button v-else type="default" @click="router.push('/sign')"> 登陆 </n-button>
+        <Tips class="float-right" />
       </div>
       <!-- <template #footer> footer </template> -->
     </n-popover>
@@ -41,6 +42,7 @@ import { useAuthOutsideStore } from '@/store/modules/auth';
 import { NAvatar, NPopover, NBadge, NButton, NText } from 'naive-ui';
 import defaultLogo from '@/assets/logo.png';
 import { useAuth } from '@/hooks';
+import Tips from '@/components/tips/index.vue';
 
 export interface AvatarProps {
   src: string;

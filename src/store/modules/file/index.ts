@@ -209,7 +209,7 @@ export const useFileStore = defineStore({
     async onDeleteFileAction(files: FileListData[]) {
       Promise.allSettled(files.map(file => (file !== null ? deleteFile(file.identity) : null)))
         .then(res => {
-          if (res.find(i => i !== null && (i as any).data.msg === 'success')) {
+          if (res.find(i => (i as any).value?.data?.msg === 'success')) {
             this.onGetFileListAction().then(() => {
               files.map(file => {
                 file && this.onJumpToFileAction(file);
@@ -219,8 +219,8 @@ export const useFileStore = defineStore({
             onWarning('删除失败');
           }
         })
-        .catch(err => {
-          onError(`请重试: ${err}`);
+        .catch(() => {
+          onError(`出错了`);
         });
     },
   },

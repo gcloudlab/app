@@ -1,5 +1,5 @@
 <template>
-  <n-message-provider placement="top-right" :theme-overrides="messageThemeOverrides">
+  <n-message-provider :max="4" placement="top-right" :theme-overrides="messageThemeOverrides">
     <MessageApi />
   </n-message-provider>
   <n-config-provider :theme-overrides="themeOverrides" preflight-style-disabled>

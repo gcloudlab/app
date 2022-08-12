@@ -1,5 +1,8 @@
 <template>
-  <div class="auth bg-gradient-to-r from-cyan-500">
+  <div
+    class="auth from-cyan-500 transition-all duration-300 ease-in-out"
+    :class="[formStatus === 'signin' ? 'bg-gradient-to-r' : 'bg-gradient-to-l']"
+  >
     <div class="auth_options-container">
       <div class="auth_options-text rounded-lg shadow-md">
         <div class="auth_options-unregistered">
@@ -28,7 +31,7 @@
 
       <div
         class="auth_options-forms rounded-lg"
-        style="height: 110%"
+        style="height: 115%"
         :class="{ ...formClass }"
         id="auth_options-forms"
       >

@@ -13,9 +13,7 @@
       <div :class="[...boardClasses, 'h-56 w-full  bg-gradient-to-b from-green-100 ']">
         我的分享
       </div>
-      <div :class="[...boardClasses]">
-        <AttentionInter />
-      </div>
+      <div :class="[...boardClasses]"></div>
     </div>
   </div>
 </template>
@@ -25,7 +23,6 @@ import { storeToRefs } from 'pinia';
 import RobotJson from '@/assets/lotties/robot.json';
 import { useFileOutsideStore } from '@/store/modules/file';
 import TriggerUpload from '@/components/upload/trigger-upload.vue';
-import AttentionInter from './attention-inter.vue';
 
 const fileStore = useFileOutsideStore();
 
