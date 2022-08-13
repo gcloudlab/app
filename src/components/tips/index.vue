@@ -3,6 +3,7 @@
     <n-button
       quaternary
       type="primary"
+      size="small"
       @click="onInfo(tips, { closable: true, duration: 10000, keepAliveOnHover: true })"
       >用户须知</n-button
     >
@@ -15,6 +16,6 @@ import { onInfo } from '@/utils/messages';
 import { NButton } from 'naive-ui';
 
 const tips = ref(
-  `  由于经费有限，每次上传文件限制50Mb以内，默认总容量200Mb，蟹蟹您的支持。\n请注意遵守互联网冲浪规范，杜绝上传违规文件等内容，逮到了你跑得脱，马脑阔。`
+  `「上传须知」：由于经费有限，单文件上传限制10Mb以内，默认总容量200Mb。请注意遵守互联网冲浪规范，杜绝上传违规文件等内容，逮到了你跑得脱，马脑阔😠，蟹蟹您的支持。`
 );
 </script>

@@ -2,6 +2,7 @@ import axios from '@/service/axios';
 import {
   CreateFolderOption,
   FileListResponse,
+  MoveFolderOption,
   SaveFileToUserRepoOption,
   UpdateFileNameOption,
 } from '@/models/file';
@@ -24,4 +25,7 @@ export const deleteFile = async (fileId: string) => {
 };
 export const updateFileName = async (option: UpdateFileNameOption) => {
   return await axios.post('/user/file/name/update', option);
+};
+export const moveFolder = async (option: MoveFolderOption) => {
+  return await axios.put('/user/file/move', option);
 };

@@ -17,18 +17,29 @@
           />
         </n-badge>
       </template>
-      <template #header>
-        <n-text> 用户：{{ auth?.name || '未注册用户' }} </n-text> <br />
-        <n-text> Email：{{ auth?.email }} </n-text>
-        <!-- <Button type="success"></Button> -->
-      </template>
-      <div class="sign">
-        <n-button v-if="sign_status && online_status" type="default" @click="handleLogout">
-          注销
-        </n-button>
-        <n-button v-else type="default" @click="router.push('/sign')"> 登陆 </n-button>
-        <Tips class="float-right" />
+      <template #header> </template>
+      <div class="user w-56">
+        <div class="user-info">
+          <n-text> 用户：{{ auth?.name || '未注册用户' }} </n-text> <br />
+          <n-text> Email：{{ auth?.email }} </n-text>
+        </div>
+        <n-divider />
+        <div class="sign-action">
+          <n-button
+            v-if="sign_status && online_status"
+            type="default"
+            size="small"
+            @click="handleLogout"
+          >
+            注销
+          </n-button>
+          <n-button v-else type="default" size="small" @click="router.push('/sign')">
+            登陆
+          </n-button>
+          <Tips class="float-right" />
+        </div>
       </div>
+
       <!-- <template #footer> footer </template> -->
     </n-popover>
   </div>
@@ -39,7 +50,7 @@ import { computed, toRefs, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
-import { NAvatar, NPopover, NBadge, NButton, NText } from 'naive-ui';
+import { NAvatar, NPopover, NBadge, NButton, NText, NDivider } from 'naive-ui';
 import defaultLogo from '@/assets/logo.png';
 import { useAuth } from '@/hooks';
 import Tips from '@/components/tips/index.vue';

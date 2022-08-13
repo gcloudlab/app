@@ -17,7 +17,7 @@
         key-field="identity"
         label-field="name"
         children-field="children"
-        :accordion="true"
+        accordion
         expand-on-click
         cascade
         :node-props="nodeProps"

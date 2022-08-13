@@ -28,15 +28,28 @@
         </div>
       </n-upload-trigger>
       <div class="flex justify-between flex-none">
-        <n-popselect
-          v-model:value="uploadFolder.value"
-          :options="origin_folders"
-          size="medium"
-          scrollable
-          trigger="click"
-          :on-update:value="handleUpdateUploadFolder"
-        >
-          <template #empty> 未创建文件夹 </template>
+        <n-popselect v-model:value="uploadFolder.value" size="medium" scrollable trigger="hover">
+          <template #empty>
+            <span class="text-xs">
+              {{ origin_folders.length === 0 ? '请先创建文件夹' : '双击选中文件夹' }}</span
+            >
+          </template>
+          <template #action>
+            <n-scrollbar style="max-height: 200px">
+              <n-tree
+                block-line
+                :data="origin_folders"
+                :accordion="true"
+                cascade
+                key-field="identity"
+                label-field="name"
+                children-field="children"
+                expand-on-click
+                :render-switcher-icon="renderSwitcherIcon"
+                :node-props="nodeProps"
+              />
+            </n-scrollbar>
+          </template>
           <n-button quaternary type="primary" size="small" class="">
             文件夹：{{ uploadFolder.label }}
           </n-button>
@@ -95,7 +108,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs, defineAsyncComponent } from 'vue';
+import { ref, toRefs, defineAsyncComponent, h } from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   NUpload,
@@ -109,6 +122,9 @@ import {
   UploadInst,
   NButton,
   NPopselect,
+  NTree,
+  NIcon,
+  TreeOption,
 } from 'naive-ui';
 import { useFiles } from '@/hooks/useFiles';
 import { CloudUploadOutline } from '@vicons/ionicons5';
@@ -117,7 +133,9 @@ import { onError } from '@/utils/messages';
 import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
 import { useStorage } from '@/utils/use-storage';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
+import { Folder } from '@vicons/ionicons5';
 const CreateFolder = defineAsyncComponent(() => import('@/components/create-folder/index.vue'));
+const renderSwitcherIcon = () => h(NIcon, null, { default: () => h(Folder) });
 
 const props = defineProps({
   action: {
@@ -147,9 +165,9 @@ const uploadRef = ref<UploadInst | null>(null);
 const fileList = ref<UploadFileInfo[]>([]);
 const uploadFolder = ref<SelectBaseOption>({
   value: props.currentFolder?.value ?? 0,
-  label: props.currentFolder?.label ?? '未分类',
+  label: props.currentFolder?.label ?? '文件夹1',
 });
-const uploadFolderName = ref<string>('未分类');
+const uploadFolderName = ref<string>('文件夹1');
 const uploadAction = ref('https://gcloud.aoau.top/file/upload');
 const headers = {
   Authorization: useStorage('token'),
@@ -193,8 +211,15 @@ const handleClearUploadFile = () => {
 const handleFileListChange = () => {
   // console.log('是的，file-list 的值变了');
 };
+const nodeProps = ({ option }: { option: TreeOption }) => {
+  return {
+    onDblclick() {
+      uploadFolder.value = option;
+    },
+  };
+};
 
-const { upload_files, folder_routes, origin_folders } = storeToRefs(fileStore);
+const { upload_files, origin_folders } = storeToRefs(fileStore);
 toRefs(props);
 </script>
 

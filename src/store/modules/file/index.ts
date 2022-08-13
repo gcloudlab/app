@@ -4,12 +4,14 @@ import {
   createFolder,
   deleteFile,
   getFileList,
+  moveFolder,
   updateFileName,
   uploadFile,
 } from '@/service/api/file';
 import type {
   CreateFolderOption,
   FileListData,
+  MoveFolderOption,
   SaveFileToUserRepoOption,
   UpdateFileNameOption,
 } from '@/models/file';
@@ -18,6 +20,7 @@ import { onError, onWarning } from '@/utils/messages';
 import type { UploadFileInfo } from 'naive-ui';
 import { saveFileToUserRepo } from '@/service/api/file';
 import useTimer from '@/hooks/useTimer';
+import { onInfo } from '../../../utils/messages';
 
 export interface FileState {
   files_count: number;
@@ -59,7 +62,7 @@ export const useFileStore = defineStore({
         this.fetching = true;
         let res = await getFileList();
         if (res.status === 200) {
-          this.origin_folders = transformOriginFileList(res.data.list);
+          this.origin_folders = generateTree(transformOriginFileList(res.data.list), 0);
           this.user_files = generateTree(res.data.list, 0);
           // console.log('--store-all files', this.origin_folders, this.user_files);
           this.files_count = this.user_files.reduce((prev, cur) => {
@@ -147,7 +150,7 @@ export const useFileStore = defineStore({
         this.upload_files = [];
       }
     },
-    // use less
+    // useless
     async onUploadFileAction(payload: File) {
       try {
         await uploadFile(payload);
@@ -156,6 +159,10 @@ export const useFileStore = defineStore({
       }
     },
     async onUploadFilesToUserAction(payload: SaveFileToUserRepoOption) {
+      if (this.files_size >= 1024 * 1024 * 200) {
+        onWarning('嘿，你的空间不够了');
+        return;
+      }
       try {
         const res = await saveFileToUserRepo(payload);
         if (res.data.msg === 'success') {
@@ -222,6 +229,17 @@ export const useFileStore = defineStore({
         .catch(() => {
           onError(`出错了`);
         });
+    },
+    async onMoveFoderAction(payload: MoveFolderOption) {
+      try {
+        const res = await moveFolder(payload);
+        if (res.data.msg === 'success') {
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (error) {
+        onError('出错了');
+      }
     },
   },
 });

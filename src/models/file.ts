@@ -39,3 +39,8 @@ export interface UpdateFileNameOption {
   identity: string;
   name: string;
 }
+
+export interface MoveFolderOption {
+  identity: string;
+  parent_identity: string;
+}

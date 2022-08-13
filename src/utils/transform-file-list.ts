@@ -2,7 +2,7 @@ import type { FileListData } from '@/models/file';
 import _ from 'lodash';
 import { transformDate } from './date';
 
-const generateTree = (list: FileListData[], rootId: number) => {
+const generateTree = (list: FileListData[] | any, rootId: number) => {
   if (!Array.isArray(list)) {
     new Error('type only Array');
     return list;
@@ -11,6 +11,7 @@ const generateTree = (list: FileListData[], rootId: number) => {
   const objMap: any = {}; // 暂存数组以 id 为 key的映射关系
   const result = []; // 结果
   const other = [];
+  // const folder_tree = []; // 文件夹树
   let otherSize = -1;
 
   for (const item of list) {
@@ -29,7 +30,7 @@ const generateTree = (list: FileListData[], rootId: number) => {
       // bug(fixed): 关于此处，为何treeitem放前面，若非如此合并后children为空，猜测是网络原因，因为本地是没问题的
       result.push(_.assign(treeItem, { isFolder: true, children: [] }));
     } else if (parentId === rootId && item.ext !== '') {
-      // 未分类文件
+      // 文件夹1文件
       other.push({ ...treeItem, type: fileType(treeItem.ext), isFolder: false });
       otherSize += treeItem.size;
     } else {
@@ -49,18 +50,17 @@ const generateTree = (list: FileListData[], rootId: number) => {
   }
 
   if (other.length > 0) {
-    return [
-      ...result,
-      {
-        name: '未分类',
-        identity: 'other',
-        size: otherSize,
-        isFolder: true,
-        parent_id: 0,
-        type: '文件夹',
-        children: other,
-      },
-    ];
+    const otherItem = {
+      name: '文件夹1',
+      identity: 'other',
+      size: otherSize,
+      isFolder: true,
+      parent_id: 0,
+      type: '文件夹',
+      children: other,
+      ext: '',
+    };
+    return [...result, otherItem];
   }
 
   return result;
@@ -109,6 +109,8 @@ export const transformOriginFileList = (list: FileListData[]) => {
     return {
       label: item.name,
       value: item.id,
+      children: [],
+      ...item,
     };
   });
 };

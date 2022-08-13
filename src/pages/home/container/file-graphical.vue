@@ -6,7 +6,7 @@
       <div
         v-for="file in values.children"
         :key="file.id"
-        class="flex flex-col justify-end items-center w-16 mx-3 mb-5 transition-all duration-100 hover:bg-gray-100 hover:shadow hover:rounded-lg"
+        class="flex flex-col justify-end items-center w-18 mx-3 mb-5 transition-all duration-100 hover:bg-gray-100 hover:shadow hover:rounded-lg"
       >
         <Folder
           v-if="file?.type === '文件夹'"
@@ -14,7 +14,7 @@
           @click="handleExpandedKeys(file)"
         />
         <div
-          class="image-item-wrapper w-16"
+          class="image-item-wrapper w-18"
           v-else-if="file?.type === '图片'"
           @click="handleSelectedKeys(file)"
         >
@@ -22,7 +22,7 @@
             class="shadow-lg rounded"
             lazy
             :src="file.path"
-            width="64"
+            width="70"
             object-fit="fill"
             preview-disabled
             fallback-src="./src/assets/logo.png"
@@ -47,7 +47,7 @@
           :style="{ backgroundColor: 'white', color: 'black' }"
         >
           <template #trigger>
-            <p class="truncate w-16 mt-1 text-center text-xs" @click="handleSelectedKeys(file)">
+            <p class="truncate w-18 mt-1 text-center text-xs" @click="handleSelectedKeys(file)">
               <ShowOrEdit truncate :value="file.name" :onUpdateValue="handleUpadeteName" />
             </p>
           </template>

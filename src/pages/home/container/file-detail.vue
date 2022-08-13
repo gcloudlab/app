@@ -52,7 +52,9 @@
           </n-button>
         </div>
         <div class="flex justify-around mt-2">
-          <n-button class="w-1/2" type="info" circle size="small"> 移动到 </n-button>
+          <n-button class="w-1/2" type="info" circle size="small" @click="handleMoveFile">
+            移动到
+          </n-button>
           <n-button class="ml-2 w-1/2" type="warning" circle size="small" @click="handleDeleteFile">
             删除
           </n-button>
@@ -73,7 +75,8 @@ import { FileListData } from '@/models/file';
 import { transformSize } from '@/utils/transform-size';
 import { Folder, DocumentTextOutline } from '@vicons/ionicons5';
 import DragUpload from '@/components/upload/trigger-upload.vue';
-import downloadByUrl from '@/utils/download-by-url';
+// import downloadByUrl from '@/utils/download-by-url';
+import { onInfo } from '@/utils/messages';
 const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
 
 const props = defineProps({
@@ -84,7 +87,7 @@ const props = defineProps({
   },
 });
 // const fileStore = useFileOutsideStore();
-const { onDeleteFile, onUpdateFileName } = useFiles();
+const { onDeleteFile, onUpdateFileName, onMoveFile } = useFiles();
 const currentFileRef = ref<FileListData | null>(null);
 
 const handleSelect = (file: FileListData) => {
@@ -108,10 +111,11 @@ const handleDeleteFile = () => {
   onDeleteFile([props.file]);
 };
 const handleDownload = (file: FileListData) => {
-  if (file.type !== '文件夹') {
-    downloadByUrl(file);
-  } else {
-  }
+  onInfo('开发中~');
+  // if (file.type !== '文件夹') {
+  //   downloadByUrl(file);
+  // } else {
+  // }
 };
 const handleShare = (file: FileListData) => {
   if (file.type !== '文件夹') {
@@ -119,6 +123,10 @@ const handleShare = (file: FileListData) => {
   } else {
     console.log('分享文件夹');
   }
+};
+const handleMoveFile = () => {
+  // onMoveFile()
+  console.log('移动文件');
 };
 // const { folder_routes } = storeToRefs(fileStore);
 toRefs(props);

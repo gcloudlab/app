@@ -3,28 +3,28 @@ import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import type { UserLoginRequestProps, UserTokenType, UserRegisterRequestProps } from '@/models/auth';
 
-const mainStore = useAuthOutsideStore();
+const authStore = useAuthOutsideStore();
 
 export const useAuth = () => {
   let token = ref<UserTokenType>();
   let error = ref<Error | null>(null);
 
   const onLogin = async (loginInfo: UserLoginRequestProps | null) => {
-    if (loginInfo) await mainStore.onLoginAction(loginInfo);
+    if (loginInfo) await authStore.onLoginAction(loginInfo);
   };
 
   const onLogout = () => {
-    mainStore.onLogoutAction();
+    authStore.onLogoutAction();
   };
 
   const onRegister = (registerInfo: UserRegisterRequestProps | null) => {
-    if (registerInfo) mainStore.onRegisterAction(registerInfo);
+    if (registerInfo) authStore.onRegisterAction(registerInfo);
   };
   const onGetCode = async (email: string) => {
-    if (email) return await mainStore.onMailCodeAction(email);
+    if (email) return await authStore.onMailCodeAction(email);
   };
   const onGetUserDetailAndCheckAuth = async () => {
-    if (await mainStore.onGetUserDetailByTokenAction()) {
+    if (await authStore.onGetUserDetailByTokenAction()) {
       return true;
     }
     return false;
@@ -34,7 +34,7 @@ export const useAuth = () => {
 };
 
 export const useToken = () => {
-  const { token, refresh_token } = storeToRefs(mainStore);
+  const { token, refresh_token } = storeToRefs(authStore);
   // const local_token = localStorage.getItem('token');
   return {
     token,

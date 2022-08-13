@@ -3,6 +3,7 @@ import { useFileOutsideStore } from '@/store/modules/file';
 import type {
   CreateFolderOption,
   FileListData,
+  MoveFolderOption,
   SaveFileToUserRepoOption,
   UpdateFileNameOption,
 } from '@/models/file';
@@ -49,6 +50,9 @@ export const useFiles = () => {
   const onDeleteFile = async (files: FileListData[]) => {
     await fileStore.onDeleteFileAction(files);
   };
+  const onMoveFile = async (payload: MoveFolderOption) => {
+    await fileStore.onMoveFoderAction(payload);
+  };
 
   return {
     onGetFileList,
@@ -63,5 +67,6 @@ export const useFiles = () => {
     onCreateFolder,
     onUpdateFileName,
     onDeleteFile,
+    onMoveFile,
   };
 };
