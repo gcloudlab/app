@@ -10,6 +10,8 @@ import {
 import { UserLoginRequestProps, UserRegisterRequestProps, UserDetail } from '@/models/auth';
 import { useStorage } from '@/utils/use-storage';
 import { onError, onSuccess, onWarning, onInfo } from '@/utils/messages';
+import _ from 'lodash';
+import randomAvatar from '@/utils/random-avatar';
 
 const initialState = {
   // auth: useStorage('user'),
@@ -31,7 +33,7 @@ export const useAuthStore = defineStore({
   state: () =>
     ({
       auth: {
-        avatar: 'https://avatars.githubusercontent.com/u/89140804?v=4',
+        avatar: useStorage('avatar') || randomAvatar(),
       },
       token: initialState.token || '',
       refresh_token: initialState.refresh_token || '',
@@ -142,6 +144,14 @@ export const useAuthStore = defineStore({
         this.online_status = false;
         // onWarning('请重新登陆');
         // onError('出错了');
+      }
+    },
+    onChangeAvatarAction(url: string) {
+      if (url !== '') {
+        _.assign(this.auth, {
+          avatar: url,
+        });
+        useStorage('avatar', url);
       }
     },
   },

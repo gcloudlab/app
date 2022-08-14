@@ -37,8 +37,20 @@ export const useAuth = () => {
       return false;
     }
   };
+  const onChangeAvatar = (url: string) => {
+    authStore.onChangeAvatarAction(url);
+  };
 
-  return { token, onLogin, onLogout, onRegister, onGetCode, onGetUserDetailAndCheckAuth, error };
+  return {
+    token,
+    onLogin,
+    onLogout,
+    onRegister,
+    onGetCode,
+    onGetUserDetailAndCheckAuth,
+    onChangeAvatar,
+    error,
+  };
 };
 
 export const useToken = () => {
