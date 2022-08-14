@@ -75,7 +75,8 @@ export const useAuthStore = defineStore({
       delete this.auth;
       this.sign_status = false;
       this.online_status = false;
-      localStorage.clear();
+      localStorage.removeItem('token');
+      localStorage.removeItem('refresh_token');
     },
     onRegisterAction(registerInfo: UserRegisterRequestProps) {
       try {
