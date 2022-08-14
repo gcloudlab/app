@@ -30,8 +30,8 @@
       <div class="flex justify-between flex-none">
         <n-popselect v-model:value="uploadFolder.value" size="medium" scrollable trigger="hover">
           <template #empty>
-            <span class="text-xs">
-              {{ origin_folders.length === 0 ? '请先创建文件夹' : '双击选中文件夹' }}</span
+            <span class="text-xs text-primary">
+              {{ origin_folders.length === 0 ? '请先创建文件夹' : '单文件上传限制10MB' }}</span
             >
           </template>
           <template #action>
@@ -49,7 +49,7 @@
                 :render-switcher-icon="renderSwitcherIcon"
                 :node-props="nodeProps"
               />
-              <div v-else class="text-xs text-center">然后双击选择文件夹</div>
+              <div v-else class="text-xs text-center">右侧新建文件夹</div>
             </n-scrollbar>
           </template>
           <n-button quaternary type="primary" size="small" class="">
@@ -205,7 +205,7 @@ const handleFileListChange = () => {
 };
 const nodeProps = ({ option }: { option: TreeOption }) => {
   return {
-    onDblclick() {
+    onClick() {
       uploadFolder.value = option;
     },
   };
