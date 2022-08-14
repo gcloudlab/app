@@ -37,6 +37,7 @@
           <template #action>
             <n-scrollbar style="max-height: 200px">
               <n-tree
+                v-if="origin_folders.length > 0"
                 block-line
                 :data="origin_folders"
                 :accordion="true"
@@ -48,10 +49,11 @@
                 :render-switcher-icon="renderSwitcherIcon"
                 :node-props="nodeProps"
               />
+              <div v-else class="text-xs text-center">然后双击选择文件夹</div>
             </n-scrollbar>
           </template>
           <n-button quaternary type="primary" size="small" class="">
-            文件夹：{{ uploadFolder.label }}
+            上传到：{{ uploadFolder.label }}
           </n-button>
         </n-popselect>
         <CreateFolder class="float-right" :folder="uploadFolder" />
@@ -74,7 +76,7 @@
           </template>
           <template #header>
             <div>
-              <span>上传列表</span>
+              <span class="text-gray-500">上传列表</span>
             </div>
           </template>
           <n-scrollbar style="max-height: 95px" class="h-54">
@@ -84,21 +86,11 @@
         <!-- 下载列表 -->
         <n-collapse-item name="2" :arrow="false">
           <template #header-extra>
-            <div class="flex items-center mr-3">
-              <svg v-if="upload_files.length > 0" class="animate-ping w-2 h-2 text-green-800">
-                <CloudUploadOutline />
-              </svg>
-              <span class="text-green-600 mx-2">
-                {{ upload_files.length }}
-              </span>
-              <n-button v-if="upload_files.length > 0" @click="handleClearUploadFile" size="small">
-                清空
-              </n-button>
-            </div>
+            <div class="flex items-center mr-3"></div>
           </template>
           <template #header>
             <div class="">
-              <span>下载列表</span>
+              <span class="text-gray-500">下载列表</span>
             </div>
           </template>
         </n-collapse-item>
@@ -165,9 +157,9 @@ const uploadRef = ref<UploadInst | null>(null);
 const fileList = ref<UploadFileInfo[]>([]);
 const uploadFolder = ref<SelectBaseOption>({
   value: props.currentFolder?.value ?? 0,
-  label: props.currentFolder?.label ?? '文件夹1',
+  label: props.currentFolder?.label ?? '默认文件夹',
 });
-const uploadFolderName = ref<string>('文件夹1');
+const uploadFolderName = ref<string>('默认文件夹');
 const uploadAction = ref('https://gcloud.aoau.top/file/upload');
 const headers = {
   Authorization: useStorage('token'),

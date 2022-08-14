@@ -30,7 +30,7 @@ const generateTree = (list: FileListData[] | any, rootId: number) => {
       // bug(fixed): 关于此处，为何treeitem放前面，若非如此合并后children为空，猜测是网络原因，因为本地是没问题的
       result.push(_.assign(treeItem, { isFolder: true, children: [] }));
     } else if (parentId === rootId && item.ext !== '') {
-      // 文件夹1文件
+      // 默认文件夹文件
       other.push({ ...treeItem, type: fileType(treeItem.ext), isFolder: false });
       otherSize += treeItem.size;
     } else {
@@ -51,7 +51,7 @@ const generateTree = (list: FileListData[] | any, rootId: number) => {
 
   if (other.length > 0) {
     const otherItem = {
-      name: '文件夹1',
+      name: '默认文件夹',
       identity: 'other',
       size: otherSize,
       isFolder: true,

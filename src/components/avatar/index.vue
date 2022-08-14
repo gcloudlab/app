@@ -18,42 +18,20 @@
         </n-badge>
       </template>
       <template #header> </template>
-      <div class="user w-56">
-        <div class="user-info">
-          <n-text> 用户：{{ auth?.name || '未注册用户' }} </n-text> <br />
-          <n-text> Email：{{ auth?.email }} </n-text>
-        </div>
-        <n-divider />
-        <div class="sign-action">
-          <n-button
-            v-if="sign_status && online_status"
-            type="default"
-            size="small"
-            @click="handleLogout"
-          >
-            注销
-          </n-button>
-          <n-button v-else type="default" size="small" @click="router.push('/sign')">
-            登陆
-          </n-button>
-          <Tips class="float-right" />
-        </div>
-      </div>
-
-      <!-- <template #footer> footer </template> -->
+      <UserInfo class="user w-56" />
     </n-popover>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, ref } from 'vue';
+import { computed, toRefs, ref, defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
-import { NAvatar, NPopover, NBadge, NButton, NText, NDivider } from 'naive-ui';
+import { NAvatar, NPopover, NBadge } from 'naive-ui';
 import defaultLogo from '@/assets/logo.png';
 import { useAuth } from '@/hooks';
-import Tips from '@/components/tips/index.vue';
+import UserInfo from '@/components/user-info/index.vue';
 
 export interface AvatarProps {
   src: string;

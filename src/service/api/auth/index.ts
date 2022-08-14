@@ -24,7 +24,7 @@ export const sendMailCodeService = async (email: string): Promise<any> => {
   return await axios.post('/mail/code/send/register', { email });
 };
 
-export const RefreshAuthService = async (): Promise<RefreshAuthResponse> => {
+export const refreshAuthService = async (): Promise<RefreshAuthResponse> => {
   return await axios.post('/refresh/authorization');
 };
 

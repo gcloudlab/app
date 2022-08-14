@@ -4,7 +4,7 @@ import {
   userLoginService,
   userRegisterService,
   sendMailCodeService,
-  RefreshAuthService,
+  refreshAuthService,
   getUserDetailByTokenService,
 } from '@/service/api/auth';
 import { UserLoginRequestProps, UserRegisterRequestProps, UserDetail } from '@/models/auth';
@@ -54,10 +54,11 @@ export const useAuthStore = defineStore({
           this.token = res.data.token;
           this.refresh_token = res.data.refresh_token;
           await this.onGetUserDetailByTokenAction();
+          // 为什么只存refresh_token？因为token在axios响应拦截中已经缓存好了
           useStorage('refresh_token', this.refresh_token);
         } else if (res.data.msg === '用户名或密码错误') {
           this.sign_status = false;
-          onError('不要让我知道你忘记密码了');
+          onWarning('不要让我知道你忘记密码了');
         } else {
           onError(res.data.msg);
         }
@@ -108,7 +109,9 @@ export const useAuthStore = defineStore({
       }
     },
     async onRefreshTokenAction() {
-      await RefreshAuthService();
+      try {
+        return await refreshAuthService();
+      } catch (error) {}
     },
     async onGetUserDetailByTokenAction() {
       try {
@@ -127,6 +130,7 @@ export const useAuthStore = defineStore({
         } else if (res.data.msg === 'not found') {
           onWarning('找不到用户');
           localStorage.removeItem('token');
+          localStorage.removeItem('refresh_token');
           localStorage.removeItem('sign_status');
           this.sign_status = false;
           this.online_status = false;

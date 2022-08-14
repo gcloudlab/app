@@ -11,7 +11,7 @@
         <Vue3Lottie class="robot h-3/4 w-1/4" :animationData="RobotJson" />
       </div>
       <div :class="[...boardClasses, 'h-56 w-full  bg-gradient-to-b from-green-100 ']">
-        我的分享
+        <!-- 我的分享 -->
       </div>
       <div :class="[...boardClasses]"></div>
     </div>

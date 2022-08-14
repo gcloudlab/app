@@ -1,8 +1,8 @@
 <template>
-  <n-divider class="text-sm m-0" title-placement="left"> 社区 </n-divider>
+  <n-divider class="text-sm m-0" title-placement="left"> 😎 社区 </n-divider>
   <div v-if="register_count > 0" class="pb-2">
     <div class="analysize px-3 text-sm flex justify-start items-center">
-      <div class="flex-none">注册总数：</div>
+      <div class="flex-none">注册人数：</div>
       <div><n-number-animation :from="0" :to="register_count" /></div>
     </div>
   </div>

@@ -48,6 +48,7 @@ export interface UserRegisterRequestProps {
 
 export interface RefreshAuthResponse {
   data: {
+    msg: string;
     token: UserTokenType;
     refresh_token: UserTokenType;
   };

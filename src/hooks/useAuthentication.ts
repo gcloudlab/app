@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import type { UserLoginRequestProps, UserTokenType, UserRegisterRequestProps } from '@/models/auth';
+import { onError, onInfo } from '@/utils/messages';
 
 const authStore = useAuthOutsideStore();
 
@@ -26,8 +27,15 @@ export const useAuth = () => {
   const onGetUserDetailAndCheckAuth = async () => {
     if (await authStore.onGetUserDetailByTokenAction()) {
       return true;
+    } else {
+      // refresh token
+      const res = await authStore.onRefreshTokenAction();
+      if (res && res.data.msg === 'success') {
+        return true;
+      }
+      onInfo(res ? res.data.msg : '未登陆');
+      return false;
     }
-    return false;
   };
 
   return { token, onLogin, onLogout, onRegister, onGetCode, onGetUserDetailAndCheckAuth, error };
