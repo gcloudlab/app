@@ -28,29 +28,28 @@
         </div>
       </n-upload-trigger>
       <div class="flex justify-between flex-none">
-        <n-popselect v-model:value="uploadFolder.value" size="medium" scrollable trigger="hover">
+        <n-popselect
+          v-model:value="uploadFolder.value"
+          size="medium"
+          scrollable
+          trigger="hover"
+        >
           <template #empty>
             <span class="text-xs text-primary">
-              {{ origin_folders.length === 0 ? '请先创建文件夹' : '单文件上传限制10MB' }}</span
+              {{
+                origin_folders.length === 0
+                  ? "建议新建文件夹"
+                  : "单文件上传限制10MB"
+              }}</span
             >
           </template>
           <template #action>
-            <n-scrollbar style="max-height: 200px">
-              <n-tree
-                v-if="origin_folders.length > 0"
-                block-line
-                :data="origin_folders"
-                :accordion="true"
-                cascade
-                key-field="identity"
-                label-field="name"
-                children-field="children"
-                expand-on-click
-                :render-switcher-icon="renderSwitcherIcon"
-                :node-props="nodeProps"
-              />
-              <div v-else class="text-xs text-center">右侧新建文件夹</div>
-            </n-scrollbar>
+            <FolderTree
+              v-if="origin_folders.length > 0"
+              :data="origin_folders"
+              :nodeProps="nodeProps"
+            />
+            <div v-else class="text-xs text-center">右侧新建文件夹</div>
           </template>
           <n-button quaternary type="primary" size="small" class="">
             上传到：{{ uploadFolder.label }}
@@ -63,13 +62,20 @@
         <n-collapse-item name="1" :arrow="false">
           <template #header-extra>
             <div class="flex items-center mr-3">
-              <svg v-if="upload_files.length > 0" class="animate-ping w-2 h-2 text-green-800">
+              <svg
+                v-if="upload_files.length > 0"
+                class="animate-ping w-2 h-2 text-green-800"
+              >
                 <CloudUploadOutline />
               </svg>
               <span class="text-green-600 mx-2">
                 {{ upload_files.length }}
               </span>
-              <n-button v-if="upload_files.length > 0" @click="handleClearUploadFile" size="small">
+              <n-button
+                v-if="upload_files.length > 0"
+                @click="handleClearUploadFile"
+                size="small"
+              >
                 清空
               </n-button>
             </div>
@@ -100,8 +106,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs, defineAsyncComponent, h } from 'vue';
-import { storeToRefs } from 'pinia';
+import { ref, toRefs, defineAsyncComponent, h } from "vue";
+import { storeToRefs } from "pinia";
 import {
   NUpload,
   NUploadTrigger,
@@ -114,25 +120,26 @@ import {
   UploadInst,
   NButton,
   NPopselect,
-  NTree,
-  NIcon,
   TreeOption,
-} from 'naive-ui';
-import { useFiles } from '@/hooks/useFiles';
-import { CloudUploadOutline } from '@vicons/ionicons5';
-import { useFileOutsideStore } from '@/store/modules/file';
-import { onError } from '@/utils/messages';
-import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
-import { useStorage } from '@/utils/use-storage';
-import { FileInfo } from 'naive-ui/es/upload/src/interface';
-import { Folder } from '@vicons/ionicons5';
-const CreateFolder = defineAsyncComponent(() => import('@/components/create-folder/index.vue'));
-const renderSwitcherIcon = () => h(NIcon, null, { default: () => h(Folder) });
+} from "naive-ui";
+import { useFiles } from "@/hooks/useFiles";
+import { CloudUploadOutline } from "@vicons/ionicons5";
+import { useFileOutsideStore } from "@/store/modules/file";
+import { onError } from "@/utils/messages";
+import { SelectBaseOption } from "naive-ui/es/select/src/interface";
+import { useStorage } from "@/utils/use-storage";
+import { FileInfo } from "naive-ui/es/upload/src/interface";
+const CreateFolder = defineAsyncComponent(
+  () => import("@/components/create-folder/index.vue")
+);
+const FolderTree = defineAsyncComponent(
+  () => import("@/components/folder-tree/index.vue")
+);
 
 const props = defineProps({
   action: {
     type: String,
-    default: '',
+    default: "",
     require: true,
   },
   max: {
@@ -141,51 +148,66 @@ const props = defineProps({
   },
   title: {
     type: String,
-    default: '',
+    default: "",
   },
   description: {
     type: String,
-    default: '',
+    default: "",
   },
   currentFolder: {
     type: Object,
   },
 });
 const fileStore = useFileOutsideStore();
-const { onAddUploadFiles, onRemoveUploadFile, onUploadFilesToUser } = useFiles();
+const { onAddUploadFiles, onRemoveUploadFile, onUploadFilesToUser } =
+  useFiles();
 const uploadRef = ref<UploadInst | null>(null);
 const fileList = ref<UploadFileInfo[]>([]);
 const uploadFolder = ref<SelectBaseOption>({
   value: props.currentFolder?.value ?? 0,
-  label: props.currentFolder?.label ?? '默认文件夹',
+  label: props.currentFolder?.label ?? "默认文件夹",
 });
-const uploadFolderName = ref<string>('默认文件夹');
-const uploadAction = ref('https://gcloud.aoau.top/file/upload');
+const uploadFolderName = ref<string>("默认文件夹");
+const uploadAction = ref("https://gcloud.aoau.top/file/upload");
 const headers = {
-  Authorization: useStorage('token'),
+  Authorization: useStorage("token"),
 };
 
 const handleUpdateUploadFolder = (value: number, option: SelectBaseOption) => {
   uploadFolderName.value = option.label as string;
-  uploadFolder.value = fileStore.get_origin_folders.filter(item => item.value === value)[0];
+  uploadFolder.value = fileStore.get_origin_folders.filter(
+    (item) => item.value === value
+  )[0];
 };
-const handleUploadChange = (data: { fileList: UploadFileInfo[]; file: UploadFileInfo }) => {
+const handleUploadChange = (data: {
+  fileList: UploadFileInfo[];
+  file: UploadFileInfo;
+}) => {
   fileList.value = data.fileList;
   onAddUploadFiles(data.file);
 };
-const handleRemoveUploadFile = (data: { fileList: UploadFileInfo[]; file: UploadFileInfo }) => {
+const handleRemoveUploadFile = (data: {
+  fileList: UploadFileInfo[];
+  file: UploadFileInfo;
+}) => {
   onRemoveUploadFile(data.file);
   return data.file;
 };
-const handleUploadError = (options: { file: UploadFileInfo; event?: ProgressEvent }) => {
+const handleUploadError = (options: {
+  file: UploadFileInfo;
+  event?: ProgressEvent;
+}) => {
   onError(`上传失败：${options.file.name}`);
   return options.file;
 };
-const handleUploadFinish = (options: { file: FileInfo; event?: ProgressEvent }) => {
+const handleUploadFinish = (options: {
+  file: FileInfo;
+  event?: ProgressEvent;
+}) => {
   if ((event?.currentTarget as XMLHttpRequest).status === 200) {
     // onSuccess(`上传完成：${options.file.name}`);
     const res = JSON.parse((event?.currentTarget as XMLHttpRequest).response);
-    if (res.msg === 'success') {
+    if (res.msg === "success") {
       onUploadFilesToUser({
         repositoryIdentity: res.identity,
         parentId: uploadFolder.value.value as number,
@@ -229,7 +251,10 @@ toRefs(props);
     margin-top: 0;
     border: none;
   }
-  .n-collapse .n-collapse-item .n-collapse-item__content-wrapper .n-collapse-item__content-inner {
+  .n-collapse
+    .n-collapse-item
+    .n-collapse-item__content-wrapper
+    .n-collapse-item__content-inner {
     padding: 0;
   }
   .n-upload-file-list .n-upload-file .n-upload-file-info {

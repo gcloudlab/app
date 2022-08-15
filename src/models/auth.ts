@@ -54,3 +54,8 @@ export interface RefreshAuthResponse {
   };
   status: number;
 }
+
+export interface UpdateAvatarOptions {
+  // identity: string;
+  avatar: string;
+}
