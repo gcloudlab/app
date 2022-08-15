@@ -180,7 +180,7 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
   return {
     async onDblclick() {
       console.log("parent_id", option.value);
-      moveFileInfo.parent_identity = option.value as number;
+      moveFileInfo.parent_identity = Number(option.value);
       showFolderTree.value = false;
       if (
         moveFileInfo.parent_identity &&
