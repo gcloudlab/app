@@ -15,10 +15,7 @@
           :src="file.path"
           fallback-src="./src/assets/logo.png"
         />
-        <Folder
-          v-else-if="file.type === '文件夹'"
-          class="w-12 text-yellow-500"
-        />
+        <Folder v-else-if="file.type === '文件夹'" class="w-12 text-yellow-500" />
         <DocumentTextOutline v-else class="w-12 text-gray-100" />
         <div class="flex justify-start items-center flex-wrap mt-2">
           <span class="">名称：</span>
@@ -62,13 +59,7 @@
             @clickoutside="showFolderTree = false"
           >
             <template #trigger>
-              <n-button
-                class="w-1/2"
-                type="info"
-                circle
-                size="small"
-                @click="handleMoveFile(file.identity, file.parent_id)"
-              >
+              <n-button class="w-1/2" type="info" circle size="small" @click="handleMoveFile(file)">
                 移动到
               </n-button>
             </template>
@@ -79,13 +70,7 @@
             />
             <div v-else class="text-xs text-center">请先新建文件夹</div>
           </n-popover>
-          <n-button
-            class="ml-2 w-1/2"
-            type="warning"
-            circle
-            size="small"
-            @click="handleDeleteFile"
-          >
+          <n-button class="ml-2 w-1/2" type="warning" circle size="small" @click="handleDeleteFile">
             删除
           </n-button>
         </div>
@@ -96,28 +81,19 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, PropType, ref, toRefs, reactive } from "vue";
-import { storeToRefs } from "pinia";
-import { useFileOutsideStore } from "@/store/modules/file";
-import { useFiles } from "@/hooks/useFiles";
-import {
-  NCard,
-  NImage,
-  NScrollbar,
-  NButton,
-  TreeOption,
-  NPopover,
-} from "naive-ui";
-import { FileListData } from "@/models/file";
-import { transformSize } from "@/utils/transform-size";
-import { Folder, DocumentTextOutline } from "@vicons/ionicons5";
-import DragUpload from "@/components/upload/trigger-upload.vue";
+import { defineAsyncComponent, PropType, ref, toRefs, reactive } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useFileOutsideStore } from '@/store/modules/file';
+import { useFiles } from '@/hooks/useFiles';
+import { NCard, NImage, NScrollbar, NButton, TreeOption, NPopover } from 'naive-ui';
+import { FileListData } from '@/models/file';
+import { transformSize } from '@/utils/transform-size';
+import { Folder, DocumentTextOutline } from '@vicons/ionicons5';
+import DragUpload from '@/components/upload/trigger-upload.vue';
 // import downloadByUrl from '@/utils/download-by-url';
-import { onInfo } from "@/utils/messages";
-const ShowOrEdit = defineAsyncComponent(() => import("./file-edit.vue"));
-const FolderTree = defineAsyncComponent(
-  () => import("@/components/folder-tree/index.vue")
-);
+import { onInfo } from '@/utils/messages';
+const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
+const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 
 const props = defineProps({
   file: {
@@ -131,9 +107,9 @@ const { onDeleteFile, onUpdateFileName, onMoveFile } = useFiles();
 const currentFileRef = ref<FileListData | null>(null);
 const showFolderTree = ref(false);
 const moveFileInfo = reactive({
-  identity: "",
-  parent_identity: 0,
-  old_parent_id: 0,
+  identity: '',
+  parent_identity: '',
+  file: {} as FileListData,
 });
 
 const handleSelect = (file: FileListData) => {
@@ -157,36 +133,31 @@ const handleDeleteFile = () => {
   onDeleteFile([props.file]);
 };
 const handleDownload = (file: FileListData) => {
-  onInfo("开发中~");
+  onInfo('开发中~');
   // if (file.type !== '文件夹') {
   //   downloadByUrl(file);
   // } else {
   // }
 };
 const handleShare = (file: FileListData) => {
-  if (file.type !== "文件夹") {
-    console.log("分享文件");
+  if (file.type !== '文件夹') {
+    console.log('分享文件');
   } else {
-    console.log("分享文件夹");
+    console.log('分享文件夹');
   }
 };
-const handleMoveFile = (identify: string, oldParentId: number) => {
+
+const handleMoveFile = (file: FileListData) => {
   showFolderTree.value = true;
-  moveFileInfo.identity = identify;
-  moveFileInfo.old_parent_id = oldParentId;
-  console.log("移动文件id", identify);
+  moveFileInfo.identity = file.identity;
+  moveFileInfo.file = file;
 };
 const nodeProps = ({ option }: { option: TreeOption }) => {
   return {
     async onDblclick() {
-      console.log("parent_id", option.value);
-      moveFileInfo.parent_identity = Number(option.value);
+      moveFileInfo.parent_identity = option.identity as string;
       showFolderTree.value = false;
-      if (
-        moveFileInfo.parent_identity &&
-        moveFileInfo.identity &&
-        moveFileInfo.parent_identity !== moveFileInfo.old_parent_id
-      ) {
+      if (moveFileInfo.parent_identity && moveFileInfo.identity) {
         await onMoveFile(moveFileInfo);
       }
     },

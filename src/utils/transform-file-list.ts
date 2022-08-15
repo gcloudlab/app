@@ -11,7 +11,6 @@ const generateTree = (list: FileListData[] | any, rootId: number) => {
   const objMap: any = {}; // 暂存数组以 id 为 key的映射关系
   const result = []; // 结果
   const other = [];
-  // const folder_tree = []; // 文件夹树
   let otherSize = -1;
 
   for (const item of list) {
@@ -37,10 +36,11 @@ const generateTree = (list: FileListData[] | any, rootId: number) => {
       // 若父元素不存在，初始化父元素
       if (!objMap[parentId]) {
         objMap[parentId] = { size: 0 };
+        console.log('初始化父元素', parentId);
       }
 
       // 若无该根元素则放入map中
-      if (objMap[parentId]['children'] === undefined) {
+      if (!objMap[parentId]['children']) {
         objMap[parentId]['children'] = [];
       }
       objMap[parentId]['children'].push(treeItem);
@@ -48,6 +48,7 @@ const generateTree = (list: FileListData[] | any, rootId: number) => {
       objMap[parentId]['isFolder'] = objMap[parentId]?.ext === '';
     }
   }
+  console.log(result);
 
   if (other.length > 0) {
     const otherItem = {

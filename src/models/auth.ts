@@ -55,7 +55,10 @@ export interface RefreshAuthResponse {
   status: number;
 }
 
-export interface UpdateAvatarOptions {
+export interface UpdateUserInfoOptions {
   // identity: string;
-  avatar: string;
+  avatar?: string;
+  name?: string;
+  email?: string;
+  password?: string;
 }

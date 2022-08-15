@@ -1,13 +1,13 @@
-import { ref } from "vue";
-import { storeToRefs } from "pinia";
-import { useAuthOutsideStore } from "@/store/modules/auth";
+import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useAuthOutsideStore } from '@/store/modules/auth';
 import type {
   UserLoginRequestProps,
   UserTokenType,
   UserRegisterRequestProps,
-  UpdateAvatarOptions,
-} from "@/models/auth";
-import { onError, onInfo } from "@/utils/messages";
+  UpdateUserInfoOptions,
+} from '@/models/auth';
+import { onError, onInfo } from '@/utils/messages';
 
 const authStore = useAuthOutsideStore();
 
@@ -34,19 +34,14 @@ export const useAuth = () => {
       return true;
     } else {
       // refresh token
-      const res = await authStore.onRefreshTokenAction();
-      if (res && res.data.msg === "success") {
-        return true;
-      }
-      onInfo(res ? res.data.msg : "未登陆");
-      return false;
+      await authStore.onRefreshTokenAction();
     }
   };
   const onChangeAvatar = (url: string) => {
     authStore.onChangeAvatarAction(url);
   };
-  const onUpdateAvatar = async (option: UpdateAvatarOptions) => {
-    await authStore.onUpdateAvatarAction(option);
+  const onUpdateUserInfo = async (option: UpdateUserInfoOptions) => {
+    await authStore.onUpdateUserInfoAction(option);
   };
 
   return {
@@ -57,7 +52,7 @@ export const useAuth = () => {
     onGetCode,
     onGetUserDetailAndCheckAuth,
     onChangeAvatar,
-    onUpdateAvatar,
+    onUpdateUserInfo,
     error,
   };
 };

@@ -8,13 +8,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, defineAsyncComponent, computed } from 'vue';
+import { onMounted, defineAsyncComponent } from 'vue';
 import { onBeforeRouteLeave } from 'vue-router';
 import { useAuth } from '@/hooks';
 import { useFiles } from '@/hooks/useFiles';
 import Header from './header.vue';
 import { NScrollbar } from 'naive-ui';
-const Loading = defineAsyncComponent(() => import('@/components/commons/loading/index.vue'));
+// const Loading = defineAsyncComponent(() => import('@/components/commons/loading/index.vue'));
 
 const { onGetFileList } = useFiles();
 const { onGetUserDetailAndCheckAuth } = useAuth();

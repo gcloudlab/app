@@ -53,6 +53,11 @@ axiosInstance.interceptors.request.use(
     if (token !== '') {
       config.headers!['Authorization'] = `${token}`;
     }
+    const refresh_token = useStorage('refresh_token');
+    if (config.url === '/refresh/authorization') {
+      config.headers!['Authorization'] = `${refresh_token}`;
+    }
+
     return config;
   },
   (error: any) => {

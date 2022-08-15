@@ -42,5 +42,6 @@ export interface UpdateFileNameOption {
 
 export interface MoveFolderOption {
   identity: string;
-  parent_identity: number;
+  parent_identity: string;
+  file: FileListData;
 }

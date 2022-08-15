@@ -51,7 +51,7 @@ export const themeOverrides: GlobalThemeOverrides = {
 
 export type MessageThemeOverrides = NonNullable<MessageProviderProps['themeOverrides']>;
 export const messageThemeOverrides: MessageThemeOverrides = {
-  colorWarning: '#e2e52a',
+  // colorWarning: '#e2e52a',
   // textColorWarning: '#e2e52a',
   // iconColorWarning: 'cyan',
   boxShadowWarning: '2px 2px 4px #b6b6b6',
