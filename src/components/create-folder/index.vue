@@ -21,7 +21,7 @@
       <p class="mt-3 ml-1">
         在
         <span class="font-bold">{{
-          folder?.label === '默认文件夹' ? '根目录' : folder?.label
+          folder?.name === '默认文件夹' ? '默认文件夹' : folder?.name
         }}</span>
         中新建文件夹
       </p>
@@ -50,7 +50,7 @@ const onNegativeClick = () => {
 const onPositiveClick = () => {
   if (folderName.value !== '') {
     console.log(folderName.value);
-    onCreateFolder({ name: folderName.value, parent_id: props.folder!.value as number });
+    onCreateFolder({ name: folderName.value, parent_id: props.folder!.id as number });
     showModal.value = false;
   }
 };

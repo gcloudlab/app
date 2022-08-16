@@ -42,12 +42,19 @@ const fileType = (ext: string) => {
 const generateTree = (list: FileListData[] | any) => {
   const id: any = {};
   const result: FileListData[] | any = [];
-  const folder: FileListData[] | any = [];
 
   const files = list.filter((i: FileListData) => i.ext !== '');
+  const folders = list.filter((i: FileListData) => i.ext === '');
   const count = files.length;
   const size = files.reduce((a: number, b: { size: number }) => a + b.size, 0);
   const children = _.groupBy(list, 'parent_id');
+  const empty_folders = folders.filter(
+    (folder: FileListData) => !Object.keys(children).includes(String(folder.id))
+  );
+
+  empty_folders.map((i: FileListData) => {
+    children[i.id] = [];
+  });
 
   list.map((row: FileListData) => {
     row.type = fileType(row.ext!);
