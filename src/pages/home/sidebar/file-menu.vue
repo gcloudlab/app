@@ -54,7 +54,7 @@ const emits = defineEmits(['checkedKeys', 'expandedKeys', 'selectedKeys', 'delet
 const fileStore = useFileOutsideStore();
 const isChecked = ref(false);
 const pattern = ref('');
-const renderSwitcherIcon = () => h(NIcon, null, { default: () => h(Folder) });
+const renderSwitcherIcon = () => h(NIcon, { class: 'text-primary' }, { default: () => h(Folder) });
 
 const handleCheckedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
   emits('checkedKeys', option);
@@ -80,6 +80,9 @@ const { files_count, user_files, fetching } = storeToRefs(fileStore);
 
 <style lang="scss">
 .file-tree {
+  .n-tree .n-tree-node-wrapper {
+    padding: 0;
+  }
   .n-tree .n-tree-node.n-tree-node--highlight .n-tree-node-content .n-tree-node-content__text {
     border: none;
     color: #00b0b3;

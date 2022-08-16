@@ -15,13 +15,12 @@
           :src="file.path"
           fallback-src="./src/assets/logo.png"
         />
-        <Folder v-else-if="file.type === '文件夹'" class="w-12 text-yellow-500" />
+        <Folder v-else-if="file.type === '文件夹'" class="w-12 text-primary" />
         <DocumentTextOutline v-else class="w-12 text-gray-100" />
         <div class="flex justify-start items-center flex-wrap mt-2">
-          <span class="">名称：</span>
           <ShowOrEdit
             v-if="file.type === '文件夹'"
-            class="inline-block"
+            class="inline-block text-lg text-yellow-400"
             :value="file.name"
             :onUpdateValue="handleUpdateName"
           />
@@ -157,7 +156,7 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
     async onDblclick() {
       moveFileInfo.parent_identity = option.identity as string;
       showFolderTree.value = false;
-      if (moveFileInfo.parent_identity && moveFileInfo.identity) {
+      if (moveFileInfo.parent_identity && moveFileInfo.identity && option.isFolder) {
         await onMoveFile(moveFileInfo);
       }
     },

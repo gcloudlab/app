@@ -10,7 +10,7 @@
       >
         <Folder
           v-if="file?.type === '文件夹'"
-          class="w-10 text-yellow-500 cursor-pointer"
+          class="w-10 text-primary cursor-pointer"
           @click="handleExpandedKeys(file)"
         />
         <div

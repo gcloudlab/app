@@ -4,13 +4,13 @@
       <div
         :class="[
           ...boardClasses,
-          'flex items-center flex-1 bg-gradient-to-t from-green-100 col-auto',
+          'flex items-center flex-1 bg-gradient-to-t from-green-100 col-auto transition-all duration-200 ease-in-out',
         ]"
       >
         <TriggerUpload class="w-full h-full shadow-sm" title="立即上传" />
         <Vue3Lottie class="robot h-3/4 w-1/4" :animationData="RobotJson" />
       </div>
-      <div :class="[...boardClasses, 'other w-full bg-gradient-to-b from-green-100 ']">
+      <div :class="[...boardClasses, 'other w-full bg-gradient-to-b from-green-100']">
         <!-- 我的分享 -->
       </div>
       <div :class="[...boardClasses]"></div>
@@ -26,7 +26,7 @@ import TriggerUpload from '@/components/upload/trigger-upload.vue';
 
 const fileStore = useFileOutsideStore();
 
-const boardClasses = ['rounded', 'hover:shadow', 'transition-all', 'duration-200'];
+const boardClasses = ['rounded', 'hover:shadow'];
 
 const { upload_files } = storeToRefs(fileStore);
 </script>

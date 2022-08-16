@@ -127,12 +127,12 @@ const columns: DataTableColumns = [
   {
     title: '类型',
     key: 'type',
-    width: 4,
+    width: 3,
   },
   {
     title: '大小',
     key: 'size',
-    width: 4,
+    width: 3,
     sorter: (row1: any, row2: any) => row1.size - row2.size,
     render(row) {
       return transformSize(row.size as number);
@@ -141,7 +141,7 @@ const columns: DataTableColumns = [
   {
     title: '日期',
     key: 'updated_at',
-    width: 5,
+    width: 4,
     defaultSortOrder: 'descend',
     sorter: (row1: any, row2: any) => compareDate(row1.updated_at, row2.updated_at),
   },

@@ -15,7 +15,7 @@ import type {
   SaveFileToUserRepoOption,
   UpdateFileNameOption,
 } from '@/models/file';
-import generateTree, { transformOriginFileList } from '@/utils/transform-file-list';
+import generateTree from '@/utils/transform-file-list';
 import { onError, onWarning } from '@/utils/messages';
 import type { UploadFileInfo } from 'naive-ui';
 import { saveFileToUserRepo } from '@/service/api/file';
@@ -61,18 +61,13 @@ export const useFileStore = defineStore({
         this.fetching = true;
         let res = await getFileList();
         if (res.status === 200) {
-          this.origin_folders = generateTree(transformOriginFileList(res.data.list), 0);
-          this.user_files = generateTree(res.data.list, 0);
-          console.log('--store-all files', this.origin_folders, this.user_files);
-          this.files_count = this.user_files.reduce((prev, cur) => {
-            if (cur.children && cur.children.length !== 0) return prev + cur.children.length;
-            return prev + 1;
-          }, 0);
-          this.files_size = res.data.list.reduce((prev, cur) => {
-            if (cur && cur.size !== 0) return prev + cur.size;
-            return prev + 1;
-          }, 0);
+          const { result, count, size } = generateTree(res.data.list);
+          this.user_files = result;
+          this.origin_folders = result;
+          this.files_count = count;
+          this.files_size = size;
           this.fetching = false;
+          // console.log('--store-all files', this.origin_folders, this.user_files);
         }
       } catch (error) {
         useTimer(() => {

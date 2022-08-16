@@ -27,7 +27,7 @@
       </n-tab>
       <template #suffix>
         <Avatar
-          :src="auth?.avatar || ''"
+          :src="auth?.avatar || 'why.png'"
           size="large"
           bordered
           objectFit="contain"

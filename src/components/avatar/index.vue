@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, ref, defineAsyncComponent } from 'vue';
+import { computed, toRefs, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
