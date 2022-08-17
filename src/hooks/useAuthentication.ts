@@ -30,12 +30,7 @@ export const useAuth = () => {
     if (email) return await authStore.onMailCodeAction(email);
   };
   const onGetUserDetailAndCheckAuth = async () => {
-    if (await authStore.onGetUserDetailByTokenAction()) {
-      return true;
-    } else {
-      // refresh token
-      await authStore.onRefreshTokenAction();
-    }
+    return await authStore.onGetUserDetailByTokenAction();
   };
   const onChangeAvatar = (url: string) => {
     authStore.onChangeAvatarAction(url);

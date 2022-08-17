@@ -16,7 +16,7 @@ import type {
   UpdateFileNameOption,
 } from '@/models/file';
 import generateTree from '@/utils/transform-file-list';
-import { onError, onWarning } from '@/utils/messages';
+import { onError, onWarning, onSuccess } from '@/utils/messages';
 import type { UploadFileInfo } from 'naive-ui';
 import { saveFileToUserRepo } from '@/service/api/file';
 import useTimer from '@/hooks/useTimer';
@@ -190,6 +190,13 @@ export const useFileStore = defineStore({
             }
           });
           // this.onRemoveUploadFileAction(payload);
+        } else if (res.data.msg === '容量不足') {
+          onWarning('嘿，你的空间不够了');
+          this.upload_files.map(i => {
+            if (i.name === payload.name) {
+              i.status = 'error';
+            }
+          });
         }
       } catch (e) {
         onError('上传失败，请重试');
@@ -240,6 +247,7 @@ export const useFileStore = defineStore({
       try {
         const res = await moveFolder(payload);
         if (res.data.msg === 'success') {
+          onSuccess('已保存');
           // this.onJumpToFileAction({ ...payload.file });
         } else {
           onWarning(res.data.msg);

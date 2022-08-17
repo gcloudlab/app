@@ -2,6 +2,7 @@
   <n-scrollbar style="max-height: 200px">
     <div class="folder-tree">
       <n-tree
+        v-if="data"
         v-bind="$attrs"
         block-line
         :data="data"
@@ -14,6 +15,7 @@
         :render-switcher-icon="renderSwitcherIcon"
         :node-props="nodeProps"
       />
+      <Loading v-else />
     </div>
   </n-scrollbar>
 </template>
@@ -23,6 +25,7 @@ import { PropType, h, toRefs } from 'vue';
 import { NIcon, NTree, NScrollbar } from 'naive-ui';
 import { Folder } from '@vicons/ionicons5';
 import { TreeNodeProps } from 'naive-ui/es/tree/src/interface';
+import Loading from '@/components/commons/loading/index.vue';
 
 const props = defineProps({
   data: {

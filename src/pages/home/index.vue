@@ -11,6 +11,9 @@
         />
         <Overview />
         <OnlineUsers />
+        <n-divider class="">
+          <About />
+        </n-divider>
       </n-scrollbar>
     </div>
     <!-- main -->
@@ -72,15 +75,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue';
+import { ref, defineAsyncComponent, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { useFiles } from '@/hooks/useFiles';
 import { FileListData } from '@/models/file';
 import { transformSize } from '@/utils/transform-size';
-import { TreeOption, NTag, NButton, NScrollbar } from 'naive-ui';
+import { TreeOption, NTag, NButton, NScrollbar, NDivider } from 'naive-ui';
 import { ChevronBack, AppsSharp, Menu, Refresh } from '@vicons/ionicons5';
 import MainNav from './main-nav/index.vue';
+import About from '@/components/about/index.vue';
 const FileMenu = defineAsyncComponent(() => import('./sidebar/file-menu.vue'));
 const Overview = defineAsyncComponent(() => import('./sidebar/overview.vue'));
 const OnlineUsers = defineAsyncComponent(() => import('./sidebar/community-status.vue'));
@@ -129,6 +133,10 @@ const handleChangeViewType = () => {
 };
 
 const { folder_routes, files_size } = storeToRefs(fileStore);
+
+// watch(folder_routes, (newValue, oldValue) => {
+//   console.log('folder_routes', newValue, oldValue);
+// });
 </script>
 
 <style lang="scss" scoped>

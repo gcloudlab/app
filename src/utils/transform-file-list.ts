@@ -44,12 +44,15 @@ const generateTree = (list: FileListData[] | any) => {
   const result: FileListData[] | any = [];
 
   const files = list.filter((i: FileListData) => i.ext !== '');
-  const folders = list.filter((i: FileListData) => i.ext === '');
   const count = files.length;
   const size = files.reduce((a: number, b: { size: number }) => a + b.size, 0);
   const children = _.groupBy(list, 'parent_id');
-  const empty_folders = folders.filter(
-    (folder: FileListData) => !Object.keys(children).includes(String(folder.id))
+  const empty_folders = list.filter(
+    (file: FileListData) =>
+      file.ext === '' &&
+      file.path === '' &&
+      file.size === 0 &&
+      !Object.keys(children).includes(String(file.id))
   );
 
   empty_folders.map((i: FileListData) => {

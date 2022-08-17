@@ -34,7 +34,7 @@
           :stroke-width="6"
           indicator-placement="inside"
           :color="themeVars.errorColor"
-          :percentage="files_count / 10"
+          :percentage="files_count"
           :rail-color="themeVars.primaryColor"
           processing
         />

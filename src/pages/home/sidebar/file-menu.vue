@@ -7,7 +7,7 @@
         !isChecked ? '选择' : '取消'
       }}</Button>
     </div>
-    <n-scrollbar style="height: 240px">
+    <n-scrollbar style="max-height: 200px">
       <n-tree
         v-if="files_count > 0"
         class="mt-2 tree md:w-60"

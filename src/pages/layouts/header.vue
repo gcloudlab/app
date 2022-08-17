@@ -27,7 +27,7 @@
       </n-tab>
       <template #suffix>
         <Avatar
-          :src="auth?.avatar || 'why.png'"
+          :src="auth?.avatar || defaultAvatar"
           size="large"
           bordered
           objectFit="contain"
@@ -46,6 +46,7 @@ import { NTabs, NTab, NImage } from 'naive-ui';
 import Avatar from '@/components/avatar/index.vue';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import Logo from '@/assets/gcloud.png';
+import defaultAvatar from '@/assets/logo.png';
 
 const router = useRouter();
 const authStore = useAuthOutsideStore();

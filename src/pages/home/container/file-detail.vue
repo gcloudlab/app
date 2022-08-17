@@ -15,7 +15,10 @@
           :src="file.path"
           fallback-src="./src/assets/logo.png"
         />
-        <Folder v-else-if="file.type === '文件夹'" class="w-12 text-primary" />
+        <Folder
+          v-else-if="file.type === '文件夹' && file.path === '' && file.size === 0"
+          class="w-12 text-primary"
+        />
         <DocumentTextOutline v-else class="w-12 text-gray-100" />
         <div class="flex justify-start items-center flex-wrap mt-2">
           <ShowOrEdit
@@ -140,7 +143,7 @@ const handleDownload = (file: FileListData) => {
 };
 const handleShare = (file: FileListData) => {
   if (file.type !== '文件夹') {
-    console.log('分享文件');
+    console.log('分享文件', file);
   } else {
     console.log('分享文件夹');
   }
