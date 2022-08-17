@@ -193,7 +193,7 @@ const handleFileListChange = () => {
 const nodeProps = ({ option }: { option: TreeOption }) => {
   return {
     onClick() {
-      if (option.ext === '') uploadFolder.value = option;
+      if (option.path === '') uploadFolder.value = option;
     },
   };
 };

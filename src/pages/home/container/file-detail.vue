@@ -5,7 +5,7 @@
         class="leading-4"
         hoverable
         :bordered="false"
-        content-style="background-color: #008c8f; border-radius: 5px;color: white;"
+        content-style="background-color: #008f8f; border-radius: 5px;color: white;"
         @click="handleSelect(file)"
       >
         <n-image
@@ -15,15 +15,19 @@
           :src="file.path"
           fallback-src="./src/assets/logo.png"
         />
-        <Folder
-          v-else-if="file.type === '文件夹' && file.path === '' && file.size === 0"
-          class="w-12 text-primary"
-        />
-        <DocumentTextOutline v-else class="w-12 text-gray-100" />
+
         <div class="flex justify-start items-center flex-wrap mt-2">
+          <Folder
+            v-if="file.type === '文件夹' && file.path === '' && file.repository_identity === ''"
+            class="w-5 text-primary mr-2"
+          />
+          <DocumentTextOutline
+            v-else-if="file.type !== '文件夹' && file.type !== '图片'"
+            class="w-5 text-gray-100 mr-2"
+          />
           <ShowOrEdit
             v-if="file.type === '文件夹'"
-            class="inline-block text-lg text-yellow-400"
+            class="inline-block text-base flex-1"
             :value="file.name"
             :onUpdateValue="handleUpdateName"
           />

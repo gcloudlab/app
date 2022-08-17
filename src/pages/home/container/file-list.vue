@@ -6,6 +6,7 @@
         :columns="columns"
         :row-props="rowProps"
         :data="values.children"
+        :loading="!values.children"
         row-class-name="animate__animated animate__fadeIn faster"
         :row-key="rowKeys"
         children-key="donnot-need-children"
@@ -13,8 +14,8 @@
         :pagination="false"
         :default-expand-all="true"
       >
-        <template name="empty">
-          <Empty description="空空如也"> </Empty>
+        <template #empty>
+          <Empty description="空文件夹"> </Empty>
         </template>
       </n-data-table>
     </n-scrollbar>
@@ -75,7 +76,7 @@ const rowProps = (row: FileListData) => {
   return {
     style: 'cursor: pointer;',
     onClick: () => {
-      if (row?.isFolder) {
+      if (row?.type === '文件夹') {
         emits('expandedKeys', row);
       }
     },
@@ -105,8 +106,7 @@ const columns: DataTableColumns = [
     render(row, index) {
       return h(ShowOrEdit as unknown as VueElement, {
         value: row.name,
-        class: 'ml-2',
-        style: row.type === '文件夹' && { color: 'rgb(234,179,9)', cursor: 'pointer' },
+        class: ['ml-2 cursor-pointer', row.type === '文件夹' ? 'text-primary' : ''],
         onUpdateValue(v: string) {
           // data.value[index].name = v
           if (v && row.name !== v && row.identity) {
@@ -119,7 +119,6 @@ const columns: DataTableColumns = [
         },
         onClick() {
           emits('selectedKeys', row);
-          console.log('--click');
         },
       });
     },

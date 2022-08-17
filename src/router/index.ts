@@ -18,7 +18,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/share/index.vue'),
       },
       {
-        path: '/picture',
+        path: '/xswl',
         name: 'picture',
         component: () => import('@/pages/picture/index.vue'),
       },

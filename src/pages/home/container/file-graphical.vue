@@ -1,6 +1,7 @@
 <template>
   <div class="file-graphical">
     <div
+      v-if="values.children?.length !== 0"
       class="file-warpper mt-4 flex flex-wrap justify-start animate__animated animate__fadeIn faster"
     >
       <div
@@ -58,6 +59,7 @@
         </n-tooltip>
       </div>
     </div>
+    <Empty v-else description="空文件夹"> </Empty>
     <DropDown
       :show="showDropdownRef"
       :position="{ x: xRef, y: yRef }"
@@ -75,6 +77,7 @@ import { FileListData } from '@/models/file';
 import { Folder, DocumentTextOutline } from '@vicons/ionicons5';
 const DropDown = defineAsyncComponent(() => import('@/components/commons/drop-down/index.vue'));
 const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
+const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
 const props = defineProps({
   values: {

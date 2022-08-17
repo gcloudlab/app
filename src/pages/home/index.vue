@@ -18,6 +18,7 @@
     </div>
     <!-- main -->
     <div class="main-container shadow-inner w-screen z-10">
+      <!-- tool bar -->
       <div class="main-nav bg-gray-100 flex items-center shadow" v-if="folder_routes.length > 1">
         <Button class="px-3" @click="handleBackToPreFolder" size="small">
           <ChevronBack class="w-4" />
@@ -46,6 +47,7 @@
           ({{ folder_routes.at(-1)?.children?.length }})
         </n-tag>
       </div>
+      <!-- file detail -->
       <div class="main-bar flex">
         <div class="main-files-bar flex-auto">
           <n-scrollbar style="max-height: calc(100vh - 60px)">

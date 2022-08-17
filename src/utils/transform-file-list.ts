@@ -43,13 +43,14 @@ const generateTree = (list: FileListData[] | any) => {
   const id: any = {};
   const result: FileListData[] | any = [];
 
-  const files = list.filter((i: FileListData) => i.ext !== '');
+  const files = list.filter((i: FileListData) => i.repository_identity !== '' && i.path !== '');
   const count = files.length;
   const size = files.reduce((a: number, b: { size: number }) => a + b.size, 0);
   const children = _.groupBy(list, 'parent_id');
+
   const empty_folders = list.filter(
     (file: FileListData) =>
-      file.ext === '' &&
+      file.repository_identity === '' &&
       file.path === '' &&
       file.size === 0 &&
       !Object.keys(children).includes(String(file.id))
@@ -81,7 +82,9 @@ const generateTree = (list: FileListData[] | any) => {
         result.unshift(item);
       }
     } else {
-      const other = children[key].filter(item => item.ext !== '');
+      const other = children[key].filter(
+        item => item.repository_identity !== '' && item.path !== ''
+      );
       result.unshift({
         name: '默认文件夹',
         identity: 'other',

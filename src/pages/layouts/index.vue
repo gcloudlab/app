@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, defineAsyncComponent } from 'vue';
+import { onMounted } from 'vue';
 import { onBeforeRouteLeave } from 'vue-router';
 import { useAuth } from '@/hooks';
 import { useFiles } from '@/hooks/useFiles';
