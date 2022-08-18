@@ -19,7 +19,10 @@
     <!-- main -->
     <div class="main-container shadow-inner w-screen z-10">
       <!-- tool bar -->
-      <div class="main-nav bg-gray-100 flex items-center shadow" v-if="folder_routes.length > 1">
+      <div
+        class="main-nav bg-gray-100 flex items-center shadow"
+        v-if="folder_routes.length > 1"
+      >
         <Button class="px-3" @click="handleBackToPreFolder" size="small">
           <ChevronBack class="w-4" />
         </Button>
@@ -43,7 +46,11 @@
         </n-button>
         <FileFolderRoute :routes="folder_routes" />
         <n-tag :bordered="false" size="small" type="info">
-          共{{ folder_routes.at(-1)!.size === -1 ? `${transformSize(files_size)}` : `${transformSize(folder_routes.at(-1)!.size)}` }}
+          共{{
+            folder_routes.at(-1)!.size === -1
+              ? `${transformSize(files_size)}`
+              : `${transformSize(folder_routes.at(-1)!.size)}`
+          }}
           ({{ folder_routes.at(-1)?.children?.length }})
         </n-tag>
       </div>
@@ -58,7 +65,9 @@
               @expandedKeys="handleExpandedKeys"
             />
             <FileGraphical
-              v-else-if="fileViewType === 'graphical' && folder_routes.length > 1"
+              v-else-if="
+                fileViewType === 'graphical' && folder_routes.length > 1
+              "
               :values="folder_routes.at(-1)"
               @selectedKeys="handleSelectedKeys"
               @expandedKeys="handleExpandedKeys"
@@ -77,30 +86,47 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent, watch } from 'vue';
-import { storeToRefs } from 'pinia';
-import { useFileOutsideStore } from '@/store/modules/file';
-import { useFiles } from '@/hooks/useFiles';
-import { FileListData } from '@/models/file';
-import { transformSize } from '@/utils/transform-size';
-import { TreeOption, NTag, NButton, NScrollbar, NDivider } from 'naive-ui';
-import { ChevronBack, AppsSharp, Menu, Refresh } from '@vicons/ionicons5';
-import MainNav from './main-nav/index.vue';
-import About from '@/components/about/index.vue';
-const FileMenu = defineAsyncComponent(() => import('./sidebar/file-menu.vue'));
-const Overview = defineAsyncComponent(() => import('./sidebar/overview.vue'));
-const OnlineUsers = defineAsyncComponent(() => import('./sidebar/community-status.vue'));
-const FileList = defineAsyncComponent(() => import('./container/file-list.vue'));
-const FileGraphical = defineAsyncComponent(() => import('./container/file-graphical.vue'));
-const FileDetail = defineAsyncComponent(() => import('./container/file-detail.vue'));
-const FileFolderRoute = defineAsyncComponent(() => import('./container/file-folder-route.vue'));
-const Button = defineAsyncComponent(() => import('@/components/commons/button/index.vue'));
+import { ref, defineAsyncComponent, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { useFileOutsideStore } from "@/store/modules/file";
+import { useFiles } from "@/hooks/useFiles";
+import { FileListData } from "@/models/file";
+import { transformSize } from "@/utils/transform-size";
+import { TreeOption, NTag, NButton, NScrollbar, NDivider } from "naive-ui";
+import { ChevronBack, AppsSharp, Menu, Refresh } from "@vicons/ionicons5";
+import MainNav from "./main-nav/index.vue";
+import About from "@/components/about/index.vue";
+const FileMenu = defineAsyncComponent(() => import("./sidebar/file-menu.vue"));
+const Overview = defineAsyncComponent(() => import("./sidebar/overview.vue"));
+const OnlineUsers = defineAsyncComponent(
+  () => import("./sidebar/community-status.vue")
+);
+const FileList = defineAsyncComponent(
+  () => import("./file-container/file-list.vue")
+);
+const FileGraphical = defineAsyncComponent(
+  () => import("./file-container/file-graphical.vue")
+);
+const FileDetail = defineAsyncComponent(
+  () => import("./file-container/file-detail.vue")
+);
+const FileFolderRoute = defineAsyncComponent(
+  () => import("./file-container/file-folder-route.vue")
+);
+const Button = defineAsyncComponent(
+  () => import("@/components/commons/button/index.vue")
+);
 
 const fileStore = useFileOutsideStore();
-const { onGetFileList, onAddToFolderRoutes, onRemoveFromFolderRoutes, onJumpToFile, onDeleteFile } =
-  useFiles();
+const {
+  onGetFileList,
+  onAddToFolderRoutes,
+  onRemoveFromFolderRoutes,
+  onJumpToFile,
+  onDeleteFile,
+} = useFiles();
 const expendMenuValue = ref<TreeOption | FileListData>();
-const fileViewType = ref<'list' | 'graphical'>('graphical');
+const fileViewType = ref<"list" | "graphical">("graphical");
 const currentClickedFile = ref<FileListData>();
 const currentCheckedFiles = ref<FileListData[]>([]);
 
@@ -131,7 +157,7 @@ const handleBackToPreFolder = () => {
   onRemoveFromFolderRoutes();
 };
 const handleChangeViewType = () => {
-  fileViewType.value = fileViewType.value === 'list' ? 'graphical' : 'list';
+  fileViewType.value = fileViewType.value === "list" ? "graphical" : "list";
 };
 
 const { folder_routes, files_size } = storeToRefs(fileStore);

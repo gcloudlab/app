@@ -1,13 +1,13 @@
-import { ref } from 'vue';
-import { useFileOutsideStore } from '@/store/modules/file';
+import { ref } from "vue";
+import { useFileOutsideStore } from "@/store/modules/file";
 import type {
   CreateFolderOption,
   FileListData,
   MoveFolderOption,
   SaveFileToUserRepoOption,
   UpdateFileNameOption,
-} from '@/models/file';
-import type { UploadFileInfo } from 'naive-ui';
+} from "@/models/file";
+import type { UploadFileInfo } from "naive-ui";
 
 const fileStore = useFileOutsideStore();
 
@@ -55,6 +55,7 @@ export const useFiles = () => {
   };
 
   return {
+    total_size: fileStore.get_user_files_size,
     onGetFileList,
     onAddToFolderRoutes,
     onRemoveFromFolderRoutes,
