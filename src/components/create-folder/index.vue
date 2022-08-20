@@ -1,6 +1,8 @@
 <template>
   <div class="create-folder">
-    <n-button quaternary type="primary" size="small" @click="showModal = true"> 新建 </n-button>
+    <n-button quaternary type="primary" size="small" @click="showModal = true">
+      新建
+    </n-button>
     <n-modal
       v-model:show="showModal"
       :mask-closable="false"
@@ -21,7 +23,7 @@
       <p class="mt-3 ml-1">
         在
         <span class="font-bold">{{
-          folder?.name === '默认文件夹' ? '默认文件夹' : folder?.name
+          folder?.name === "默认文件夹" ? "根目录" : folder?.name
         }}</span>
         中新建文件夹
       </p>
@@ -30,10 +32,10 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs } from 'vue';
-import { NInput, NModal, NButton } from 'naive-ui';
-import { useFiles } from '@/hooks/useFiles';
-import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
+import { PropType, ref, toRefs } from "vue";
+import { NInput, NModal, NButton } from "naive-ui";
+import { useFiles } from "@/hooks/useFiles";
+import { SelectBaseOption } from "naive-ui/es/select/src/interface";
 
 const props = defineProps({
   folder: {
@@ -43,14 +45,17 @@ const props = defineProps({
 });
 const { onCreateFolder } = useFiles();
 const showModal = ref(false);
-const folderName = ref('');
+const folderName = ref("");
 const onNegativeClick = () => {
   showModal.value = false;
 };
 const onPositiveClick = () => {
-  if (folderName.value !== '') {
+  if (folderName.value !== "") {
     console.log(folderName.value);
-    onCreateFolder({ name: folderName.value, parent_id: props.folder!.id as number });
+    onCreateFolder({
+      name: folderName.value,
+      parent_id: props.folder!.id as number,
+    });
     showModal.value = false;
   }
 };

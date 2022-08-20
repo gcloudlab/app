@@ -20,7 +20,7 @@
       <n-upload-trigger #="{ handleClick }" abstract>
         <div
           @click="handleClick"
-          class="w-full flex flex-col justify-center items-center p-1 text-center hover:bg-green-100 cursor-pointer transition-all duration-150"
+          class="w-full flex flex-col justify-center items-center text-center hover:bg-green-100 cursor-pointer transition-all duration-150"
           :class="[upload_files.length <= 0 ? 'h-5/6' : '']"
         >
           <CloudUploadOutline class="animate-pulse w-9 text-gray-500 mt-3" />
@@ -52,7 +52,7 @@
             />
             <div v-else class="text-xs text-center">右侧新建文件夹</div>
           </template>
-          <n-button quaternary type="primary" size="small" class="">
+          <n-button quaternary type="primary" size="small">
             上传到：{{ uploadFolder.name }}
           </n-button>
         </n-popselect>

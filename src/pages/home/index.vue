@@ -86,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent, watch } from "vue";
+import { ref, defineAsyncComponent } from "vue";
 import { storeToRefs } from "pinia";
 import { useFileOutsideStore } from "@/store/modules/file";
 import { useFiles } from "@/hooks/useFiles";
