@@ -1,17 +1,10 @@
 <template>
   <div class="create-folder">
-    <n-button quaternary type="primary" size="small" @click="showModal = true">
-      新建
-    </n-button>
-    <n-modal
-      v-model:show="showModal"
-      :mask-closable="false"
-      preset="dialog"
-      title="新建文件夹"
-      :show-icon="false"
+    <Modal
+      triggerContent="新建"
+      modalTitle="新建文件夹"
       positive-text="创建"
       negative-text="取消"
-      :positive-button-props="{ type: 'primary' }"
       @positive-click="onPositiveClick"
       @negative-click="onNegativeClick"
     >
@@ -27,20 +20,23 @@
         }}</span>
         中新建文件夹
       </p>
-    </n-modal>
+    </Modal>
   </div>
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs } from "vue";
-import { NInput, NModal, NButton } from "naive-ui";
+import { PropType, ref, toRefs, defineAsyncComponent } from "vue";
+import { NInput } from "naive-ui";
 import { useFiles } from "@/hooks/useFiles";
 import { SelectBaseOption } from "naive-ui/es/select/src/interface";
+const Modal = defineAsyncComponent(
+  () => import("@/components/commons/modal/index.vue")
+);
 
 const props = defineProps({
   folder: {
     type: Object as PropType<SelectBaseOption>,
-    require: true,
+    required: true,
   },
 });
 const { onCreateFolder } = useFiles();
@@ -63,9 +59,4 @@ const onPositiveClick = () => {
 toRefs(props);
 </script>
 
-<style lang="scss">
-.n-modal-mask {
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-}
-</style>
+<style lang="scss"></style>

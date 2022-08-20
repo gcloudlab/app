@@ -24,7 +24,7 @@
             lazy
             :src="file.path"
             width="70"
-            object-fit="fill"
+            object-fit="cover"
             preview-disabled
             fallback-src="./src/assets/logo.png"
             :intersection-observer-options="{

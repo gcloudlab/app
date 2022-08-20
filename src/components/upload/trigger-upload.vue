@@ -141,7 +141,6 @@ const props = defineProps({
   action: {
     type: String,
     default: "",
-    require: true,
   },
   max: {
     type: Number,

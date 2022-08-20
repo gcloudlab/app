@@ -1,13 +1,13 @@
 <template>
   <div class="video-preview">
     <video class="video shadow-md rounded" width="160" height="83">
-      <source :src="src" type="video/mp4" />
+      <!-- <source :src="src" type="video/mp4" />
       <source :src="src" type="video/mov" />
       <source :src="src" type="video/ogg" />
       <source :src="src" type="video/webm" />
       <object :data="src" width="160" height="83">
         <embed :src="src" width="160" height="83" />
-      </object>
+      </object> -->
     </video>
     <div class="mask transition-color duration-300 rounded"></div>
     <Play
@@ -26,7 +26,7 @@ const props = defineProps({
   src: {
     type: String,
     default: "",
-    require: true,
+    required: true,
   },
   data: {
     type: Object as PropType<FileListData>,

@@ -67,5 +67,6 @@ toRefs(props);
 .video-js {
   width: 100%;
   height: calc(100vh - 51px);
+  background-color: #00b0b3ba;
 }
 </style>
