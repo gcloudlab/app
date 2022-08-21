@@ -40,11 +40,16 @@
           v-else-if="file.type === '视频文件'"
           class="shadow-md rounded"
           width="70"
-          style="max-height: 60px"
+          style="max-height: 46px"
           @click="handleSelectedKeys(file)"
         >
           <source :src="file.path" type="video/mp4" />
         </video>
+        <FileTraySharp
+          class="w-10 text-primary cursor-pointer"
+          v-else-if="file.type === '压缩文件'"
+          @click="handleSelectedKeys(file)"
+        />
         <DocumentTextOutline
           v-else
           class="w-10 text-gray-400 cursor-pointer"
@@ -87,7 +92,7 @@ import { PropType, ref, toRefs, defineAsyncComponent } from "vue";
 import { NImage, NSkeleton, NTooltip } from "naive-ui";
 import { useFiles } from "@/hooks/useFiles";
 import { FileListData } from "@/models/file";
-import { Folder, DocumentTextOutline } from "@vicons/ionicons5";
+import { Folder, DocumentTextOutline, FileTraySharp } from "@vicons/ionicons5";
 const DropDown = defineAsyncComponent(
   () => import("@/components/commons/drop-down/index.vue")
 );

@@ -7,7 +7,7 @@
         !isChecked ? '选择' : '取消'
       }}</Button>
     </div>
-    <n-scrollbar class="shadow-inner bg-gradient-to-b from-green-50" style="max-height: 200px">
+    <n-scrollbar class="shadow-inner bg-gradient-to-b from-green-50" style="height: 200px">
       <n-tree
         v-if="files_count > 0"
         class="mt-2 tree md:w-60"

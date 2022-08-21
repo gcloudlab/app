@@ -47,16 +47,16 @@ const activate = () => {
 };
 const data: TimelineItemProps[] = [
   {
-    type: "info",
-    title: "日常",
-    content: "新增日志查看; 修复图片预览畸变；其他",
-    time: "2022-08-20 20:46",
-  },
-  {
     type: "success",
     title: "功能",
-    content: "新增视频播放功能",
-    time: "2022-08-20 20:46",
+    content: "新增Not Found页面",
+    time: "2022-08-21",
+  },
+  {
+    type: "info",
+    title: "日常",
+    content: "新增日志查看; 新增视频播放功能; 修复图片预览畸变；其他",
+    time: "2022-08-20",
   },
 ];
 </script>

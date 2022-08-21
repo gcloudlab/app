@@ -6,23 +6,17 @@
         <span class="text-primary">{{ auth?.name || "Guest" }}</span>
       </h3>
       <p class="text-xs">{{ auth?.email }}</p>
-      <n-button
-        class="mr-3"
-        tertiary
-        type="primary"
-        size="small"
-        @click="handleEditUserInfo"
-      >
-        编辑
-      </n-button>
-      <n-button
-        tertiary
-        type="primary"
-        size="small"
-        @click="handleChangeAvatar"
-      >
-        换个头像
-      </n-button>
+      <div class="flex">
+        <EditUser :data="auth!" />
+        <n-button
+          tertiary
+          type="primary"
+          size="small"
+          @click="handleChangeAvatar"
+        >
+          换个头像
+        </n-button>
+      </div>
     </div>
     <n-divider />
     <div class="action">
@@ -48,7 +42,11 @@
       </p>
     </div>
     <n-divider />
-    <UpdateLog />
+    <div class="flex">
+      <Tips />
+      <UpdateLog />
+    </div>
+
     <n-divider />
     <div class="sign-action">
       <n-button
@@ -67,7 +65,6 @@
       >
         登陆
       </n-button>
-      <Tips class="float-right" />
     </div>
   </div>
 </template>
@@ -82,7 +79,7 @@ import Tips from "@/components/tips/index.vue";
 import { NButton, NDivider } from "naive-ui";
 import { getTimeState } from "@/utils/date";
 import randomAvatar from "@/utils/random-avatar";
-import { onInfo } from "@/utils/messages";
+import EditUser from "./edit-user.vue";
 const UpdateLog = defineAsyncComponent(
   () => import("@/components/update-log/index.vue")
 );
@@ -100,9 +97,6 @@ const handleChangeAvatar = async () => {
   const avatar_url = randomAvatar();
   onChangeAvatar(avatar_url);
   await onUpdateUserInfo({ avatar: avatar_url });
-};
-const handleEditUserInfo = () => {
-  onInfo("暂不支持");
 };
 </script>
 

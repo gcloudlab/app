@@ -9,6 +9,7 @@ const fileType = (ext: string) => {
     case "gif":
     case "bmp":
     case "jpeg":
+    case "svg":
       return "图片";
     case "doc":
     case "docx":

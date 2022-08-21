@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <transition name="fade-in">
-      <button>1221412</button>
-    </transition>
-  </div>
+  <div>开发中</div>
 </template>
 
 <script setup lang="ts"></script>

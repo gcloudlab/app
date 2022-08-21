@@ -43,6 +43,10 @@
             v-else-if="!mediaType.includes(file.type || '')"
             class="w-5 text-gray-100 mr-2"
           />
+          <FileTraySharp
+            class="w-5 text-gray-100 mr-2"
+            v-else-if="file.type === '压缩文件'"
+          />
           <ShowOrEdit
             v-if="file.type === '文件夹'"
             class="inline-block text-base flex-1"
@@ -131,9 +135,9 @@ import {
 } from "naive-ui";
 import { FileListData } from "@/models/file";
 import { transformSize } from "@/utils/transform-size";
-import { Folder, DocumentTextOutline } from "@vicons/ionicons5";
+import { Folder, DocumentTextOutline, FileTraySharp } from "@vicons/ionicons5";
 import DragUpload from "@/components/upload/trigger-upload.vue";
-// import downloadByUrl from '@/utils/download-by-url';
+import downloadByUrl from "@/utils/download-by-url";
 import { onInfo } from "@/utils/messages";
 const ShowOrEdit = defineAsyncComponent(() => import("./file-edit.vue"));
 const FolderTree = defineAsyncComponent(
@@ -159,7 +163,7 @@ const moveFileInfo = reactive({
   parent_identity: "",
   file: {} as FileListData,
 });
-const mediaType = ["文件夹", "图片", "音频文件", "视频文件"];
+const mediaType = ["文件夹", "图片", "音频文件", "视频文件", "压缩文件"];
 
 const handleSelect = (file: FileListData) => {
   currentFileRef.value = file;
@@ -183,10 +187,10 @@ const handleDeleteFile = () => {
 };
 const handleDownload = (file: FileListData) => {
   onInfo("开发中~");
-  // if (file.type !== '文件夹') {
-  //   downloadByUrl(file);
-  // } else {
-  // }
+  if (file.type !== "文件夹") {
+    downloadByUrl(file);
+  } else {
+  }
 };
 const handleShare = (file: FileListData) => {
   onInfo("开发中~");

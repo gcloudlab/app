@@ -1,24 +1,23 @@
 <template>
   <div class="video-playground">
-    <VideoPreview :src="_src" :data="data" @play="handlePlay" />
-    <n-drawer v-model:show="show" width="100%" resizable>
-      <n-drawer-content title="斯通纳" closable>
-        <template #header>
-          {{ data.name || "未知文件" }}
-        </template>
-        <VideoPlayer :src="_src" />
-        <!-- <template #footer> Footer </template> -->
-      </n-drawer-content>
-    </n-drawer>
+    <Drawer v-model:show="show" width="100%">
+      <template #trigger>
+        <VideoPreview :src="_src" :data="data" @play="handlePlay" />
+      </template>
+      <template #header>
+        {{ data.name || "未知文件" }}
+      </template>
+      <VideoPlayer :src="_src" />
+    </Drawer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { PropType, ref, toRefs, watch } from "vue";
-import { NDrawer, NDrawerContent } from "naive-ui";
 import { FileListData } from "@/models/file";
 import VideoPlayer from "./video-player.vue";
 import VideoPreview from "@/components/video/video-preview.vue";
+import Drawer from "@/components/commons/drawer/index.vue";
 
 const props = defineProps({
   data: {

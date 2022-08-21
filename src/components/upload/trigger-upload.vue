@@ -198,6 +198,11 @@ const handleBeforeUpload = (data: {
   file: UploadFileInfo;
   fileList: UploadFileInfo[];
 }) => {
+  console.log(data.file.file?.size);
+  if (data.file.file && data.file.file?.size > 10 * 1024 * 1024) {
+    onWarning("单文件上传限制10M及以内");
+    return false;
+  }
   if (total_size >= 1024 * 1024 * 1000) {
     onWarning("嘿，你的空间不够了");
     return false;
