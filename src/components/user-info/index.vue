@@ -5,7 +5,11 @@
         {{ getTimeState() }},
         <span class="text-primary">{{ auth?.name || "Guest" }}</span>
       </h3>
-      <p class="text-xs">{{ auth?.email }}</p>
+      <p class="text-xs">
+        {{ auth?.email }} <n-divider vertical /> 已加入{{
+          auth?.registration_days
+        }}天
+      </p>
       <div class="flex">
         <EditUser :data="auth!" />
         <n-button
@@ -43,6 +47,14 @@
     </div>
     <n-divider />
     <div class="flex">
+      <n-button
+        tertiary
+        type="primary"
+        size="small"
+        @click="onInfo('开发中～')"
+      >
+        使用手册
+      </n-button>
       <Tips />
       <UpdateLog />
     </div>
@@ -78,6 +90,7 @@ import { useAuth } from "@/hooks";
 import Tips from "@/components/tips/index.vue";
 import { NButton, NDivider } from "naive-ui";
 import { getTimeState } from "@/utils/date";
+import { onInfo } from "@/utils/messages";
 import randomAvatar from "@/utils/random-avatar";
 import EditUser from "./edit-user.vue";
 const UpdateLog = defineAsyncComponent(

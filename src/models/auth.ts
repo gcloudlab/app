@@ -28,6 +28,7 @@ export interface UserDetailResponse {
     email?: string;
     avatar?: string;
     msg?: string;
+    created_at?: string;
   };
   status: number;
 }
@@ -37,6 +38,8 @@ export interface UserDetail {
   identity?: string;
   email?: string;
   avatar?: string;
+  created_at?: string;
+  registration_days?: number;
 }
 
 export interface UserRegisterRequestProps {

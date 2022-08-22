@@ -1,8 +1,8 @@
 <template>
   <div>
-    <n-button quaternary type="primary" size="small" @click="activate"
-      >更新日志</n-button
-    >
+    <n-button tertiary type="primary" size="small" @click="activate">
+      更新日志
+    </n-button>
     <n-drawer
       v-model:show="active"
       :width="200"
@@ -14,15 +14,13 @@
     >
       <n-drawer-content>
         <n-scrollbar style="max-height: 300px">
-          <n-timeline>
-            <n-timeline-item
-              v-for="item in data"
-              :type="item.type"
-              :title="item.title"
-              :content="item.content"
-              :time="item.time"
-            />
-          </n-timeline>
+          <div>
+            <div v-for="item in data">
+              <div class="text-primary">{{ item.date }}</div>
+              <div>{{ item.content }}</div>
+              <n-divider />
+            </div>
+          </div>
         </n-scrollbar>
       </n-drawer-content>
     </n-drawer>
@@ -31,13 +29,11 @@
 
 <script setup lang="ts">
 import {
-  NTimeline,
-  NTimelineItem,
   NScrollbar,
-  TimelineItemProps,
   NDrawer,
   NDrawerContent,
   NButton,
+  NDivider,
 } from "naive-ui";
 import { ref } from "vue";
 
@@ -45,18 +41,19 @@ const active = ref(false);
 const activate = () => {
   active.value = true;
 };
-const data: TimelineItemProps[] = [
+const data = [
   {
-    type: "success",
-    title: "功能",
-    content: "新增Not Found页面",
-    time: "2022-08-21",
+    content: "「功能」新增加入天数显示",
+    date: "2022-08-22",
   },
   {
-    type: "info",
-    title: "日常",
-    content: "新增日志查看; 新增视频播放功能; 修复图片预览畸变；其他",
-    time: "2022-08-20",
+    content: "「功能」新增Not Found页面",
+    date: "2022-08-21",
+  },
+  {
+    content:
+      "「维护」新增日志查看; 新增视频播放功能; 修复图片预览畸变；其他...",
+    date: "2022-08-20",
   },
 ];
 </script>
