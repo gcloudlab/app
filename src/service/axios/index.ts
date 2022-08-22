@@ -49,6 +49,7 @@ axiosInstance.interceptors.response.use(
 
 axiosInstance.interceptors.request.use(
   (config: AxiosRequestConfig) => {
+    // config.headers!["Content-Encoding"] = "gzip";
     const token = useStorage("token");
     if (token !== "") {
       config.headers!["Authorization"] = `${token}`;
@@ -57,7 +58,6 @@ axiosInstance.interceptors.request.use(
       const refresh_token = useStorage("refresh_token");
       config.headers!["Authorization"] = `${refresh_token}`;
     }
-
     return config;
   },
   (error: any) => {

@@ -15,7 +15,7 @@
           @click="handleExpandedKeys(file)"
         />
         <div
-          class="image-item-wrapper w-18"
+          class="image-item-wrapper w-18 relative"
           v-else-if="file?.type === '图片'"
           @click="handleSelectedKeys(file)"
         >
@@ -30,11 +30,14 @@
             :intersection-observer-options="{
               root: '#image-scroll-container',
             }"
+            :on-load="handleOnLoad"
+          />
+          <div
+            v-if="isLoadingImg"
+            class="z-10 w-18 h-12 absolute right-0 top-0 left-0"
           >
-            <template #placeholder>
-              <n-skeleton width="100%" height="100%" :sharp="false" />
-            </template>
-          </n-image>
+            <n-skeleton width="100%" height="100%" :sharp="false" />
+          </div>
         </div>
         <video
           v-else-if="file.type === '视频文件'"
@@ -77,6 +80,9 @@
         </n-tooltip>
       </div>
     </div>
+    <!-- <div class="w-18 h-10">
+      <n-skeleton width="100%" height="100%" :sharp="false" />
+    </div> -->
     <Empty v-else description="空文件夹"> </Empty>
     <DropDown
       :show="showDropdownRef"
@@ -114,6 +120,7 @@ const showDropdownRef = ref(false);
 const xRef = ref(0);
 const yRef = ref(0);
 const currentFileRef = ref<FileListData | null>(null);
+const isLoadingImg = ref(true);
 
 const handleSelectedKeys = (file: FileListData) => {
   currentFileRef.value = file;
@@ -142,6 +149,9 @@ const handleSelectDropDownItem = (value: string) => {
 };
 const handleClidkOutside = (value: boolean) => {
   showDropdownRef.value = value;
+};
+const handleOnLoad = (e: Event) => {
+  isLoadingImg.value = false;
 };
 
 toRefs(props);
