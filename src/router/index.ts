@@ -5,7 +5,6 @@ const Share = () => import("@/pages/share/index.vue");
 const Xswl = () => import("@/pages/picture/index.vue");
 const Sign = () => import("@/pages/sign/index.vue");
 const NotFound = () => import("@/pages/notfound/index.vue");
-
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
@@ -33,12 +32,12 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/sign",
     name: "sign",
-    component: () => Sign,
+    component: Sign,
   },
   {
     path: "/:cathchAll(.*)",
     name: "notfound",
-    component: () => NotFound,
+    component: NotFound,
   },
 ];
 
