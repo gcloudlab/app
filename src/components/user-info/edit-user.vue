@@ -2,7 +2,7 @@
   <Drawer v-model:show="show" width="40%">
     <template #trigger>
       <n-button
-        class="mr-3"
+        class="mr-1"
         tertiary
         type="primary"
         size="small"

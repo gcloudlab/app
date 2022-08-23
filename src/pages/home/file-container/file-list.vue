@@ -39,15 +39,19 @@ import {
   ref,
   nextTick,
   defineAsyncComponent,
-} from 'vue';
-import { DataTableColumns, NDataTable, TreeOption, NScrollbar } from 'naive-ui';
-import { FileListData } from '@/models/file';
-import { useFiles } from '@/hooks/useFiles';
-import { compareDate } from '@/utils/date';
-import { transformSize } from '@/utils/transform-size';
-const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
-const DropDown = defineAsyncComponent(() => import('@/components/commons/drop-down/index.vue'));
-const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
+} from "vue";
+import { DataTableColumns, NDataTable, TreeOption, NScrollbar } from "naive-ui";
+import { FileListData } from "@/models/file";
+import { useFiles } from "@/hooks/useFiles";
+import { compareDate } from "@/utils/date";
+import { transformSize } from "@/utils/transform-size";
+const Empty = defineAsyncComponent(
+  () => import("@/components/commons/empty/index.vue")
+);
+const DropDown = defineAsyncComponent(
+  () => import("@/components/commons/drop-down/index.vue")
+);
+const ShowOrEdit = defineAsyncComponent(() => import("./file-edit.vue"));
 
 const props = defineProps({
   values: {
@@ -55,7 +59,7 @@ const props = defineProps({
     default: {},
   },
 });
-const emits = defineEmits(['expandedKeys', 'selectedKeys']);
+const emits = defineEmits(["expandedKeys", "selectedKeys"]);
 
 const { onUpdateFileName } = useFiles();
 const showDropdownRef = ref(false);
@@ -74,10 +78,10 @@ const pagination = reactive({
 
 const rowProps = (row: FileListData) => {
   return {
-    style: 'cursor: pointer;',
+    style: "cursor: pointer;",
     onClick: () => {
-      if (row?.type === '文件夹') {
-        emits('expandedKeys', row);
+      if (row?.type === "文件夹") {
+        emits("expandedKeys", row);
       }
     },
     onContextmenu: (e: MouseEvent) => {
@@ -92,13 +96,9 @@ const rowProps = (row: FileListData) => {
   };
 };
 const columns: DataTableColumns = [
-  // {
-  //   type: 'selection',
-  //   width: 10,
-  // },
   {
-    title: '文件名称',
-    key: 'name',
+    title: "文件名称",
+    key: "name",
     width: 15,
     ellipsis: {
       tooltip: true,
@@ -106,7 +106,10 @@ const columns: DataTableColumns = [
     render(row, index) {
       return h(ShowOrEdit as unknown as VueElement, {
         value: row.name,
-        class: ['ml-2 cursor-pointer', row.type === '文件夹' ? 'text-primary' : ''],
+        class: [
+          "ml-2 cursor-pointer",
+          row.type === "文件夹" ? "text-primary" : "",
+        ],
         onUpdateValue(v: string) {
           // data.value[index].name = v
           if (v && row.name !== v && row.identity) {
@@ -118,19 +121,19 @@ const columns: DataTableColumns = [
           }
         },
         onClick() {
-          emits('selectedKeys', row);
+          emits("selectedKeys", row);
         },
       });
     },
   },
   {
-    title: '类型',
-    key: 'type',
+    title: "类型",
+    key: "type",
     width: 3,
   },
   {
-    title: '大小',
-    key: 'size',
+    title: "大小",
+    key: "size",
     width: 3,
     sorter: (row1: any, row2: any) => row1.size - row2.size,
     render(row) {
@@ -138,16 +141,17 @@ const columns: DataTableColumns = [
     },
   },
   {
-    title: '日期',
-    key: 'updated_at',
+    title: "日期",
+    key: "updated_at",
     width: 4,
-    defaultSortOrder: 'descend',
-    sorter: (row1: any, row2: any) => compareDate(row1.updated_at, row2.updated_at),
+    defaultSortOrder: "descend",
+    sorter: (row1: any, row2: any) =>
+      compareDate(row1.updated_at, row2.updated_at),
   },
 ];
 const rowKeys = (row: FileListData) => row.name;
 const handleSelectDropDownItem = (value: string) => {
-  console.log('--drop select', value);
+  console.log("--drop select", value);
   showDropdownRef.value = false;
 };
 const handleClidkOutside = (value: boolean) => {

@@ -93,12 +93,15 @@ export const useAuthStore = defineStore({
               email: registerInfo.email,
             };
             onSuccess("注册成功");
+            return true;
           } else {
             onError(res.data.msg);
+            return false;
           }
         });
       } catch (error) {
         onError("出错了，再试一次");
+        return false;
       }
     },
     async onMailCodeAction(email: string) {

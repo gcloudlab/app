@@ -12,7 +12,7 @@
       </n-button>
     </template>
     <template #header> 正在分享{{ file.name }}</template>
-    <div class="px-5">
+    <div class="">
       <div class="flex items-center text-sm">
         <n-tag type="info"> {{ file.type }} </n-tag>
         <p class="mx-2">{{ file.name }}</p>

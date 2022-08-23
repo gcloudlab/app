@@ -183,13 +183,16 @@ const handleSignup = () => {
     model.value.email &&
     model.value.code
   ) {
-    onRegister({
-      name: model.value.name,
-      password: model.value.password,
-      email: model.value.email,
-      code: model.value.code,
-    });
-    afterSignup();
+    if (
+      onRegister({
+        name: model.value.name,
+        password: model.value.password,
+        email: model.value.email,
+        code: model.value.code,
+      })
+    ) {
+      afterSignup();
+    }
   }
 };
 const afterSignup = () => {

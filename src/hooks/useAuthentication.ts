@@ -1,13 +1,13 @@
-import { ref } from 'vue';
-import { storeToRefs } from 'pinia';
-import { useAuthOutsideStore } from '@/store/modules/auth';
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+import { useAuthOutsideStore } from "@/store/modules/auth";
 import type {
   UserLoginRequestProps,
   UserTokenType,
   UserRegisterRequestProps,
   UpdateUserInfoOptions,
-} from '@/models/auth';
-import { onError, onInfo } from '@/utils/messages';
+} from "@/models/auth";
+import { onError, onInfo } from "@/utils/messages";
 
 const authStore = useAuthOutsideStore();
 
@@ -24,7 +24,8 @@ export const useAuth = () => {
   };
 
   const onRegister = (registerInfo: UserRegisterRequestProps | null) => {
-    if (registerInfo) authStore.onRegisterAction(registerInfo);
+    if (registerInfo) return authStore.onRegisterAction(registerInfo);
+    return false;
   };
   const onGetCode = async (email: string) => {
     if (email) return await authStore.onMailCodeAction(email);
