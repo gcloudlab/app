@@ -3,13 +3,18 @@
     <div class="user">
       <h3>
         {{ getTimeState() }},
-        <span class="text-primary">{{ auth?.name || "Guest" }}</span>
+        <span class="text-primary">{{ auth?.name || "游客" }}</span>
       </h3>
-      <p class="text-xs">
-        {{ auth?.email }} <n-divider vertical /> 已加入{{
-          auth?.registration_days
-        }}天
-      </p>
+      <div class="flex items-center mb-2">
+        <div class="text-xs">
+          {{ auth?.email || "注册即赠1G容量～" }}
+        </div>
+
+        <div v-if="auth?.registration_days" class="text-xs">
+          <n-divider vertical />已加入{{ auth?.registration_days }}天
+        </div>
+      </div>
+
       <div class="flex">
         <EditUser :data="auth!" />
         <n-button
@@ -46,7 +51,7 @@
       </p>
     </div>
     <n-divider />
-    <div class="flex">
+    <div class="flex justify-between">
       <n-button
         tertiary
         type="primary"

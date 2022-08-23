@@ -15,22 +15,24 @@
           :src="file.path"
           fallback-src="./src/assets/logo.png"
         />
-
         <VideoPlayground
-          v-if="file.type === '视频文件'"
+          v-else-if="file.type === '视频文件'"
           :data="file"
           :src="file.path"
         />
-
         <audio
-          v-if="file.type === '音频文件'"
+          v-else-if="file.type === '音频文件'"
           class="shadow-md rounded"
           style="width: 160px; height: 30px"
           :src="file.path"
           controls
         />
+        <div class="absolute hidden">
+          <n-skeleton width="160px" height="83px" :repeat="1" :sharp="false" />
+        </div>
 
         <div class="flex justify-start items-center flex-wrap mt-2">
+          <!-- file icon -->
           <Folder
             v-if="
               file.type === '文件夹' &&
@@ -47,6 +49,8 @@
             class="w-5 text-gray-100 mr-2"
             v-else-if="file.type === '压缩文件'"
           />
+
+          <!-- file name -->
           <ShowOrEdit
             v-if="file.type === '文件夹'"
             class="inline-block text-base flex-1"
@@ -59,7 +63,7 @@
         <p v-show="file.isFolder">文件数量：{{ file.children?.length }}</p>
         <p>文件类型：{{ file.type }}</p>
         <p v-show="file.updated_at">修改日期：{{ file.updated_at }}</p>
-        <div class="flex justify-around">
+        <div class="flex">
           <n-button
             class="w-1/2"
             type="primary"
@@ -69,17 +73,9 @@
           >
             下载
           </n-button>
-          <n-button
-            class="ml-2 w-1/2"
-            type="success"
-            circle
-            size="small"
-            @click="handleShare(file)"
-          >
-            分享
-          </n-button>
+          <ShareDrawer :file="file" class="ml-2 w-1/2" />
         </div>
-        <div class="flex justify-around mt-2">
+        <div class="mt-2">
           <n-popover
             :show="showFolderTree"
             placement="bottom"
@@ -88,7 +84,7 @@
           >
             <template #trigger>
               <n-button
-                class="w-1/2"
+                class="w-full"
                 type="info"
                 circle
                 size="small"
@@ -105,7 +101,7 @@
             <div v-else class="text-xs text-center">请先新建文件夹</div>
           </n-popover>
           <n-button
-            class="ml-2 w-1/2"
+            class="mt-2 w-full"
             type="warning"
             circle
             size="small"
@@ -132,13 +128,15 @@ import {
   NButton,
   TreeOption,
   NPopover,
+  NSkeleton,
 } from "naive-ui";
 import { FileListData } from "@/models/file";
 import { transformSize } from "@/utils/transform-size";
 import { Folder, DocumentTextOutline, FileTraySharp } from "@vicons/ionicons5";
-import DragUpload from "@/components/upload/trigger-upload.vue";
 import downloadByUrl from "@/utils/download-by-url";
 import { onInfo } from "@/utils/messages";
+import DragUpload from "@/components/upload/trigger-upload.vue";
+import ShareDrawer from "@/components/share-drawer/index.vue";
 const ShowOrEdit = defineAsyncComponent(() => import("./file-edit.vue"));
 const FolderTree = defineAsyncComponent(
   () => import("@/components/folder-tree/index.vue")

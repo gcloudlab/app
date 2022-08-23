@@ -11,9 +11,6 @@
         />
         <Overview />
         <OnlineUsers />
-        <n-divider class="">
-          <About />
-        </n-divider>
       </n-scrollbar>
     </div>
     <!-- main -->
@@ -92,10 +89,10 @@ import { useFileOutsideStore } from "@/store/modules/file";
 import { useFiles } from "@/hooks/useFiles";
 import { FileListData } from "@/models/file";
 import { transformSize } from "@/utils/transform-size";
-import { TreeOption, NTag, NButton, NScrollbar, NDivider } from "naive-ui";
+import { TreeOption, NTag, NButton, NScrollbar } from "naive-ui";
 import { ChevronBack, AppsSharp, Menu, Refresh } from "@vicons/ionicons5";
 import MainNav from "./main-nav/index.vue";
-import About from "@/components/about/index.vue";
+
 const FileMenu = defineAsyncComponent(() => import("./sidebar/file-menu.vue"));
 const Overview = defineAsyncComponent(() => import("./sidebar/overview.vue"));
 const OnlineUsers = defineAsyncComponent(

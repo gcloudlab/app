@@ -101,6 +101,8 @@ const generateTree = (list: FileListData[] | any) => {
         children: other,
         ext: "",
         id: 0,
+        path: "",
+        repository_identity: "",
       });
     }
   }

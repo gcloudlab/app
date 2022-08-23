@@ -25,7 +25,8 @@
   max-width: 420px;
 }
 
-.n-modal-mask {
+.n-modal-mask,
+.n-drawer-mask {
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
 }

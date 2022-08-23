@@ -18,11 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs } from "vue";
 import { NDrawer, NDrawerContent, NButton } from "naive-ui";
-
-const emits = defineEmits(["onShow"]);
-const show = ref(false);
 </script>
 
 <style lang="scss" scoped></style>

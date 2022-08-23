@@ -11,7 +11,7 @@
         编辑
       </n-button>
     </template>
-    <template #header> 编辑【{{ data.name }}】 </template>
+    <template #header> 修改个人资料</template>
     暂不支持
     <Vue3Lottie class="w-1/2" :animationData="RobotJson" />
   </Drawer>

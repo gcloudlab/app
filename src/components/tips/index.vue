@@ -1,6 +1,7 @@
 <template>
   <div class="attention-group flex text-sm">
     <n-button
+      class="mx-1"
       tertiary
       type="primary"
       size="small"
@@ -11,8 +12,9 @@
           keepAliveOnHover: true,
         })
       "
-      >用户须知</n-button
     >
+      上传须知
+    </n-button>
   </div>
 </template>
 

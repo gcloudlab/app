@@ -20,7 +20,7 @@
       <n-upload-trigger #="{ handleClick }" abstract>
         <div
           @click="handleClick"
-          class="w-full flex flex-col justify-center items-center text-center hover:bg-green-100 cursor-pointer transition-all duration-150"
+          class="w-full flex flex-col justify-center items-center text-center bg-gradient-to-t from-green-100 hover:bg-green-100 cursor-pointer transition-all duration-150"
           :class="[upload_files.length <= 0 ? 'h-5/6' : '']"
         >
           <CloudUploadOutline class="animate-pulse w-9 text-gray-500 mt-3" />
@@ -28,7 +28,7 @@
           <n-p depth="3" style="margin: 8px 0 0 0"> {{ description }} </n-p>
         </div>
       </n-upload-trigger>
-      <div class="flex justify-between flex-none">
+      <div class="flex justify-between flex-none bg-green-100">
         <n-popselect
           v-model:value="uploadFolder.value"
           size="medium"

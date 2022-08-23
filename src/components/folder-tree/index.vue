@@ -2,7 +2,7 @@
   <n-scrollbar style="max-height: 200px">
     <div class="folder-tree">
       <n-tree
-        v-if="data"
+        ref="tree"
         v-bind="$attrs"
         block-line
         :data="data"
@@ -15,13 +15,16 @@
         :render-switcher-icon="renderSwitcherIcon"
         :node-props="nodeProps"
       />
-      <Loading v-else />
+      <Loading
+        v-if="isLoading"
+        class="absolute top-0 bottom-0 right-0 left-0 m-auto"
+      />
     </div>
   </n-scrollbar>
 </template>
 
 <script setup lang="ts">
-import { PropType, h, toRefs } from "vue";
+import { PropType, h, toRefs, ref, onMounted } from "vue";
 import { NIcon, NTree, NScrollbar } from "naive-ui";
 import { Folder } from "@vicons/ionicons5";
 import { TreeNodeProps } from "naive-ui/es/tree/src/interface";
@@ -41,10 +44,16 @@ const props = defineProps({
     type: Function as PropType<TreeNodeProps>,
   },
 });
-
+const tree = ref(null);
+const isLoading = ref(true);
 const renderSwitcherIcon = () =>
   h(NIcon, { class: "text-primary" }, { default: () => h(Folder) });
 
+onMounted(() => {
+  if (tree.value) {
+    isLoading.value = false;
+  }
+});
 toRefs(props);
 </script>
 

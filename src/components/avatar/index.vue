@@ -18,29 +18,29 @@
         </n-badge>
       </template>
       <template #header> </template>
-      <UserInfo class="user w-56" />
+      <UserInfo class="user w-60" />
     </n-popover>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs, ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia';
-import { useAuthOutsideStore } from '@/store/modules/auth';
-import { NAvatar, NPopover, NBadge } from 'naive-ui';
-import defaultLogo from '@/assets/logo.png';
-import { useAuth } from '@/hooks';
-import UserInfo from '@/components/user-info/index.vue';
+import { computed, toRefs, ref } from "vue";
+import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
+import { useAuthOutsideStore } from "@/store/modules/auth";
+import { NAvatar, NPopover, NBadge } from "naive-ui";
+import defaultLogo from "@/assets/logo.png";
+import { useAuth } from "@/hooks";
+import UserInfo from "@/components/user-info/index.vue";
 
 export interface AvatarProps {
   src: string;
-  size?: 'small' | 'medium' | 'large' | number;
+  size?: "small" | "medium" | "large" | number;
   color?: string;
   lazy?: boolean;
   fallbackSrc?: string;
   bordered?: boolean;
-  objectFit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down';
+  objectFit?: "fill" | "contain" | "cover" | "none" | "scale-down";
   round?: boolean;
   animate?: string;
   showStatus?: boolean;
@@ -53,27 +53,27 @@ const { onLogout } = useAuth();
 
 const defaultAvatar = ref(defaultLogo);
 const props = withDefaults(defineProps<AvatarProps>(), {
-  animate: '',
-  size: 'medium',
-  color: 'whitesmoke',
+  animate: "",
+  size: "medium",
+  color: "whitesmoke",
   lazy: false,
   // fallbackSrc: defaultAvatar.value,
   bordered: true,
-  objectFit: 'cover',
+  objectFit: "cover",
   round: false,
   showStatus: false,
 });
 
 const status = computed(() => {
   if (sign_status?.value && online_status?.value) {
-    return 'success';
+    return "success";
   }
-  return 'warning';
+  return "warning";
 });
 
 const handleLogout = () => {
   onLogout();
-  router.push('/sign');
+  router.push("/sign");
 };
 
 toRefs(props);
