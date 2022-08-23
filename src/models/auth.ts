@@ -1,19 +1,13 @@
 export type UserTokenType = string;
 
 export interface UserLoginResponse {
-  data: {
-    msg: string;
-    token: UserTokenType;
-    refresh_token: UserTokenType;
-  };
-  status: number;
+  msg: string;
+  token: UserTokenType;
+  refresh_token: UserTokenType;
 }
 
 export interface UserRegisterResponse {
-  data: {
-    msg: string;
-  };
-  status: number;
+  msg: string;
 }
 
 export interface UserLoginRequestProps {
@@ -22,15 +16,12 @@ export interface UserLoginRequestProps {
 }
 
 export interface UserDetailResponse {
-  data: {
-    name: string;
-    identity?: string;
-    email?: string;
-    avatar?: string;
-    msg?: string;
-    created_at?: string;
-  };
-  status: number;
+  name: string;
+  identity?: string;
+  email?: string;
+  avatar?: string;
+  msg?: string;
+  created_at?: string;
 }
 
 export interface UserDetail {
@@ -50,12 +41,9 @@ export interface UserRegisterRequestProps {
 }
 
 export interface RefreshAuthResponse {
-  data: {
-    msg: string;
-    token: UserTokenType;
-    refresh_token: UserTokenType;
-  };
-  status: number;
+  msg: string;
+  token: UserTokenType;
+  refresh_token: UserTokenType;
 }
 
 export interface UpdateUserInfoOptions {
@@ -64,4 +52,9 @@ export interface UpdateUserInfoOptions {
   name?: string;
   email?: string;
   password?: string;
+}
+
+export interface SendMailCodeResponse {
+  msg?: string;
+  code?: string;
 }

@@ -12,11 +12,8 @@ export interface FileListResponseData {
 }
 
 export interface FileListResponse {
-  data: {
-    count: number;
-    list: FileListResponseData[];
-  };
-  status: number;
+  count: number;
+  list: FileListResponseData[];
 }
 
 export interface FileListData extends FileListResponseData {

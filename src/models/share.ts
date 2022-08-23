@@ -9,6 +9,18 @@ export interface ShareDetailItem {
   code?: number;
 }
 
-export interface ShareDetailResponse {
-  data: ShareDetailItem;
+export interface CreateShareOption {
+  user_repository_identity: string;
+  expired_time: number;
 }
+export interface CreateShareResponse {
+  identity: string;
+  msg?: string;
+  code?: number;
+}
+
+export interface SaveShareOption {
+  repository_identity: string;
+  parent_id: number;
+}
+export interface SaveShareResponse extends CreateShareResponse {}
