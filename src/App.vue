@@ -7,7 +7,8 @@
     <MessageApi />
   </n-message-provider>
   <n-config-provider :theme-overrides="themeOverrides" preflight-style-disabled>
-    <router-view></router-view>
+    <Mobile v-if="isMobile()" />
+    <router-view v-else></router-view>
   </n-config-provider>
 </template>
 
@@ -15,4 +16,6 @@
 import { NConfigProvider, NMessageProvider } from "naive-ui";
 import { themeOverrides, messageThemeOverrides } from "@/assets/style/theme";
 import MessageApi from "@/components/commons/message/message-api.vue";
+import { isMobile } from "@/utils/is-mobile";
+import Mobile from "@/components/mobile/index.vue";
 </script>

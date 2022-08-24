@@ -43,6 +43,10 @@ const activate = () => {
 };
 const data = [
   {
+    content: "「功能」添加移动端访问受限提示",
+    date: "2022-08-24",
+  },
+  {
     content: "「功能」新增加入天数显示",
     date: "2022-08-22",
   },
