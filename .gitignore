@@ -6,7 +6,4 @@ dist-ssr
 
 yarn.lock
 package-lock.json
-.gitattributes
-.prettierrc.js
 .cz-config.js
-.eslintrc.js
