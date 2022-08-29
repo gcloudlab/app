@@ -1,43 +1,43 @@
-import type { FileListData } from "@/models/file";
-import _ from "lodash";
-import { transformDate } from "./date";
+import type { FileListData } from '@/models/file';
+import _ from 'lodash';
+import { transformDate } from './date';
 
 const fileType = (ext: string) => {
   switch (ext.slice(1).toLowerCase()) {
-    case "jpg":
-    case "png":
-    case "gif":
-    case "bmp":
-    case "jpeg":
-    case "svg":
-      return "图片";
-    case "doc":
-    case "docx":
-      return "文档";
-    case "xls":
-    case "xlsx":
-      return "表格";
-    case "ppt":
-    case "pptx":
-      return "幻灯片";
-    case "pdf":
-      return "PDF";
-    case "zip":
-    case "rar":
-      return "压缩文件";
-    case "txt":
-      return "文本文件";
-    case "mp3":
-    case "wav":
-      return "音频文件";
-    case "mp4":
-    case "avi":
-    case "mov":
-    case "ogg":
-    case "webm":
-      return "视频文件";
-    case "":
-      return "文件夹";
+    case 'jpg':
+    case 'png':
+    case 'gif':
+    case 'bmp':
+    case 'jpeg':
+    case 'svg':
+      return '图片';
+    case 'doc':
+    case 'docx':
+      return '文档';
+    case 'xls':
+    case 'xlsx':
+      return '表格';
+    case 'ppt':
+    case 'pptx':
+      return '幻灯片';
+    case 'pdf':
+      return 'PDF';
+    case 'zip':
+    case 'rar':
+      return '压缩文件';
+    case 'txt':
+      return '文本文件';
+    case 'mp3':
+    case 'wav':
+      return '音频文件';
+    case 'mp4':
+    case 'avi':
+    case 'mov':
+    case 'ogg':
+    case 'webm':
+      return '视频文件';
+    case '':
+      return '文件夹';
     default:
       return ext;
   }
@@ -47,29 +47,27 @@ const generateTree = (list: FileListData[] | any) => {
   const id: any = {};
   const result: FileListData[] | any = [];
 
-  const files = list.filter(
-    (i: FileListData) => i.repository_identity !== "" && i.path !== ""
-  );
+  const files = list.filter((i: FileListData) => i.repository_identity !== '' && i.path !== '');
   const count = files.length;
   const size = files.reduce((a: number, b: { size: number }) => a + b.size, 0);
-  const children = _.groupBy(list, "parent_id");
+  const children = _.groupBy(list, 'parent_id');
 
   const empty_folders = list.filter(
     (file: FileListData) =>
-      file.repository_identity === "" &&
-      file.path === "" &&
+      file.repository_identity === '' &&
+      file.path === '' &&
       file.size === 0 &&
       !Object.keys(children).includes(String(file.id))
   );
 
   empty_folders.map((i: FileListData) => {
     children[i.id] = [];
-  });
+  })
 
   list.map((row: FileListData) => {
     row.type = fileType(row.ext!);
     row.updated_at = transformDate(row.updated_at!);
-    const index = row["id"];
+    const index = row.id;
     id[index] = row;
     if (children[index]) {
       row.children = children[index];
@@ -78,7 +76,7 @@ const generateTree = (list: FileListData[] | any) => {
 
   for (const key in children) {
     const parent: FileListData = _.find(list, { id: Number(key) });
-    if (key !== "0") {
+    if (key !== '0') {
       if (parent?.parent_id === 0) {
         const item = {
           ...parent,
@@ -89,24 +87,24 @@ const generateTree = (list: FileListData[] | any) => {
       }
     } else {
       const other = children[key].filter(
-        (item) => item.repository_identity !== "" && item.path !== ""
+        item => item.repository_identity !== '' && item.path !== ''
       );
       result.unshift({
-        name: "默认文件夹",
-        identity: "other",
+        name: '默认文件夹',
+        identity: 'other',
         size: other.reduce((total, item) => total + item.size, 0),
         isFolder: true,
         parent_id: 0,
-        type: "文件夹",
+        type: '文件夹',
         children: other,
-        ext: "",
+        ext: '',
         id: 0,
-        path: "",
-        repository_identity: "",
+        path: '',
+        repository_identity: '',
       });
     }
   }
   return { result, count, size };
-};
+}
 
 export default generateTree;

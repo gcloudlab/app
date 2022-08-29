@@ -1,44 +1,50 @@
-import { ref } from "vue";
-import { storeToRefs } from "pinia";
-import { useAuthOutsideStore } from "@/store/modules/auth";
+import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useAuthOutsideStore } from '@/store/modules/auth';
 import type {
   UserLoginRequestProps,
   UserTokenType,
   UserRegisterRequestProps,
   UpdateUserInfoOptions,
-} from "@/models/auth";
-import { onError, onInfo } from "@/utils/messages";
+} from '@/models/auth';
+import { onError, onInfo } from '@/utils/messages';
 
 const authStore = useAuthOutsideStore();
 
 export const useAuth = () => {
-  let token = ref<UserTokenType>();
-  let error = ref<Error | null>(null);
+  const token = ref<UserTokenType>();
+  const error = ref<Error | null>(null);
 
   const onLogin = async (loginInfo: UserLoginRequestProps | null) => {
-    if (loginInfo) await authStore.onLoginAction(loginInfo);
+    if (loginInfo) {
+      await authStore.onLoginAction(loginInfo);
+    }
   };
 
   const onLogout = () => {
     authStore.onLogoutAction();
-  };
+  }
 
   const onRegister = (registerInfo: UserRegisterRequestProps | null) => {
-    if (registerInfo) return authStore.onRegisterAction(registerInfo);
+    if (registerInfo) {
+      return authStore.onRegisterAction(registerInfo);
+    }
     return false;
-  };
+  }
   const onGetCode = async (email: string) => {
-    if (email) return await authStore.onMailCodeAction(email);
+    if (email) {
+      return await authStore.onMailCodeAction(email);
+    }
   };
   const onGetUserDetailAndCheckAuth = async () => {
     return await authStore.onGetUserDetailByTokenAction();
-  };
+  }
   const onChangeAvatar = (url: string) => {
     authStore.onChangeAvatarAction(url);
-  };
+  }
   const onUpdateUserInfo = async (option: UpdateUserInfoOptions) => {
     await authStore.onUpdateUserInfoAction(option);
-  };
+  }
 
   return {
     token,
@@ -51,7 +57,7 @@ export const useAuth = () => {
     onUpdateUserInfo,
     error,
   };
-};
+}
 
 export const useToken = () => {
   const { token, refresh_token } = storeToRefs(authStore);
@@ -60,4 +66,4 @@ export const useToken = () => {
     token,
     refresh_token,
   };
-};
+}

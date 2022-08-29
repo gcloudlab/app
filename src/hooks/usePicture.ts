@@ -19,5 +19,5 @@ const usePicture = async (page: number) => {
     // return picture;
   }
   return picture.value;
-};
+}
 export default usePicture;

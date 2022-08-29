@@ -28,7 +28,7 @@ onBeforeRouteLeave(leaveGuard => {
 onMounted(async () => {
   onGetUserDetailAndCheckAuth();
   await onGetFileList();
-});
+})
 </script>
 
 <style lang="scss" scoped></style>

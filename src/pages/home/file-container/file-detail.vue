@@ -15,11 +15,7 @@
           :src="file.path"
           fallback-src="./src/assets/logo.png"
         />
-        <VideoPlayground
-          v-else-if="file.type === '视频文件'"
-          :data="file"
-          :src="file.path"
-        />
+        <VideoPlayground v-else-if="file.type === '视频文件'" :data="file" :src="file.path" />
         <audio
           v-else-if="file.type === '音频文件'"
           class="shadow-md rounded"
@@ -34,28 +30,21 @@
         <div class="flex justify-start items-center flex-wrap mt-2">
           <!-- file icon -->
           <Folder
-            v-if="
-              file.type === '文件夹' &&
-              file.path === '' &&
-              file.repository_identity === ''
-            "
+            v-if="file.type === '文件夹' && file.path === '' && file.repository_identity === ''"
             class="w-5 text-primary mr-2"
           />
           <DocumentTextOutline
             v-else-if="!mediaType.includes(file.type || '')"
             class="w-5 text-gray-100 mr-2"
           />
-          <FileTraySharp
-            class="w-5 text-gray-100 mr-2"
-            v-else-if="file.type === '压缩文件'"
-          />
+          <FileTraySharp v-else-if="file.type === '压缩文件'" class="w-5 text-gray-100 mr-2" />
 
           <!-- file name -->
           <ShowOrEdit
             v-if="file.type === '文件夹'"
             class="inline-block text-base flex-1"
             :value="file.name"
-            :onUpdateValue="handleUpdateName"
+            :on-update-value="handleUpdateName"
           />
           <span v-else>{{ file.name }}</span>
         </div>
@@ -96,7 +85,7 @@
             <FolderTree
               v-if="origin_folders.length > 0"
               :data="origin_folders"
-              :nodeProps="nodeProps"
+              :node-props="nodeProps"
             />
             <div v-else class="text-xs text-center">请先新建文件夹</div>
           </n-popover>
@@ -117,33 +106,21 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, PropType, ref, toRefs, reactive } from "vue";
-import { storeToRefs } from "pinia";
-import { useFileOutsideStore } from "@/store/modules/file";
-import { useFiles } from "@/hooks/useFiles";
-import {
-  NCard,
-  NImage,
-  NScrollbar,
-  NButton,
-  TreeOption,
-  NPopover,
-  NSkeleton,
-} from "naive-ui";
-import { FileListData } from "@/models/file";
-import { transformSize } from "@/utils/transform-size";
-import { Folder, DocumentTextOutline, FileTraySharp } from "@vicons/ionicons5";
-import downloadByUrl from "@/utils/download-by-url";
-import { onInfo } from "@/utils/messages";
-import DragUpload from "@/components/upload/trigger-upload.vue";
-import ShareDrawer from "@/components/share-drawer/index.vue";
-const ShowOrEdit = defineAsyncComponent(() => import("./file-edit.vue"));
-const FolderTree = defineAsyncComponent(
-  () => import("@/components/folder-tree/index.vue")
-);
-const VideoPlayground = defineAsyncComponent(
-  () => import("@/components/video/index.vue")
-);
+import { defineAsyncComponent, PropType, ref, toRefs, reactive } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useFileOutsideStore } from '@/store/modules/file';
+import { useFiles } from '@/hooks/useFiles';
+import { NCard, NImage, NScrollbar, NButton, TreeOption, NPopover, NSkeleton } from 'naive-ui';
+import { FileListData } from '@/models/file';
+import { transformSize } from '@/utils/transform-size';
+import { Folder, DocumentTextOutline, FileTraySharp } from '@vicons/ionicons5';
+import downloadByUrl from '@/utils/download-by-url';
+import { onInfo } from '@/utils/messages';
+import DragUpload from '@/components/upload/trigger-upload.vue';
+import ShareDrawer from '@/components/share-drawer/index.vue';
+const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
+const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
+const VideoPlayground = defineAsyncComponent(() => import('@/components/video/index.vue'));
 
 const props = defineProps({
   file: {
@@ -157,15 +134,15 @@ const { onDeleteFile, onUpdateFileName, onMoveFile } = useFiles();
 const currentFileRef = ref<FileListData | null>(null);
 const showFolderTree = ref(false);
 const moveFileInfo = reactive({
-  identity: "",
-  parent_identity: "",
+  identity: '',
+  parent_identity: '',
   file: {} as FileListData,
 });
-const mediaType = ["文件夹", "图片", "音频文件", "视频文件", "压缩文件"];
+const mediaType = ['文件夹', '图片', '音频文件', '视频文件', '压缩文件'];
 
 const handleSelect = (file: FileListData) => {
   currentFileRef.value = file;
-};
+}
 const handleUpdateName = (v: string) => {
   if (
     currentFileRef.value &&
@@ -182,43 +159,39 @@ const handleUpdateName = (v: string) => {
 };
 const handleDeleteFile = () => {
   onDeleteFile([props.file]);
-};
+}
 const handleDownload = (file: FileListData) => {
-  onInfo("开发中~");
-  if (file.type !== "文件夹") {
+  onInfo('开发中~');
+  if (file.type !== '文件夹') {
     downloadByUrl(file);
   } else {
   }
 };
 const handleShare = (file: FileListData) => {
-  onInfo("开发中~");
+  onInfo('开发中~');
   // if (file.type !== "文件夹") {
   //   console.log("分享文件", file);
   // } else {
   //   console.log("分享文件夹");
   // }
-};
+}
 
 const handleMoveFile = (file: FileListData) => {
   showFolderTree.value = true;
   moveFileInfo.identity = file.identity;
   moveFileInfo.file = file;
-};
+}
 const nodeProps = ({ option }: { option: TreeOption }) => {
   return {
     async onDblclick() {
       moveFileInfo.parent_identity = option.identity as string;
       showFolderTree.value = false;
-      if (
-        moveFileInfo.parent_identity &&
-        moveFileInfo.identity &&
-        option.isFolder
-      ) {
+      if (moveFileInfo.parent_identity && moveFileInfo.identity && option.isFolder) {
         await onMoveFile(moveFileInfo);
       }
     },
   };
-};
+}
 
 const { origin_folders } = storeToRefs(fileStore);
 toRefs(props);

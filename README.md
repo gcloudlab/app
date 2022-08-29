@@ -1,4 +1,4 @@
-<p align="center"><img width="60%" align="center" src="/src/assets/gcloud.png"></p>
+<p align="center"><img width="60%" align="center" src="https://img-yesmore.vercel.app//gcloud/gcloudx.png"></p>
 
 <p align="center">😎 简单 & 免费的开源云盘</p>
 
@@ -11,7 +11,7 @@
 
 > 项目开发中
 
-`GCloud` 是使用 Vue3 + [Go](https://golang.org/)（后端）开发的云盘应用，具备云盘的基本功能，且开源免费。另外，`GCloud` 是作为学习 Go 语言的项目而存在，所以不具备大容量存储功能（存储上限为 200MB），开发者可以 `fork` 此项目并自行开通无上限的存储功能（基于腾讯云对象存储COS，详见 [COS开通方法]([/dev/README.md](https://github.com/yesmore/gcloud-server/blob/master/dev/README.md))）共个人使用、学习等。祝您体验愉快~
+`GCloud` 是使用 Vue3 + [Go](https://golang.org/)（后端）开发的云盘应用，具备云盘的基本功能，且开源免费。另外，`GCloud` 是作为学习 Go 语言的项目而存在，所以不具备大容量存储功能（存储上限为 200MB），开发者可以 `fork` 此项目并自行开通无上限的存储功能（基于腾讯云对象存储 COS，详见 [COS 开通方法](<[/dev/README.md](https://github.com/yesmore/gcloud-server/blob/master/dev/README.md)>)）共个人使用、学习等。祝您体验愉快~
 
 ## 功能特性
 
@@ -27,7 +27,7 @@
 - [ ] 增加文件分享功能
 - [ ] 增加文件分享链接功能
 - [ ] 公共文件夹
-- [ ] defineAsyncComponent优化
+- [ ] defineAsyncComponent 优化
 
 ## 开发者须知
 
@@ -43,7 +43,7 @@ Windows 11 with vscode，go module
 
 ### 开发手册
 
-详见 [GCloud开发手册](/dev/README.md).
+详见 [GCloud 开发手册](/dev/README.md).
 
 ## License
 

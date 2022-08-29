@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { NDrawer, NDrawerContent, NButton } from "naive-ui";
+import { NDrawer, NDrawerContent, NButton } from 'naive-ui';
 </script>
 
 <style lang="scss" scoped></style>

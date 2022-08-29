@@ -7,9 +7,9 @@
     >
       <n-list class="">
         <n-list-item
-          class="px-2 hover:bg-gray-100"
           v-for="(item, index) in options"
           :key="index"
+          class="px-2 hover:bg-gray-100"
           @click="handleSelect(item)"
         >
           {{ item.label }}
@@ -124,7 +124,7 @@ const handleSelect = (value: OptionItem) => {
   emit('onSelect', value);
   pageName.value = value.label;
   showMenu.value = false;
-};
+}
 
 toRefs(props);
 </script>

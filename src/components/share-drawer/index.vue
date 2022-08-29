@@ -1,13 +1,7 @@
 <template>
   <Drawer v-model:show="show" width="60%">
     <template #trigger>
-      <n-button
-        class="w-full"
-        type="success"
-        circle
-        size="small"
-        @click="handleOpenShare"
-      >
+      <n-button class="w-full" type="success" circle size="small" @click="handleOpenShare">
         分享
       </n-button>
     </template>
@@ -23,13 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs, defineAsyncComponent } from "vue";
-import { FileListData } from "@/models/file";
-import { NButton, NTag } from "naive-ui";
-import { transformSize } from "@/utils/transform-size";
-const Drawer = defineAsyncComponent(
-  () => import("@/components/commons/drawer/index.vue")
-);
+import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
+import { FileListData } from '@/models/file';
+import { NButton, NTag } from 'naive-ui';
+import { transformSize } from '@/utils/transform-size';
+const Drawer = defineAsyncComponent(() => import('@/components/commons/drawer/index.vue'));
 
 const props = defineProps({
   file: {
@@ -41,7 +33,7 @@ const show = ref(false);
 const handleOpenShare = () => {
   console.log(props.file);
   show.value = true;
-};
+}
 
 toRefs(props);
 </script>

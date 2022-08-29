@@ -15,6 +15,6 @@ const useTimer = (cb: Function, end: number) => {
     }
   });
   return [count];
-};
+}
 
 export default useTimer;

@@ -20,7 +20,7 @@ const ShowOrEdit = defineComponent({
       isEdit.value = true;
       nextTick(() => {
         inputRef.value?.focus();
-      });
+      })
     }
     // function handleOnClick() {
     //   clearTimeout(timeOut.value);

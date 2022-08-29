@@ -1,6 +1,6 @@
-declare module "@vue/runtime-core" {
+declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    LottieAnimation: typeof import("vue3-lottie")["Vue3Lottie"];
+    LottieAnimation: typeof import('vue3-lottie')['Vue3Lottie'];
   }
 }
 export {};

@@ -4,4 +4,4 @@ const globalStore = useGlobalOutsideStore();
 
 export const useRegisterCount = async () => {
   await globalStore.onGetRegisterCountAction();
-};
+}

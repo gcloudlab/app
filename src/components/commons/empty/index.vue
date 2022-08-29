@@ -1,7 +1,7 @@
 <template>
   <n-empty :show-icon="false" :show-description="false">
     <template #extra>
-      <Vue3Lottie :animationData="EmptyJson" :height="sizeMap[size]" :width="sizeMap[size]" />
+      <Vue3Lottie :animation-data="EmptyJson" :height="sizeMap[size]" :width="sizeMap[size]" />
       <p v-if="description !== ''" class="pb-4">{{ description }}</p>
       <slot></slot>
     </template>

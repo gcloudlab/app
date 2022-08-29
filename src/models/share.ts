@@ -23,4 +23,4 @@ export interface SaveShareOption {
   repository_identity: string;
   parent_id: number;
 }
-export interface SaveShareResponse extends CreateShareResponse {}
+export type SaveShareResponse = CreateShareResponse;

@@ -1,14 +1,14 @@
-import { defineStore } from "pinia";
-import piniaStore from "@/store";
+import { defineStore } from 'pinia';
+import piniaStore from '@/store';
 // import {  } from '@/service/api/share';
-import { onWarning, onError } from "@/utils/messages";
+import { onWarning, onError } from '@/utils/messages';
 
 export interface ShareStateProps {
   share_list: [];
 }
 
 export const useShareStore = defineStore({
-  id: "share",
+  id: 'share',
   state: () =>
     ({
       share_list: [],
@@ -20,7 +20,7 @@ export const useShareStore = defineStore({
     async onGetRegisterCountAction() {
       try {
       } catch (error) {
-        onError("出错了");
+        onError('出错了');
       }
     },
   },

@@ -15,4 +15,4 @@ const statusMap = {
 
 export const showMessage = (status: StatusType): string => {
   return statusMap[status] || '未知错误';
-};
+}

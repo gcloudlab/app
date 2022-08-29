@@ -3,9 +3,9 @@
     <div class="picture mt-3">
       <div class="picture-bar flex flex-wrap justify-around items-end">
         <div
-          class="picture-item w-80 h-80 sm:w-80 sm:h-80 md:w-64 md:h-64 mx-0.5 mb-3"
           v-for="(item, index) in pictures?.photoList"
           :key="index"
+          class="picture-item w-80 h-80 sm:w-80 sm:h-80 md:w-64 md:h-64 mx-0.5 mb-3"
         >
           <n-image
             class="picture-i animate__animated animate__fadeIn faster shadow-lg rounded"
@@ -41,16 +41,16 @@ const Logo = ref(defaultLogo);
 
 onMounted(async () => {
   handleGetPictures();
-});
+})
 const handleGetPictures = async () => {
   pictures.value = await usePicture(currentPage.value);
-};
+}
 
 const handleSelect = (option: any) => {
   pictures.value = null;
   currentPage.value = option.key;
   handleGetPictures();
-};
+}
 </script>
 
 <style lang="scss" scoped>

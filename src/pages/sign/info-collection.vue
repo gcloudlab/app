@@ -1,31 +1,18 @@
 <template>
   <n-form
-    class="mt-6"
     ref="formRef"
+    class="mt-6"
     :model="model"
     :show-label="false"
     :rules="rules"
     label-placement="left"
   >
     <n-form-item v-if="signType === 'signup'" path="email" label="邮箱">
-      <n-input
-        v-model:value="model.email"
-        placeholder="请输入邮箱"
-        @keydown.enter.prevent
-      />
+      <n-input v-model:value="model.email" placeholder="请输入邮箱" @keydown.enter.prevent />
     </n-form-item>
     <n-form-item v-if="signType === 'signup'" path="code" label="验证码">
-      <n-input
-        v-model:value="model.code"
-        placeholder="请输入验证码"
-        @keydown.enter.prevent
-      />
-      <n-button
-        class="ml-3"
-        type="primary"
-        :disabled="codeLock !== 60"
-        @click="handleSendCode"
-      >
+      <n-input v-model:value="model.code" placeholder="请输入验证码" @keydown.enter.prevent />
+      <n-button class="ml-3" type="primary" :disabled="codeLock !== 60" @click="handleSendCode">
         <template v-if="codeLock === 60 && !isSendCode"> 发送验证码 </template>
         <template v-else-if="codeLock < 60 && !isSendCode">
           {{ `已发送 ${codeLock}s` }}
@@ -51,39 +38,26 @@
       />
     </n-form-item>
     <div class="flex justify-between">
-      <n-button
-        quaternary
-        type="default"
-        class="forms_buttons-forgot"
-        @click="handleTips"
-      >
-        {{ signType === "signin" ? "忘记密码? " : "小贴士" }}
+      <n-button quaternary type="default" class="forms_buttons-forgot" @click="handleTips">
+        {{ signType === 'signin' ? '忘记密码? ' : '小贴士' }}
       </n-button>
       <n-button class="w-28" type="default" round @click="handleValidate">
-        {{ signType === "signin" ? "登陆" : "注册" }}
+        {{ signType === 'signin' ? '登陆' : '注册' }}
       </n-button>
     </div>
   </n-form>
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs } from "vue";
-import { useRouter } from "vue-router";
-import {
-  FormInst,
-  FormItemRule,
-  FormRules,
-  NInput,
-  NFormItem,
-  NButton,
-  NForm,
-} from "naive-ui";
-import { useAuth } from "@/hooks";
-import { useAuthOutsideStore } from "@/store/modules/auth";
-import { validateEmail } from "@/utils/email";
-import Loading from "@/components/commons/loading/index.vue";
-import { onWarning, onInfo } from "@/utils/messages";
-import { AuthRules } from "@/utils/rules";
+import { PropType, ref, toRefs } from 'vue';
+import { useRouter } from 'vue-router';
+import { FormInst, FormItemRule, FormRules, NInput, NFormItem, NButton, NForm } from 'naive-ui';
+import { useAuth } from '@/hooks';
+import { useAuthOutsideStore } from '@/store/modules/auth';
+import { validateEmail } from '@/utils/email';
+import Loading from '@/components/commons/loading/index.vue';
+import { onWarning, onInfo } from '@/utils/messages';
+import { AuthRules } from '@/utils/rules';
 
 export interface ModelType {
   name: string | null;
@@ -91,7 +65,7 @@ export interface ModelType {
   email: string | null;
   code: string | null;
 }
-export type SignType = "signup" | "signin";
+export type SignType = 'signup' | 'signin';
 export interface InfoCollectionProps {
   signType: SignType;
 }
@@ -100,10 +74,10 @@ const props = defineProps({
   signType: {
     type: String as PropType<SignType>,
     required: true,
-    default: "signin",
+    default: 'signin',
   },
 });
-const emits = defineEmits(["afterSignup"]);
+const emits = defineEmits(['afterSignup']);
 
 const router = useRouter();
 
@@ -124,26 +98,26 @@ const isSendCode = ref(false);
 const rules: FormRules = AuthRules;
 
 const handleValidate = () => {
-  formRef.value?.validate((errors) => {
+  formRef.value?.validate(errors => {
     if (!errors) {
       handleSubmit();
     } else {
-      window.$message.error("请正确填写");
+      window.$message.error('请正确填写');
     }
   });
-};
+}
 const handleSubmit = async () => {
-  if (props.signType === "signin") {
+  if (props.signType === 'signin') {
     await handleSignin();
-  } else if (props.signType === "signup") {
+  } else if (props.signType === 'signup') {
     handleSignup();
   } else {
-    window.$message.warning("请填写完整");
+    window.$message.warning('请填写完整');
   }
 };
 const handleSendCode = async () => {
   if (
-    props.signType === "signup" &&
+    props.signType === 'signup' &&
     codeLock.value === 60 &&
     model.value.email &&
     validateEmail(model.value.email)
@@ -161,10 +135,10 @@ const handleSendCode = async () => {
     }
   } else {
     isSendCode.value = false;
-    window.$message.warning("请填写有效邮箱");
+    window.$message.warning('请填写有效邮箱');
   }
   isSendCode.value = false;
-};
+}
 const handleSignin = async () => {
   if (model.value.name && model.value.password) {
     await onLogin({
@@ -177,12 +151,7 @@ const handleSignin = async () => {
   }
 };
 const handleSignup = () => {
-  if (
-    model.value.name &&
-    model.value.password &&
-    model.value.email &&
-    model.value.code
-  ) {
+  if (model.value.name && model.value.password && model.value.email && model.value.code) {
     if (
       onRegister({
         name: model.value.name,
@@ -196,13 +165,13 @@ const handleSignup = () => {
   }
 };
 const afterSignup = () => {
-  emits("afterSignup", "signin");
-};
+  emits('afterSignup', 'signin');
+}
 const handleTips = () => {
-  if (props.signType === "signin") {
-    onWarning("哦豁，我也记不得");
+  if (props.signType === 'signin') {
+    onWarning('哦豁，我也记不得');
   } else {
-    onInfo("别忘记密码了嗷~");
+    onInfo('别忘记密码了嗷~');
   }
 };
 toRefs(props);

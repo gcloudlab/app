@@ -1,44 +1,44 @@
-import { createRouter, RouteRecordRaw, createWebHashHistory } from "vue-router";
+import { createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router';
 
-const Layouts = () => import("@/pages/layouts/index.vue");
-const Home = () => import("@/pages/home/index.vue");
-const Share = () => import("@/pages/share/index.vue");
-const Xswl = () => import("@/pages/picture/index.vue");
-const Sign = () => import("@/pages/sign/index.vue");
-const NotFound = () => import("@/pages/notfound/index.vue");
+const Layouts = () => import('@/pages/layouts/index.vue');
+const Home = () => import('@/pages/home/index.vue');
+const Share = () => import('@/pages/share/index.vue');
+const Xswl = () => import('@/pages/picture/index.vue');
+const Sign = () => import('@/pages/sign/index.vue');
+const NotFound = () => import('@/pages/notfound/index.vue');
 
 const routes: RouteRecordRaw[] = [
   {
-    path: "/",
-    name: "layout",
+    path: '/',
+    name: 'layout',
     component: Layouts,
-    redirect: "/home",
+    redirect: '/home',
     children: [
       {
-        path: "/home",
-        name: "home",
+        path: '/home',
+        name: 'home',
         component: Home,
       },
       {
-        path: "/share",
-        name: "share",
+        path: '/share',
+        name: 'share',
         component: Share,
       },
       {
-        path: "/xswl",
-        name: "picture",
+        path: '/xswl',
+        name: 'picture',
         component: Xswl,
       },
     ],
   },
   {
-    path: "/sign",
-    name: "sign",
+    path: '/sign',
+    name: 'sign',
     component: Sign,
   },
   {
-    path: "/:cathchAll(.*)",
-    name: "notfound",
+    path: '/:cathchAll(.*)',
+    name: 'notfound',
     component: NotFound,
   },
 ];

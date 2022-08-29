@@ -26,7 +26,7 @@ const handleClickFolder = (folder: FileListData) => {
     onRemoveFromFolderRoutes();
   }
   onJumpToFolder(folder);
-};
+}
 
 toRefs(props);
 </script>

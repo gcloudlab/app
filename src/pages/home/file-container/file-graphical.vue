@@ -15,8 +15,8 @@
           @click="handleExpandedKeys(file)"
         />
         <div
-          class="image-item-wrapper w-18 relative"
           v-else-if="file?.type === '图片'"
+          class="image-item-wrapper w-18 relative"
           @click="handleSelectedKeys(file)"
         >
           <n-image
@@ -32,10 +32,7 @@
             }"
             :on-load="handleOnLoad"
           />
-          <div
-            v-if="isLoadingImg"
-            class="z-10 w-18 h-12 absolute right-0 top-0 left-0"
-          >
+          <div v-if="isLoadingImg" class="z-10 w-18 h-12 absolute right-0 top-0 left-0">
             <n-skeleton width="100%" height="100%" :sharp="false" />
           </div>
         </div>
@@ -49,8 +46,8 @@
           <source :src="file.path" type="video/mp4" />
         </video>
         <FileTraySharp
-          class="w-10 text-primary cursor-pointer"
           v-else-if="file.type === '压缩文件'"
+          class="w-10 text-primary cursor-pointer"
           @click="handleSelectedKeys(file)"
         />
         <DocumentTextOutline
@@ -69,11 +66,7 @@
               class="self-center truncate w-18 mt-1 text-center text-xs"
               @click="handleSelectedKeys(file)"
             >
-              <ShowOrEdit
-                truncate
-                :value="file.name"
-                :onUpdateValue="handleUpadeteName"
-              />
+              <ShowOrEdit truncate :value="file.name" :on-update-value="handleUpadeteName" />
             </p>
           </template>
           {{ file.name }}
@@ -94,18 +87,14 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs, defineAsyncComponent } from "vue";
-import { NImage, NSkeleton, NTooltip } from "naive-ui";
-import { useFiles } from "@/hooks/useFiles";
-import { FileListData } from "@/models/file";
-import { Folder, DocumentTextOutline, FileTraySharp } from "@vicons/ionicons5";
-const DropDown = defineAsyncComponent(
-  () => import("@/components/commons/drop-down/index.vue")
-);
-const ShowOrEdit = defineAsyncComponent(() => import("./file-edit.vue"));
-const Empty = defineAsyncComponent(
-  () => import("@/components/commons/empty/index.vue")
-);
+import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
+import { NImage, NSkeleton, NTooltip } from 'naive-ui';
+import { useFiles } from '@/hooks/useFiles';
+import { FileListData } from '@/models/file';
+import { Folder, DocumentTextOutline, FileTraySharp } from '@vicons/ionicons5';
+const DropDown = defineAsyncComponent(() => import('@/components/commons/drop-down/index.vue'));
+const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
+const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
 const props = defineProps({
   values: {
@@ -114,7 +103,7 @@ const props = defineProps({
     default: {},
   },
 });
-const emits = defineEmits(["selectedKeys", "expandedKeys"]);
+const emits = defineEmits(['selectedKeys', 'expandedKeys']);
 const { onUpdateFileName } = useFiles();
 const showDropdownRef = ref(false);
 const xRef = ref(0);
@@ -124,11 +113,11 @@ const isLoadingImg = ref(true);
 
 const handleSelectedKeys = (file: FileListData) => {
   currentFileRef.value = file;
-  emits("selectedKeys", file);
-};
+  emits('selectedKeys', file);
+}
 const handleExpandedKeys = (file: FileListData) => {
-  emits("expandedKeys", file);
-};
+  emits('expandedKeys', file);
+}
 const handleUpadeteName = (v: string) => {
   if (
     v &&
@@ -144,15 +133,15 @@ const handleUpadeteName = (v: string) => {
   }
 };
 const handleSelectDropDownItem = (value: string) => {
-  console.log("--drop select", value);
+  console.log('--drop select', value);
   showDropdownRef.value = false;
-};
+}
 const handleClidkOutside = (value: boolean) => {
   showDropdownRef.value = value;
-};
+}
 const handleOnLoad = (e: Event) => {
   isLoadingImg.value = false;
-};
+}
 
 toRefs(props);
 </script>

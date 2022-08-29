@@ -1,5 +1,5 @@
 <template>
-  <Vue3Lottie :animationData="LoadingJson" :height="sizeMap[size]" :width="sizeMap[size]" />
+  <Vue3Lottie :animation-data="LoadingJson" :height="sizeMap[size]" :width="sizeMap[size]" />
 </template>
 
 <script setup lang="ts">

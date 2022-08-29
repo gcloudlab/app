@@ -1,9 +1,9 @@
 <template>
   <div class="file-tree">
     <div class="flex">
-      <n-input class="mr-0" v-model:value="pattern" size="small" placeholder="搜索文件" />
-      <Button v-if="isChecked" @click="handleDelete" type="error" size="small">删除</Button>
-      <Button @click="isChecked = !isChecked" size="small">{{
+      <n-input v-model:value="pattern" class="mr-0" size="small" placeholder="搜索文件" />
+      <Button v-if="isChecked" type="error" size="small" @click="handleDelete">删除</Button>
+      <Button size="small" @click="isChecked = !isChecked">{{
         !isChecked ? '选择' : '取消'
       }}</Button>
     </div>
@@ -30,7 +30,7 @@
       <div v-else-if="fetching" class="p-4">
         <n-skeleton text :repeat="6" :sharp="false" />
       </div>
-      <Empty class="animate__animated animate__fadeIn faster" v-else description="空空如也" />
+      <Empty v-else class="animate__animated animate__fadeIn faster" description="空空如也" />
     </n-scrollbar>
   </div>
 </template>
@@ -58,23 +58,23 @@ const renderSwitcherIcon = () => h(NIcon, { class: 'text-primary' }, { default: 
 
 const handleCheckedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
   emits('checkedKeys', option);
-};
+}
 const handleExpandedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
   emits('expandedKeys', option[option.length - 1]);
-};
+}
 const handleSelectedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
   emits('selectedKeys', option[0]);
-};
+}
 const handleDelete = () => {
   emits('delete', true);
-};
+}
 const nodeProps = ({ option }: { option: TreeOption }) => {
   return {
     // onClick() {
     //   window.$message.info('[Click] ' + option.label);
     // },
   };
-};
+}
 const { files_count, user_files, fetching } = storeToRefs(fileStore);
 </script>
 

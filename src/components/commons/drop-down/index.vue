@@ -45,10 +45,10 @@ const options: DropdownOption[] = [
 
 const handleSelect = (v: string) => {
   emits('select', v);
-};
+}
 const onClickoutside = () => {
   emits('clickoutside', false);
-};
+}
 
 toRefs(props);
 </script>

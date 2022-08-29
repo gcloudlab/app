@@ -5,5 +5,5 @@
 </template>
 
 <script setup lang="ts">
-import NotFoundSVG from "@/assets/404.svg";
+import NotFoundSVG from '@/assets/404.svg';
 </script>

@@ -10,15 +10,10 @@
         <TriggerUpload class="w-full h-full shadow-sm" title="立即上传" />
         <Vue3Lottie
           class="robot w-1/5 bg-gradient-to-t from-green-100"
-          :animationData="RobotJson"
+          :animation-data="RobotJson"
         />
       </div>
-      <div
-        :class="[
-          ...boardClasses,
-          'other w-full bg-gradient-to-b from-green-100',
-        ]"
-      >
+      <div :class="[...boardClasses, 'other w-full bg-gradient-to-b from-green-100']">
         <!-- 我的分享 -->
       </div>
       <div :class="[...boardClasses]"></div>
@@ -27,14 +22,14 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import RobotJson from "@/assets/lotties/robot.json";
-import { useFileOutsideStore } from "@/store/modules/file";
-import TriggerUpload from "@/components/upload/trigger-upload.vue";
+import { storeToRefs } from 'pinia';
+import RobotJson from '@/assets/lotties/robot.json';
+import { useFileOutsideStore } from '@/store/modules/file';
+import TriggerUpload from '@/components/upload/trigger-upload.vue';
 
 const fileStore = useFileOutsideStore();
 
-const boardClasses = ["rounded", "hover:shadow"];
+const boardClasses = ['rounded', 'hover:shadow'];
 
 const { upload_files } = storeToRefs(fileStore);
 </script>

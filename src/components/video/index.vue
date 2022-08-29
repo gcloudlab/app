@@ -5,7 +5,7 @@
         <VideoPreview :src="_src" :data="data" @play="handlePlay" />
       </template>
       <template #header>
-        {{ data.name || "未知文件" }}
+        {{ data.name || '未知文件' }}
       </template>
       <VideoPlayer :src="_src" />
     </Drawer>
@@ -13,11 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs, watch } from "vue";
-import { FileListData } from "@/models/file";
-import VideoPlayer from "./video-player.vue";
-import VideoPreview from "@/components/video/video-preview.vue";
-import Drawer from "@/components/commons/drawer/index.vue";
+import { PropType, ref, toRefs, watch } from 'vue';
+import { FileListData } from '@/models/file';
+import VideoPlayer from './video-player.vue';
+import VideoPreview from '@/components/video/video-preview.vue';
+import Drawer from '@/components/commons/drawer/index.vue';
 
 const props = defineProps({
   data: {
@@ -26,7 +26,7 @@ const props = defineProps({
   },
   src: {
     type: String,
-    default: "",
+    default: '',
     required: true,
   },
 });
@@ -34,12 +34,12 @@ const show = ref(false);
 const handlePlay = (src: string, data: FileListData) => {
   show.value = true;
   // console.log("播放", src, data);
-};
+}
 
 const _src = ref(props.src);
 watch(
   () => props.src,
-  (val) => {
+  val => {
     if (val) {
       _src.value = val;
     }

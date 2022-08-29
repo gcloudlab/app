@@ -7,6 +7,6 @@ const randomAvatar = (): string => {
   const res = `${base_avatar_url}${random}.png`;
   useStorage('avatar', res);
   return res;
-};
+}
 
 export default randomAvatar;

@@ -12,14 +12,14 @@
           class="animate__animated animate__fadeIn faster"
           width="100"
           preview-disabled
-          @click="router.push('/home')"
           :src="logoUrl"
+          @click="router.push('/home')"
         />
       </template>
       <n-tab
-        class="cursor-pointer"
         v-for="item in tabs"
         :key="item.name"
+        class="cursor-pointer"
         :name="item.name"
         @click="router.push(item.path)"
       >
@@ -30,8 +30,8 @@
           :src="auth?.avatar || defaultAvatar"
           size="large"
           bordered
-          objectFit="contain"
-          :showStatus="true"
+          object-fit="contain"
+          :show-status="true"
         />
       </template>
     </n-tabs>
@@ -39,24 +39,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { storeToRefs } from "pinia";
-import { useRouter } from "vue-router";
-import { NTabs, NTab, NImage } from "naive-ui";
-import Avatar from "@/components/avatar/index.vue";
-import { useAuthOutsideStore } from "@/store/modules/auth";
-import Logo from "@/assets/gcloud.png";
-import defaultAvatar from "@/assets/logo.png";
+import { ref, computed } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useRouter } from 'vue-router';
+import { NTabs, NTab, NImage } from 'naive-ui';
+import Avatar from '@/components/avatar/index.vue';
+import { useAuthOutsideStore } from '@/store/modules/auth';
+import Logo from '@/assets/gcloud.png';
+import defaultAvatar from '@/assets/logo.png';
 
 const router = useRouter();
 const authStore = useAuthOutsideStore();
-const currentRoute = computed(() => router.currentRoute.value.name ?? "home");
+const currentRoute = computed(() => router.currentRoute.value.name ?? 'home');
 
 const tabs = ref([
-  { name: "home", label: "主页", path: "/home" },
-  { name: "share", label: "分享", path: "/share" },
-  { name: "community", label: "社区", path: "/community" },
-  { name: "library", label: "图书馆", path: "/library" },
+  { name: 'home', label: '主页', path: '/home' },
+  { name: 'share', label: '分享', path: '/share' },
+  { name: 'community', label: '社区', path: '/community' },
+  { name: 'library', label: '图书馆', path: '/library' },
   // { name: 'picture', label: '学习资料', path: '/picture' },
 ]);
 const logoUrl = ref(Logo);

@@ -18,25 +18,25 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs } from "vue";
-import { NModal, NButton } from "naive-ui";
+import { PropType, ref, toRefs } from 'vue';
+import { NModal, NButton } from 'naive-ui';
 
 const props = defineProps({
   triggerContent: {
     type: String,
-    default: "打开",
+    default: '打开',
   },
   modalTitle: {
     type: String,
-    default: "标题",
+    default: '标题',
   },
   showIcon: {
     type: Boolean,
     default: false,
   },
   preset: {
-    type: String as PropType<"dialog" | "confirm" | "card">,
-    default: "dialog",
+    type: String as PropType<'dialog' | 'confirm' | 'card'>,
+    default: 'dialog',
   },
 });
 const showModal = ref(false);

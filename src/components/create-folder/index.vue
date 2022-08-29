@@ -1,8 +1,8 @@
 <template>
   <div class="create-folder">
     <Modal
-      triggerContent="新建"
-      modalTitle="新建文件夹"
+      trigger-content="新建"
+      modal-title="新建文件夹"
       positive-text="创建"
       negative-text="取消"
       @positive-click="onPositiveClick"
@@ -15,9 +15,7 @@
       />
       <p class="mt-3 ml-1">
         在
-        <span class="font-bold">{{
-          folder?.name === "默认文件夹" ? "根目录" : folder?.name
-        }}</span>
+        <span class="font-bold">{{ folder?.name === '默认文件夹' ? '根目录' : folder?.name }}</span>
         中新建文件夹
       </p>
     </Modal>
@@ -25,13 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs, defineAsyncComponent } from "vue";
-import { NInput } from "naive-ui";
-import { useFiles } from "@/hooks/useFiles";
-import { SelectBaseOption } from "naive-ui/es/select/src/interface";
-const Modal = defineAsyncComponent(
-  () => import("@/components/commons/modal/index.vue")
-);
+import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
+import { NInput } from 'naive-ui';
+import { useFiles } from '@/hooks/useFiles';
+import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
+const Modal = defineAsyncComponent(() => import('@/components/commons/modal/index.vue'));
 
 const props = defineProps({
   folder: {
@@ -41,12 +37,12 @@ const props = defineProps({
 });
 const { onCreateFolder } = useFiles();
 const showModal = ref(false);
-const folderName = ref("");
+const folderName = ref('');
 const onNegativeClick = () => {
   showModal.value = false;
-};
+}
 const onPositiveClick = () => {
-  if (folderName.value !== "") {
+  if (folderName.value !== '') {
     console.log(folderName.value);
     onCreateFolder({
       name: folderName.value,

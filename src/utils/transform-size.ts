@@ -7,4 +7,4 @@ export const transformSize = (size: number): string => {
     return (size / 1000 ** 2 / 1024).toFixed(2) + 'GB';
   }
   return '0KB';
-};
+}

@@ -19,14 +19,14 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, toRefs } from "vue";
-import { Play } from "@vicons/ionicons5";
-import { FileListData } from "@/models/file";
+import { PropType, toRefs } from 'vue';
+import { Play } from '@vicons/ionicons5';
+import { FileListData } from '@/models/file';
 
 const props = defineProps({
   src: {
     type: String,
-    default: "",
+    default: '',
     required: true,
   },
   data: {

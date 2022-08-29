@@ -5,27 +5,27 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, ref, toRefs } from "vue";
-import videojs, { VideoJsPlayer } from "video.js";
-import "video.js/dist/video-js.css";
+import { onMounted, onUnmounted, ref, toRefs } from 'vue';
+import videojs, { VideoJsPlayer } from 'video.js';
+import 'video.js/dist/video-js.css';
 
 const props = defineProps({
   src: {
     type: String,
-    default: "",
+    default: '',
     required: true,
   },
   poster: {
     type: String,
-    default: "",
+    default: '',
   },
   type: {
     type: String,
-    default: "video/mp4",
+    default: 'video/mp4',
   },
   customClass: {
     type: String,
-    default: "",
+    default: '',
   },
 });
 const videoPlayer = ref<string | Element | any>(null);
@@ -49,10 +49,10 @@ onMounted(() => {
       playbackRates: [0.5, 1, 1.5, 1.75, 2],
     },
     () => {
-      myPlayer.value?.log("play.....");
+      myPlayer.value?.log('play.....');
     }
   );
-});
+})
 
 onUnmounted(() => {
   if (myPlayer.value) {

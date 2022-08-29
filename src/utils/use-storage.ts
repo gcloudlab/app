@@ -7,5 +7,4 @@ export const useStorage = (key: string, initialValue: any = null) => {
       return JSON.parse(storedValue);
     }
   }
-  return;
 };

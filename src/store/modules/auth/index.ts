@@ -56,7 +56,7 @@ export const useAuthStore = defineStore({
   actions: {
     async onLoginAction(loginInfo: UserLoginRequestProps) {
       try {
-        let res = await userLoginService(loginInfo);
+        const res = await userLoginService(loginInfo);
         if (res.status === 200 && res.data.msg === '用户登录成功') {
           this.token = res.data.token;
           this.refresh_token = res.data.refresh_token;
@@ -94,11 +94,10 @@ export const useAuthStore = defineStore({
             };
             onSuccess('注册成功');
             return true;
-          } else {
-            onError(res.data.msg);
-            return false;
           }
-        });
+          onError(res.data.msg);
+          return false;
+        })
       } catch (error) {
         onError('出错了，再试一次');
         return false;
@@ -110,10 +109,9 @@ export const useAuthStore = defineStore({
         if (res.data.msg === 'registered') {
           onError('邮箱已注册');
           return false;
-        } else {
-          onInfo('请注意查收邮箱');
-          return true;
         }
+        onInfo('请注意查收邮箱');
+        return true;
       } catch (error) {
         this.sign_status = false;
         onError('获取验证码失败');

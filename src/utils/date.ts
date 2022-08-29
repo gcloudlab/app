@@ -25,4 +25,4 @@ export const getTimeState = () => {
     return `晚上好`;
   }
   return 'Hi';
-};
+}

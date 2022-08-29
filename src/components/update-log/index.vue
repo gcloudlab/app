@@ -1,8 +1,6 @@
 <template>
   <div>
-    <n-button tertiary type="primary" size="small" @click="activate">
-      更新日志
-    </n-button>
+    <n-button tertiary type="primary" size="small" @click="activate"> 更新日志 </n-button>
     <n-drawer
       v-model:show="active"
       :width="200"
@@ -28,36 +26,29 @@
 </template>
 
 <script setup lang="ts">
-import {
-  NScrollbar,
-  NDrawer,
-  NDrawerContent,
-  NButton,
-  NDivider,
-} from "naive-ui";
-import { ref } from "vue";
+import { NScrollbar, NDrawer, NDrawerContent, NButton, NDivider } from 'naive-ui';
+import { ref } from 'vue';
 
 const active = ref(false);
 const activate = () => {
   active.value = true;
-};
+}
 const data = [
   {
-    content: "「功能」添加移动端访问受限提示",
-    date: "2022-08-24",
+    content: '「功能」添加移动端访问受限提示',
+    date: '2022-08-24',
   },
   {
-    content: "「功能」新增加入天数显示",
-    date: "2022-08-22",
+    content: '「功能」新增加入天数显示',
+    date: '2022-08-22',
   },
   {
-    content: "「功能」新增Not Found页面",
-    date: "2022-08-21",
+    content: '「功能」新增Not Found页面',
+    date: '2022-08-21',
   },
   {
-    content:
-      "「维护」新增日志查看; 新增视频播放功能; 修复图片预览畸变；其他...",
-    date: "2022-08-20",
+    content: '「维护」新增日志查看; 新增视频播放功能; 修复图片预览畸变；其他...',
+    date: '2022-08-20',
   },
 ];
 </script>

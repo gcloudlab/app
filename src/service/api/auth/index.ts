@@ -1,4 +1,4 @@
-import axios from "@/service/axios";
+import axios from '@/service/axios';
 import {
   UserLoginResponse,
   UserLoginRequestProps,
@@ -8,39 +8,37 @@ import {
   UserDetailResponse,
   UpdateUserInfoOptions,
   SendMailCodeResponse,
-} from "@/models/auth";
-import { CustomResponse } from "@/models";
+} from '@/models/auth';
+import { CustomResponse } from '@/models';
 
 export const userLoginService = async (
   params: UserLoginRequestProps
 ): Promise<CustomResponse<UserLoginResponse>> => {
-  return await axios.post("/user/login", params);
-};
+  return await axios.post('/user/login', params);
+}
 
 export const userRegisterService = async (
   params: UserRegisterRequestProps
 ): Promise<CustomResponse<UserRegisterResponse>> => {
-  return await axios.post("/user/register", params);
-};
+  return await axios.post('/user/register', params);
+}
 
 export const sendMailCodeService = async (
   email: string
 ): Promise<CustomResponse<SendMailCodeResponse>> => {
-  return await axios.post("/mail/code/send/register", { email });
-};
+  return await axios.post('/mail/code/send/register', { email });
+}
 
-export const refreshAuthService = async (): Promise<
-  CustomResponse<RefreshAuthResponse>
-> => {
-  return await axios.post("/refresh/authorization");
-};
+export const refreshAuthService = async (): Promise<CustomResponse<RefreshAuthResponse>> => {
+  return await axios.post('/refresh/authorization');
+}
 
 export const getUserDetailByTokenService = async (): Promise<
   CustomResponse<UserDetailResponse>
 > => {
-  return await axios.get("/user/detail");
-};
+  return await axios.get('/user/detail');
+}
 
 export const updateUserInfo = async (option: UpdateUserInfoOptions) => {
-  return await axios.post("/user/update", option);
-};
+  return await axios.post('/user/update', option);
+}

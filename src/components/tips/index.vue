@@ -19,9 +19,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { onInfo } from "@/utils/messages";
-import { NButton } from "naive-ui";
+import { ref } from 'vue';
+import { onInfo } from '@/utils/messages';
+import { NButton } from 'naive-ui';
 
 const tips = ref(
   `「上传须知」：由于经费有限，单文件上传限制10Mb以内，默认总容量200Mb。请注意遵守互联网冲浪规范，杜绝上传违规文件等内容，逮到了你跑得脱，马脑阔😠，蟹蟹您的支持。`

@@ -32,7 +32,7 @@ import { useRegisterCount } from '@/hooks/useGlobal';
 const globalStore = useGlobalOutsideStore();
 onMounted(() => {
   useRegisterCount();
-});
+})
 const { register_count } = storeToRefs(globalStore);
 </script>
 
