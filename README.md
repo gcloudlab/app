@@ -19,31 +19,19 @@
 - 🎯 支持邮箱注册，安全保障
 - ✨ 纯 Go 开发（后端）
 - 🎨 **不限速**
+- ...
 
 详见文档 [API](/docs/API.md).
 
-### TODOs
-
-- [ ] 增加文件分享功能
-- [ ] 增加文件分享链接功能
-- [ ] 公共文件夹
-- [ ] defineAsyncComponent 优化
-
 ## 开发者须知
-
-### 技术架构
-
-- 后台：go-zero(Monolithic Service)
-- 数据库：MySQL、Redis
-- 文件存储：腾讯云 COS
-
-### 开发环境
-
-Windows 11 with vscode，go module
 
 ### 开发手册
 
 详见 [GCloud 开发手册](/dev/README.md).
+
+### 共建者
+
+<a href="https://github.com/yesmore"><img src="https://github.com/yesmore.png?size=50"></a> <a href="https://github.com/tinyflake"><img src="https://github.com/tinyflake.png?size=50"></a> <a href="https://github.com/ysimportant(https://github.com/lysimportant)"><img src="https://github.com/lysimportant.png?size=50"></a>
 
 ## License
 
