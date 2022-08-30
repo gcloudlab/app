@@ -2,7 +2,7 @@ import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import viteCompression from 'vite-plugin-compression';
-
+import vueJsx from '@vitejs/plugin-vue-jsx';
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd());
@@ -11,6 +11,7 @@ export default ({ mode }) => {
     base: './', //打包路径
     plugins: [
       vue(),
+      vueJsx(),
       viteCompression({
         verbose: true,
         disable: false,
