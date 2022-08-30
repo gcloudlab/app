@@ -23,14 +23,14 @@ export const useAuth = () => {
 
   const onLogout = () => {
     authStore.onLogoutAction();
-  }
+  };
 
-  const onRegister = (registerInfo: UserRegisterRequestProps | null) => {
+  const onRegister = async (registerInfo: UserRegisterRequestProps | null) => {
     if (registerInfo) {
-      return authStore.onRegisterAction(registerInfo);
+      return await authStore.onRegisterAction(registerInfo);
     }
     return false;
-  }
+  };
   const onGetCode = async (email: string) => {
     if (email) {
       return await authStore.onMailCodeAction(email);
@@ -38,13 +38,13 @@ export const useAuth = () => {
   };
   const onGetUserDetailAndCheckAuth = async () => {
     return await authStore.onGetUserDetailByTokenAction();
-  }
+  };
   const onChangeAvatar = (url: string) => {
     authStore.onChangeAvatarAction(url);
-  }
+  };
   const onUpdateUserInfo = async (option: UpdateUserInfoOptions) => {
     await authStore.onUpdateUserInfoAction(option);
-  }
+  };
 
   return {
     token,
@@ -57,7 +57,7 @@ export const useAuth = () => {
     onUpdateUserInfo,
     error,
   };
-}
+};
 
 export const useToken = () => {
   const { token, refresh_token } = storeToRefs(authStore);
@@ -66,4 +66,4 @@ export const useToken = () => {
     token,
     refresh_token,
   };
-}
+};

@@ -83,23 +83,22 @@ export const useAuthStore = defineStore({
       localStorage.removeItem('token');
       localStorage.removeItem('refresh_token');
     },
-    onRegisterAction(registerInfo: UserRegisterRequestProps) {
+    async onRegisterAction(registerInfo: UserRegisterRequestProps) {
       try {
-        userRegisterService(registerInfo).then(async res => {
-          if (res.data.msg === '注册成功') {
-            this.auth = {
-              ...this.auth,
-              name: registerInfo.name,
-              email: registerInfo.email,
-            };
-            onSuccess('注册成功');
-            return true;
-          }
-          onError(res.data.msg);
-          return false;
-        })
+        const res = await userRegisterService(registerInfo);
+        if (res.data.msg === '注册成功') {
+          this.auth = {
+            ...this.auth,
+            name: registerInfo.name,
+            email: registerInfo.email,
+          };
+          onSuccess('注册成功');
+          return true;
+        }
+        onError(res.data.msg);
+        return false;
       } catch (error) {
-        onError('出错了，再试一次');
+        onError('出错了');
         return false;
       }
     },

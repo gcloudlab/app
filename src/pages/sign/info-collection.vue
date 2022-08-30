@@ -105,7 +105,7 @@ const handleValidate = () => {
       window.$message.error('请正确填写');
     }
   });
-}
+};
 const handleSubmit = async () => {
   if (props.signType === 'signin') {
     await handleSignin();
@@ -138,7 +138,7 @@ const handleSendCode = async () => {
     window.$message.warning('请填写有效邮箱');
   }
   isSendCode.value = false;
-}
+};
 const handleSignin = async () => {
   if (model.value.name && model.value.password) {
     await onLogin({
@@ -150,23 +150,24 @@ const handleSignin = async () => {
     }
   }
 };
-const handleSignup = () => {
+const handleSignup = async () => {
   if (model.value.name && model.value.password && model.value.email && model.value.code) {
-    if (
-      onRegister({
-        name: model.value.name,
-        password: model.value.password,
-        email: model.value.email,
-        code: model.value.code,
-      })
-    ) {
+    const res = await onRegister({
+      name: model.value.name,
+      password: model.value.password,
+      email: model.value.email,
+      code: model.value.code,
+    });
+    console.log(res);
+
+    if (res) {
       afterSignup();
     }
   }
 };
 const afterSignup = () => {
   emits('afterSignup', 'signin');
-}
+};
 const handleTips = () => {
   if (props.signType === 'signin') {
     onWarning('哦豁，我也记不得');

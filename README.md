@@ -29,9 +29,9 @@
 
 详见 [GCloud 开发手册](/dev/README.md).
 
-### 共建者
+## 共建者
 
-<a href="https://github.com/yesmore"><img src="https://github.com/yesmore.png?size=50"></a> <a href="https://github.com/tinyflake"><img src="https://github.com/tinyflake.png?size=50"></a> <a href="https://github.com/ysimportant(https://github.com/lysimportant)"><img src="https://github.com/lysimportant.png?size=50"></a>
+<a href="https://github.com/yesmore"><img src="https://github.com/yesmore.png?size=50"></a> <a href="https://github.com/tinyflake"><img src="https://github.com/tinyflake.png?size=50"></a> <a href="https://github.com/lysimportant"><img src="https://github.com/lysimportant.png?size=50"></a>
 
 ## License
 
