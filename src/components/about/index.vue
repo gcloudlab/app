@@ -2,7 +2,7 @@
   <div class="about text-sm text-center">
     <a class="text-primary" href="https://github.com/gcloudlab" target="_blank">&lt;/&gt;</a>
     with 💖 by
-    <a class="text-primary" href="https://yesmore.cc" target="_blank">yesmore</a>
+    <a class="text-primary" href="#" target="_blank">GCloud开发者团队</a>
   </div>
 </template>
 
