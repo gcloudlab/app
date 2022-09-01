@@ -1,5 +1,5 @@
 <template>
-  <About class="my-5" />
+  <!-- <About class="my-5" /> -->
 </template>
 
 <script setup lang="ts">
