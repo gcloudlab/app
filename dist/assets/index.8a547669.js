@@ -1,0 +1,1 @@
+import{d as e,U as t,a4 as s,X as a,S as n,b8 as o}from"./index.af57445c.js";const r=["src"],i=e({__name:"index",setup(c){return(l,_)=>(n(),t("div",null,[s("img",{style:{width:"99vw",height:"97vh"},src:a(o),alt:"404"},null,8,r)]))}});export{i as default};

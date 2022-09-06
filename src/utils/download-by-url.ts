@@ -37,7 +37,7 @@ function coreDownload(url: string, filename: string) {
   });
 }
 function getBlob(url: string, cb: any) {
-  var xhr = new XMLHttpRequest();
+  const xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
   xhr.responseType = 'blob';
   xhr.onload = function () {
@@ -51,8 +51,8 @@ function saveAs(blob: Blob, filename: string) {
   if ((window.navigator as any).msSaveOrOpenBlob) {
     (navigator as any).msSaveBlob(blob, filename);
   } else {
-    var link = document.createElement('a');
-    var body = document.querySelector('body');
+    const link = document.createElement('a');
+    const body = document.querySelector('body');
 
     link.href = window.URL.createObjectURL(blob);
     link.download = filename;
