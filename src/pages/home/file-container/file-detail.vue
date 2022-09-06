@@ -142,7 +142,7 @@ const mediaType = ['文件夹', '图片', '音频文件', '视频文件', '压�
 
 const handleSelect = (file: FileListData) => {
   currentFileRef.value = file;
-}
+};
 const handleUpdateName = (v: string) => {
   if (
     currentFileRef.value &&
@@ -159,12 +159,12 @@ const handleUpdateName = (v: string) => {
 };
 const handleDeleteFile = () => {
   onDeleteFile([props.file]);
-}
+};
 const handleDownload = (file: FileListData) => {
-  onInfo('开发中~');
   if (file.type !== '文件夹') {
     downloadByUrl(file);
   } else {
+    onInfo('开发中~');
   }
 };
 const handleShare = (file: FileListData) => {
@@ -174,13 +174,13 @@ const handleShare = (file: FileListData) => {
   // } else {
   //   console.log("分享文件夹");
   // }
-}
+};
 
 const handleMoveFile = (file: FileListData) => {
   showFolderTree.value = true;
   moveFileInfo.identity = file.identity;
   moveFileInfo.file = file;
-}
+};
 const nodeProps = ({ option }: { option: TreeOption }) => {
   return {
     async onDblclick() {
@@ -191,7 +191,7 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
       }
     },
   };
-}
+};
 
 const { origin_folders } = storeToRefs(fileStore);
 toRefs(props);

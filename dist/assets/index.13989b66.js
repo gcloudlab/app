@@ -1,0 +1,1 @@
+import{d as e,Z as o,S as s,$ as n,W as r,aL as p,X as i}from"./index.090d1b34.js";import{a as d}from"./index.5e4b8f88.js";import"./color-to-class.6a5641e4.js";const _=e({__name:"index",props:{animation:{default:""}},setup(a){return o(a),(t,m)=>(s(),n(i(d),{"v-bind":t.$attrs},{default:r(()=>[p(t.$slots,"default")]),_:3},8,["v-bind"]))}});export{_ as default};

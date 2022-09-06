@@ -1,7 +1,10 @@
 node_modules
 .DS_Store
-dist
-dist-ssr
+
+
 *.local
 
 .cz-config.js
+
+.env.development
+.env.production
