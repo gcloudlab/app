@@ -63,7 +63,7 @@ toRefs(props);
     color: #00b0b3;
   }
   .n-tree .n-tree-node-content .n-tree-node-content__text {
-    max-width: 130px;
+    width: 130px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
