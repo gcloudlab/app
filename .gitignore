@@ -4,6 +4,3 @@ node_modules
 *.local
 
 .cz-config.js
-
-.env.development
-.env.production

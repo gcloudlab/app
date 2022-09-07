@@ -1,34 +1,12 @@
 import { FileListData } from '@/models/file';
-import COS from 'cos-js-sdk-v5';
 import { onError } from './messages';
-
-const cosf = new COS({
-  SecretId: import.meta.env.VITE_APP_SECRET_ID,
-  SecretKey: import.meta.env.VITE_APP_SECRET_KEY,
-});
 
 const downloadByUrl = async (file: FileListData) => {
   if (!file.path) {
     return;
   }
-
-  cosf.getObjectUrl(
-    {
-      Bucket: 'gcloud-1303456836',
-      Region: 'ap-chengdu',
-      Key: file.path.replace('https://gcloud-1303456836.cos.ap-chengdu.myqcloud.com/', ''),
-      Sign: true,
-    },
-    function (err, data) {
-      if (err) return onError('出错了');
-      const downloadUrl =
-        data.Url +
-        (data.Url.indexOf('?') > -1 ? '&' : '?') +
-        'response-content-disposition=attachment'; // 补充强制下载的参数
-      coreDownload(downloadUrl, file.name);
-      // downLoadLink(downloadUrl, file.name);
-    }
-  );
+  // I'm sb.
+  coreDownload(file.path, file.name);
 };
 
 function coreDownload(url: string, filename: string) {
@@ -43,6 +21,8 @@ function getBlob(url: string, cb: any) {
   xhr.onload = function () {
     if (xhr.status === 200) {
       cb(xhr.response);
+    } else {
+      onError('出错了');
     }
   };
   xhr.send();
@@ -68,16 +48,16 @@ function saveAs(blob: Blob, filename: string) {
   }
 }
 
-// filename
-const downLoadLink = (url: string, filename: string) => {
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = url;
-  a.setAttribute('download', filename || 'unknown');
-  document.body.appendChild(a);
-  // window.URL.revokeObjectURL(downloadUrl);
-  a.click();
-  a.remove();
-};
+// simple
+// const downLoadLink = (url: string, filename: string) => {
+//   const a = document.createElement('a');
+//   a.style.display = 'none';
+//   a.href = url;
+//   a.setAttribute('download', filename || 'unknown');
+//   document.body.appendChild(a);
+//   // window.URL.revokeObjectURL(downloadUrl);
+//   a.click();
+//   a.remove();
+// };
 
 export default downloadByUrl;
