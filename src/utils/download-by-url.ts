@@ -9,12 +9,12 @@ const downloadByUrl = async (file: FileListData) => {
   coreDownload(file.path, file.name);
 };
 
-function coreDownload(url: string, filename: string) {
+const coreDownload = (url: string, filename: string) => {
   getBlob(url, function (blob: Blob) {
     saveAs(blob, filename);
   });
-}
-function getBlob(url: string, cb: any) {
+};
+const getBlob = (url: string, cb: any) => {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
   xhr.responseType = 'blob';
@@ -26,8 +26,8 @@ function getBlob(url: string, cb: any) {
     }
   };
   xhr.send();
-}
-function saveAs(blob: Blob, filename: string) {
+};
+const saveAs = (blob: Blob, filename: string) => {
   if ((window.navigator as any).msSaveOrOpenBlob) {
     (navigator as any).msSaveBlob(blob, filename);
   } else {
@@ -46,7 +46,7 @@ function saveAs(blob: Blob, filename: string) {
 
     window.URL.revokeObjectURL(link.href);
   }
-}
+};
 
 // simple
 // const downLoadLink = (url: string, filename: string) => {

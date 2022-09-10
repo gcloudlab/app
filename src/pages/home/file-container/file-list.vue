@@ -87,10 +87,10 @@ const rowProps = (row: FileListData) => {
         showDropdownRef.value = true;
         xRef.value = e.clientX;
         yRef.value = e.clientY;
-      })
+      });
     },
   };
-}
+};
 const columns: DataTableColumns = [
   {
     title: '文件名称',
@@ -145,10 +145,10 @@ const rowKeys = (row: FileListData) => row.name;
 const handleSelectDropDownItem = (value: string) => {
   console.log('--drop select', value);
   showDropdownRef.value = false;
-}
+};
 const handleClidkOutside = (value: boolean) => {
   showDropdownRef.value = value;
-}
+};
 
 toRefs(props);
 </script>

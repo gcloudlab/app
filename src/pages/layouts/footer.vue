@@ -1,9 +1,7 @@
 <template>
-  <!-- <About class="my-5" /> -->
+  <img style="display: none" src="https://visitor-badge.glitch.me/badge?page_id=gcloud.app" />
 </template>
 
-<script setup lang="ts">
-import About from '@/components/about/index.vue';
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped></style>

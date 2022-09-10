@@ -40,7 +40,7 @@ const showModal = ref(false);
 const folderName = ref('');
 const onNegativeClick = () => {
   showModal.value = false;
-}
+};
 const onPositiveClick = () => {
   if (folderName.value !== '') {
     console.log(folderName.value);
