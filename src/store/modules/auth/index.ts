@@ -145,6 +145,7 @@ export const useAuthStore = defineStore({
             email: res.data.email,
             identity: res.data.identity,
             avatar: res.data.avatar,
+            capacity: res.data.capacity,
             created_at: transformDate(res.data.created_at || '2022-05-20T10:14:46+08:00'),
             registration_days: dateFromNow(
               transformDate(res.data.created_at || '2022-08-22T10:14:46+08:00')

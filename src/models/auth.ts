@@ -20,6 +20,7 @@ export interface UserDetailResponse {
   identity?: string;
   email?: string;
   avatar?: string;
+  capacity?: string;
   msg?: string;
   created_at?: string;
 }
@@ -31,6 +32,7 @@ export interface UserDetail {
   avatar?: string;
   created_at?: string;
   registration_days?: number;
+  capacity?: string;
 }
 
 export interface UserRegisterRequestProps {

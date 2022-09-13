@@ -110,10 +110,12 @@ import {
 import { useFiles } from '@/hooks/useFiles';
 import { CloudUploadOutline } from '@vicons/ionicons5';
 import { useFileOutsideStore } from '@/store/modules/file';
+import { useAuthOutsideStore } from '@/store/modules/auth';
 import { onError, onWarning } from '@/utils/messages';
 import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
 import { useStorage } from '@/utils/use-storage';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
+import { Max_Size_Per_Upload, One_GB } from '@/constants';
 const CreateFolder = defineAsyncComponent(() => import('@/components/create-folder/index.vue'));
 const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 
@@ -139,6 +141,7 @@ const props = defineProps({
   },
 });
 const fileStore = useFileOutsideStore();
+const authStore = useAuthOutsideStore();
 const { total_size, onAddUploadFiles, onRemoveUploadFile, onUploadFilesToUser } = useFiles();
 const uploadRef = ref<UploadInst | null>(null);
 const fileList = ref<UploadFileInfo[]>([]);
@@ -158,27 +161,27 @@ const headers = {
 const handleUploadChange = (data: { fileList: UploadFileInfo[]; file: UploadFileInfo }) => {
   fileList.value = data.fileList;
   onAddUploadFiles(data.file);
-}
+};
 const handleRemoveUploadFile = (data: { fileList: UploadFileInfo[]; file: UploadFileInfo }) => {
   onRemoveUploadFile(data.file);
   return data.file;
-}
+};
 const handleBeforeUpload = (data: { file: UploadFileInfo; fileList: UploadFileInfo[] }) => {
   console.log(data.file.file?.size);
-  if (data.file.file && data.file.file?.size > 10 * 1024 * 1024) {
+  if (data.file.file && data.file.file?.size > Max_Size_Per_Upload) {
     onWarning('单文件上传限制10M及以内');
     return false;
   }
-  if (total_size >= 1024 * 1024 * 1000) {
+  if (total_size >= Number(authStore.auth?.capacity) ?? One_GB) {
     onWarning('嘿，你的空间不够了');
     return false;
   }
   return true;
-}
+};
 const handleUploadError = (options: { file: UploadFileInfo; event?: ProgressEvent }) => {
   onError(`上传失败：${options.file.name}`);
   return options.file;
-}
+};
 const handleUploadFinish = (options: { file: FileInfo; event?: ProgressEvent }) => {
   if ((event?.currentTarget as XMLHttpRequest).status === 200) {
     // onSuccess(`上传完成：${options.file.name}`);
@@ -193,11 +196,11 @@ const handleUploadFinish = (options: { file: FileInfo; event?: ProgressEvent }) 
     }
   }
   return options.file;
-}
+};
 const handleClearUploadFile = () => {
   uploadRef.value?.clear();
   onRemoveUploadFile();
-}
+};
 const handleFileListChange = () => {
   // console.log('是的，file-list 的值变了');
 };
@@ -209,7 +212,7 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
       }
     },
   };
-}
+};
 
 const { upload_files, origin_folders } = storeToRefs(fileStore);
 toRefs(props);
