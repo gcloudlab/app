@@ -172,7 +172,7 @@ const handleBeforeUpload = (data: { file: UploadFileInfo; fileList: UploadFileIn
     onWarning('单文件上传限制10M及以内');
     return false;
   }
-  if (total_size >= Number(authStore.auth?.capacity) ?? One_GB) {
+  if (total_size >= authStore.auth?.capacity! ?? One_GB) {
     onWarning('嘿，你的空间不够了');
     return false;
   }
