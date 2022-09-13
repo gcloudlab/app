@@ -58,23 +58,23 @@ const renderSwitcherIcon = () => h(NIcon, { class: 'text-primary' }, { default: 
 
 const handleCheckedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
   emits('checkedKeys', option);
-}
+};
 const handleExpandedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
   emits('expandedKeys', option[option.length - 1]);
-}
+};
 const handleSelectedKeys = (keys: Array<string | number>, option: Array<TreeOption | null>) => {
   emits('selectedKeys', option[0]);
-}
+};
 const handleDelete = () => {
   emits('delete', true);
-}
+};
 const nodeProps = ({ option }: { option: TreeOption }) => {
   return {
     // onClick() {
     //   window.$message.info('[Click] ' + option.label);
     // },
   };
-}
+};
 const { files_count, user_files, fetching } = storeToRefs(fileStore);
 </script>
 

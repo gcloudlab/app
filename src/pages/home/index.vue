@@ -124,7 +124,7 @@ const handleExpandedKeys = (value: TreeOption | FileListData) => {
 };
 const handleCheckedKeys = (value: FileListData[]) => {
   currentCheckedFiles.value = value;
-}
+};
 const handleDelete = (value: boolean) => {
   if (value && currentCheckedFiles.value.length > 0) {
     onDeleteFile(currentCheckedFiles.value);
@@ -132,10 +132,10 @@ const handleDelete = (value: boolean) => {
 };
 const handleBackToPreFolder = () => {
   onRemoveFromFolderRoutes();
-}
+};
 const handleChangeViewType = () => {
   fileViewType.value = fileViewType.value === 'list' ? 'graphical' : 'list';
-}
+};
 
 const { folder_routes, files_size } = storeToRefs(fileStore);
 

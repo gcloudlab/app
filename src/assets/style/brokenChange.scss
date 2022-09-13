@@ -8,7 +8,7 @@
 .n-tree-node-content__text {
   -moz-user-select: none;
   -webkit-user-select: none;
-  user-select: none;
+  user-select: none !important;
 }
 .n-alert .n-alert-body {
   border: none;

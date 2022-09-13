@@ -39,14 +39,7 @@
           />
           <FileTraySharp v-else-if="file.type === '压缩文件'" class="w-5 text-gray-100 mr-2" />
 
-          <!-- file name -->
-          <ShowOrEdit
-            v-if="file.type === '文件夹'"
-            class="inline-block text-base flex-1"
-            :value="file.name"
-            :on-update-value="handleUpdateName"
-          />
-          <span v-else>{{ file.name }}</span>
+          <span>{{ file.name }}</span>
         </div>
         <p>文件大小：{{ transformSize(file.size) }}</p>
         <p v-show="file.isFolder">文件数量：{{ file.children?.length }}</p>

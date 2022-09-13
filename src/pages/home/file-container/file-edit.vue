@@ -20,7 +20,7 @@ const ShowOrEdit = defineComponent({
       isEdit.value = true;
       nextTick(() => {
         inputRef.value?.focus();
-      })
+      });
     }
     // function handleOnClick() {
     //   clearTimeout(timeOut.value);
@@ -48,7 +48,7 @@ const ShowOrEdit = defineComponent({
           onDblclick: handleOnDblClick,
           class: props.truncate ? 'truncate w-16' : '',
           style: {
-            userSelect: 'none',
+            userSelect: 'none!important',
           },
         },
         isEdit.value

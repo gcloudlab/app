@@ -7,7 +7,7 @@
       :height="300"
       :trap-focus="false"
       :block-scroll="false"
-      placement="bottom"
+      placement="top"
       to="#user-info"
     >
       <n-drawer-content>
@@ -32,8 +32,16 @@ import { ref } from 'vue';
 const active = ref(false);
 const activate = () => {
   active.value = true;
-}
+};
 const data = [
+  {
+    content: '「功能」修复已知问题；禁止选中文件夹文本',
+    date: '2022-09-13',
+  },
+  {
+    content: '「Bug」修复注册成功/失败跳转问题',
+    date: '2022-09-01',
+  },
   {
     content: '「功能」添加移动端访问受限提示',
     date: '2022-08-24',

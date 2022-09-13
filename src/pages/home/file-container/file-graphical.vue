@@ -114,10 +114,10 @@ const isLoadingImg = ref(true);
 const handleSelectedKeys = (file: FileListData) => {
   currentFileRef.value = file;
   emits('selectedKeys', file);
-}
+};
 const handleExpandedKeys = (file: FileListData) => {
   emits('expandedKeys', file);
-}
+};
 const handleUpadeteName = (v: string) => {
   if (
     v &&
@@ -135,13 +135,13 @@ const handleUpadeteName = (v: string) => {
 const handleSelectDropDownItem = (value: string) => {
   console.log('--drop select', value);
   showDropdownRef.value = false;
-}
+};
 const handleClidkOutside = (value: boolean) => {
   showDropdownRef.value = value;
-}
+};
 const handleOnLoad = (e: Event) => {
   isLoadingImg.value = false;
-}
+};
 
 toRefs(props);
 </script>
