@@ -7,7 +7,7 @@
           'flex items-center flex-1 col-auto transition-all duration-200 ease-in-out',
         ]"
       >
-        <TriggerUpload class="w-full h-full shadow-sm" title="立即上传" />
+        <TriggerUpload class="w-full h-full shadow-sm" title="单击上传" />
         <Vue3Lottie
           class="robot w-1/5 bg-gradient-to-t from-green-100"
           :animation-data="RobotJson"

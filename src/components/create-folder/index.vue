@@ -48,8 +48,10 @@ const onPositiveClick = () => {
     onCreateFolder({
       name: folderName.value,
       parent_id: props.folder!.id as number,
+    }).then(() => {
+      folderName.value = '';
+      showModal.value = false;
     });
-    showModal.value = false;
   } else {
     onWarning('文件夹名不能为空');
   }

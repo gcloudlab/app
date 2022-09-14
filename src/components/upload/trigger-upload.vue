@@ -91,7 +91,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs, defineAsyncComponent, h } from 'vue';
+import { ref, toRefs, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   NUpload,
