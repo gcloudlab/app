@@ -27,6 +27,8 @@ import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
 import { NInput } from 'naive-ui';
 import { useFiles } from '@/hooks/useFiles';
 import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
+import { onWarning } from '@/utils/messages';
+
 const Modal = defineAsyncComponent(() => import('@/components/commons/modal/index.vue'));
 
 const props = defineProps({
@@ -43,12 +45,13 @@ const onNegativeClick = () => {
 };
 const onPositiveClick = () => {
   if (folderName.value !== '') {
-    console.log(folderName.value);
     onCreateFolder({
       name: folderName.value,
       parent_id: props.folder!.id as number,
     });
     showModal.value = false;
+  } else {
+    onWarning('文件夹名为空');
   }
 };
 

@@ -167,7 +167,7 @@ const handleRemoveUploadFile = (data: { fileList: UploadFileInfo[]; file: Upload
   return data.file;
 };
 const handleBeforeUpload = (data: { file: UploadFileInfo; fileList: UploadFileInfo[] }) => {
-  console.log(data.file.file?.size);
+  // console.log(data.file.file?.size);
   if (data.file.file && data.file.file?.size > Max_Size_Per_Upload) {
     onWarning('单文件上传限制10M及以内');
     return false;
