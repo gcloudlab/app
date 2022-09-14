@@ -99,7 +99,7 @@ const columns: DataTableColumns = [
     ellipsis: {
       tooltip: true,
     },
-    render(row, index) {
+    render(row, _index) {
       return h(ShowOrEdit as unknown as VueElement, {
         value: row.name,
         class: ['ml-2 cursor-pointer', row.type === '文件夹' ? 'text-primary' : ''],

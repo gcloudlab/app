@@ -2,12 +2,12 @@
   <div class="file-graphical">
     <div
       v-if="values.children?.length !== 0"
-      class="file-warpper mt-4 flex flex-wrap justify-start"
+      class="file-warpper mt-4 ml-3 flex flex-wrap justify-start"
     >
       <div
         v-for="file in values.children"
         :key="file.id"
-        class="flex flex-col justify-end items-center w-18 px-1 mx-2 mb-5 transition-all duration-100 hover:bg-gray-100 hover:shadow hover:rounded-lg animate__animated animate__fadeIn faster"
+        class="flex flex-col justify-end items-center w-18 px-1 mx-2 mb-5 transition-all duration-200 hover:bg-gray-100 hover:shadow hover:rounded-lg animate__animated animate__fadeIn faster"
       >
         <Folder
           v-if="file?.type === '文件夹' && file.path === '' && file.size === 0"

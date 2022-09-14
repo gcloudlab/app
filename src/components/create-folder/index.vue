@@ -51,7 +51,7 @@ const onPositiveClick = () => {
     });
     showModal.value = false;
   } else {
-    onWarning('文件夹名为空');
+    onWarning('文件夹名不能为空');
   }
 };
 

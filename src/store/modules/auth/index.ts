@@ -92,7 +92,7 @@ export const useAuthStore = defineStore({
             name: registerInfo.name,
             email: registerInfo.email,
           };
-          onSuccess('注册成功');
+          onSuccess(res.data.msg);
           return true;
         }
         onError(res.data.msg);
