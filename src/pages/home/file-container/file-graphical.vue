@@ -32,7 +32,11 @@
             }"
             :on-load="handleOnLoad"
           />
-          <div v-if="isLoadingImg" class="z-10 w-18 h-12 absolute right-0 top-0 left-0">
+          <div
+            v-if="isLoadingImg"
+            class="z-10 w-18 h-12 absolute right-0 left-0"
+            style="top: -27px"
+          >
             <n-skeleton width="100%" height="100%" :sharp="false" />
           </div>
         </div>

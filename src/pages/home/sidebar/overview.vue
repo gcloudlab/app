@@ -15,7 +15,7 @@
           :color="themeVars.errorColor"
           :indicator-text-color="themeVars.infoColor"
           :rail-color="themeVars.primaryColor"
-          :percentage="Number((files_size / 2 / 10 ** 6).toFixed(2))"
+          :percentage="Number((files_size / 10485760).toFixed(2))"
           processing
         />
         <div class="pl-2">

@@ -29,7 +29,7 @@ import TriggerUpload from '@/components/upload/trigger-upload.vue';
 
 const fileStore = useFileOutsideStore();
 
-const boardClasses = ['rounded', 'hover:shadow'];
+const boardClasses = ['rounded'];
 
 const { upload_files } = storeToRefs(fileStore);
 </script>
