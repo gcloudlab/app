@@ -17,7 +17,7 @@
       </n-list>
     </n-scrollbar>
     <n-button
-      class="mt-2 px-2 shadow-md bg-white"
+      class="mt-2 px-2 shadow-md"
       size="large"
       type="primary"
       round
@@ -124,7 +124,7 @@ const handleSelect = (value: OptionItem) => {
   emit('onSelect', value);
   pageName.value = value.label;
   showMenu.value = false;
-}
+};
 
 toRefs(props);
 </script>

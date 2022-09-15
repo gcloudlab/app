@@ -12,8 +12,13 @@
     </n-form-item>
     <n-form-item v-if="signType === 'signup'" path="code" label="验证码">
       <n-input v-model:value="model.code" placeholder="请输入验证码" @keydown.enter.prevent />
-      <n-button class="ml-3" type="primary" :disabled="codeLock !== 60" @click="handleSendCode">
-        <template v-if="codeLock === 60 && !isSendCode"> 发送验证码 </template>
+      <n-button
+        class="ml-2 w-24"
+        type="primary"
+        :disabled="codeLock !== 60"
+        @click="handleSendCode"
+      >
+        <template v-if="codeLock === 60 && !isSendCode"> 获取验证码 </template>
         <template v-else-if="codeLock < 60 && !isSendCode">
           {{ `已发送 ${codeLock}s` }}
         </template>
@@ -32,7 +37,7 @@
       <n-input
         v-model:value="model.password"
         type="password"
-        placeholder="请输入密码"
+        placeholder="请输入密码（不可修改）"
         @keydown.enter.prevent
         @keyup.enter="handleValidate"
       />
@@ -56,7 +61,7 @@ import { useAuth } from '@/hooks';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { validateEmail } from '@/utils/email';
 import Loading from '@/components/commons/loading/index.vue';
-import { onWarning, onInfo } from '@/utils/messages';
+import { onWarning, onInfo, onError } from '@/utils/messages';
 import { AuthRules } from '@/utils/rules';
 
 export interface ModelType {
@@ -102,7 +107,7 @@ const handleValidate = () => {
     if (!errors) {
       handleSubmit();
     } else {
-      window.$message.error('请正确填写');
+      onError('请正确填写');
     }
   });
 };
@@ -112,7 +117,7 @@ const handleSubmit = async () => {
   } else if (props.signType === 'signup') {
     handleSignup();
   } else {
-    window.$message.warning('请填写完整');
+    onWarning('请填写完整');
   }
 };
 const handleSendCode = async () => {
@@ -135,7 +140,7 @@ const handleSendCode = async () => {
     }
   } else {
     isSendCode.value = false;
-    window.$message.warning('请填写有效邮箱');
+    onWarning('请填写有效邮箱');
   }
   isSendCode.value = false;
 };
