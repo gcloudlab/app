@@ -28,17 +28,12 @@
         </div>
 
         <div class="flex justify-start items-center flex-wrap mt-2">
-          <!-- file icon -->
-          <Folder
-            v-if="file.type === '文件夹' && file.path === '' && file.repository_identity === ''"
-            class="w-5 text-primary mr-2"
+          <n-icon
+            v-if="file.icon !== 'media'"
+            class="mr-2 text-gray-100 cursor-pointer"
+            :component="(file?.icon as FileIconType)?.icon"
+            size="20"
           />
-          <DocumentTextOutline
-            v-else-if="!mediaType.includes(file.type || '')"
-            class="w-5 text-gray-100 mr-2"
-          />
-          <FileTraySharp v-else-if="file.type === '压缩文件'" class="w-5 text-gray-100 mr-2" />
-
           <span>{{ file.name }}</span>
         </div>
         <p>文件大小：{{ transformSize(file.size) }}</p>
@@ -103,10 +98,19 @@ import { defineAsyncComponent, PropType, ref, toRefs, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { useFiles } from '@/hooks/useFiles';
-import { NCard, NImage, NScrollbar, NButton, TreeOption, NPopover, NSkeleton } from 'naive-ui';
-import { FileListData } from '@/models/file';
+import {
+  NCard,
+  NImage,
+  NScrollbar,
+  NButton,
+  TreeOption,
+  NPopover,
+  NSkeleton,
+  NIcon,
+} from 'naive-ui';
+import { FileIconType, FileListData } from '@/models/file';
 import { transformSize } from '@/utils/transform-size';
-import { Folder, DocumentTextOutline, FileTraySharp } from '@vicons/ionicons5';
+import { Folder, DocumentOutline, FileTraySharp } from '@vicons/ionicons5';
 import downloadByUrl from '@/utils/download-by-url';
 import { onInfo } from '@/utils/messages';
 import DragUpload from '@/components/upload/trigger-upload.vue';

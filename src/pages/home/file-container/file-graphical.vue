@@ -1,11 +1,11 @@
 <template>
   <div class="file-graphical">
     <div
-      v-if="values.children?.length !== 0"
+      v-if="props.values.children?.length !== 0"
       class="file-warpper mt-4 ml-3 flex flex-wrap justify-start"
     >
       <div
-        v-for="file in values.children"
+        v-for="file in props.values.children"
         :key="file.id"
         class="flex flex-col justify-end items-center w-18 px-1 mx-2 mb-5 transition-all duration-200 hover:bg-gray-100 hover:shadow hover:rounded-lg animate__animated animate__fadeIn faster"
       >
@@ -49,16 +49,16 @@
         >
           <source :src="file.path" type="video/mp4" />
         </video>
-        <FileTraySharp
-          v-else-if="file.type === '压缩文件'"
-          class="w-10 text-primary cursor-pointer"
-          @click="handleSelectedKeys(file)"
-        />
-        <DocumentTextOutline
+        <n-icon
           v-else
-          class="w-10 text-gray-400 cursor-pointer"
+          class="cursor-pointer"
+          :class="(file?.icon as FileIconType).style"
+          :component="(file?.icon as FileIconType)?.icon"
+          size="40"
           @click="handleSelectedKeys(file)"
         />
+
+        <!-- file name -->
         <n-tooltip
           :show-arrow="false"
           placement="bottom"
@@ -92,10 +92,10 @@
 
 <script setup lang="ts">
 import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
-import { NImage, NSkeleton, NTooltip } from 'naive-ui';
+import { NImage, NSkeleton, NTooltip, NIcon } from 'naive-ui';
 import { useFiles } from '@/hooks/useFiles';
-import { FileListData } from '@/models/file';
-import { Folder, DocumentTextOutline, FileTraySharp } from '@vicons/ionicons5';
+import { FileIconType, FileListData } from '@/models/file';
+import { Folder } from '@vicons/ionicons5';
 const DropDown = defineAsyncComponent(() => import('@/components/commons/drop-down/index.vue'));
 const ShowOrEdit = defineAsyncComponent(() => import('./file-edit.vue'));
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));

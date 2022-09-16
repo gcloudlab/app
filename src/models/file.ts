@@ -1,3 +1,5 @@
+import { Component } from 'vue';
+
 export interface FileListResponseData {
   id: number;
   parent_id: number;
@@ -7,7 +9,6 @@ export interface FileListResponseData {
   path?: string;
   size: number;
   ext?: string;
-  type?: string;
   updated_at?: string;
 }
 
@@ -17,9 +18,15 @@ export interface FileListResponse {
 }
 
 export interface FileListData extends FileListResponseData {
-  children?: FileListResponseData[];
+  children?: FileListData[];
   isFolder?: boolean;
+  type?: string;
+  icon?: FileIconType | string;
 }
+export type FileIconType = {
+  style: string;
+  icon: Component;
+};
 
 export interface SaveFileToUserRepoOption {
   repositoryIdentity: string;

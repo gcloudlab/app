@@ -67,7 +67,7 @@ export const useFileStore = defineStore({
           this.files_count = count;
           this.files_size = size;
           this.fetching = false;
-          // console.log('--store-all files', this.origin_folders, this.user_files);
+          // console.log('--store-all files', this.user_files);
         }
       } catch (error) {
         useTimer(() => {
@@ -115,7 +115,7 @@ export const useFileStore = defineStore({
             },
             this.user_files[this.user_files.length - 1],
           ];
-          return
+          return;
         }
         const parentFolders = findParents(this.user_files, parent_id);
         if (parentFolders && parentFolders.length > 0) {
@@ -140,7 +140,7 @@ export const useFileStore = defineStore({
             i.status = payload.status;
           }
         });
-        return
+        return;
       }
       if (payload.status === 'removed') {
         this.upload_files = this.upload_files.filter(i => i.status !== 'removed');
@@ -176,7 +176,7 @@ export const useFileStore = defineStore({
               name: payload.name,
               size: 0,
             });
-          })
+          });
         } else if (res.data.msg === 'exist') {
           onError('已存在同名文件');
           this.upload_files.map(i => {
@@ -228,7 +228,7 @@ export const useFileStore = defineStore({
             this.onGetFileListAction().then(() => {
               files.map(file => {
                 file && this.onJumpToFileAction(file);
-              })
+              });
             });
           } else {
             onWarning('删除失败');
@@ -236,7 +236,7 @@ export const useFileStore = defineStore({
         })
         .catch(() => {
           onError(`出错了`);
-        })
+        });
     },
     async onMoveFoderAction(payload: MoveFolderOption) {
       try {
@@ -272,7 +272,7 @@ function findParents(treeData: FileListData[], id: number) {
         findele(item.children, id);
       }
     });
-  }
+  };
   findele(treeData, id);
   return allparents;
 }
