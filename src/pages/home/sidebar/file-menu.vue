@@ -10,7 +10,7 @@
     <n-scrollbar class="shadow-inner bg-gradient-to-b from-green-50" style="height: 200px">
       <n-tree
         v-if="files_count > 0"
-        class="mt-2 ml-3 tree md:w-60"
+        class="mt-2 ml-2 tree md:w-60"
         block-line
         :data="user_files"
         :pattern="pattern"
