@@ -1,6 +1,6 @@
 <template>
   <div class="main-nav">
-    <div class="flex flex-wrap grid-cols-2 sm:grid-cols-2 mx-3 mt-3 gap-1">
+    <div class="flex flex-wrap grid-cols-2 sm:grid-cols-2 mx-2 mt-2 gap-1">
       <div
         :class="[
           ...boardClasses,

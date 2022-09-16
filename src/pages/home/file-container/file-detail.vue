@@ -1,5 +1,5 @@
 <template>
-  <div class="file-detail w-52 shadow rounded">
+  <div class="file-detail w-52 rounded">
     <n-scrollbar style="max-height: calc(100vh - 60px)">
       <n-card
         class="leading-4"
