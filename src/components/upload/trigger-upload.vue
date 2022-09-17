@@ -75,7 +75,7 @@
           </n-scrollbar>
         </n-collapse-item>
         <!-- 下载列表 -->
-        <n-collapse-item v-if="upload_files.length > 0" name="2" :arrow="false">
+        <!-- <n-collapse-item v-if="upload_files.length > 0" name="2" :arrow="false">
           <template #header-extra>
             <div class="flex items-center mr-3"></div>
           </template>
@@ -84,7 +84,7 @@
               <span class="text-gray-500">下载列表</span>
             </div>
           </template>
-        </n-collapse-item>
+        </n-collapse-item> -->
       </n-collapse>
     </n-upload>
   </div>
@@ -115,7 +115,7 @@ import { onError, onWarning } from '@/utils/messages';
 import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
 import { useStorage } from '@/utils/use-storage';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
-import { Max_Size_Per_Upload, One_GB } from '@/constants';
+import { Max_Size_Per_Upload, One_GB, Upload_Url } from '@/constants';
 const CreateFolder = defineAsyncComponent(() => import('@/components/create-folder/index.vue'));
 const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 
@@ -149,7 +149,7 @@ const uploadFolder = ref<SelectBaseOption>({
   id: props.currentFolder?.value ?? 0,
   name: props.currentFolder?.label ?? '默认文件夹',
 });
-const uploadAction = ref('https://gcloud.aoau.top/file/upload');
+const uploadAction = ref(Upload_Url);
 const headers = {
   Authorization: useStorage('token'),
 };
@@ -192,6 +192,7 @@ const handleUploadFinish = (options: { file: FileInfo; event?: ProgressEvent }) 
         parentId: uploadFolder.value.id as number,
         ext: res.ext,
         name: res.name,
+        target: uploadFolder.value.name === '公共文件夹' ? 'public' : 'private',
       });
     }
   }

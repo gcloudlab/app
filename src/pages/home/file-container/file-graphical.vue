@@ -1,11 +1,14 @@
 <template>
   <div class="file-graphical">
+    <n-alert v-if="values.name === '公共文件夹'" type="info" :show-icon="false" closable>
+      🎯 公共文件夹对所有人可见。请勿上传违规内容，蟹蟹~
+    </n-alert>
     <div
-      v-if="props.values.children?.length !== 0"
+      v-if="values.children?.length !== 0"
       class="file-warpper mt-4 ml-3 flex flex-wrap justify-start"
     >
       <div
-        v-for="file in props.values.children"
+        v-for="file in values.children"
         :key="file.id"
         class="flex flex-col justify-end items-center w-18 px-1 mx-2 mb-5 transition-all duration-200 hover:bg-gray-100 hover:shadow hover:rounded-lg animate__animated animate__fadeIn faster"
       >
@@ -52,7 +55,7 @@
         <n-icon
           v-else
           class="cursor-pointer"
-          :class="(file?.icon as FileIconType).style"
+          :class="(file?.icon as FileIconType)?.style"
           :component="(file?.icon as FileIconType)?.icon"
           size="40"
           @click="handleSelectedKeys(file)"
@@ -77,9 +80,6 @@
         </n-tooltip>
       </div>
     </div>
-    <!-- <div class="w-18 h-10">
-      <n-skeleton width="100%" height="100%" :sharp="false" />
-    </div> -->
     <Empty v-else description="空文件夹"> </Empty>
     <DropDown
       :show="showDropdownRef"
@@ -92,7 +92,7 @@
 
 <script setup lang="ts">
 import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
-import { NImage, NSkeleton, NTooltip, NIcon } from 'naive-ui';
+import { NImage, NSkeleton, NTooltip, NIcon, NAlert } from 'naive-ui';
 import { useFiles } from '@/hooks/useFiles';
 import { FileIconType, FileListData } from '@/models/file';
 import { Folder } from '@vicons/ionicons5';
@@ -150,10 +150,16 @@ const handleOnLoad = (e: Event) => {
 toRefs(props);
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .file-graphical {
   .image-item-wrapper {
     max-height: 46px;
+  }
+  .n-alert .n-alert-body {
+    padding: 5px 10px;
+  }
+  .n-alert .n-alert__close {
+    margin: 7px;
   }
 }
 </style>

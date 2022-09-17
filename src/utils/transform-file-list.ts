@@ -1,11 +1,11 @@
-import type { FileListData } from '@/models/file';
+import type { FileListData, UploadTargetType } from '@/models/file';
 import { Folder } from '@vicons/ionicons5';
 import _ from 'lodash';
 import { shallowRef } from 'vue';
 import { transformDate } from './date';
 import { generate_file_icon } from './generate_file_icon';
 
-const generateTree = (list: FileListData[] | any) => {
+const generateTree = (list: FileListData[] | any, target: UploadTargetType) => {
   const id: any = {};
   const result: FileListData[] | any = [];
 
@@ -40,6 +40,8 @@ const generateTree = (list: FileListData[] | any) => {
 
   for (const key in children) {
     const parent: FileListData = _.find(list, { id: Number(key) });
+    // console.log(key, children, parent, target);
+
     if (key !== '0') {
       if (parent?.parent_id === 0) {
         const item = {
@@ -53,23 +55,47 @@ const generateTree = (list: FileListData[] | any) => {
       const other = children[key].filter(
         item => item.repository_identity !== '' && item.path !== ''
       );
-      result.unshift({
-        name: '默认文件夹',
-        identity: 'other',
-        size: other.reduce((total, item) => total + item.size, 0),
-        isFolder: true,
-        parent_id: 0,
-        type: '文件夹',
-        children: other,
-        ext: '',
-        id: 0,
-        path: '',
-        repository_identity: '',
-        icon: { style: 'text-primary', icon: shallowRef(Folder) },
-      });
+      if (target === 'private') {
+        result.unshift(...[default_folder(other), public_folder()]);
+      } else if (target === 'public') {
+        result.unshift(...other);
+      }
     }
   }
+
   return { result, count, size };
 };
 
+const public_folder = () => {
+  return {
+    name: '公共文件夹',
+    identity: 'public',
+    size: -1,
+    isFolder: true,
+    parent_id: 0,
+    type: '文件夹',
+    children: [],
+    ext: '',
+    id: 0,
+    path: '',
+    repository_identity: '',
+    icon: { style: 'text-primary', icon: shallowRef(Folder) },
+  };
+};
+const default_folder = (other: any) => {
+  return {
+    name: '默认文件夹',
+    identity: 'default',
+    size: other.reduce((total: number, item: FileListData) => total + item.size, 0),
+    isFolder: true,
+    parent_id: 0,
+    type: '文件夹',
+    children: other,
+    ext: '',
+    id: 0,
+    path: '',
+    repository_identity: '',
+    icon: { style: 'text-primary', icon: shallowRef(Folder) },
+  };
+};
 export default generateTree;

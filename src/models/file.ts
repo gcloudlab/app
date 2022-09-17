@@ -28,13 +28,14 @@ export type FileIconType = {
   icon: Component;
 };
 
-export interface SaveFileToUserRepoOption {
+export type UploadTargetType = 'private' | 'public';
+export interface SaveFileToRepoOption {
   repositoryIdentity: string;
   parentId: number;
   ext: string;
   name: string;
+  target: UploadTargetType;
 }
-
 export interface CreateFolderOption {
   parent_id: number;
   name: string;

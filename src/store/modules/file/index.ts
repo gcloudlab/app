@@ -12,18 +12,19 @@ import type {
   CreateFolderOption,
   FileListData,
   MoveFolderOption,
-  SaveFileToUserRepoOption,
+  SaveFileToRepoOption,
   UpdateFileNameOption,
 } from '@/models/file';
 import generateTree from '@/utils/transform-file-list';
 import { onError, onWarning, onSuccess } from '@/utils/messages';
 import type { UploadFileInfo } from 'naive-ui';
-import { saveFileToUserRepo } from '@/service/api/file';
+import { saveFileToRepo } from '@/service/api/file';
 import useTimer from '@/hooks/useTimer';
 
 export interface FileState {
   files_count: number;
   user_files: FileListData[];
+  public_files: FileListData[];
   files_size: number;
   folder_routes: FileListData[];
   upload_files: UploadFileInfo[];
@@ -40,6 +41,7 @@ export const useFileStore = defineStore({
     ({
       files_count: -1,
       user_files: [],
+      public_files: [],
       files_size: -1,
       folder_routes: [{ id: -1, name: '主菜单', size: -1, parent_id: 0, identity: 'root' }],
       upload_files: [],
@@ -59,9 +61,22 @@ export const useFileStore = defineStore({
     async onGetFileListAction() {
       try {
         this.fetching = true;
-        const res = await getFileList();
-        if (res.status === 200) {
-          const { result, count, size } = generateTree(res.data.list);
+        const res = await getFileList('private');
+        const public_res = await getFileList('public');
+        if (res.status === 200 && public_res.status === 200) {
+          const { result, count, size } = generateTree(res.data.list, 'private');
+          const {
+            result: public_result,
+            count: public_count,
+            size: public_size,
+          } = generateTree(public_res.data.list, 'public');
+          result.map((item: FileListData) => {
+            if (item.name === '公共文件夹') {
+              item.children = public_result;
+            }
+          });
+          // console.log(public_result);
+
           this.user_files = result;
           this.origin_folders = result;
           this.files_count = count;
@@ -77,8 +92,11 @@ export const useFileStore = defineStore({
       }
     },
     onAddToFolderRoutesAction(payload: FileListData) {
-      if (this.folder_routes.find(item => item.id === payload.id)) {
-      } else if (this.folder_routes[this.folder_routes.length - 1]?.id === payload.parent_id) {
+      const other_folders = ['default', 'public'];
+      if (
+        this.folder_routes.at(-1)?.id === payload.parent_id &&
+        !other_folders.includes(payload.identity)
+      ) {
         this.folder_routes.push(payload);
       } else {
         this.folder_routes = [
@@ -148,7 +166,7 @@ export const useFileStore = defineStore({
         this.upload_files.push(payload);
       }
     },
-    onRemoveUploadFileAction(payload?: UploadFileInfo | SaveFileToUserRepoOption) {
+    onRemoveUploadFileAction(payload?: UploadFileInfo | SaveFileToRepoOption) {
       if (payload) {
         this.upload_files = this.upload_files.filter(i => i.name !== payload.name);
       } else {
@@ -163,9 +181,9 @@ export const useFileStore = defineStore({
         console.log(err);
       }
     },
-    async onUploadFilesToUserAction(payload: SaveFileToUserRepoOption) {
+    async onUploadFilesToRepoAction(payload: SaveFileToRepoOption) {
       try {
-        const res = await saveFileToUserRepo(payload);
+        const res = await saveFileToRepo(payload);
         if (res.data.msg === 'success') {
           this.onRemoveUploadFileAction(payload);
           this.onGetFileListAction().then(() => {
@@ -199,7 +217,7 @@ export const useFileStore = defineStore({
     },
     async onCreateFolderAction(payload: CreateFolderOption) {
       try {
-        const res = await createFolder(payload);
+        const res = await createFolder(payload, 'private');
         if (res.data.msg === 'success') {
           await this.onGetFileListAction();
         } else if (res.data.msg === '文件名已存在') {
@@ -211,7 +229,7 @@ export const useFileStore = defineStore({
     },
     async onUpdateFileNameAction(payload: UpdateFileNameOption) {
       try {
-        const res = await updateFileName(payload);
+        const res = await updateFileName(payload, 'private');
         if (res.data.msg === 'success') {
           await this.onGetFileListAction();
         } else {
@@ -222,7 +240,9 @@ export const useFileStore = defineStore({
       }
     },
     async onDeleteFileAction(files: FileListData[]) {
-      Promise.allSettled(files.map(file => (file !== null ? deleteFile(file.identity) : null)))
+      Promise.allSettled(
+        files.map(file => (file !== null ? deleteFile(file.identity, 'private') : null))
+      )
         .then(res => {
           if (res.find(i => (i as any).value?.data?.msg === 'success')) {
             this.onGetFileListAction().then(() => {
@@ -240,7 +260,7 @@ export const useFileStore = defineStore({
     },
     async onMoveFoderAction(payload: MoveFolderOption) {
       try {
-        const res = await moveFolder(payload);
+        const res = await moveFolder(payload, 'private');
         if (res.data.msg === 'success') {
           onSuccess('已保存');
           // this.onJumpToFileAction({ ...payload.file });

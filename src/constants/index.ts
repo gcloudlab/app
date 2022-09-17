@@ -1,8 +1,11 @@
+export const Upload_Url = 'https://gcloud.aoau.top/file/upload';
+
 export const One_Byte = 1024;
 export const Max_Size_Per_Upload = 10 * One_Byte * One_Byte;
 export const One_GB = 1000 * One_Byte * One_Byte;
+
 export const EXTENDS_MAP = {
-  IMAGE: ['jpg', 'png', 'gif', 'bmp', 'jpeg', 'svg'],
+  IMAGE: ['jpg', 'png', 'gif', 'bmp', 'jpeg', 'svg', 'ico'],
   WORD: ['doc', 'docx'],
   CSV: ['csv'],
   CSS: ['css', 'scss', 'less'],
