@@ -1,93 +1,9 @@
-import type { FileIconType, FileListData } from '@/models/file';
+import type { FileListData } from '@/models/file';
+import { Folder } from '@vicons/ionicons5';
 import _ from 'lodash';
-import { transformDate } from './date';
-import { Folder, LogoMarkdown, FileTraySharp } from '@vicons/ionicons5';
-import {
-  DocumentCss20Regular,
-  DocumentTextExtract20Regular,
-  DocumentChevronDouble20Regular,
-  DocumentJavascript20Regular,
-  DocumentPercent20Regular,
-  DocumentPdf32Filled,
-  DocumentBulletList20Regular,
-  MusicNote2Play20Regular,
-  Document20Regular,
-  DocumentBulletListClock20Regular,
-} from '@vicons/fluent';
 import { shallowRef } from 'vue';
-
-const fileType = (ext: string): [type: string, icon: FileIconType | string] => {
-  switch (ext.slice(1).toLowerCase()) {
-    case 'jpg':
-    case 'png':
-    case 'gif':
-    case 'bmp':
-    case 'jpeg':
-    case 'svg':
-      return ['图片', 'media'];
-    case 'doc':
-    case 'docx':
-      return ['文档', { style: 'text-gray-500', icon: shallowRef(DocumentTextExtract20Regular) }];
-    case 'csv':
-      return [
-        'csv',
-        { style: 'text-gray-500', icon: shallowRef(DocumentBulletListClock20Regular) },
-      ];
-    case 'css':
-    case 'scss':
-    case 'less':
-      return ['样式文件', { style: 'text-gray-500', icon: shallowRef(DocumentCss20Regular) }];
-    case 'go':
-    case 'java':
-    case 'py':
-    case 'c':
-    case 'cpp':
-    case 'r':
-    case 'm':
-      return [
-        '源文件',
-        { style: 'text-gray-500', icon: shallowRef(DocumentChevronDouble20Regular) },
-      ];
-    case 'json':
-      return ['json', { style: 'text-yellow-500', icon: shallowRef(DocumentJavascript20Regular) }];
-    case 'js':
-      return [
-        'js脚本',
-        { style: 'text-yellow-500', icon: shallowRef(DocumentJavascript20Regular) },
-      ];
-    case 'xls':
-    case 'xlsx':
-      return ['表格', { style: 'text-gray-500', icon: shallowRef(DocumentPercent20Regular) }];
-    case 'ppt':
-    case 'pptx':
-      return ['幻灯片', { style: 'text-red-400', icon: shallowRef(DocumentTextExtract20Regular) }];
-    case 'pdf':
-      return ['PDF', { style: 'text-gray-500', icon: shallowRef(DocumentPdf32Filled) }];
-    case 'zip':
-    case 'rar':
-      return ['压缩文件', { style: 'text-primary', icon: shallowRef(FileTraySharp) }];
-    case 'txt':
-      return [
-        '文本文件',
-        { style: 'text-gray-500', icon: shallowRef(DocumentBulletList20Regular) },
-      ];
-    case 'mp3':
-    case 'wav':
-      return ['音频文件', { style: 'text-primary', icon: shallowRef(MusicNote2Play20Regular) }];
-    case 'mp4':
-    case 'avi':
-    case 'mov':
-    case 'ogg':
-    case 'webm':
-      return ['视频文件', 'media'];
-    case 'md':
-      return ['markdown', { style: 'text-gray-600', icon: shallowRef(LogoMarkdown) }];
-    case '':
-      return ['文件夹', { style: 'text-primary', icon: shallowRef(Folder) }];
-    default:
-      return [ext, { style: 'text-gray-500', icon: shallowRef(Document20Regular) }];
-  }
-};
+import { transformDate } from './date';
+import { generate_file_icon } from './generate_file_icon';
 
 const generateTree = (list: FileListData[] | any) => {
   const id: any = {};
@@ -111,7 +27,7 @@ const generateTree = (list: FileListData[] | any) => {
   });
 
   list.map((row: FileListData) => {
-    const [type, icon] = fileType(row.ext!);
+    const [type, icon] = generate_file_icon(row.ext!);
     row.type = type;
     row.icon = icon;
     row.updated_at = transformDate(row.updated_at!);

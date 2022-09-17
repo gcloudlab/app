@@ -9,6 +9,7 @@
         :key="file.id"
         class="flex flex-col justify-end items-center w-18 px-1 mx-2 mb-5 transition-all duration-200 hover:bg-gray-100 hover:shadow hover:rounded-lg animate__animated animate__fadeIn faster"
       >
+        <!-- file icon -->
         <Folder
           v-if="file?.type === '文件夹' && file.path === '' && file.size === 0"
           class="w-10 text-primary cursor-pointer"
@@ -31,14 +32,13 @@
               root: '#image-scroll-container',
             }"
             :on-load="handleOnLoad"
-          />
-          <div
-            v-if="isLoadingImg"
-            class="z-10 w-18 h-12 absolute right-0 left-0"
-            style="top: -27px"
           >
-            <n-skeleton width="100%" height="100%" :sharp="false" />
-          </div>
+            <template #placeholder>
+              <div style="width: 70px; height: 46px; margin-top: -15px">
+                <n-skeleton width="100%" height="100%" :sharp="false" />
+              </div>
+            </template>
+          </n-image>
         </div>
         <video
           v-else-if="file.type === '视频文件'"
