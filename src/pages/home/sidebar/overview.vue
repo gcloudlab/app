@@ -5,41 +5,30 @@
       v-if="files_count !== -1 || !fetching"
       class="pb-2 animate__animated animate__fadeIn faster"
     >
-      <div class="analysize px-3 text-sm flex justify-start items-center">
-        <div class="flex-none">存储：</div>
-        <n-progress
-          class="w-12"
-          type="line"
-          :stroke-width="6"
-          indicator-placement="inside"
-          :color="themeVars.errorColor"
-          :indicator-text-color="themeVars.infoColor"
-          :rail-color="themeVars.primaryColor"
-          :percentage="Number((files_size / 10485760).toFixed(2))"
-          processing
-        />
-        <div class="pl-2">
-          <n-number-animation
-            :from="0"
-            :to="Number(transformSize(files_size).slice(0, transformSize(files_size).length - 2))"
-            :precision="1"
-          />
-        </div>
+      <ProgressView
+        label="私有存储"
+        :percentage="Number((files_size / 10485760).toFixed(2))"
+        :from="0"
+        :to="Number(transformSize(files_size).slice(0, transformSize(files_size).length - 2))"
+        :precision="1"
+      >
         {{ transformSize(files_size).slice(-2) }}
-      </div>
-      <div class="analysize text-sm p-3 flex justify-start items-center">
-        <div class="flex-none">文件：</div>
-        <n-progress
-          type="line"
-          :stroke-width="6"
-          indicator-placement="inside"
-          :color="themeVars.errorColor"
-          :percentage="files_count"
-          :rail-color="themeVars.primaryColor"
-          processing
-        />
-        <div class="pl-2"><n-number-animation :from="0" :to="files_count" /></div>
-      </div>
+      </ProgressView>
+      <ProgressView
+        label="公共存储"
+        :percentage="Number((public_size / 10485760).toFixed(2))"
+        :from="0"
+        :to="Number(transformSize(public_size).slice(0, transformSize(public_size).length - 2))"
+        :precision="1"
+      >
+        {{ transformSize(public_size).slice(-2) }}
+      </ProgressView>
+      <ProgressView
+        label="总文件数"
+        :percentage="files_count + public_count"
+        :from="0"
+        :to="files_count + public_count"
+      />
     </div>
     <div v-else class="px-3 pb-2">
       <n-skeleton text :repeat="2" :sharp="false" />
@@ -52,12 +41,13 @@ import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { NDivider, NProgress, NSkeleton, NNumberAnimation, useThemeVars } from 'naive-ui';
 import { transformSize } from '@/utils/transform-size';
+import ProgressView from '@/components/progress-view/index.vue';
 
 const fileStore = useFileOutsideStore();
 const themeVars = useThemeVars();
 // console.log(themeVars.value.primaryColor);
 
-const { files_count, files_size, fetching } = storeToRefs(fileStore);
+const { files_count, public_count, files_size, public_size, fetching } = storeToRefs(fileStore);
 </script>
 
 <style lang="scss">

@@ -55,7 +55,7 @@ export const useFileStore = defineStore({
   getters: {
     get_files_count: state => state.files_count,
     get_user_files: state => state.user_files,
-    get_user_files_size: state => state.files_size,
+    get_total_files_size: state => state.files_size + state.public_size,
     get_folder_routes: state => state.folder_routes,
     get_upload_files: state => state.upload_files,
     get_uploading_files_count: state => state.upload_files.length,
@@ -86,7 +86,13 @@ export const useFileStore = defineStore({
           this.files_size = size;
           this.public_size = public_size;
           this.fetching = false;
-          // console.log('--store-all files', this.user_files, public_count, public_size);
+          // console.log(
+          //   '--store-all files',
+          //   this.user_files,
+          //   this.files_count,
+          //   public_count,
+          //   public_size
+          // );
         }
       } catch (error) {
         useTimer(() => {

@@ -55,7 +55,7 @@ export const useFiles = () => {
   };
 
   return {
-    total_size: fileStore.get_user_files_size,
+    total_size: fileStore.get_total_files_size,
     onGetFileList,
     onAddToFolderRoutes,
     onRemoveFromFolderRoutes,
