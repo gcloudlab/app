@@ -47,7 +47,7 @@
           v-else-if="file.type === '视频文件'"
           class="shadow-md rounded"
           width="70"
-          style="max-height: 46px"
+          style="height: 46px"
           @click="handleSelectedKeys(file)"
         >
           <source :src="file.path" type="video/mp4" />
