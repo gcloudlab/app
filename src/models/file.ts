@@ -10,6 +10,7 @@ export interface FileListResponseData {
   size: number;
   ext?: string;
   updated_at?: string;
+  owner?: string;
 }
 
 export interface FileListResponse {

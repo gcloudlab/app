@@ -41,7 +41,9 @@
         <FileFolderRoute :routes="folder_routes" />
         <n-tag :bordered="false" size="small" type="info">
           共{{
-            folder_routes.at(-1)!.size === -1
+            folder_routes.at(-1)?.name === '公共文件夹'
+              ? `${transformSize(public_size)}`
+              : folder_routes.at(-1)!.size === -1
               ? `${transformSize(files_size)}`
               : `${transformSize(folder_routes.at(-1)!.size)}`
           }}
@@ -137,7 +139,7 @@ const handleChangeViewType = () => {
   fileViewType.value = fileViewType.value === 'list' ? 'graphical' : 'list';
 };
 
-const { folder_routes, files_size } = storeToRefs(fileStore);
+const { folder_routes, files_size, public_size } = storeToRefs(fileStore);
 
 // watch(folder_routes, (newValue, oldValue) => {
 //   console.log('folder_routes', newValue, oldValue);

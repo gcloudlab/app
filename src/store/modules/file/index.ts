@@ -23,9 +23,11 @@ import useTimer from '@/hooks/useTimer';
 
 export interface FileState {
   files_count: number;
+  public_count: number;
   user_files: FileListData[];
   public_files: FileListData[];
   files_size: number;
+  public_size: number;
   folder_routes: FileListData[];
   upload_files: UploadFileInfo[];
   origin_folders: {
@@ -40,9 +42,11 @@ export const useFileStore = defineStore({
   state: () =>
     ({
       files_count: -1,
+      public_count: -1,
       user_files: [],
       public_files: [],
       files_size: -1,
+      public_size: -1,
       folder_routes: [{ id: -1, name: '主菜单', size: -1, parent_id: 0, identity: 'root' }],
       upload_files: [],
       origin_folders: [],
@@ -75,19 +79,20 @@ export const useFileStore = defineStore({
               item.children = public_result;
             }
           });
-          // console.log(public_result);
-
           this.user_files = result;
           this.origin_folders = result;
           this.files_count = count;
+          this.public_count = public_count;
           this.files_size = size;
+          this.public_size = public_size;
           this.fetching = false;
-          // console.log('--store-all files', this.user_files);
+          // console.log('--store-all files', this.user_files, public_count, public_size);
         }
       } catch (error) {
         useTimer(() => {
           this.fetching = false;
           this.files_count = 0;
+          this.public_count = 0;
         }, 3);
       }
     },
@@ -122,19 +127,21 @@ export const useFileStore = defineStore({
     onJumpToFileAction(payload: FileListData) {
       if (!payload?.isFolder && payload) {
         const parent_id = payload.parent_id;
-        if (parent_id === 0) {
-          this.folder_routes = [
-            {
-              id: -1,
-              name: '主菜单',
-              size: -1,
-              parent_id: 0,
-              identity: 'root',
-            },
-            this.user_files[this.user_files.length - 1],
-          ];
-          return;
-        }
+        // Bug: 我也不知道为啥注释掉这里就能正常运行了hhhh焯
+        // if (parent_id === 0) {
+        //   this.folder_routes = [
+        //     {
+        //       id: -1,
+        //       name: '主菜单',
+        //       size: -1,
+        //       parent_id: 0,
+        //       identity: 'root',
+        //     },
+        //     this.user_files[this.user_files.length - 1],
+        //   ];
+        //   return;
+        // }
+
         const parentFolders = findParents(this.user_files, parent_id);
         if (parentFolders && parentFolders.length > 0) {
           this.folder_routes = [

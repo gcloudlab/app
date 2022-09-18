@@ -9,7 +9,7 @@
     </div>
     <n-scrollbar class="shadow-inner bg-gradient-to-b from-green-50" style="height: 200px">
       <n-tree
-        v-if="files_count > 0"
+        v-if="files_count > 0 && public_count > 0"
         class="mt-2 ml-1.5 tree md:w-60"
         block-line
         :data="user_files"
@@ -75,7 +75,7 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
     // },
   };
 };
-const { files_count, user_files, fetching } = storeToRefs(fileStore);
+const { files_count, public_count, user_files, fetching } = storeToRefs(fileStore);
 </script>
 
 <style lang="scss">

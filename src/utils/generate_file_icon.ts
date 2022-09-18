@@ -1,6 +1,5 @@
-import { Folder, LogoMarkdown, FileTraySharp } from '@vicons/ionicons5';
+import { Folder, LogoMarkdown, FileTraySharp, LogoHtml5, LogoCss3 } from '@vicons/ionicons5';
 import {
-  DocumentCss20Regular,
   DocumentTextExtract20Regular,
   DocumentChevronDouble20Regular,
   DocumentJavascript20Regular,
@@ -24,9 +23,11 @@ export const generate_file_icon = (ext: string): [type: string, icon: FileIconTy
   } else if (EXTENDS_MAP.WORD.includes(_ext)) {
     return ['文档', { style: 'text-gray-500', icon: shallowRef(DocumentTextExtract20Regular) }];
   } else if (EXTENDS_MAP.CSV.includes(_ext)) {
-    return ['csv', { style: 'text-gray-500', icon: shallowRef(DocumentBulletListClock20Regular) }];
+    return ['CSV', { style: 'text-gray-500', icon: shallowRef(DocumentBulletListClock20Regular) }];
+  } else if (EXTENDS_MAP.HTML.includes(_ext)) {
+    return ['HTML', { style: 'text-red-400', icon: shallowRef(LogoHtml5) }];
   } else if (EXTENDS_MAP.CSS.includes(_ext)) {
-    return ['样式文件', { style: 'text-gray-500', icon: shallowRef(DocumentCss20Regular) }];
+    return ['样式文件', { style: 'text-blue-500', icon: shallowRef(LogoCss3) }];
   } else if (EXTENDS_MAP.CODE_SOURCE.includes(_ext)) {
     return [
       `${_ext}源文件`,

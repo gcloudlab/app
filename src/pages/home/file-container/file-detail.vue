@@ -27,7 +27,7 @@
           <n-skeleton width="160px" height="83px" :repeat="1" :sharp="false" />
         </div>
 
-        <div class="flex justify-start items-center flex-wrap mt-2">
+        <div class="flex justify-start items-center flex-nowrap mt-2">
           <n-icon
             v-if="file.icon !== 'media'"
             class="mr-2 text-gray-100 cursor-pointer"
@@ -39,6 +39,7 @@
         <p>文件大小：{{ transformSize(file.size) }}</p>
         <p v-show="file.isFolder">文件数量：{{ file.children?.length }}</p>
         <p>文件类型：{{ file.type }}</p>
+        <p v-show="file?.owner">上传用户：{{ file.owner }}</p>
         <p v-show="file.updated_at">修改日期：{{ file.updated_at }}</p>
         <div class="flex">
           <n-button
