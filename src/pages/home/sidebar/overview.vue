@@ -23,12 +23,7 @@
       >
         {{ transformSize(public_size).slice(-2) }}
       </ProgressView>
-      <ProgressView
-        label="总文件数"
-        :percentage="files_count + public_count"
-        :from="0"
-        :to="files_count + public_count"
-      />
+      <ProgressView label="私有文件" :percentage="files_count" :from="0" :to="files_count" />
     </div>
     <div v-else class="px-3 pb-2">
       <n-skeleton text :repeat="2" :sharp="false" />
