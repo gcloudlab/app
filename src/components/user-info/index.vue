@@ -37,6 +37,11 @@
       <Tips />
       <UpdateLog />
     </div>
+    <p class="text-primary text-center">
+      𝑾𝒆 𝒐𝒑𝒆𝒏
+      <a href="https://github.com/gcloudlab/app" target="_blank" class="text-secondary">𝒔𝒐𝒖𝒓𝒄𝒆</a> -
+      𝑮𝑪𝒍𝒐𝒖𝒅 开源团队
+    </p>
 
     <n-divider />
     <div class="sign-action">
@@ -75,12 +80,12 @@ const { onLogout, onChangeAvatar, onUpdateUserInfo } = useAuth();
 const handleLogout = () => {
   onLogout();
   router.push('/sign');
-}
+};
 const handleChangeAvatar = async () => {
   const avatar_url = randomAvatar();
   onChangeAvatar(avatar_url);
   await onUpdateUserInfo({ avatar: avatar_url });
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

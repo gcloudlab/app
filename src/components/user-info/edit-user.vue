@@ -2,7 +2,7 @@
   <Drawer v-model:show="show" width="40%">
     <template #trigger>
       <n-button class="mr-1" tertiary type="primary" size="small" @click="handleEditUserInfo">
-        编辑
+        编辑资料
       </n-button>
     </template>
     <template #header> 修改个人资料</template>
@@ -27,7 +27,7 @@ const props = defineProps({
 const show = ref(false);
 const handleEditUserInfo = () => {
   show.value = true;
-}
+};
 
 toRefs(props);
 </script>

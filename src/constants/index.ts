@@ -12,7 +12,7 @@ export const EXTENDS_MAP = {
   CSS: ['css', 'scss', 'less'],
   CODE_SOURCE: ['go', 'java', 'py', 'c', 'cpp', 'r', 'm'],
   JSON: ['json'],
-  JAVASCRIPT: ['js'],
+  JAVASCRIPT: ['js', 'ejs', 'ts', 'tsx', 'jsx'],
   EXCEL: ['xls', 'xlsx'],
   PPT: ['ppt', 'pptx'],
   PDF: ['pdf'],
