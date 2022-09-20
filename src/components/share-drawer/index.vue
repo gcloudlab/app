@@ -5,7 +5,6 @@
         <template #icon>
           <n-icon><ShareSocial /></n-icon>
         </template>
-        分享享
       </n-button>
     </template>
     <template #header> 正在分享{{ file.name }}</template>

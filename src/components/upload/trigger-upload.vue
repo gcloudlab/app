@@ -29,7 +29,13 @@
         </div>
       </n-upload-trigger>
       <div class="flex justify-between flex-none bg-green-100">
-        <n-popselect v-model:value="uploadFolder.value" size="medium" scrollable trigger="hover">
+        <n-popselect
+          v-model:value="uploadFolder.value"
+          placement="left"
+          size="medium"
+          scrollable
+          trigger="hover"
+        >
           <template #empty>
             <span class="text-xs text-primary">
               {{ origin_folders.length === 0 ? '建议新建文件夹' : '单文件上传限制10MB' }}</span

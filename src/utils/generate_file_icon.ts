@@ -58,7 +58,7 @@ export const generate_file_icon = (ext: string): [type: string, icon: FileIconTy
   } else if (EXTENDS_MAP.MARKDOWN.includes(_ext)) {
     return ['markdown', { style: 'text-secondary', icon: shallowRef(LogoMarkdown) }];
   } else if (EXTENDS_MAP.LINK.includes(_ext)) {
-    return ['markdown', { style: 'text-secondary', icon: shallowRef(DocumentLink24Regular) }];
+    return ['link', { style: 'text-secondary', icon: shallowRef(DocumentLink24Regular) }];
   } else {
     return [_ext, { style: 'text-gray-500', icon: shallowRef(Document20Regular) }];
   }

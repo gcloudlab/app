@@ -42,46 +42,49 @@
         <p v-show="file?.owner">上传用户：{{ file.owner }}</p>
         <p v-show="file.updated_at">修改日期：{{ file.updated_at }}</p>
         <!-- Btn action -->
-        <div class="text-center">
-          <n-button-group class="w-full">
-            <n-button type="primary" size="small" @click.prevent="handleDownload(file)">
-              <template #icon>
-                <n-icon><CloudDownloadOutline /></n-icon>
-              </template>
-              下载
-            </n-button>
-            <ShareDrawer :file="file" class="" />
-          </n-button-group>
-          <n-button-group v-show="!file.owner || file.owner === auth?.name" class="w-full" vertical>
-            <n-popover
-              :show="showFolderTree"
-              placement="bottom"
-              trigger="manual"
-              @clickoutside="showFolderTree = false"
-            >
-              <template #trigger>
-                <n-button type="info" size="small" @click="handleMoveFile(file)">
-                  <template #icon>
-                    <n-icon><MoveOutline /></n-icon>
-                  </template>
-                  移动
-                </n-button>
-              </template>
-              <FolderTree
-                v-if="origin_folders.length > 0"
-                :data="origin_folders"
-                :node-props="nodeProps"
-              />
-              <div v-else class="text-xs text-center">请先新建文件夹</div>
-            </n-popover>
-            <n-button type="error" size="small" @click="handleDeleteFile">
-              <template #icon>
-                <n-icon><TrashOutline /></n-icon>
-              </template>
-              删除
-            </n-button>
-          </n-button-group>
+        <div class="flex justify-center w-full">
+          <n-button
+            class="flex-1"
+            type="primary"
+            size="small"
+            @click.prevent="handleDownload(file)"
+          >
+            <template #icon>
+              <n-icon><CloudDownloadOutline /></n-icon>
+            </template>
+          </n-button>
+          <PreviewDrawer :file="file" />
+          <ShareDrawer class="flex-2" :file="file" />
         </div>
+        <n-button-group v-show="!file.owner || file.owner === auth?.name" class="w-full" vertical>
+          <n-popover
+            :show="showFolderTree"
+            placement="bottom"
+            trigger="manual"
+            @clickoutside="showFolderTree = false"
+          >
+            <template #trigger>
+              <n-button type="info" size="small" @click="handleMoveFile(file)">
+                <template #icon>
+                  <n-icon><MoveOutline /></n-icon>
+                </template>
+                移动
+              </n-button>
+            </template>
+            <FolderTree
+              v-if="origin_folders.length > 0"
+              :data="origin_folders"
+              :node-props="nodeProps"
+            />
+            <div v-else class="text-xs text-center">请先新建文件夹</div>
+          </n-popover>
+          <n-button type="error" size="small" @click="handleDeleteFile">
+            <template #icon>
+              <n-icon><TrashOutline /></n-icon>
+            </template>
+            删除
+          </n-button>
+        </n-button-group>
       </n-card>
       <DragUpload class="w-full h-28" />
     </n-scrollbar>
@@ -111,6 +114,7 @@ import downloadByUrl from '@/utils/download-by-url';
 import { onInfo } from '@/utils/messages';
 import DragUpload from '@/components/upload/trigger-upload.vue';
 import ShareDrawer from '@/components/share-drawer/index.vue';
+import PreviewDrawer from '@/components/preview-drawer/index.vue';
 import { CloudDownloadOutline, MoveOutline, TrashOutline } from '@vicons/ionicons5';
 const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 const VideoPlayground = defineAsyncComponent(() => import('@/components/video/index.vue'));
