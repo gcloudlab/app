@@ -7,11 +7,14 @@
       <div class="auth_options-text rounded-lg shadow-md">
         <div class="auth_options-unregistered">
           <h1 class="auth_unregistered-title font-black tracking-wide">GCloud 云盘</h1>
-          <h2 class="leading-10">让我康康还有谁没注册😰</h2>
+          <!-- <h2 class="leading-10">让我康康还有谁没注册😰</h2> -->
           <p class="auth_unregistered-text">
             tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
           </p>
           <n-button type="primary" round class="auth_unregistered-signup" @click="onChangeToSignup">
+            <template #icon>
+              <n-icon><log-in-icon /></n-icon>
+            </template>
             去注册
           </n-button>
           <n-button type="warning" secondary round class="ml-3" @click="router.back()"
@@ -21,9 +24,11 @@
 
         <div class="auth_options-registered">
           <h1 class="auth_unregistered-title font-black tracking-wide">GCloud 云盘</h1>
-          <h2 class="leading-10">已有账号请移步登陆</h2>
-          <p class="auth_registered-text">左拐不送。</p>
+          <p class="auth_registered-text">已有账号请移步登陆，左拐不送。</p>
           <n-button type="primary" round class="auth_registered-login" @click="onChangeToSignin">
+            <template #icon>
+              <n-icon><log-in-icon /></n-icon>
+            </template>
             去登陆
           </n-button>
         </div>
@@ -44,7 +49,7 @@
           <InfoCollection sign-type="signin" />
         </div>
         <div v-else class="auth_forms-signup">
-          <div class="flex justify-between" style="margin-top: -30px">
+          <div class="flex justify-between" style="margin-top: -60px">
             <h1 class="text-2xl antialiased font-mono font-extrabold">Sign up</h1>
             <Vue3Lottie class="mr-0 mt-2" :animation-data="SpaceJson" :height="50" :width="50" />
           </div>
@@ -57,12 +62,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import InfoCollection from './info-collection.vue';
-import { NButton } from 'naive-ui';
+import { NButton, NIcon } from 'naive-ui';
 import SpaceJson from '@/assets/lotties/space.json';
 import './index.scss';
+import { LogInOutline as LogInIcon } from '@vicons/ionicons5';
 
 export type FormStatus = 'signin' | 'signup';
 
@@ -76,14 +82,14 @@ const onChangeToSignin = () => {
     bounceLeft: false,
     bounceRight: true,
   };
-}
+};
 const onChangeToSignup = () => {
   formStatus.value = 'signup';
   formClass.value = {
     bounceLeft: true,
     bounceRight: false,
   };
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

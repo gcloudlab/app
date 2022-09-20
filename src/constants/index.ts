@@ -10,7 +10,7 @@ export const EXTENDS_MAP = {
   CSV: ['csv'],
   HTML: ['html', 'xml', 'xhtml'],
   CSS: ['css', 'scss', 'less'],
-  CODE_SOURCE: ['go', 'java', 'py', 'c', 'cpp', 'r', 'm'],
+  CODE_SOURCE: ['go', 'java', 'py', 'c', 'cpp', 'r', 'm', 'api'],
   JSON: ['json'],
   JAVASCRIPT: ['js', 'ejs', 'ts', 'tsx', 'jsx'],
   EXCEL: ['xls', 'xlsx'],
@@ -21,4 +21,5 @@ export const EXTENDS_MAP = {
   AUDIO: ['mp3', 'wav'],
   VIDEO: ['mp4', 'avi', 'mov', 'ogg', 'webm'],
   MARKDOWN: ['md'],
+  LINK: ['lnk', 'link'],
 };

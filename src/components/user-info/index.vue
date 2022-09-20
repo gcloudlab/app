@@ -51,9 +51,17 @@
         size="small"
         @click="handleLogout"
       >
+        <template #icon>
+          <n-icon><LogOutIcon /></n-icon>
+        </template>
         注销
       </n-button>
-      <n-button v-else type="default" size="small" @click="router.push('/sign')"> 登陆 </n-button>
+      <n-button v-else type="default" size="small" @click="router.push('/sign')"
+        ><template #icon>
+          <n-icon><LogInIcon /></n-icon>
+        </template>
+        登陆
+      </n-button>
     </div>
   </div>
 </template>
@@ -65,11 +73,12 @@ import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { useAuth } from '@/hooks';
 import Tips from '@/components/tips/index.vue';
-import { NButton, NDivider } from 'naive-ui';
+import { NButton, NDivider, NIcon } from 'naive-ui';
 import { getTimeState } from '@/utils/date';
 import { onInfo } from '@/utils/messages';
 import randomAvatar from '@/utils/random-avatar';
 import EditUser from './edit-user.vue';
+import { LogOutOutline as LogOutIcon, LogInOutline as LogInIcon } from '@vicons/ionicons5';
 const UpdateLog = defineAsyncComponent(() => import('@/components/update-log/index.vue'));
 
 const router = useRouter();

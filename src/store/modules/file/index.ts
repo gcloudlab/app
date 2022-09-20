@@ -131,7 +131,7 @@ export const useFileStore = defineStore({
       });
     },
     onJumpToFileAction(payload: FileListData) {
-      if (!payload?.isFolder && payload) {
+      if (payload?.type !== '文件夹' && payload) {
         const parent_id = payload.parent_id;
         // Bug: 我也不知道为啥注释掉这里就能正常运行了hhhh焯
         // if (parent_id === 0) {
@@ -169,6 +169,7 @@ export const useFileStore = defineStore({
         this.upload_files.map(i => {
           if (i.name === payload.name) {
             i.status = payload.status;
+            i.percentage = payload.percentage;
           }
         });
         return;
@@ -212,7 +213,7 @@ export const useFileStore = defineStore({
           onError('已存在同名文件');
           this.upload_files.map(i => {
             if (i.name === payload.name) {
-              i.status = 'error';
+              i.status = 'error'; // or 'pending'?
             }
           });
           // this.onRemoveUploadFileAction(payload);
@@ -276,7 +277,9 @@ export const useFileStore = defineStore({
         const res = await moveFolder(payload, 'private');
         if (res.data.msg === 'success') {
           onSuccess('已保存');
-          // this.onJumpToFileAction({ ...payload.file });
+          this.onGetFileListAction().then(() => {
+            this.onJumpToFileAction({ ...payload.file });
+          });
         } else {
           onWarning(res.data.msg);
         }

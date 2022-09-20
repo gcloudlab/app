@@ -9,6 +9,7 @@ import {
   MusicNote2Play20Regular,
   Document20Regular,
   DocumentBulletListClock20Regular,
+  DocumentLink24Regular,
 } from '@vicons/fluent';
 import { shallowRef } from 'vue';
 import { EXTENDS_MAP } from '@/constants';
@@ -31,7 +32,7 @@ export const generate_file_icon = (ext: string): [type: string, icon: FileIconTy
   } else if (EXTENDS_MAP.CODE_SOURCE.includes(_ext)) {
     return [
       `${_ext}源文件`,
-      { style: 'text-gray-500', icon: shallowRef(DocumentChevronDouble20Regular) },
+      { style: 'text-green-600', icon: shallowRef(DocumentChevronDouble20Regular) },
     ];
   } else if (EXTENDS_MAP.JSON.includes(_ext)) {
     return ['json', { style: 'text-yellow-500', icon: shallowRef(DocumentJavascript20Regular) }];
@@ -56,6 +57,8 @@ export const generate_file_icon = (ext: string): [type: string, icon: FileIconTy
     return ['视频文件', 'media'];
   } else if (EXTENDS_MAP.MARKDOWN.includes(_ext)) {
     return ['markdown', { style: 'text-secondary', icon: shallowRef(LogoMarkdown) }];
+  } else if (EXTENDS_MAP.LINK.includes(_ext)) {
+    return ['markdown', { style: 'text-secondary', icon: shallowRef(DocumentLink24Regular) }];
   } else {
     return [_ext, { style: 'text-gray-500', icon: shallowRef(Document20Regular) }];
   }

@@ -1,7 +1,7 @@
 <template>
   <n-form
     ref="formRef"
-    class="mt-6"
+    class=""
     :model="model"
     :show-label="false"
     :rules="rules"
@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { PropType, ref, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
-import { FormInst, FormItemRule, FormRules, NInput, NFormItem, NButton, NForm } from 'naive-ui';
+import { FormInst, FormRules, NInput, NFormItem, NButton, NIcon, NForm } from 'naive-ui';
 import { useAuth } from '@/hooks';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { validateEmail } from '@/utils/email';
