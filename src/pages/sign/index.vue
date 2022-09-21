@@ -17,9 +17,12 @@
             </template>
             去注册
           </n-button>
-          <n-button type="warning" secondary round class="ml-3" @click="router.back()"
-            >返回</n-button
-          >
+          <n-button type="warning" secondary round class="ml-3" @click="router.back()">
+            <template #icon>
+              <n-icon><ArrowBackOutline /></n-icon>
+            </template>
+            返回
+          </n-button>
         </div>
 
         <div class="auth_options-registered">
@@ -68,7 +71,7 @@ import InfoCollection from './info-collection.vue';
 import { NButton, NIcon } from 'naive-ui';
 import SpaceJson from '@/assets/lotties/space.json';
 import './index.scss';
-import { LogInOutline as LogInIcon } from '@vicons/ionicons5';
+import { LogInOutline as LogInIcon, ArrowBackOutline } from '@vicons/ionicons5';
 
 export type FormStatus = 'signin' | 'signup';
 

@@ -8,7 +8,7 @@
     >
       <n-badge :dot="unread_count > 0" :processingt="unread_count > 0">
         <n-icon
-          class="mr-5 mt-2 text-primary cursor-pointer hover:text-gray-500"
+          class="mr-4 mt-1 text-primary cursor-pointer hover:text-gray-500"
           :component="Alert20Regular"
           size="23"
         />
@@ -59,7 +59,7 @@ const handleSelect = (key: string | number, option: DropdownOption) => {
 .notification {
   .n-badge .n-badge-sup {
     left: 18px;
-    top: 7px;
+    top: 4px;
   }
 }
 </style>

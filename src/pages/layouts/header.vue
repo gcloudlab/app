@@ -27,6 +27,13 @@
       </n-tab>
       <template #suffix>
         <GlobalNotification />
+        <p
+          v-if="!auth?.name"
+          class="mr-4 mt-3 cursor-pointer text-primary text-sm hover:text-secondary"
+          @click="router.push('/sign')"
+        >
+          注册
+        </p>
         <Avatar
           :src="auth?.avatar || defaultAvatar"
           size="large"

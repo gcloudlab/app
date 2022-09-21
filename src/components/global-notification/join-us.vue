@@ -11,7 +11,7 @@
         𝑾𝒆 𝒐𝒑𝒆𝒏
         <a href="https://github.com/gcloudlab/app" target="_blank" class="text-secondary">𝒔𝒐𝒖𝒓𝒄𝒆</a>
       </h2>
-      <div>...</div>
+      <div>码字中...</div>
       <p class="text-center">𝑮𝑪𝒍𝒐𝒖𝒅 开源团队</p>
     </div>
   </Drawer>
