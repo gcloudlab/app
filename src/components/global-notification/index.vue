@@ -14,8 +14,6 @@
         />
       </n-badge>
     </n-dropdown>
-    <!-- <HowToUse />
-    <JoinUs /> -->
   </div>
 </template>
 

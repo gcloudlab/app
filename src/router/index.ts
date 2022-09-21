@@ -1,5 +1,5 @@
 import { createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router';
-
+import { isMobile } from '@/utils/is-mobile';
 const Layouts = () => import('@/pages/layouts/index.vue');
 const Home = () => import('@/pages/home/index.vue');
 const Share = () => import('@/pages/share/index.vue');
@@ -7,6 +7,7 @@ const Xswl = () => import('@/pages/picture/index.vue');
 const Sign = () => import('@/pages/sign/index.vue');
 const NotFound = () => import('@/pages/notfound/index.vue');
 const TsxDemo = () => import('@/pages/tsx-demo');
+const Mobile = () => import('@/components/mobile/index.vue');
 
 const routes: RouteRecordRaw[] = [
   {
@@ -35,7 +36,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/sign',
     name: 'sign',
-    component: Sign,
+    component: !isMobile() ? Sign : Mobile,
   },
   {
     path: '/tsx-demo',

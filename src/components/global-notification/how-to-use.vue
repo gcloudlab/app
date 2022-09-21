@@ -1,7 +1,9 @@
 <template>
   <Drawer v-model:show="show" width="60%">
     <template #trigger>
-      <div class="text-sm px-5 py-2 hover:text-primary" @click="show = true">🍀 使用说明</div>
+      <div class="text-sm px-5 py-2 cursor-pointer hover:text-primary" @click="show = true">
+        🍀 使用说明
+      </div>
     </template>
     <template #header> 如何使用GCloud云盘？</template>
     <div>

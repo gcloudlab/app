@@ -1,7 +1,9 @@
 <template>
   <Drawer v-model:show="show" width="60%">
     <template #trigger>
-      <div class="text-sm px-5 py-2 hover:text-primary" @click="show = true">😙 加入我们</div>
+      <div class="text-sm px-5 py-2 cursor-pointer hover:text-primary" @click="show = true">
+        😙 加入我们
+      </div>
     </template>
     <template #header> 加入我们</template>
     <div class="flex flex-col">

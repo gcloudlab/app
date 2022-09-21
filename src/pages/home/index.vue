@@ -1,7 +1,10 @@
 <template>
-  <div class="home flex">
+  <div class="home flex" :class="[isMobile() ? 'flex-col-reverse' : '']">
     <!-- sider -->
-    <div class="file-tree-bar w-60 animate__animated animate__fadeIn faster">
+    <div
+      class="file-tree-bar animate__animated animate__fadeIn faster"
+      :class="[isMobile() ? 'w-full' : 'w-60']"
+    >
       <n-scrollbar style="max-height: calc(100vh - 60px)">
         <FileMenu
           @selectedKeys="handleSelectedKeys"
@@ -89,6 +92,7 @@ import { transformSize } from '@/utils/transform-size';
 import { TreeOption, NTag, NButton, NScrollbar } from 'naive-ui';
 import { ChevronBack, AppsSharp, Menu, Refresh } from '@vicons/ionicons5';
 import MainNav from './main-nav/index.vue';
+import { isMobile } from '@/utils/is-mobile';
 
 const FileMenu = defineAsyncComponent(() => import('./sidebar/file-menu.vue'));
 const Overview = defineAsyncComponent(() => import('./sidebar/overview.vue'));
