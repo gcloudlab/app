@@ -23,12 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import { NDivider, NSkeleton, NNumberAnimation } from 'naive-ui';
 import { storeToRefs } from 'pinia';
 import { useGlobalOutsideStore } from '@/store/modules/global';
 import { useRegisterCount } from '@/hooks/useGlobal';
-const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
 const globalStore = useGlobalOutsideStore();
 onMounted(() => {

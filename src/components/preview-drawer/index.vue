@@ -11,7 +11,7 @@
     <n-scrollbar v-if="!loading" style="max-height: calc(100vh - 60px)">
       <div>
         <v-md-preview v-if="file.type === 'markdown'" :text="file_preview_data"></v-md-preview>
-        <div v-else-if="file.type === 'HTML'" v-html="file_preview_data"></div>
+        <!-- <div v-else-if="file.type === 'HTML'" v-html="file_preview_data"></div> -->
         <pre v-else>{{ file_preview_data }}</pre>
       </div>
     </n-scrollbar>

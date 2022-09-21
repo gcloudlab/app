@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
-import { NDivider, NProgress, NSkeleton, NNumberAnimation, useThemeVars } from 'naive-ui';
+import { NDivider, NSkeleton, useThemeVars } from 'naive-ui';
 import { transformSize } from '@/utils/transform-size';
 import ProgressView from '@/components/progress-view/index.vue';
 

@@ -26,6 +26,7 @@
         {{ item.label }}
       </n-tab>
       <template #suffix>
+        <GlobalNotification />
         <Avatar
           :src="auth?.avatar || defaultAvatar"
           size="large"
@@ -47,6 +48,7 @@ import Avatar from '@/components/avatar/index.vue';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import Logo from '@/assets/gcloud.png';
 import defaultAvatar from '@/assets/logo.png';
+import GlobalNotification from '@/components/global-notification/index.vue';
 
 const router = useRouter();
 const authStore = useAuthOutsideStore();
@@ -65,7 +67,6 @@ const { auth } = storeToRefs(authStore);
 .layout-header {
   /* background: rgba(253, 243, 243, 0.299); */
   .n-tabs {
-    /* background: rgba(255, 255, 255, 0); */
     backdrop-filter: saturate(150%) blur(8px);
     -webkit-backdrop-filter: saturate(150%) blur(8px);
   }

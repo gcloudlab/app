@@ -69,14 +69,21 @@ const status = computed(() => {
     return 'success';
   }
   return 'warning';
-})
+});
 
 const handleLogout = () => {
   onLogout();
   router.push('/sign');
-}
+};
 
 toRefs(props);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.avatar {
+  .n-badge.n-badge--dot .n-badge-sup {
+    left: 40px;
+    top: 36px;
+  }
+}
+</style>

@@ -15,11 +15,12 @@
         </div>
       </div>
 
-      <div class="flex">
+      <div class="flex justify-between">
         <EditUser :data="auth!" />
         <n-button tertiary type="primary" size="small" @click="handleChangeAvatar">
           换个头像
         </n-button>
+        <UpdateLog />
       </div>
     </div>
     <n-divider />
@@ -29,22 +30,9 @@
       <p class="hover:text-primary transition-color duration-200 cursor-pointer">🎯 我的收藏</p>
       <p class="hover:text-primary transition-color duration-200 cursor-pointer">🤮 回收站</p>
     </div>
-    <n-divider />
-    <div class="flex justify-between">
-      <n-button tertiary type="primary" size="small" @click="onInfo('开发中～')">
-        使用手册
-      </n-button>
-      <Tips />
-      <UpdateLog />
-    </div>
-    <p class="text-primary text-center">
-      𝑾𝒆 𝒐𝒑𝒆𝒏
-      <a href="https://github.com/gcloudlab/app" target="_blank" class="text-secondary">𝒔𝒐𝒖𝒓𝒄𝒆</a> -
-      𝑮𝑪𝒍𝒐𝒖𝒅 开源团队
-    </p>
 
     <n-divider />
-    <div class="sign-action">
+    <div class="sign-action flex">
       <n-button
         v-if="sign_status && online_status"
         type="default"
@@ -72,10 +60,8 @@ import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { useAuth } from '@/hooks';
-import Tips from '@/components/tips/index.vue';
 import { NButton, NDivider, NIcon } from 'naive-ui';
 import { getTimeState } from '@/utils/date';
-import { onInfo } from '@/utils/messages';
 import randomAvatar from '@/utils/random-avatar';
 import EditUser from './edit-user.vue';
 import { LogOutOutline as LogOutIcon, LogInOutline as LogInIcon } from '@vicons/ionicons5';

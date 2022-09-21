@@ -3,11 +3,20 @@ import piniaStore from '@/store';
 import { getRegisterCount } from '@/service/api/global';
 import { onWarning, onError } from '@/utils/messages';
 import useTimer from '@/hooks/useTimer';
+import { Notifications } from '@/models/global';
+import { useStorage } from '@/utils/use-storage';
+import { How_To_Use_GCloud, Join_Us } from '@/constants/notifications';
 
 export interface GlobalStateProps {
   register_count: number;
   fetching: boolean;
+  notifications: Notifications[];
+  has_read_notifications: string[];
 }
+
+const initialState = {
+  has_read_notifications: useStorage('has_read_notifications'),
+};
 
 export const useGlobalStore = defineStore({
   id: 'global',
@@ -15,6 +24,8 @@ export const useGlobalStore = defineStore({
     ({
       register_count: -1,
       fetching: false,
+      notifications: [How_To_Use_GCloud, Join_Us],
+      has_read_notifications: initialState.has_read_notifications || [],
     } as GlobalStateProps),
   getters: {
     // register_count: state => state.register_count,
@@ -36,6 +47,12 @@ export const useGlobalStore = defineStore({
           this.fetching = false;
         }, 3);
         onError('出错了');
+      }
+    },
+    onSetNotificationsStatusAction(key: string) {
+      if (!this.has_read_notifications.includes(key)) {
+        this.has_read_notifications.push(key);
+        useStorage('has_read_notifications', this.has_read_notifications);
       }
     },
   },

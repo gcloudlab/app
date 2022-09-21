@@ -4,7 +4,7 @@
     <n-drawer
       v-model:show="active"
       :width="200"
-      :height="300"
+      :height="250"
       :trap-focus="false"
       :block-scroll="false"
       placement="top"
@@ -34,6 +34,18 @@ const activate = () => {
   active.value = true;
 };
 const data = [
+  {
+    content: '「重构」重构使用说明模块，添加提示按钮',
+    date: '2022-09-21',
+  },
+  {
+    content: '「功能」新增预览文件功能（文本文件预览，不支持office文件）',
+    date: '2022-09-20',
+  },
+  {
+    content: '「Bug」修复已知问题',
+    date: '2022-09-19',
+  },
   {
     content: '「功能」修复已知问题；禁止选中文件夹文本',
     date: '2022-09-13',
