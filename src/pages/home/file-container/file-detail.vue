@@ -43,6 +43,8 @@
         <p v-show="file.updated_at">修改日期：{{ file.updated_at }}</p>
         <!-- Btn action -->
         <div class="flex justify-center w-full">
+          <PreviewDrawer :file="file" />
+          <ShareDrawer class="flex-2" :file="file" />
           <n-button
             class="flex-1"
             type="primary"
@@ -53,8 +55,6 @@
               <n-icon><CloudDownloadOutline /></n-icon>
             </template>
           </n-button>
-          <PreviewDrawer :file="file" />
-          <ShareDrawer class="flex-2" :file="file" />
         </div>
         <n-button-group v-show="!file.owner || file.owner === auth?.name" class="w-full" vertical>
           <n-popover

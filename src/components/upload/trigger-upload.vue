@@ -31,7 +31,7 @@
       <div class="flex justify-between flex-none bg-green-100">
         <n-popselect
           v-model:value="uploadFolder.value"
-          placement="left"
+          placement="right"
           size="medium"
           scrollable
           trigger="hover"

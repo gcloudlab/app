@@ -20,13 +20,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineAsyncComponent, ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useGlobalOutsideStore } from '@/store/modules/global';
 import { NBadge, NIcon, NDropdown, DropdownOption } from 'naive-ui';
 import { Alert20Regular } from '@vicons/fluent';
 import { useNotification } from '@/hooks/useGlobal';
-const HowToUse = defineAsyncComponent(() => import('./how-to-use.vue'));
-const JoinUs = defineAsyncComponent(() => import('./join-us.vue'));
+import HowToUse from './how-to-use.vue';
+import JoinUs from './join-us.vue';
 
 const globalStore = useGlobalOutsideStore();
 const showGcloud = ref(false);
