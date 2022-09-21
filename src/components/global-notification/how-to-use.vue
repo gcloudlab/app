@@ -20,6 +20,7 @@ const props = defineProps({
   show: {
     type: Boolean,
     required: true,
+    default: false,
   },
 });
 const emits = defineEmits(['afterClose']);
