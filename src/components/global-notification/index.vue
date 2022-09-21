@@ -14,8 +14,8 @@
         />
       </n-badge>
     </n-dropdown>
-    <HowToUse :show="showGcloud" @afterClose="showGcloud = false" />
-    <JoinUs :show="showJoinUs" @afterClose="showJoinUs = false" />
+    <HowToUse :show="showGcloud" @afterClose="() => (showGcloud = false)" />
+    <JoinUs :show="showJoinUs" @afterClose="() => (showJoinUs = false)" />
   </div>
 </template>
 

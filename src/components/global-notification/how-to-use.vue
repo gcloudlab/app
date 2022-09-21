@@ -13,9 +13,9 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs } from 'vue';
+import { defineAsyncComponent, toRefs } from 'vue';
 // import { NButton, NTag, NIcon } from 'naive-ui';
-import Drawer from '@/components/commons/drawer/index.vue';
+const Drawer = defineAsyncComponent(() => import('@/components/commons/drawer/index.vue'));
 const props = defineProps({
   show: {
     type: Boolean,
@@ -28,5 +28,5 @@ const emits = defineEmits(['afterClose']);
 const handleChange = () => {
   emits('afterClose', false);
 };
-// toRefs(props);
+toRefs(props);
 </script>
