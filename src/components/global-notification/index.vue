@@ -14,8 +14,8 @@
         />
       </n-badge>
     </n-dropdown>
-    <HowToUse :show="showGcloud" />
-    <JoinUs :show="showJoinUs" @afterClose="() => (showJoinUs = false)" />
+    <!-- <HowToUse />
+    <JoinUs /> -->
   </div>
 </template>
 
@@ -25,8 +25,6 @@ import { useGlobalOutsideStore } from '@/store/modules/global';
 import { NBadge, NIcon, NDropdown, DropdownOption } from 'naive-ui';
 import { Alert20Regular } from '@vicons/fluent';
 import { useNotification } from '@/hooks/useGlobal';
-import HowToUse from './how-to-use.vue';
-import JoinUs from './join-us.vue';
 
 const globalStore = useGlobalOutsideStore();
 const showGcloud = ref(false);
@@ -34,14 +32,17 @@ const showJoinUs = ref(false);
 const unread_count = ref(0);
 
 const notifications_list = computed(() => {
-  return globalStore.notifications.map(item => {
-    if (globalStore.has_read_notifications.includes(item.key)) {
-      return { ...item, has_read: true };
-    }
-    // 未读
-    unread_count.value++;
-    return { ...item }; // Why not "return item" directly?
-  });
+  if (globalStore.notifications) {
+    return globalStore.notifications.map(item => {
+      if (globalStore.has_read_notifications.includes(item.key)) {
+        return { ...item, has_read: true };
+      }
+      // 未读
+      unread_count.value++;
+      return { ...item }; // Why not "return item" directly?
+    });
+  }
+  return [];
 });
 
 const handleSelect = (key: string | number, option: DropdownOption) => {

@@ -1,6 +1,8 @@
 <template>
-  <Drawer v-model:show="show" :on-after-leave="handleChange" width="60%">
-    <template #trigger><div></div> </template>
+  <Drawer v-model:show="show" width="60%">
+    <template #trigger>
+      <div class="text-sm px-5 py-2 hover:text-primary" @click="show = true">😙 加入我们</div>
+    </template>
     <template #header> 加入我们</template>
     <div class="flex flex-col">
       <h2 class="text-primary text-center">
@@ -14,20 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, toRefs } from 'vue';
-// import { NButton, NTag, NIcon } from 'naive-ui';
+import { defineAsyncComponent, ref } from 'vue';
+import { NButton } from 'naive-ui';
 const Drawer = defineAsyncComponent(() => import('@/components/commons/drawer/index.vue'));
-const props = defineProps({
-  show: {
-    type: Boolean,
-    required: true,
-  },
-});
-const emits = defineEmits(['afterClose']);
 
-const handleChange = () => {
-  emits('afterClose', false);
-};
-
-toRefs(props);
+const show = ref(false);
 </script>
