@@ -1,7 +1,7 @@
 <template>
-  <Drawer v-model:show="show" width="60%">
+  <Drawer v-model:show="show" width="80%" :on-after-leave="handleClose">
     <template #trigger>
-      <div class="text-sm px-5 py-2 cursor-pointer hover:text-primary" @click="show = true">
+      <div class="text-sm p-1 cursor-pointer hover:text-primary" @click="handleOpen">
         🍀 使用说明
       </div>
     </template>
@@ -18,8 +18,16 @@
 
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue';
-import { NButton } from 'naive-ui';
 const Drawer = defineAsyncComponent(() => import('@/components/commons/drawer/index.vue'));
 
+const emits = defineEmits(['onClose']);
 const show = ref(false);
+
+const handleOpen = () => {
+  // console.log(props.file);
+  show.value = true;
+};
+const handleClose = () => {
+  emits('onClose', false);
+};
 </script>

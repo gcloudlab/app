@@ -8,7 +8,7 @@
       </n-button>
     </template>
     <template #header> 正在分享{{ file.name }}</template>
-    <div class="">
+    <div>
       <div class="flex items-center text-sm">
         <n-tag type="info"> {{ file.type }} </n-tag>
         <p class="mx-2">{{ file.name }}</p>
@@ -34,7 +34,7 @@ const props = defineProps({
 });
 const show = ref(false);
 const handleOpenShare = () => {
-  console.log(props.file);
+  // console.log(props.file);
   show.value = true;
 };
 
