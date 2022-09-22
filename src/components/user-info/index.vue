@@ -10,9 +10,12 @@
           {{ auth?.email || '注册即赠1G容量～' }}
         </div>
 
-        <div v-if="auth?.registration_days" class="text-xs">
-          <n-divider vertical />已加入{{ auth?.registration_days }}天
-        </div>
+        <div class="text-xs"><n-divider vertical />已加入{{ auth?.registration_days || 0 }}天</div>
+      </div>
+
+      <div v-if="auth?.capacity" class="text-xs mb-2">
+        我的空间：{{ transformSize(auth.capacity) }}
+        <n-button type="primary" quaternary size="tiny" @click="onInfo('规划中~')">升级</n-button>
       </div>
 
       <div class="flex justify-between">
@@ -63,14 +66,15 @@ import { useAuth } from '@/hooks';
 import { NButton, NDivider, NIcon } from 'naive-ui';
 import { getTimeState } from '@/utils/date';
 import randomAvatar from '@/utils/random-avatar';
+import { transformSize } from '@/utils/transform-size';
 import EditUser from './edit-user.vue';
 import { LogOutOutline as LogOutIcon, LogInOutline as LogInIcon } from '@vicons/ionicons5';
+import { onInfo } from '@/utils/messages';
 const UpdateLog = defineAsyncComponent(() => import('@/components/update-log/index.vue'));
 
 const emits = defineEmits(['onCloseEdit']);
 const router = useRouter();
 const authStore = useAuthOutsideStore();
-const { auth, sign_status, online_status } = storeToRefs(authStore);
 const { onLogout, onChangeAvatar, onUpdateUserInfo } = useAuth();
 
 const handleLogout = () => {
@@ -85,6 +89,8 @@ const handleChangeAvatar = async () => {
 const handleCloseEdit = () => {
   emits('onCloseEdit', false);
 };
+
+const { auth, sign_status, online_status } = storeToRefs(authStore);
 </script>
 
 <style lang="scss" scoped></style>

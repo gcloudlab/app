@@ -13,25 +13,21 @@
           :animation-data="RobotJson"
         />
       </div>
-      <div :class="[...boardClasses, 'other w-full bg-gradient-to-b from-green-100']">
-        <!-- 我的分享 -->
-      </div>
+      <div :class="[...boardClasses, 'other w-full bg-gradient-to-b from-green-100']"></div>
       <div :class="[...boardClasses]"></div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
+// import { storeToRefs } from 'pinia';
+// import { useFileOutsideStore } from '@/store/modules/file';
 import RobotJson from '@/assets/lotties/robot.json';
-import { useFileOutsideStore } from '@/store/modules/file';
 import TriggerUpload from '@/components/upload/trigger-upload.vue';
 
-const fileStore = useFileOutsideStore();
+// const fileStore = useFileOutsideStore();
 
 const boardClasses = ['rounded'];
-
-const { upload_files } = storeToRefs(fileStore);
 </script>
 
 <style lang="scss" scoped>

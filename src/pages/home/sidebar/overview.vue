@@ -39,8 +39,6 @@ import { transformSize } from '@/utils/transform-size';
 import ProgressView from '@/components/progress-view/index.vue';
 
 const fileStore = useFileOutsideStore();
-const themeVars = useThemeVars();
-// console.log(themeVars.value.primaryColor);
 
 const { files_count, public_count, files_size, public_size, fetching } = storeToRefs(fileStore);
 </script>
