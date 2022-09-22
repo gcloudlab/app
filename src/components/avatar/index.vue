@@ -18,7 +18,7 @@
         </n-badge>
       </template>
       <template #header> </template>
-      <UserInfo class="user w-60" />
+      <UserInfo class="user w-60" @on-close-edit="showPopover = false" />
     </n-popover>
   </div>
 </template>

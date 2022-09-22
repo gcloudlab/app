@@ -3,7 +3,7 @@
     <n-scrollbar style="max-height: calc(100vh - 60px)">
       <n-card
         class="leading-4"
-        content-style="background-color: #008f8f; border-radius: 3px;color: white;"
+        content-style="background-color: #008b83; border-radius: 3px;color: white;"
         @click="handleSelect(file)"
       >
         <!-- media preview -->
@@ -66,7 +66,7 @@
             <template #trigger>
               <n-button type="info" size="small" @click="handleMoveFile(file)">
                 <template #icon>
-                  <n-icon><MoveOutline /></n-icon>
+                  <n-icon><TableMoveAbove20Regular /></n-icon>
                 </template>
                 移动
               </n-button>
@@ -115,7 +115,8 @@ import { onInfo } from '@/utils/messages';
 import DragUpload from '@/components/upload/trigger-upload.vue';
 import ShareDrawer from '@/components/share-drawer/index.vue';
 import PreviewDrawer from '@/components/preview-drawer/index.vue';
-import { CloudDownloadOutline, MoveOutline, TrashOutline } from '@vicons/ionicons5';
+import { CloudDownloadOutline, TrashOutline } from '@vicons/ionicons5';
+import { TableMoveAbove20Regular } from '@vicons/fluent';
 const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 const VideoPlayground = defineAsyncComponent(() => import('@/components/video/index.vue'));
 

@@ -46,7 +46,7 @@ const handleOpenPreview = () => {
     show.value = true;
     handlePreview();
   } else {
-    onInfo('仅支持预览文本文件~');
+    onInfo('点击大图预览');
   }
 };
 const handlePreview = () => {

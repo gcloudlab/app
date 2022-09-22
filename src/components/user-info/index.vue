@@ -16,7 +16,7 @@
       </div>
 
       <div class="flex justify-between">
-        <EditUser :data="auth!" />
+        <EditUser :data="auth!" @on-close="handleCloseEdit" />
         <n-button tertiary type="primary" size="small" @click="handleChangeAvatar">
           换个头像
         </n-button>
@@ -67,6 +67,7 @@ import EditUser from './edit-user.vue';
 import { LogOutOutline as LogOutIcon, LogInOutline as LogInIcon } from '@vicons/ionicons5';
 const UpdateLog = defineAsyncComponent(() => import('@/components/update-log/index.vue'));
 
+const emits = defineEmits(['onCloseEdit']);
 const router = useRouter();
 const authStore = useAuthOutsideStore();
 const { auth, sign_status, online_status } = storeToRefs(authStore);
@@ -80,6 +81,9 @@ const handleChangeAvatar = async () => {
   const avatar_url = randomAvatar();
   onChangeAvatar(avatar_url);
   await onUpdateUserInfo({ avatar: avatar_url });
+};
+const handleCloseEdit = () => {
+  emits('onCloseEdit', false);
 };
 </script>
 

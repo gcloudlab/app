@@ -273,6 +273,10 @@ export const useFileStore = defineStore({
         });
     },
     async onMoveFoderAction(payload: MoveFolderOption) {
+      if (payload.parent_identity === 'default') {
+        onWarning('无法移动到默认文件夹');
+        return;
+      }
       try {
         const res = await moveFolder(payload, 'private');
         if (res.data.msg === 'success') {

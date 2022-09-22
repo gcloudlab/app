@@ -1,5 +1,5 @@
 <template>
-  <Drawer class="edit-user" v-model:show="show" width="40%">
+  <Drawer class="edit-user" v-model:show="show" :on-after-leave="handleClose" width="60%">
     <template #trigger>
       <n-button tertiary type="primary" size="small" @click="handleEditUserInfo">
         编辑资料
@@ -22,17 +22,24 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emits = defineEmits(['onClose']);
 const show = ref(false);
+
 const handleEditUserInfo = () => {
   show.value = true;
+};
+
+const handleClose = () => {
+  emits('onClose', false);
 };
 
 toRefs(props);
 </script>
 
-<style lang="scss" scoped>
-.edit-user {
-  .n-drawer-body-content-wrapper {
+<style lang="scss">
+.edit-user.n-drawer {
+  .n-drawer-content .n-drawer-body-content-wrapper {
     padding: 16px 24px !important;
   }
 }
