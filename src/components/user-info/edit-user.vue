@@ -1,5 +1,5 @@
 <template>
-  <Drawer v-model:show="show" width="40%">
+  <Drawer class="edit-user" v-model:show="show" width="40%">
     <template #trigger>
       <n-button tertiary type="primary" size="small" @click="handleEditUserInfo">
         编辑资料
@@ -7,7 +7,6 @@
     </template>
     <template #header> 修改个人资料</template>
     暂不支持
-    <Vue3Lottie class="w-1/2" :animation-data="RobotJson" />
   </Drawer>
 </template>
 
@@ -16,7 +15,6 @@ import { PropType, ref, toRefs } from 'vue';
 import { NButton } from 'naive-ui';
 import Drawer from '@/components/commons/drawer/index.vue';
 import { UserDetail } from '@/models/auth';
-import RobotJson from '@/assets/lotties/robot.json';
 
 const props = defineProps({
   data: {
@@ -32,4 +30,10 @@ const handleEditUserInfo = () => {
 toRefs(props);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.edit-user {
+  .n-drawer-body-content-wrapper {
+    padding: 16px 24px !important;
+  }
+}
+</style>

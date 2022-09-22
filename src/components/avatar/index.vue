@@ -1,8 +1,8 @@
 <template>
   <div class="avatar">
-    <n-popover trigger="click" v-bind="$attrs" :show-arrow="false">
+    <n-popover trigger="manual" :show="showPopover" v-bind="$attrs" :show-arrow="false">
       <template #trigger>
-        <n-badge :show="showStatus" dot :type="status">
+        <n-badge :show="showStatus" dot :type="status" @click="showPopover = !showPopover">
           <n-avatar
             class="animate__animated animate__fadeIn faster"
             :src="src"
@@ -25,12 +25,10 @@
 
 <script setup lang="ts">
 import { computed, toRefs, ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { NAvatar, NPopover, NBadge } from 'naive-ui';
 import defaultLogo from '@/assets/logo.png';
-import { useAuth } from '@/hooks';
 import UserInfo from '@/components/user-info/index.vue';
 
 export interface AvatarProps {
@@ -46,12 +44,11 @@ export interface AvatarProps {
   showStatus?: boolean;
 }
 
-const router = useRouter();
 const authStore = useAuthOutsideStore();
-const { auth, sign_status, online_status } = storeToRefs(authStore);
-const { onLogout } = useAuth();
+const { sign_status, online_status } = storeToRefs(authStore);
 
 const defaultAvatar = ref(defaultLogo);
+const showPopover = ref(false);
 const props = withDefaults(defineProps<AvatarProps>(), {
   animate: '',
   size: 'medium',
@@ -70,11 +67,6 @@ const status = computed(() => {
   }
   return 'warning';
 });
-
-const handleLogout = () => {
-  onLogout();
-  router.push('/sign');
-};
 
 toRefs(props);
 </script>

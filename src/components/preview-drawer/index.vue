@@ -72,6 +72,7 @@ toRefs(props);
     justify-content: center;
     align-items: center;
     background: #f3f8f8;
+    padding: 16px 24px !important;
     .lottie-animation-container {
       margin-top: -100px;
     }
