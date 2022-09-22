@@ -15,7 +15,7 @@
 
       <div v-if="auth?.capacity" class="text-xs mb-2">
         我的空间：{{ transformSize(auth.capacity) }}
-        <n-button type="primary" quaternary size="tiny" @click="onInfo('规划中~')">升级</n-button>
+        <n-button type="primary" quaternary size="tiny" @click="onInfo('规划中~')">扩容</n-button>
       </div>
 
       <div class="flex justify-between">

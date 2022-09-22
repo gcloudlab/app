@@ -5,6 +5,7 @@ import { onWarning, onError } from '@/utils/messages';
 
 export interface ShareStateProps {
   share_list: [];
+  fetching: boolean;
 }
 
 export const useShareStore = defineStore({
@@ -12,13 +13,15 @@ export const useShareStore = defineStore({
   state: () =>
     ({
       share_list: [],
+      fetching: false,
     } as ShareStateProps),
   getters: {
     // register_count: state => state.register_count,
   },
   actions: {
-    async onGetRegisterCountAction() {
+    async onGetShareListAction() {
       try {
+        this.fetching = true;
       } catch (error) {
         onError('出错了');
       }

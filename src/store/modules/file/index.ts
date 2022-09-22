@@ -30,6 +30,7 @@ export interface FileState {
   public_size: number;
   folder_routes: FileListData[];
   upload_files: UploadFileInfo[];
+  deleted_files: FileListData[];
   origin_folders: {
     label: string;
     value: number;
@@ -50,6 +51,7 @@ export const useFileStore = defineStore({
       folder_routes: [{ id: -1, name: '主菜单', size: -1, parent_id: 0, identity: 'root' }],
       upload_files: [],
       origin_folders: [],
+      deleted_files: [],
       fetching: false,
     } as FileState),
   getters: {
