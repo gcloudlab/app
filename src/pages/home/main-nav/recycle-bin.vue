@@ -1,5 +1,5 @@
 <template>
-  <n-scrollbar style="height: calc(100vh - 234px)">
+  <n-scrollbar style="max-height: calc(100vh - 234px)">
     <n-h4 prefix="bar" class="text-primary">回收站</n-h4>
     <div v-if="deleted_files.length > 0"></div>
     <div v-else-if="fetching" class="p-4">

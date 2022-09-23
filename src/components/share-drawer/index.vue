@@ -1,5 +1,5 @@
 <template>
-  <Drawer v-model:show="show" width="60%">
+  <Drawer class="share-drawer" v-model:show="show" width="60%">
     <template #trigger>
       <n-button type="success" size="small" @click="handleOpenShare">
         <template #icon>
@@ -41,4 +41,10 @@ const handleOpenShare = () => {
 toRefs(props);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.share-drawer {
+  .n-drawer-body-content-wrapper {
+    padding: 16px 24px !important;
+  }
+}
+</style>

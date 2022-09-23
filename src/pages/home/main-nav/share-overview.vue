@@ -1,5 +1,5 @@
 <template>
-  <n-scrollbar style="height: calc(100vh - 234px)">
+  <n-scrollbar style="max-height: calc(100vh - 234px)">
     <n-h4 prefix="bar" class="text-primary">热门分享</n-h4>
     <div v-if="0"></div>
     <div v-else-if="0" class="p-4">
