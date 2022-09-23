@@ -1,12 +1,5 @@
 <template>
-  <n-form
-    ref="formRef"
-    class=""
-    :model="model"
-    :show-label="false"
-    :rules="rules"
-    label-placement="left"
-  >
+  <n-form ref="formRef" :model="model" :show-label="false" :rules="rules" label-placement="left">
     <n-form-item v-if="signType === 'signup'" path="email" label="邮箱">
       <n-input v-model:value="model.email" placeholder="请输入邮箱" @keydown.enter.prevent />
     </n-form-item>

@@ -11,6 +11,15 @@
           <p class="auth_unregistered-text">
             tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
           </p>
+          <p class="auth_unregistered-text">
+            tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
+          </p>
+          <p class="auth_unregistered-text">
+            tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
+          </p>
+          <p class="auth_unregistered-text">
+            tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
+          </p>
           <n-button type="primary" round class="auth_unregistered-signup" @click="onChangeToSignup">
             <template #icon>
               <n-icon><log-in-icon /></n-icon>
@@ -45,15 +54,14 @@
       >
         <div v-if="formStatus === 'signin'" class="auth_forms-login">
           <div class="flex justify-between">
-            <h1 class="text-2xl antialiased font-mono font-extrabold">Sign in</h1>
+            <h1 class="text-2xl antialiased font-mono font-extrabold">Sign In</h1>
             <Vue3Lottie class="mr-0 mt-2" :animation-data="SpaceJson" :height="50" :width="50" />
           </div>
-
           <InfoCollection sign-type="signin" />
         </div>
         <div v-else class="auth_forms-signup">
-          <div class="flex justify-between" style="margin-top: -60px">
-            <h1 class="text-2xl antialiased font-mono font-extrabold">Sign up</h1>
+          <div class="flex justify-between">
+            <h1 class="text-2xl antialiased font-mono font-extrabold">Sign Up</h1>
             <Vue3Lottie class="mr-0 mt-2" :animation-data="SpaceJson" :height="50" :width="50" />
           </div>
           <InfoCollection sign-type="signup" @afterSignup="onChangeToSignin" />

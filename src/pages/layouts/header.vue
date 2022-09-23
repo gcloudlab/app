@@ -29,7 +29,7 @@
         <GlobalNotification />
         <p
           v-if="!auth?.name"
-          class="mr-4 mt-3 cursor-pointer text-primary text-sm hover:text-secondary"
+          class="mr-4 mt-3 animate-pulse cursor-pointer text-primary text-sm hover:text-secondary"
           @click="router.push('/sign')"
         >
           注册
