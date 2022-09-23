@@ -13,8 +13,8 @@
           :animation-data="RobotJson"
         />
       </div>
-      <div class="flex" :class="[...boardClasses, 'other w-full']">
-        <ShareOverview class="flex-1 p-3 pb-12" />
+      <div class="flex other w-full mb-2" :class="boardClasses">
+        <ShareOverview class="flex-1 p-3" />
         <Other class="flex-1 p-3" />
       </div>
     </div>
@@ -35,9 +35,9 @@ const boardClasses = ['rounded'];
 </script>
 
 <style lang="scss" scoped>
-.main-nav {
+/* .main-nav {
   .other {
-    max-height: calc(100vh - 265px);
+    height: 100%;
   }
-}
+} */
 </style>

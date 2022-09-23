@@ -4,7 +4,7 @@
     <n-drawer
       v-model:show="active"
       :width="200"
-      :height="250"
+      :height="270"
       :trap-focus="false"
       :block-scroll="false"
       placement="top"

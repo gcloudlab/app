@@ -1,5 +1,7 @@
 <template>
-  <n-h4 prefix="bar" class="text-primary top-0" style="position: sticky">回收站</n-h4>
+  <n-h4 prefix="bar" class="text-primary top-0" style="position: sticky; margin-top: 0"
+    >回收站</n-h4
+  >
   <n-scrollbar style="height: 100%">
     <div v-if="deleted_files.length > 0"></div>
     <div v-else-if="fetching" class="p-4">

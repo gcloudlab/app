@@ -14,6 +14,7 @@
         <p class="mx-2">{{ file.name }}</p>
         <p>{{ transformSize(file.size) }}</p>
       </div>
+      <ShareForm />
     </div>
   </Drawer>
 </template>
@@ -24,6 +25,7 @@ import { FileListData } from '@/models/file';
 import { NButton, NTag, NIcon } from 'naive-ui';
 import { transformSize } from '@/utils/transform-size';
 import { ShareSocial } from '@vicons/ionicons5';
+import ShareForm from './share-form.vue';
 const Drawer = defineAsyncComponent(() => import('@/components/commons/drawer/index.vue'));
 
 const props = defineProps({
