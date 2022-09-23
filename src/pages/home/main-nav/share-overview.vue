@@ -1,12 +1,14 @@
 <template>
-  <n-scrollbar style="max-height: calc(100vh - 234px)">
-    <n-h4 prefix="bar" class="text-primary">热门分享</n-h4>
-    <div v-if="0"></div>
-    <div v-else-if="0" class="p-4">
-      <n-skeleton class="mb-1" height="20px" :repeat="10" :sharp="false" />
-    </div>
-    <Empty v-else description="空空如也" />
-  </n-scrollbar>
+  <div class="shadow">
+    <n-h4 prefix="bar" class="text-primary top-0" style="position: sticky">热门分享</n-h4>
+    <n-scrollbar style="max-height: calc(100vh - 245px)">
+      <div v-if="0"></div>
+      <div v-else-if="0" class="p-4">
+        <n-skeleton class="mb-1" height="20px" :repeat="10" :sharp="false" />
+      </div>
+      <Empty v-else description="空空如也" />
+    </n-scrollbar>
+  </div>
 </template>
 
 <script setup lang="ts">

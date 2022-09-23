@@ -13,11 +13,10 @@
           :animation-data="RobotJson"
         />
       </div>
-      <div class="flex" :class="[...boardClasses, 'other w-full bg-gradient-to-b from-green-100']">
-        <ShareOverview class="flex-1 p-3 shadow" />
-        <RecycleBin class="flex-1 p-3 shadow" />
+      <div class="flex" :class="[...boardClasses, 'other w-full']">
+        <ShareOverview class="flex-1 p-3 pb-12" />
+        <Other class="flex-1 p-3" />
       </div>
-      <div :class="[...boardClasses]"></div>
     </div>
   </div>
 </template>
@@ -28,7 +27,7 @@
 import RobotJson from '@/assets/lotties/robot.json';
 import TriggerUpload from '@/components/upload/trigger-upload.vue';
 import ShareOverview from './share-overview.vue';
-import RecycleBin from './recycle-bin.vue';
+import Other from './other.vue';
 
 // const fileStore = useFileOutsideStore();
 
@@ -38,7 +37,7 @@ const boardClasses = ['rounded'];
 <style lang="scss" scoped>
 .main-nav {
   .other {
-    height: calc(100vh - 210px);
+    max-height: calc(100vh - 265px);
   }
 }
 </style>

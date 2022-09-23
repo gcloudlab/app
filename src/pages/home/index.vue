@@ -5,7 +5,7 @@
       class="file-tree-bar animate__animated animate__fadeIn faster"
       :class="[isMobile() ? 'w-full' : 'w-60']"
     >
-      <n-scrollbar style="max-height: calc(100vh - 60px)">
+      <n-scrollbar style="max-height: calc(100vh - 88px)">
         <FileMenu
           @selectedKeys="handleSelectedKeys"
           @expandedKeys="handleExpandedKeys"
@@ -56,7 +56,7 @@
       <!-- file detail -->
       <div class="main-bar flex">
         <div class="main-files-bar flex-auto">
-          <n-scrollbar style="max-height: calc(100vh - 60px)">
+          <n-scrollbar style="height: calc(100vh - 60px)">
             <FileList
               v-if="fileViewType === 'list' && folder_routes.length > 1"
               :values="folder_routes.at(-1)"
@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent, watch } from 'vue';
+import { ref, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { useFiles } from '@/hooks/useFiles';
@@ -157,8 +157,9 @@ const { folder_routes, files_size, public_size } = storeToRefs(fileStore);
 <style lang="scss" scoped>
 .file-tree-bar,
 .main-container {
-  min-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
 }
+
 .main-container {
   background: rgb(255, 255, 255);
   .main-bar {
