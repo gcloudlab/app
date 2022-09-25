@@ -3,23 +3,25 @@
     <div class="user">
       <h3>
         {{ getTimeState() }},
-        <span class="text-primary">{{ auth?.name || '游客' }}</span>
+        <span class="text-primary">{{ authStore.auth?.name || '游客' }}</span>
       </h3>
       <div class="flex items-center mb-2">
         <div class="text-xs">
-          {{ auth?.email || '注册即赠1G容量～' }}
+          {{ authStore.auth?.email || '注册即赠1G容量～' }}
         </div>
 
-        <div class="text-xs"><n-divider vertical />已加入{{ auth?.registration_days || 0 }}天</div>
+        <div class="text-xs">
+          <n-divider vertical />已加入{{ authStore.auth?.registration_days || 0 }}天
+        </div>
       </div>
 
-      <div v-if="auth?.capacity" class="text-xs mb-2">
-        我的空间：{{ transformSize(auth.capacity) }}
+      <div v-if="authStore.auth?.capacity" class="text-xs mb-2">
+        我的空间：{{ transformSize(authStore.auth.capacity) }}
         <n-button type="primary" quaternary size="tiny" @click="onInfo('规划中~')">扩容</n-button>
       </div>
 
       <div class="flex justify-between">
-        <EditUser :data="auth!" @on-close="handleCloseEdit" />
+        <EditUser v-if="authStore.auth" :data="authStore.auth" @on-close="handleCloseEdit" />
         <n-button tertiary type="primary" size="small" @click="handleChangeAvatar">
           换个头像
         </n-button>

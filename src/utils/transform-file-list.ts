@@ -4,14 +4,29 @@ import _ from 'lodash';
 import { shallowRef } from 'vue';
 import { transformDate } from './date';
 import { generate_file_icon } from './generate_file_icon';
+import { useAuthOutsideStore } from '@/store/modules/auth';
+const authStore = useAuthOutsideStore();
 
 const generateTree = (list: FileListData[] | any, target: UploadTargetType) => {
   const id: any = {};
   const result: FileListData[] | any = [];
 
   const files = list.filter((i: FileListData) => i.repository_identity !== '' && i.path !== '');
+
+  let owner_public_files = [];
+  let owner_public_files_size = 0;
+  if (target === 'public') {
+    owner_public_files = files.filter((i: FileListData) => i.owner === authStore.auth?.name);
+    owner_public_files_size = owner_public_files.reduce(
+      (a: number, b: { size: number }) => a + b.size,
+      0
+    );
+  }
+
   const count = files.length;
+
   const size = files.reduce((a: number, b: { size: number }) => a + b.size, 0);
+
   const children = _.groupBy(list, 'parent_id');
 
   const empty_folders = list.filter(
@@ -63,7 +78,7 @@ const generateTree = (list: FileListData[] | any, target: UploadTargetType) => {
     }
   }
 
-  return { result, count, size };
+  return { result, count, size, owner_public_files, owner_public_files_size };
 };
 
 const public_folder = () => {

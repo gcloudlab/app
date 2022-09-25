@@ -26,8 +26,10 @@ export interface FileState {
   public_count: number;
   user_files: FileListData[];
   public_files: FileListData[];
+  owner_public_files: FileListData[];
   files_size: number;
   public_size: number;
+  owner_public_files_size: number;
   folder_routes: FileListData[];
   upload_files: UploadFileInfo[];
   deleted_files: FileListData[];
@@ -48,6 +50,8 @@ export const useFileStore = defineStore({
       public_files: [],
       files_size: -1,
       public_size: -1,
+      owner_public_files: [],
+      owner_public_files_size: 0,
       folder_routes: [{ id: -1, name: '主菜单', size: -1, parent_id: 0, identity: 'root' }],
       upload_files: [],
       origin_folders: [],
@@ -57,7 +61,7 @@ export const useFileStore = defineStore({
   getters: {
     get_files_count: state => state.files_count,
     get_user_files: state => state.user_files,
-    get_total_files_size: state => state.files_size + state.public_size,
+    get_total_files_size: state => state.files_size + state.owner_public_files_size,
     get_folder_routes: state => state.folder_routes,
     get_upload_files: state => state.upload_files,
     get_uploading_files_count: state => state.upload_files.length,
@@ -69,12 +73,15 @@ export const useFileStore = defineStore({
         this.fetching = true;
         const res = await getFileList('private');
         const public_res = await getFileList('public');
+
         if (res.status === 200 && public_res.status === 200) {
           const { result, count, size } = generateTree(res.data.list, 'private');
           const {
             result: public_result,
             count: public_count,
             size: public_size,
+            owner_public_files,
+            owner_public_files_size,
           } = generateTree(public_res.data.list, 'public');
           result.map((item: FileListData) => {
             if (item.name === '公共文件夹') {
@@ -84,18 +91,14 @@ export const useFileStore = defineStore({
           this.user_files = result;
           this.origin_folders = result;
           this.deleted_files = res.data.deleted_list;
+          this.owner_public_files = owner_public_files;
           this.files_count = count;
           this.public_count = public_count;
           this.files_size = size;
           this.public_size = public_size;
+          this.owner_public_files_size = owner_public_files_size;
           this.fetching = false;
-          // console.log(
-          //   '--store-all files',
-          //   this.user_files,
-          //   this.files_count,
-          //   public_count,
-          //   public_size
-          // );
+          // console.log('--store-all files', owner_public_files);
         }
       } catch (error) {
         useTimer(() => {

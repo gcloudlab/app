@@ -1,7 +1,7 @@
 <template>
   <div class="file-graphical">
     <n-alert v-if="values.name === '公共文件夹'" type="info" :show-icon="false" closable>
-      🎯 公共文件夹对所有人可见。请勿上传违规内容，蟹蟹~
+      🎯 公共文件夹对所有人可见(暂仅支持上传功能)。请勿上传违规内容，蟹蟹~
     </n-alert>
     <div
       v-if="values.children?.length !== 0"

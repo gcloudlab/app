@@ -28,14 +28,14 @@
       <template #suffix>
         <GlobalNotification />
         <p
-          v-if="!auth?.name"
+          v-if="!authStore.auth?.name"
           class="mr-4 mt-3 animate-pulse cursor-pointer text-primary text-sm hover:text-secondary"
           @click="router.push('/sign')"
         >
           注册
         </p>
         <Avatar
-          :src="auth?.avatar || defaultAvatar"
+          :src="authStore.auth?.avatar || defaultAvatar"
           size="large"
           bordered
           object-fit="contain"
