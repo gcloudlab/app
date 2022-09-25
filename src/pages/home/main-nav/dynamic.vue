@@ -1,7 +1,7 @@
 <template>
   <n-h4 prefix="bar" class="text-primary top-0" style="position: sticky">动态</n-h4>
   <n-scrollbar style="height: 100%">
-    <div v-if="deleted_files.length > 0"></div>
+    <div v-if="0"></div>
     <div v-else-if="fetching" class="p-4">
       <n-skeleton class="mb-1" height="20px" :repeat="5" :sharp="false" />
     </div>

@@ -35,6 +35,10 @@ const activate = () => {
 };
 const data = [
   {
+    content: '「新增」添加回收站列表',
+    date: '2022-09-21',
+  },
+  {
     content: '「重构」重构使用说明模块，添加提示按钮',
     date: '2022-09-21',
   },

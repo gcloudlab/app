@@ -83,6 +83,7 @@ export const useFileStore = defineStore({
           });
           this.user_files = result;
           this.origin_folders = result;
+          this.deleted_files = res.data.deleted_list;
           this.files_count = count;
           this.public_count = public_count;
           this.files_size = size;

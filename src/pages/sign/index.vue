@@ -9,7 +9,7 @@
           <h1 class="auth_unregistered-title font-black tracking-wide">GCloud 云盘</h1>
           <!-- <h2 class="leading-10">让我康康还有谁没注册😰</h2> -->
           <p class="auth_unregistered-text">GCloud是一款免费的、不限速的在线云盘.</p>
-          <p class="auth_unregistered-text">它的优点有很多，比如巴拉巴拉...</p>
+          <p class="auth_unregistered-text">它的优点有很多，比如这个那个还有内个...</p>
           <p class="auth_unregistered-text">
             tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
           </p>
