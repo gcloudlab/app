@@ -98,7 +98,7 @@ export const useFileStore = defineStore({
           this.public_size = public_size;
           this.owner_public_files_size = owner_public_files_size;
           this.fetching = false;
-          // console.log('--store-all files', owner_public_files);
+          // console.log('--store-all files', result);
         }
       } catch (error) {
         useTimer(() => {

@@ -11,7 +11,12 @@ const generateTree = (list: FileListData[] | any, target: UploadTargetType) => {
   const id: any = {};
   const result: FileListData[] | any = [];
 
-  const files = list.filter((i: FileListData) => i.repository_identity !== '' && i.path !== '');
+  let files = list.filter((i: FileListData) => i.repository_identity !== '' && i.path !== '');
+
+  // 只新建文件夹，未上传文件情况
+  if (files.length === 0) {
+    files = list;
+  }
 
   let owner_public_files = [];
   let owner_public_files_size = 0;
@@ -24,7 +29,6 @@ const generateTree = (list: FileListData[] | any, target: UploadTargetType) => {
   }
 
   const count = files.length;
-
   const size = files.reduce((a: number, b: { size: number }) => a + b.size, 0);
 
   const children = _.groupBy(list, 'parent_id');
