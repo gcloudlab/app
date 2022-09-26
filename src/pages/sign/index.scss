@@ -72,6 +72,7 @@ $ff-medium: 500;
   &_options-container {
     position: relative;
     width: 80%;
+    min-width: 700px;
   }
 
   &_options-text {

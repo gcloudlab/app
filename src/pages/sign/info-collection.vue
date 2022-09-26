@@ -156,7 +156,6 @@ const handleSignup = async () => {
       email: model.value.email,
       code: model.value.code,
     });
-    console.log(res);
 
     if (res) {
       afterSignup();

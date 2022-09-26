@@ -1,5 +1,5 @@
 <template>
-  <n-h4 prefix="bar" class="text-primary top-0" style="position: sticky">动态</n-h4>
+  <n-h5 prefix="bar" class="text-primary top-0" style="position: sticky">动态</n-h5>
   <n-scrollbar style="height: 100%">
     <div v-if="0"></div>
     <div v-else-if="fetching" class="p-4">
@@ -13,7 +13,7 @@
 import { defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
-import { NSkeleton, NScrollbar, NH4 } from 'naive-ui';
+import { NSkeleton, NScrollbar, NH5 } from 'naive-ui';
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
 const fileStore = useFileOutsideStore();

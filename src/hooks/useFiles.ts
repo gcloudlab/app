@@ -1,4 +1,3 @@
-import { ref } from 'vue';
 import { useFileOutsideStore } from '@/store/modules/file';
 import type {
   CreateFolderOption,

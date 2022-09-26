@@ -14,17 +14,22 @@
             tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
           </p>
 
-          <n-button type="primary" round class="auth_unregistered-signup" @click="onChangeToSignup">
-            <template #icon>
-              <n-icon><log-in-icon /></n-icon>
-            </template>
-            去注册
-          </n-button>
-          <n-button type="warning" secondary round class="ml-3" @click="router.back()">
+          <n-button type="warning" secondary round @click="router.back()">
             <template #icon>
               <n-icon><ArrowBackOutline /></n-icon>
             </template>
             返回
+          </n-button>
+          <n-button
+            type="primary"
+            round
+            class="auth_unregistered-signup ml-3"
+            @click="onChangeToSignup"
+          >
+            <template #icon>
+              <n-icon><log-in-icon /></n-icon>
+            </template>
+            去注册
           </n-button>
         </div>
 
