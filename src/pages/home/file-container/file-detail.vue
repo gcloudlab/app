@@ -58,6 +58,7 @@
         </div>
         <n-button-group v-show="!file.owner || file.owner === auth?.name" class="w-full" vertical>
           <n-popover
+            v-show="!file.owner"
             :show="showFolderTree"
             placement="bottom"
             trigger="manual"

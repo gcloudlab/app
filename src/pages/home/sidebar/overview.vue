@@ -39,7 +39,7 @@
       />
     </div>
     <div v-else class="px-3 pb-2">
-      <n-skeleton text :repeat="2" :sharp="false" />
+      <n-skeleton text :repeat="4" :sharp="false" />
     </div>
   </div>
 </template>

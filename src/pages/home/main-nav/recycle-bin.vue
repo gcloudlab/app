@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between top-0" style="position: sticky">
     <n-h4 prefix="bar" class="text-primary mt-0">
-      回收站 {{ `(${deleted_files.length})` || '' }}
+      回收站 {{ deleted_files.length !== 0 ? `(${deleted_files.length})` : '' }}
     </n-h4>
     <!-- <n-button size="small" @click="onInfo('肝ing...')">撤回</n-button> -->
     <n-button size="small" @click="onInfo('肝ing...')">清空</n-button>

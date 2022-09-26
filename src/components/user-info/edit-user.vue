@@ -20,6 +20,7 @@ const props = defineProps({
   data: {
     type: Object as PropType<UserDetail>,
     required: true,
+    default: {},
   },
 });
 

@@ -22,7 +22,7 @@ const routes: RouteRecordRaw[] = [
         component: Home,
       },
       {
-        path: '/share',
+        path: '/s/:id',
         name: 'share',
         component: Share,
       },

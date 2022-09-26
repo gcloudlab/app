@@ -21,7 +21,7 @@
       </div>
 
       <div class="flex justify-between">
-        <EditUser v-if="authStore.auth" :data="authStore.auth" @on-close="handleCloseEdit" />
+        <EditUser :data="authStore.auth!" @on-close="handleCloseEdit" />
         <n-button tertiary type="primary" size="small" @click="handleChangeAvatar">
           换个头像
         </n-button>
