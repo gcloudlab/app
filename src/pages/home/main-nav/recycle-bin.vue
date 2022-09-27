@@ -72,7 +72,7 @@ const columns: DataTableColumns<FileListData> = [
   {
     title: '删除日期',
     key: 'deleted_at',
-    width: 3,
+    width: 4,
     defaultSortOrder: 'ascend',
     sorter: (row1: any, row2: any) => compareDate(row1.deleted_at, row2.deleted_at),
     render(row) {

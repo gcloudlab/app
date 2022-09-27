@@ -30,6 +30,7 @@
     "vfonts": "^0.1.0",
     "video.js": "^7.20.2",
     "vue": "^3.2.2",
+    "vue-clipboard3": "^2.0.0",
     "vue-router": "4",
     "vue3-lottie": "^2.2.5"
   },

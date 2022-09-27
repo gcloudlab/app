@@ -1,11 +1,16 @@
 export interface ShareDetailItem {
   repository_identity: string;
+  identity: string;
   name: string;
   ext: string;
   size: number;
   path: string;
   click_num: number;
+  expired_time: number;
   desc: string;
+  avatar: string;
+  owner: string;
+  updated_at: string;
   msg?: string;
   code?: number;
 }

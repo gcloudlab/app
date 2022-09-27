@@ -83,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue';
+import { ref, defineAsyncComponent, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { useFiles } from '@/hooks/useFiles';
@@ -112,6 +112,10 @@ const expendMenuValue = ref<TreeOption | FileListData>();
 const fileViewType = ref<'list' | 'graphical'>('graphical');
 const currentClickedFile = ref<FileListData>();
 const currentCheckedFiles = ref<FileListData[]>([]);
+
+onMounted(async () => {
+  await onGetFileList();
+});
 
 const handleSelectedKeys = (value: FileListData) => {
   // console.log('---selected key', value);

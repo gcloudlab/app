@@ -1,3 +1,4 @@
+import { expired_time_map } from '@/constants/expired_time';
 import moment from 'moment';
 
 moment.suppressDeprecationWarnings = true;
@@ -11,8 +12,8 @@ export const compareDate = (
   date2: string,
   accuracy?: moment.unitOfTime.Diff
 ): number => moment(date1).diff(date2, accuracy || 'seconds');
-export const dateFromNow = (to: string) =>
-  compareDate(moment().format('YYYY-MM-DD HH:mm:ss'), to, 'day');
+export const dateFromNow = (to: string, accuracy?: moment.unitOfTime.Diff) =>
+  compareDate(moment().format('YYYY-MM-DD HH:mm:ss'), to, accuracy || 'day');
 
 export const getTimeState = () => {
   const timeNow = new Date();
@@ -25,4 +26,8 @@ export const getTimeState = () => {
     return `晚上好`;
   }
   return 'Hi';
+};
+
+export const transformSecondsToHours = (sec: number) => {
+  return expired_time_map.find(item => item.value === sec)?.label;
 };

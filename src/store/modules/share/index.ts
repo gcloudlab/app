@@ -2,23 +2,25 @@ import { defineStore } from 'pinia';
 import piniaStore from '@/store';
 // import {  } from '@/service/api/share';
 import { onWarning, onError } from '@/utils/messages';
-import { CreateShareOption } from '@/models/share';
+import { CreateShareOption, ShareDetailItem } from '@/models/share';
 import { createShare, getShareDetailByShareIdentity } from '@/service/api/share';
 import { onSuccess } from '../../../utils/messages';
 
 export interface ShareStateProps {
-  share_list: [];
+  share_list: ShareDetailItem[] | null;
   fetching: boolean;
   current_sharing_file_identity: string;
+  share_detail: ShareDetailItem;
 }
 
 export const useShareStore = defineStore({
   id: 'share',
   state: () =>
     ({
-      share_list: [],
+      share_list: null,
       fetching: false,
       current_sharing_file_identity: '',
+      share_detail: {},
     } as ShareStateProps),
   getters: {
     // register_count: state => state.register_count,
@@ -35,11 +37,6 @@ export const useShareStore = defineStore({
       try {
         const res = await createShare(option);
         if (res.data.msg === 'success') {
-          onSuccess('分享成功', {
-            duration: 5000,
-            closable: true,
-            keepAliveOnHover: true,
-          });
           this.current_sharing_file_identity = res.data.identity;
         } else {
           onWarning(res.data.msg);
@@ -49,14 +46,18 @@ export const useShareStore = defineStore({
       }
     },
     async onGetShareDetailByIndentityAction(id: string) {
+      this.fetching = true;
       try {
         const res = await getShareDetailByShareIdentity(id);
-        if (res.data.msg !== 'success') {
+        if (res.data.msg === 'success') {
+          this.share_detail = res.data;
+        } else {
           onError(res.data.msg);
         }
       } catch (error) {
         onError('出错了');
       }
+      this.fetching = false;
     },
   },
 });

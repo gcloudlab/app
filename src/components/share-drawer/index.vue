@@ -20,14 +20,16 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
+import { PropType, ref, toRefs, defineAsyncComponent, h } from 'vue';
+import { useRouter } from 'vue-router';
+import { useShareOutsideStore } from '@/store/modules/share';
 import { FileListData } from '@/models/file';
-import { NButton, NTag, NIcon } from 'naive-ui';
+import { NButton, NTag, NIcon, MessageRenderMessage, NCard, NA } from 'naive-ui';
 import { transformSize } from '@/utils/transform-size';
 import { ShareSocial } from '@vicons/ionicons5';
 import ShareForm from './share-form.vue';
-import { onInfo } from '@/utils/messages';
-import { onSuccess } from '../../utils/messages';
+import { onInfo, onSuccess } from '@/utils/messages';
+
 const Drawer = defineAsyncComponent(() => import('@/components/commons/drawer/index.vue'));
 
 const props = defineProps({
@@ -36,6 +38,9 @@ const props = defineProps({
     required: true,
   },
 });
+const router = useRouter();
+const shareStore = useShareOutsideStore();
+
 const show = ref(false);
 
 const handleOpenShare = () => {
@@ -54,7 +59,33 @@ const handleOpenShare = () => {
 const handleSuccessCreate = (v: boolean) => {
   if (v) {
     show.value = false;
+    onSuccess('分享', {
+      showIcon: false,
+      closable: true,
+      duration: 5000,
+      keepAliveOnHover: true,
+      render: renderMessage,
+    });
   }
+};
+
+const renderMessage: MessageRenderMessage = props => {
+  return h(
+    NCard,
+    {
+      title: '分享成功',
+      size: 'small',
+      closable: true,
+    },
+    {
+      default: () =>
+        h(
+          NA,
+          { onClick: () => router.push(`/s/${shareStore.current_sharing_file_identity}`) },
+          { default: () => '查看分享详情' }
+        ),
+    }
+  );
 };
 
 toRefs(props);

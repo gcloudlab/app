@@ -34,10 +34,10 @@ import Other from './other.vue';
 const boardClasses = ['rounded'];
 </script>
 
-<style lang="scss" scoped>
-/* .main-nav {
-  .other {
-    height: 100%;
+<style lang="scss">
+.main-nav {
+  .n-h {
+    font-size: 14px;
   }
-} */
+}
 </style>

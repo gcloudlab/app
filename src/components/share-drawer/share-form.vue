@@ -38,6 +38,7 @@ import { onError } from '@/utils/messages';
 import { CreateShareOption } from '@/models/share';
 import { useShare } from '@/hooks/useShare';
 import { useShareOutsideStore } from '@/store/modules/share';
+import { expired_time_map } from '@/constants/expired_time';
 
 const emits = defineEmits(['onSuccess']);
 const props = defineProps({
@@ -78,28 +79,6 @@ const rules: FormRules = {
     },
   ],
 };
-const expired_time_map = [
-  {
-    label: '24h',
-    value: 86400,
-  },
-  {
-    label: '3天',
-    value: 259200,
-  },
-  {
-    label: '7天',
-    value: 604800,
-  },
-  {
-    label: '30天',
-    value: 2592000,
-  },
-  {
-    label: '永久',
-    value: -1,
-  },
-];
 
 const handleValidate = () => {
   formRef.value?.validate(errors => {
