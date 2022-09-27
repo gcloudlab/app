@@ -8,3 +8,10 @@ export interface Notifications {
   description: string;
   render?: any;
 }
+
+export interface ShareStatisticsData {
+  share_count: number;
+  click_num: number;
+  msg: string;
+  code: number;
+}

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import piniaStore from '@/store';
-import { getRegisterCount } from '@/service/api/global';
+import { getRegisterCount, getShareStatistics } from '@/service/api/global';
 import { onWarning, onError } from '@/utils/messages';
 import useTimer from '@/hooks/useTimer';
 import { Notifications } from '@/models/global';
@@ -9,6 +9,8 @@ import { How_To_Use_GCloud, Join_Us } from '@/constants/notifications';
 
 export interface GlobalStateProps {
   register_count: number;
+  share_count: number;
+  click_num: number;
   fetching: boolean;
   notifications: Notifications[];
   has_read_notifications: string[];
@@ -23,6 +25,8 @@ export const useGlobalStore = defineStore({
   state: () =>
     ({
       register_count: -1,
+      click_num: -1,
+      share_count: -1,
       fetching: false,
       notifications: [How_To_Use_GCloud, Join_Us],
       has_read_notifications: initialState.has_read_notifications || [],
@@ -53,6 +57,26 @@ export const useGlobalStore = defineStore({
       if (!this.has_read_notifications.includes(key)) {
         this.has_read_notifications.push(key);
         useStorage('has_read_notifications', this.has_read_notifications);
+      }
+    },
+    async onGetShareStatisticsAction() {
+      try {
+        this.fetching = true;
+        const { data } = await getShareStatistics();
+        if (data.msg === 'success') {
+          this.click_num = data.click_num;
+          this.share_count = data.share_count;
+          this.fetching = false;
+        } else {
+          onWarning(data.msg);
+        }
+      } catch (error) {
+        useTimer(() => {
+          this.click_num = 0;
+          this.share_count = 0;
+          this.fetching = false;
+        }, 3);
+        onError('出错了');
       }
     },
   },

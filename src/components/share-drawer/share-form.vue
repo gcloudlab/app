@@ -6,11 +6,11 @@
           <n-radio v-for="item in expired_time_map" :value="item.value"> {{ item.label }} </n-radio>
         </n-radio-group>
       </n-form-item>
-      <n-form-item path="desc" label="分享描述">
+      <n-form-item path="desc" label="分享留言">
         <n-input
           v-model:value="model.desc"
           type="textarea"
-          placeholder="请填写分享描述"
+          placeholder="请填写分享留言"
           @keydown.enter.prevent
         />
       </n-form-item>

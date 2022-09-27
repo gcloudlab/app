@@ -1,6 +1,6 @@
 <template>
   <div class="share-detail mt-10 flex justify-center items-start w-full">
-    <n-thing class="shadow rounded p-4" style="width: 50vw; min-width: 320px">
+    <n-thing class="shadow rounded p-4" style="width: 50vw; min-width: 320px; max-width: 550px">
       <template #avatar>
         <n-skeleton v-if="fetching" width="34px" height="34px" />
         <n-avatar v-else :src="share_detail.avatar" :fallback-src="defaultAvatar" />
@@ -14,7 +14,7 @@
       <template #header-extra>
         <n-tooltip trigger="hover">
           <template #trigger>
-            <n-button size="small" @click="handleCopyLink">
+            <n-button secondary type="primary" size="small" @click="handleCopyLink">
               <template #icon>
                 <CopyOutline />
               </template>
@@ -35,17 +35,28 @@
       </div>
       <template #footer>
         <n-skeleton v-if="fetching" text width="70%" />
-        <div v-else>
-          <span> 有效期：{{ transformSecondsToHours(share_detail.expired_time) }} </span>
+        <div class="flex items-center" v-else>
+          <n-button type="primary" size="tiny" quaternary>
+            <template #icon>
+              <n-icon>
+                <EyeOutline />
+              </n-icon>
+            </template>
+            {{ share_detail.click_num }}
+          </n-button>
           <n-divider vertical />
-          <span class="text-warning" v-if="share_detail.expired_time > 0">
-            <n-countdown :duration="rest_expired_time" />
-            后过期
-          </span>
+          {{ transformSize(share_detail.size) }}
+          <n-divider vertical />
+          <div v-if="rest_expired_time > 0">
+            将在<span class="text-warning" v-if="share_detail.expired_time > 0">
+              <n-countdown :duration="rest_expired_time" /> </span
+            >小时后失效
+          </div>
+          <div v-else class="text-error">已失效</div>
         </div>
       </template>
       <template #action>
-        <n-button size="small"> 转存 </n-button>
+        <n-button size="small"> 保存 </n-button>
         <n-button size="small"> 预览 </n-button>
         <n-button size="small"> 下载 </n-button>
       </template>
@@ -60,11 +71,22 @@ import { storeToRefs } from 'pinia';
 import { useShareOutsideStore } from '@/store/modules/share';
 import { useShare } from '@/hooks/useShare';
 import defaultAvatar from '@/assets/logo.png';
-import { transformSecondsToHours, transformDate, dateFromNow } from '@/utils/date';
 import useClipboard from 'vue-clipboard3';
-import { NThing, NSkeleton, NButton, NAvatar, NCountdown, NDivider, NTooltip, NP } from 'naive-ui';
-import { CopyOutline } from '@vicons/ionicons5';
+import {
+  NThing,
+  NSkeleton,
+  NButton,
+  NAvatar,
+  NCountdown,
+  NDivider,
+  NTooltip,
+  NP,
+  NIcon,
+} from 'naive-ui';
+import { CopyOutline, EyeOutline } from '@vicons/ionicons5';
+import { transformSecondsToHours, transformDate, dateFromNow } from '@/utils/date';
 import { onSuccess, onError } from '@/utils/messages';
+import { transformSize } from '@/utils/transform-size';
 
 const router = useRouter();
 const shareStore = useShareOutsideStore();
@@ -90,7 +112,7 @@ const copy_info = computed(
   () =>
     `我在GCloud云盘分享了文件「${
       shareStore.share_detail.name
-    }」，复制此信息并访问链接 https://gcloud.website/#/s/${
+    }」，复制此段信息并访问链接 https://gcloud.website/#/s/${
       shareStore.share_detail.identity
     } 即可获取文件，有效期${transformSecondsToHours(shareStore.share_detail.expired_time)}。`
 );

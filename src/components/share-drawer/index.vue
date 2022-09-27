@@ -20,11 +20,11 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs, defineAsyncComponent, h } from 'vue';
+import { PropType, ref, toRefs, defineAsyncComponent, h, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
 import { useShareOutsideStore } from '@/store/modules/share';
 import { FileListData } from '@/models/file';
-import { NButton, NTag, NIcon, MessageRenderMessage, NCard, NA } from 'naive-ui';
+import { NButton, NTag, NIcon, MessageRenderMessage, NCard, NA, MessageReactive } from 'naive-ui';
 import { transformSize } from '@/utils/transform-size';
 import { ShareSocial } from '@vicons/ionicons5';
 import ShareForm from './share-form.vue';
@@ -45,6 +45,7 @@ const shareStore = useShareOutsideStore();
 const { toClipboard } = useClipboard();
 
 const show = ref(false);
+let messageReactive: MessageReactive | null = null;
 
 const handleOpenShare = () => {
   // console.log(props.file);
@@ -62,13 +63,14 @@ const handleOpenShare = () => {
 const handleSuccessCreate = (v: boolean) => {
   if (v) {
     show.value = false;
-    onSuccess('分享', {
-      showIcon: false,
-      closable: true,
-      duration: 10000,
-      keepAliveOnHover: true,
-      render: renderMessage,
-    });
+    if (!messageReactive) {
+      messageReactive = onSuccess('分享', {
+        closable: true,
+        duration: 7000,
+        keepAliveOnHover: true,
+        render: renderMessage,
+      });
+    }
   }
 };
 
@@ -79,26 +81,46 @@ const renderMessage: MessageRenderMessage = props => {
       title: '分享成功',
       size: 'small',
       closable: true,
+      onClose: () => removeMessage(),
     },
     {
       default: () =>
-        h(
-          NA,
-          {
-            onVnodeMounted: async () => {
-              await toClipboard(
-                `https://gcloud.website/#/s/${shareStore.current_sharing_file_identity}`
-              );
+        h('div', null, [
+          h('div', { class: 'text-sm p-2 mb-2 bg-gray-100' }, '分享链接已复制到剪切板'),
+          h(
+            NA,
+            {
+              class: 'text-primary hover:text-secondary',
+              onVnodeMounted: async () => {
+                if (shareStore.current_sharing_file_identity !== '') {
+                  await toClipboard(
+                    `https://gcloud.website/#/s/${shareStore.current_sharing_file_identity}`
+                  );
+                }
+              },
+              onClick: () => {
+                if (shareStore.current_sharing_file_identity !== '') {
+                  router.push(`/s/${shareStore.current_sharing_file_identity}`);
+                } else {
+                  onError('未知错误');
+                }
+              },
             },
-            onClick: () => {
-              router.push(`/s/${shareStore.current_sharing_file_identity}`);
-            },
-          },
-          { default: () => '查看分享详情（分享链接已复制到剪切板）' }
-        ),
+            { default: () => '查看分享详情' }
+          ),
+        ]),
     }
   );
 };
+
+const removeMessage = () => {
+  if (messageReactive) {
+    messageReactive.destroy();
+    messageReactive = null;
+  }
+};
+
+onBeforeUnmount(removeMessage);
 
 toRefs(props);
 </script>

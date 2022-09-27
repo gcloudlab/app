@@ -8,12 +8,12 @@
     </div>
     <div class="analysize px-3 pb-2 text-sm flex justify-start items-center">
       <div class="flex-none">分享次数：</div>
-      <div class="text-primary"><n-number-animation :from="0" :to="0" /></div>
+      <div class="text-primary"><n-number-animation :from="0" :to="share_count" /></div>
       &nbsp;次
     </div>
     <div class="analysize px-3 pb-2 text-sm flex justify-start items-center">
       <div class="flex-none">点击次数：</div>
-      <div class="text-primary"><n-number-animation :from="0" :to="0" /></div>
+      <div class="text-primary"><n-number-animation :from="0" :to="click_num" /></div>
       &nbsp;次
     </div>
   </div>
@@ -27,13 +27,14 @@ import { onMounted } from 'vue';
 import { NDivider, NSkeleton, NNumberAnimation } from 'naive-ui';
 import { storeToRefs } from 'pinia';
 import { useGlobalOutsideStore } from '@/store/modules/global';
-import { useRegisterCount } from '@/hooks/useGlobal';
+import { useRegisterCount, useShareStatistics } from '@/hooks/useGlobal';
 
 const globalStore = useGlobalOutsideStore();
 onMounted(() => {
   useRegisterCount();
+  useShareStatistics();
 });
-const { register_count, fetching } = storeToRefs(globalStore);
+const { register_count, share_count, click_num, fetching } = storeToRefs(globalStore);
 </script>
 
 <style lang="scss" scoped></style>
