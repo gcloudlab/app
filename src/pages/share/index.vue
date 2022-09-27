@@ -52,13 +52,15 @@
               <n-countdown :duration="rest_expired_time" /> </span
             >小时后失效
           </div>
-          <div v-else class="text-error">已失效</div>
+          <div v-else class="text-error">分享已失效</div>
         </div>
       </template>
       <template #action>
-        <n-button size="small"> 保存 </n-button>
-        <n-button size="small"> 预览 </n-button>
-        <n-button size="small"> 下载 </n-button>
+        <div v-if="rest_expired_time > 0">
+          <n-button size="small"> 保存 </n-button>
+          <n-button size="small"> 预览 </n-button>
+          <n-button size="small"> 下载 </n-button>
+        </div>
       </template>
     </n-thing>
   </div>
