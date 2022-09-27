@@ -36,7 +36,7 @@ import usePicture, { PictureResponse } from '@/hooks/usePicture';
 import { onMounted, ref } from 'vue';
 import { NImage, NSkeleton, NScrollbar } from 'naive-ui';
 import Menu from './menu.vue';
-import defaultLogo from '@/assets/logo.png';
+import defaultLogo from '@/assets/ctrl.gif';
 
 const pictures = ref<PictureResponse | null>();
 const currentPage = ref(1);
