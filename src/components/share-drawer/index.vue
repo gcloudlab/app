@@ -29,6 +29,8 @@ import { transformSize } from '@/utils/transform-size';
 import { ShareSocial } from '@vicons/ionicons5';
 import ShareForm from './share-form.vue';
 import { onInfo, onSuccess } from '@/utils/messages';
+import useClipboard from 'vue-clipboard3';
+import { onError } from '../../utils/messages';
 
 const Drawer = defineAsyncComponent(() => import('@/components/commons/drawer/index.vue'));
 
@@ -40,6 +42,7 @@ const props = defineProps({
 });
 const router = useRouter();
 const shareStore = useShareOutsideStore();
+const { toClipboard } = useClipboard();
 
 const show = ref(false);
 
@@ -62,7 +65,7 @@ const handleSuccessCreate = (v: boolean) => {
     onSuccess('分享', {
       showIcon: false,
       closable: true,
-      duration: 5000,
+      duration: 10000,
       keepAliveOnHover: true,
       render: renderMessage,
     });
@@ -81,8 +84,17 @@ const renderMessage: MessageRenderMessage = props => {
       default: () =>
         h(
           NA,
-          { onClick: () => router.push(`/s/${shareStore.current_sharing_file_identity}`) },
-          { default: () => '查看分享详情' }
+          {
+            onVnodeMounted: async () => {
+              await toClipboard(
+                `https://gcloud.website/#/s/${shareStore.current_sharing_file_identity}`
+              );
+            },
+            onClick: () => {
+              router.push(`/s/${shareStore.current_sharing_file_identity}`);
+            },
+          },
+          { default: () => '查看分享详情（分享链接已复制到剪切板）' }
         ),
     }
   );

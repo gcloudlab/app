@@ -90,7 +90,7 @@ const copy_info = computed(
   () =>
     `我在GCloud云盘分享了文件「${
       shareStore.share_detail.name
-    }」，复制此信息并访问链接 https://gcloud.website/s/${
+    }」，复制此信息并访问链接 https://gcloud.website/#/s/${
       shareStore.share_detail.identity
     } 即可获取文件，有效期${transformSecondsToHours(shareStore.share_detail.expired_time)}。`
 );
