@@ -26,7 +26,7 @@
 // import { useFileOutsideStore } from '@/store/modules/file';
 import RobotJson from '@/assets/lotties/robot.json';
 import TriggerUpload from '@/components/upload/trigger-upload.vue';
-import ShareOverview from './share-overview.vue';
+import ShareOverview from './share-overview/index.vue';
 import Other from './other.vue';
 
 // const fileStore = useFileOutsideStore();

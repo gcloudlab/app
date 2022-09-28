@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia';
 import piniaStore from '@/store';
-// import {  } from '@/service/api/share';
 import { onWarning, onError } from '@/utils/messages';
 import { CreateShareOption, ShareDetailItem } from '@/models/share';
-import { createShare, getShareDetailByShareIdentity } from '@/service/api/share';
-import { onSuccess } from '../../../utils/messages';
+import { createShare, getPopularShares, getShareDetailByShareIdentity } from '@/service/api/share';
+import useTimer from '@/hooks/useTimer';
 
 export interface ShareStateProps {
   share_list: ShareDetailItem[] | null;
+  popular_share_list: ShareDetailItem[] | null;
   fetching: boolean;
   current_sharing_file_identity: string;
   share_detail: ShareDetailItem;
@@ -18,6 +18,7 @@ export const useShareStore = defineStore({
   state: () =>
     ({
       share_list: null,
+      popular_share_list: null,
       fetching: false,
       current_sharing_file_identity: '',
       share_detail: {},
@@ -26,12 +27,21 @@ export const useShareStore = defineStore({
     // register_count: state => state.register_count,
   },
   actions: {
-    async onGetShareListAction() {
+    async onGetPopularShareListAction(click_num?: number) {
+      this.fetching = true;
       try {
-        this.fetching = true;
+        const res = await getPopularShares(click_num);
+        if (res.status === 200) {
+          this.popular_share_list = res.data.list;
+        }
+        this.fetching = false;
       } catch (error) {
-        onError('出错了');
+        useTimer(() => {
+          onError('出错了');
+          this.fetching = false;
+        }, 3);
       }
+      this.fetching = false;
     },
     async onCreateShareRecordAction(option: CreateShareOption) {
       try {

@@ -1,3 +1,6 @@
+export interface ShareListResponse {
+  list: ShareDetailItem[];
+}
 export interface ShareDetailItem {
   repository_identity: string;
   identity: string;

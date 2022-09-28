@@ -6,14 +6,17 @@ import {
   SaveShareOption,
   SaveShareResponse,
   ShareDetailItem,
+  ShareListResponse,
 } from '@/models/share';
 
-export const getAllShares = async () => {
-  return await axios.get('/all/shares');
+export const getPopularShares = async (
+  click_num?: number
+): Promise<CustomResponse<ShareListResponse>> => {
+  return await axios.post('/popular/share/list', { click_num: click_num ?? 20 });
 };
 
-export const getUserShares = async () => {
-  return await axios.get('/user/shares');
+export const getUserShares = async (): Promise<CustomResponse<ShareListResponse>> => {
+  return await axios.get('/user/share/list');
 };
 
 export const getShareDetailByShareIdentity = async (

@@ -12,8 +12,13 @@ export const useShare = () => {
     await shareStore.onGetShareDetailByIndentityAction(id);
   };
 
+  const onGetPopularShareList = (click_num?: number) => {
+    shareStore.onGetPopularShareListAction(click_num);
+  };
+
   return {
     onCreateShareRecord,
     onGetShareDetailByIndentity,
+    onGetPopularShareList,
   };
 };

@@ -1,10 +1,18 @@
 <template>
-  <div class="flex justify-between top-0" style="position: sticky">
+  <div class="flex justify-between items-center top-0" style="position: sticky">
     <n-h5 prefix="bar" class="text-primary mt-0">
       回收站 {{ deleted_files.length !== 0 ? `(${deleted_files.length})` : '' }}
     </n-h5>
     <!-- <n-button size="small" @click="onInfo('肝ing...')">撤回</n-button> -->
-    <n-button size="small" @click="onInfo('肝ing...')">清空</n-button>
+    <n-button
+      v-if="checked_file_ids.length > 0"
+      type="error"
+      size="tiny"
+      @click="onInfo('肝ing...')"
+      style="margin-top: -15px"
+    >
+      删除
+    </n-button>
   </div>
 
   <n-scrollbar style="height: 100%">
@@ -27,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent, ref } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import {
@@ -46,6 +54,8 @@ import { onInfo } from '@/utils/messages';
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
 const fileStore = useFileOutsideStore();
+
+const checked_file_ids = ref<string[]>([]);
 
 const columns: DataTableColumns<FileListData> = [
   {
@@ -74,14 +84,14 @@ const columns: DataTableColumns<FileListData> = [
     key: 'deleted_at',
     width: 4,
     defaultSortOrder: 'ascend',
-    sorter: (row1: any, row2: any) => compareDate(row1.deleted_at, row2.deleted_at),
+    sorter: (row1: any, row2: any) => compareDate(row2.deleted_at, row1.deleted_at),
     render(row) {
       return transformDate(row.deleted_at as string);
     },
   },
 ];
 const handleCheck = (rowKeys: DataTableRowKey[]) => {
-  // console.log(rowKeys);
+  checked_file_ids.value = rowKeys as string[];
 };
 
 const { deleted_files, fetching } = storeToRefs(fileStore);
