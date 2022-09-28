@@ -40,9 +40,9 @@
                 {{ share_detail.click_num }}
               </n-button>
               <n-divider vertical />
-              {{ transformDate(share_detail.updated_at) }}
-              <n-divider vertical />
               {{ transformSize(share_detail.size) }}
+              <n-divider vertical />
+              {{ transformDate(share_detail.updated_at) }}
             </div>
           </template>
         </n-thing>
@@ -75,7 +75,7 @@ toRefs(props);
 <style lang="scss">
 .share-list {
   .n-list .n-list-item {
-    padding: 5px 5px 0px 5px;
+    padding: 5px 5px 2px 5px;
   }
 }
 </style>
