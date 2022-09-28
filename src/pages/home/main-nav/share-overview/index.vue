@@ -1,7 +1,7 @@
 <template>
   <div class="shadow">
     <n-h5 prefix="bar" class="text-primary top-0" style="position: sticky">热门分享</n-h5>
-    <n-scrollbar style="height: calc(100vh - 245px)">
+    <n-scrollbar style="height: calc(100vh - 243px)">
       <div v-if="popular_share_list && popular_share_list.length > 0">
         <ShareList :data="popular_share_list" />
       </div>

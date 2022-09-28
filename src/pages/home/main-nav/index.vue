@@ -13,7 +13,10 @@
           :animation-data="RobotJson"
         />
       </div>
-      <div class="flex other w-full mb-2" :class="boardClasses">
+      <div
+        class="flex other w-full mb-2"
+        :class="[...boardClasses, isMobile() ? 'flex-col h-96' : '']"
+      >
         <ShareOverview class="flex-1 p-3" />
         <Other class="flex-1 p-3" />
       </div>
@@ -24,6 +27,7 @@
 <script setup lang="ts">
 // import { storeToRefs } from 'pinia';
 // import { useFileOutsideStore } from '@/store/modules/file';
+import { isMobile } from '@/utils/is-mobile';
 import RobotJson from '@/assets/lotties/robot.json';
 import TriggerUpload from '@/components/upload/trigger-upload.vue';
 import ShareOverview from './share-overview/index.vue';

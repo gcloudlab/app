@@ -7,6 +7,7 @@
     </div>
     <!-- <Empty v-else description="敬请期待" /> -->
     <img v-else class="w-full" :src="CTRL" alt="jntm" />
+    敬请期待
   </n-scrollbar>
 </template>
 
