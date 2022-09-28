@@ -7,12 +7,12 @@
       &nbsp;人
     </div>
     <div class="analysize px-3 pb-2 text-sm flex justify-start items-center">
-      <div class="flex-none">分享次数：</div>
+      <div class="flex-none">累计分享：</div>
       <div class="text-primary"><n-number-animation :from="0" :to="share_count" /></div>
       &nbsp;次
     </div>
     <div class="analysize px-3 pb-2 text-sm flex justify-start items-center">
-      <div class="flex-none">点击次数：</div>
+      <div class="flex-none">浏览分享：</div>
       <div class="text-primary"><n-number-animation :from="0" :to="click_num" /></div>
       &nbsp;次
     </div>
