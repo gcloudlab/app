@@ -60,19 +60,18 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useAuthOutsideStore } from '@/store/modules/auth';
 import { useAuth } from '@/hooks';
-import { NButton, NDivider, NIcon } from 'naive-ui';
 import { getTimeState } from '@/utils/date';
 import randomAvatar from '@/utils/random-avatar';
+import { onInfo } from '@/utils/messages';
 import { transformSize } from '@/utils/transform-size';
 import EditUser from './edit-user.vue';
+import UpdateLog from '@/components/update-log/index.vue';
+import { NButton, NDivider, NIcon } from 'naive-ui';
 import { LogOutOutline as LogOutIcon, LogInOutline as LogInIcon } from '@vicons/ionicons5';
-import { onInfo } from '@/utils/messages';
-const UpdateLog = defineAsyncComponent(() => import('@/components/update-log/index.vue'));
 
 const emits = defineEmits(['onCloseEdit']);
 const router = useRouter();
