@@ -45,11 +45,6 @@
               {{ transformSize(share_detail.size) }}
             </div>
           </template>
-          <div>
-            <n-p v-if="share_detail.desc !== ''" class="p-3 bg-gray-100 rounded">
-              留言：{{ share_detail.desc }}
-            </n-p>
-          </div>
         </n-thing>
       </n-list-item>
     </n-list>
