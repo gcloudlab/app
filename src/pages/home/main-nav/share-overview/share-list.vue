@@ -74,6 +74,9 @@ toRefs(props);
 
 <style lang="scss">
 .share-list {
+  .n-list {
+    background-color: transparent;
+  }
   .n-list .n-list-item {
     padding: 5px 5px 2px 5px;
   }

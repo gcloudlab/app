@@ -3,13 +3,20 @@
     <n-h5 prefix="bar" class="text-primary mt-0">
       回收站 {{ deleted_files.length !== 0 ? `(${deleted_files.length})` : '' }}
     </n-h5>
-    <!-- <n-button size="small" @click="onInfo('肝ing...')">撤回</n-button> -->
+    <n-button
+      v-if="checked_file_ids.length > 0"
+      size="tiny"
+      @click="onInfo('肝ing...')"
+      style="margin-top: -15px; margin-left: auto"
+    >
+      还原
+    </n-button>
     <n-button
       v-if="checked_file_ids.length > 0"
       type="error"
       size="tiny"
       @click="onInfo('肝ing...')"
-      style="margin-top: -15px"
+      style="margin-top: -15px; margin-left: 5px"
     >
       删除
     </n-button>
@@ -24,6 +31,7 @@
         single-column
         :row-key="row => row.identity"
         size="small"
+        row-class-name="recycle-col"
         @update:checked-row-keys="handleCheck"
       />
     </div>
@@ -104,9 +112,13 @@ const { deleted_files, fetching } = storeToRefs(fileStore);
   }
   .n-data-table .n-data-table-td {
     border-bottom: none;
+    background-color: rgb(240, 253, 244);
   }
   .n-data-table .n-data-table-td.n-data-table-td--hover {
     background-color: transparent;
+  }
+  .recycle-col {
+    background-color: rgb(240, 253, 244);
   }
 }
 </style>

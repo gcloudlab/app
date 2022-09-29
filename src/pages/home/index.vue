@@ -73,7 +73,7 @@
           </n-scrollbar>
         </div>
         <FileDetail
-          v-show="currentClickedFile && folder_routes.length > 1"
+          v-show="currentClickedFile && folder_routes.length > 1 && !isMobile()"
           class="flex-none"
           :file="currentClickedFile"
         />
@@ -109,7 +109,7 @@ const fileStore = useFileOutsideStore();
 const { onGetFileList, onAddToFolderRoutes, onRemoveFromFolderRoutes, onJumpToFile, onDeleteFile } =
   useFiles();
 const expendMenuValue = ref<TreeOption | FileListData>();
-const fileViewType = ref<'list' | 'graphical'>('graphical');
+const fileViewType = ref<'list' | 'graphical'>(isMobile() ? 'list' : 'graphical');
 const currentClickedFile = ref<FileListData>();
 const currentCheckedFiles = ref<FileListData[]>([]);
 
