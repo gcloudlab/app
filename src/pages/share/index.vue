@@ -48,18 +48,18 @@
           {{ transformSize(share_detail.size) }}
           <n-divider vertical />
           <div v-if="rest_expired_time > 0">
-            将在<span class="text-warning" v-if="share_detail.expired_time > 0">
-              <n-countdown :duration="rest_expired_time" /> </span
+            将在<span class="text-warning"> <n-countdown :duration="rest_expired_time" /> </span
             >小时后失效
           </div>
+          <div v-else-if="share_detail.expired_time === -1">永久</div>
           <div v-else class="text-error">分享已失效</div>
         </div>
       </template>
       <template #action>
-        <div v-if="rest_expired_time > 0">
-          <n-button size="small"> 保存 </n-button>
-          <n-button size="small"> 预览 </n-button>
-          <n-button size="small"> 下载 </n-button>
+        <div v-if="rest_expired_time > 0 || share_detail.expired_time === -1">
+          <n-button type="primary" size="small"> 保存 </n-button>
+          <!-- <n-button size="small"> 预览 </n-button>
+          <n-button size="small"> 下载 </n-button> -->
         </div>
       </template>
     </n-thing>

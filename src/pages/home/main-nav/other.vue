@@ -1,7 +1,6 @@
 <template>
-  <div class="flex flex-col shadow" style="height: calc(100vh - 208px)">
+  <div class="flex flex-col shadow" style="height: calc(100vh - 193px)">
     <Dynamic />
-    <n-divider />
     <RecycleBin />
   </div>
 </template>

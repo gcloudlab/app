@@ -1,13 +1,21 @@
 <template>
-  <n-h5 prefix="bar" class="text-primary top-0" style="position: sticky">动态</n-h5>
+  <n-h5
+    prefix="bar"
+    class="text-primary bg-header shadow-sm rounded p-2 top-0 mb-0"
+    style="position: sticky"
+  >
+    动态
+  </n-h5>
   <n-scrollbar style="height: 100%">
-    <div v-if="0"></div>
-    <div v-else-if="fetching" class="p-4">
-      <n-skeleton class="mb-1" height="20px" :repeat="5" :sharp="false" />
+    <div class="px-3 pt-2">
+      <div v-if="0"></div>
+      <div v-else-if="fetching" class="p-4">
+        <n-skeleton class="mb-1" height="20px" :repeat="5" :sharp="false" />
+      </div>
+      <!-- <Empty v-else description="敬请期待" /> -->
+      <img v-else class="w-full" :src="CTRL" alt="jntm" />
+      敬请期待
     </div>
-    <!-- <Empty v-else description="敬请期待" /> -->
-    <img v-else class="w-full" :src="CTRL" alt="jntm" />
-    敬请期待
   </n-scrollbar>
 </template>
 

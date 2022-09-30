@@ -1,14 +1,22 @@
 <template>
   <div class="shadow">
-    <n-h5 prefix="bar" class="text-primary top-0" style="position: sticky">热门分享</n-h5>
+    <n-h5
+      prefix="bar"
+      class="text-primary bg-header shadow-sm rounded p-2 top-0 mb-0"
+      style="position: sticky"
+    >
+      热门分享
+    </n-h5>
     <n-scrollbar style="height: calc(100vh - 243px)">
-      <div v-if="popular_share_list && popular_share_list.length > 0">
-        <ShareList :data="popular_share_list" />
+      <div class="px-3 pt-2">
+        <div v-if="popular_share_list && popular_share_list.length > 0">
+          <ShareList :data="popular_share_list" />
+        </div>
+        <div v-else-if="fetching" class="p-4">
+          <n-skeleton class="mb-1" height="35px" :repeat="6" :sharp="false" />
+        </div>
+        <Empty v-else description="空空如也" />
       </div>
-      <div v-else-if="fetching" class="p-4">
-        <n-skeleton class="mb-1" height="35px" :repeat="6" :sharp="false" />
-      </div>
-      <Empty v-else description="空空如也" />
     </n-scrollbar>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between items-center top-0" style="position: sticky">
-    <n-h5 prefix="bar" class="text-primary mt-0">
+    <n-h5 prefix="bar" class="w-full text-primary bg-header shadow-sm rounded p-2 mt-0 mb-0">
       回收站 {{ deleted_files.length !== 0 ? `(${deleted_files.length})` : '' }}
     </n-h5>
     <n-button
@@ -23,7 +23,7 @@
   </div>
 
   <n-scrollbar style="height: 100%">
-    <div class="deleted_list" v-if="deleted_files.length > 0">
+    <div class="deleted_list p-3" v-if="deleted_files.length > 0">
       <n-data-table
         :columns="columns"
         :data="deleted_files"

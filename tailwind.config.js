@@ -14,6 +14,7 @@ module.exports = {
         secondary: '#009a9d',
         warning: '#fd7724',
         error: '#fd4f24',
+        header: '#f4f4f424',
       },
       backgroundImage: {
         login: 'url("https://img-yesmore.vercel.app/test/wallhaven-4verz8_1920x1080.png")',
