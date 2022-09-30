@@ -23,7 +23,10 @@
   </div>
 
   <n-scrollbar style="height: 100%">
-    <div class="deleted_list p-3" v-if="deleted_files.length > 0">
+    <div
+      class="deleted_list p-3 animate__animated animate__fadeIn faster"
+      v-if="deleted_files.length > 0"
+    >
       <n-data-table
         :columns="columns"
         :data="deleted_files"

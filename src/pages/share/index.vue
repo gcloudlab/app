@@ -69,27 +69,28 @@
             @clickoutside="showFolderTree = false"
           >
             <template #trigger>
-              <span>
-                <n-button size="small" @click="handleOpenSaveFolder">
+              <n-button-group>
+                <n-button type="primary" size="small" @click="handleOpenSaveFolder">
                   保存{{ moveFileInfo.name ? `到${moveFileInfo.name}` : '' }}
                 </n-button>
                 <n-button
                   v-if="moveFileInfo.name !== ''"
                   :disabled="moveFileInfo.name === ''"
-                  type="primary"
                   size="small"
                   @click="handleSaveFile"
                 >
                   确认
                 </n-button>
-              </span>
+              </n-button-group>
             </template>
             <FolderTree
               v-if="origin_folders.length > 0"
               :data="origin_folders"
               :node-props="nodeProps"
             />
-            <div v-else class="text-xs text-center">请先新建文件夹</div>
+            <div v-else class="text-xs text-center">
+              {{ authStore.auth?.name ? '请先新建文件夹' : '未登陆' }}
+            </div>
           </n-popover>
           <!-- <n-button size="small"> 预览 </n-button>
           <n-button size="small"> 下载 </n-button> -->
@@ -114,6 +115,7 @@ import {
   NThing,
   NSkeleton,
   NButton,
+  NButtonGroup,
   NAvatar,
   NCountdown,
   NDivider,
@@ -125,7 +127,7 @@ import {
 } from 'naive-ui';
 import { CopyOutline, EyeOutline } from '@vicons/ionicons5';
 import { transformSecondsToHours, transformDate, dateFromNow } from '@/utils/date';
-import { onSuccess, onError } from '@/utils/messages';
+import { onSuccess, onError, onWarning } from '@/utils/messages';
 import { transformSize } from '@/utils/transform-size';
 const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 
@@ -162,7 +164,7 @@ const copy_info = computed(
   () =>
     `我在GCloud云盘分享了文件「${
       shareStore.share_detail.name
-    }」，复制此段信息并访问链接 https://gcloud.website/#/s/${
+    }」，访问链接 https://gcloud.website/#/s/${
       shareStore.share_detail.identity
     } 即可获取文件，有效期${transformSecondsToHours(shareStore.share_detail.expired_time)}。`
 );
@@ -182,6 +184,10 @@ const handleOpenSaveFolder = () => {
 };
 
 const handleSaveFile = async () => {
+  if (!authStore.auth?.name) {
+    onWarning('请先登录');
+    return;
+  }
   await onSaveShareBasic(moveFileInfo).then(() => {
     moveFileInfo.parent_id = -1;
     moveFileInfo.repository_identity = '';

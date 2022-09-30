@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow">
+  <div class="share-overview">
     <n-h5
       prefix="bar"
       class="text-primary bg-header shadow-sm rounded p-2 top-0 mb-0"
@@ -8,7 +8,7 @@
       热门分享
     </n-h5>
     <n-scrollbar style="height: calc(100vh - 243px)">
-      <div class="px-3 pt-2">
+      <div class="px-3 pt-2 animate__animated animate__fadeIn faster">
         <div v-if="popular_share_list && popular_share_list.length > 0">
           <ShareList :data="popular_share_list" />
         </div>

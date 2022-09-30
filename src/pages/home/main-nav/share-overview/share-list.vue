@@ -1,17 +1,15 @@
 <template>
   <div class="share-list">
     <n-list hoverable clickable>
-      <n-list-item v-for="share_detail in data">
+      <n-list-item v-for="(share_detail, index) in data">
         <n-thing title="热门分享" content-style="margin-top: 10px;">
           <template #avatar>
             <n-avatar :src="share_detail.avatar" :fallback-src="defaultAvatar" />
           </template>
           <template #header>
-            <div class="truncate text-sm w-full">
-              <div class="w-2/3">
-                <span class="text-secondary">{{ share_detail.owner || '匿名用户' }}</span>
-                分享了 {{ share_detail.name }}
-              </div>
+            <div class="text-sm truncate">
+              <span class="text-secondary">{{ share_detail.owner || '匿名用户' }}</span>
+              <span class=""> 分享了{{ share_detail.name }}</span>
             </div>
           </template>
           <template #header-extra>
@@ -43,6 +41,17 @@
               {{ transformSize(share_detail.size) }}
               <n-divider vertical />
               {{ transformDate(share_detail.updated_at) }}
+              <div v-if="share_detail.desc !== ''">
+                <n-divider vertical />
+                <n-popover trigger="click">
+                  <template #trigger>
+                    <n-button size="tiny" quaternary>留言</n-button>
+                  </template>
+                  <n-p class="animate__animated animate__fadeIn faster">
+                    {{ share_detail.desc }}
+                  </n-p>
+                </n-popover>
+              </div>
             </div>
           </template>
         </n-thing>
@@ -52,12 +61,22 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, toRefs } from 'vue';
+import { PropType, ref, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 import { ShareDetailItem } from '@/models/share';
 import { transformDate } from '@/utils/date';
 import { transformSize } from '@/utils/transform-size';
-import { NList, NListItem, NThing, NTooltip, NButton, NP, NAvatar, NDivider } from 'naive-ui';
+import {
+  NList,
+  NListItem,
+  NThing,
+  NTooltip,
+  NButton,
+  NP,
+  NAvatar,
+  NDivider,
+  NPopover,
+} from 'naive-ui';
 import defaultAvatar from '@/assets/logo.png';
 import { EyeOutline, LinkOutline } from '@vicons/ionicons5';
 
@@ -78,7 +97,10 @@ toRefs(props);
     background-color: transparent;
   }
   .n-list .n-list-item {
-    padding: 5px 5px 2px 5px;
+    padding: 5px 5px 4px 5px;
+  }
+  .n-thing .n-thing-main .n-thing-header .n-thing-header__title {
+    width: 80%;
   }
 }
 </style>
