@@ -56,8 +56,41 @@
         </div>
       </template>
       <template #action>
-        <div v-if="rest_expired_time > 0 || share_detail.expired_time === -1">
-          <n-button type="primary" size="small"> 保存 </n-button>
+        <div
+          v-if="
+            (rest_expired_time > 0 || share_detail.expired_time === -1) &&
+            share_detail.owner !== authStore.auth?.name
+          "
+        >
+          <n-popover
+            :show="showFolderTree"
+            placement="top"
+            trigger="manual"
+            @clickoutside="showFolderTree = false"
+          >
+            <template #trigger>
+              <span>
+                <n-button size="small" @click="handleOpenSaveFolder">
+                  保存{{ moveFileInfo.name ? `到${moveFileInfo.name}` : '' }}
+                </n-button>
+                <n-button
+                  v-if="moveFileInfo.name !== ''"
+                  :disabled="moveFileInfo.name === ''"
+                  type="primary"
+                  size="small"
+                  @click="handleSaveFile"
+                >
+                  确认
+                </n-button>
+              </span>
+            </template>
+            <FolderTree
+              v-if="origin_folders.length > 0"
+              :data="origin_folders"
+              :node-props="nodeProps"
+            />
+            <div v-else class="text-xs text-center">请先新建文件夹</div>
+          </n-popover>
           <!-- <n-button size="small"> 预览 </n-button>
           <n-button size="small"> 下载 </n-button> -->
         </div>
@@ -67,11 +100,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, reactive, defineAsyncComponent, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useShareOutsideStore } from '@/store/modules/share';
+import { useFileOutsideStore } from '@/store/modules/file';
+import { useAuthOutsideStore } from '@/store/modules/auth';
 import { useShare } from '@/hooks/useShare';
+import { useFiles } from '@/hooks/useFiles';
 import defaultAvatar from '@/assets/logo.png';
 import useClipboard from 'vue-clipboard3';
 import {
@@ -84,19 +120,31 @@ import {
   NTooltip,
   NP,
   NIcon,
+  NPopover,
+  TreeOption,
 } from 'naive-ui';
 import { CopyOutline, EyeOutline } from '@vicons/ionicons5';
 import { transformSecondsToHours, transformDate, dateFromNow } from '@/utils/date';
 import { onSuccess, onError } from '@/utils/messages';
 import { transformSize } from '@/utils/transform-size';
+const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 
 const router = useRouter();
 const shareStore = useShareOutsideStore();
-const { onGetShareDetailByIndentity } = useShare();
+const fileStore = useFileOutsideStore();
+const authStore = useAuthOutsideStore();
+const { onGetShareDetailByIndentity, onSaveShareBasic } = useShare();
+const { onGetFileList } = useFiles();
 const { toClipboard } = useClipboard();
 const current_share_file_id = ref(router.currentRoute.value.params.id as string);
+const showFolderTree = ref(false);
+const moveFileInfo = reactive({
+  repository_identity: '',
+  parent_id: -1,
+  name: '',
+});
 
-onMounted(() => {
+onMounted(async () => {
   if (current_share_file_id.value) {
     onGetShareDetailByIndentity(current_share_file_id.value);
   }
@@ -129,7 +177,45 @@ const handleCopyLink = () => {
   }
 };
 
+const handleOpenSaveFolder = () => {
+  showFolderTree.value = true;
+};
+
+const handleSaveFile = async () => {
+  await onSaveShareBasic(moveFileInfo).then(() => {
+    moveFileInfo.parent_id = -1;
+    moveFileInfo.repository_identity = '';
+    moveFileInfo.name = '';
+  });
+};
+
+const nodeProps = ({ option }: { option: TreeOption }) => {
+  return {
+    onClick() {
+      if (option.type === '文件夹' && option.identity !== 'public') {
+        moveFileInfo.parent_id = option.id as number;
+        moveFileInfo.repository_identity = shareStore.share_detail.repository_identity;
+        moveFileInfo.name = option.name as string;
+      }
+    },
+  };
+};
+
+watch(
+  () => shareStore.share_detail,
+  async () => {
+    if (
+      shareStore.share_detail &&
+      authStore.auth &&
+      shareStore.share_detail.owner !== authStore.auth?.name
+    ) {
+      await onGetFileList();
+    }
+  }
+);
+
 const { share_detail, fetching } = storeToRefs(shareStore);
+const { origin_folders } = storeToRefs(fileStore);
 </script>
 
 <style lang="scss" scoped>

@@ -1,8 +1,13 @@
 import { defineStore } from 'pinia';
 import piniaStore from '@/store';
-import { onWarning, onError } from '@/utils/messages';
-import { CreateShareOption, ShareDetailItem } from '@/models/share';
-import { createShare, getPopularShares, getShareDetailByShareIdentity } from '@/service/api/share';
+import { onWarning, onError, onSuccess } from '@/utils/messages';
+import { CreateShareOption, SaveShareOption, ShareDetailItem } from '@/models/share';
+import {
+  createShare,
+  getPopularShares,
+  getShareDetailByShareIdentity,
+  saveShare,
+} from '@/service/api/share';
 import useTimer from '@/hooks/useTimer';
 
 export interface ShareStateProps {
@@ -68,6 +73,18 @@ export const useShareStore = defineStore({
         onError('出错了');
       }
       this.fetching = false;
+    },
+    async onSaveShareBasicAction(option: SaveShareOption) {
+      try {
+        const res = await saveShare(option);
+        if (res.data.msg === 'success') {
+          onSuccess('已保存');
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (error) {
+        onError('出错了');
+      }
     },
   },
 });

@@ -1,4 +1,4 @@
-import { CreateShareOption } from '@/models/share';
+import { CreateShareOption, SaveShareOption } from '@/models/share';
 import { useShareOutsideStore } from '@/store/modules/share';
 
 const shareStore = useShareOutsideStore();
@@ -16,9 +16,14 @@ export const useShare = () => {
     shareStore.onGetPopularShareListAction(click_num);
   };
 
+  const onSaveShareBasic = async (option: SaveShareOption) => {
+    await shareStore.onSaveShareBasicAction(option);
+  };
+
   return {
     onCreateShareRecord,
     onGetShareDetailByIndentity,
     onGetPopularShareList,
+    onSaveShareBasic,
   };
 };
