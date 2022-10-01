@@ -23,11 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs, defineAsyncComponent } from 'vue';
+import { PropType, ref, toRefs, defineAsyncComponent, watch } from 'vue';
 import { NInput } from 'naive-ui';
 import { useFiles } from '@/hooks/useFiles';
 import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
 import { onWarning } from '@/utils/messages';
+import { UploadTargetType } from '@/models/file';
 
 const Modal = defineAsyncComponent(() => import('@/components/commons/modal/index.vue'));
 
@@ -40,15 +41,21 @@ const props = defineProps({
 const { onCreateFolder } = useFiles();
 const showModal = ref(false);
 const folderName = ref('');
+const upload_target = ref<UploadTargetType>('private');
+
 const onNegativeClick = () => {
   showModal.value = false;
 };
+
 const onPositiveClick = () => {
   if (folderName.value !== '') {
-    onCreateFolder({
-      name: folderName.value,
-      parent_id: props.folder!.id as number,
-    }).then(() => {
+    onCreateFolder(
+      {
+        name: folderName.value,
+        parent_id: props.folder!.id as number,
+      },
+      upload_target.value
+    ).then(() => {
       folderName.value = '';
       showModal.value = false;
     });
@@ -56,6 +63,17 @@ const onPositiveClick = () => {
     onWarning('文件夹名不能为空');
   }
 };
+
+watch(
+  () => props.folder.name,
+  () => {
+    if (props.folder.name === '公共文件夹') {
+      upload_target.value = 'public';
+    } else {
+      upload_target.value = 'private';
+    }
+  }
+);
 
 toRefs(props);
 </script>

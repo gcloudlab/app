@@ -14,6 +14,7 @@ import type {
   MoveFolderOption,
   SaveFileToRepoOption,
   UpdateFileNameOption,
+  UploadTargetType,
 } from '@/models/file';
 import generateTree from '@/utils/transform-file-list';
 import { onError, onWarning, onSuccess } from '@/utils/messages';
@@ -154,7 +155,11 @@ export const useFileStore = defineStore({
         //   return;
         // }
 
-        const parentFolders = findParents(this.user_files, parent_id);
+        const parentFolders = findParents(
+          payload.target === 'private' ? this.user_files : this.public_files,
+          parent_id
+        );
+
         if (parentFolders && parentFolders.length > 0) {
           this.folder_routes = [
             {
@@ -235,9 +240,9 @@ export const useFileStore = defineStore({
         onError('上传失败，请重试');
       }
     },
-    async onCreateFolderAction(payload: CreateFolderOption) {
+    async onCreateFolderAction(payload: CreateFolderOption, target: UploadTargetType) {
       try {
-        const res = await createFolder(payload, 'private');
+        const res = await createFolder(payload, target);
         if (res.data.msg === 'success') {
           await this.onGetFileListAction();
         } else if (res.data.msg === '文件名已存在') {
@@ -247,9 +252,9 @@ export const useFileStore = defineStore({
         onError('创建失败，请重试');
       }
     },
-    async onUpdateFileNameAction(payload: UpdateFileNameOption) {
+    async onUpdateFileNameAction(payload: UpdateFileNameOption, target: UploadTargetType) {
       try {
-        const res = await updateFileName(payload, 'private');
+        const res = await updateFileName(payload, target);
         if (res.data.msg === 'success') {
           await this.onGetFileListAction();
         } else {
@@ -259,9 +264,9 @@ export const useFileStore = defineStore({
         onError('请重试');
       }
     },
-    async onDeleteFileAction(files: FileListData[]) {
+    async onDeleteFileAction(files: FileListData[], target: UploadTargetType) {
       Promise.allSettled(
-        files.map(file => (file !== null ? deleteFile(file.identity, 'private') : null))
+        files.map(file => (file !== null ? deleteFile(file.identity, target) : null))
       )
         .then(res => {
           if (res.find(i => (i as any).value?.data?.msg === 'success')) {
@@ -278,13 +283,13 @@ export const useFileStore = defineStore({
           onError(`出错了`);
         });
     },
-    async onMoveFoderAction(payload: MoveFolderOption) {
+    async onMoveFoderAction(payload: MoveFolderOption, target: UploadTargetType) {
       if (payload.parent_identity === 'default') {
         onWarning('无法移动到默认文件夹');
         return;
       }
       try {
-        const res = await moveFolder(payload, 'private');
+        const res = await moveFolder(payload, target);
         if (res.data.msg === 'success') {
           onSuccess('已保存');
           this.onGetFileListAction().then(() => {

@@ -115,13 +115,13 @@ const { deleted_files, fetching } = storeToRefs(fileStore);
   }
   .n-data-table .n-data-table-td {
     border-bottom: none;
-    background-color: rgb(240, 253, 244);
+    background-color: #efffff3a;
   }
   .n-data-table .n-data-table-td.n-data-table-td--hover {
     background-color: transparent;
   }
   .recycle-col {
-    background-color: rgb(240, 253, 244);
+    background-color: #d0f7f73a;
   }
 }
 </style>

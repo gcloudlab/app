@@ -49,6 +49,7 @@ const generateTree = (list: FileListData[] | any, target: UploadTargetType) => {
     const [type, icon] = generate_file_icon(row.ext!);
     row.type = type;
     row.icon = icon;
+    row.target = target;
     row.updated_at = transformDate(row.updated_at!);
     const index = row.id;
     id[index] = row;
@@ -89,6 +90,7 @@ const public_folder = () => {
   return {
     name: '公共文件夹',
     identity: 'public',
+    target: 'public',
     size: -1,
     isFolder: true,
     parent_id: 0,
@@ -105,6 +107,7 @@ const default_folder = (other: any) => {
   return {
     name: '默认文件夹',
     identity: 'default',
+    target: 'private',
     size: other.reduce((total: number, item: FileListData) => total + item.size, 0),
     isFolder: true,
     parent_id: 0,

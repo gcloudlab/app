@@ -87,7 +87,7 @@
           </n-button>
         </n-button-group>
       </n-card>
-      <DragUpload class="w-full h-28" />
+      <DragUpload class="w-full h-48" />
     </n-scrollbar>
   </div>
 </template>
@@ -144,7 +144,7 @@ const handleSelect = (file: FileListData) => {
 };
 
 const handleDeleteFile = () => {
-  onDeleteFile([props.file]);
+  onDeleteFile([props.file], props.file.target);
 };
 
 const handleDownload = (file: FileListData) => {

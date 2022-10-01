@@ -5,6 +5,7 @@ import type {
   MoveFolderOption,
   SaveFileToRepoOption,
   UpdateFileNameOption,
+  UploadTargetType,
 } from '@/models/file';
 import type { UploadFileInfo } from 'naive-ui';
 
@@ -40,17 +41,17 @@ export const useFiles = () => {
   const onUploadFilesToUser = async (payload: SaveFileToRepoOption) => {
     await fileStore.onUploadFilesToRepoAction(payload);
   };
-  const onCreateFolder = async (payload: CreateFolderOption) => {
-    await fileStore.onCreateFolderAction(payload);
+  const onCreateFolder = async (payload: CreateFolderOption, target?: UploadTargetType) => {
+    await fileStore.onCreateFolderAction(payload, target ?? 'private');
   };
-  const onUpdateFileName = async (payload: UpdateFileNameOption) => {
-    await fileStore.onUpdateFileNameAction(payload);
+  const onUpdateFileName = async (payload: UpdateFileNameOption, target?: UploadTargetType) => {
+    await fileStore.onUpdateFileNameAction(payload, target ?? 'private');
   };
-  const onDeleteFile = async (files: FileListData[]) => {
-    await fileStore.onDeleteFileAction(files);
+  const onDeleteFile = async (files: FileListData[], target?: UploadTargetType) => {
+    await fileStore.onDeleteFileAction(files, target ?? 'private');
   };
-  const onMoveFile = async (payload: MoveFolderOption) => {
-    await fileStore.onMoveFoderAction(payload);
+  const onMoveFile = async (payload: MoveFolderOption, target?: UploadTargetType) => {
+    await fileStore.onMoveFoderAction(payload, target ?? 'private');
   };
 
   return {

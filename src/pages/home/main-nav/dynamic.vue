@@ -29,7 +29,7 @@ import CTRL from '@/assets/ctrl.gif';
 
 const fileStore = useFileOutsideStore();
 
-const { deleted_files, fetching } = storeToRefs(fileStore);
+const { fetching } = storeToRefs(fileStore);
 </script>
 
 <style lang="scss" scoped></style>

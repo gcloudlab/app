@@ -14,7 +14,7 @@
         />
       </div>
       <div
-        class="flex other w-full mb-2 bg-green-50"
+        class="flex other w-full mb-2 bg-tertiary"
         :class="[...boardClasses, isMobile() ? 'flex-col h-96' : '']"
       >
         <ShareOverview class="flex-1 shadow-sm" />

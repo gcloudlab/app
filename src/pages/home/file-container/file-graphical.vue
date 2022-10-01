@@ -14,7 +14,7 @@
       >
         <!-- file icon -->
         <Folder
-          v-if="file?.type === '文件夹' && file.path === '' && file.size === 0"
+          v-if="file?.type === '文件夹' && file.path === ''"
           class="w-10 text-primary cursor-pointer"
           @click="handleExpandedKeys(file)"
         />
@@ -130,14 +130,17 @@ const handleUpadeteName = (v: string) => {
     currentFileRef.value.identity
   ) {
     currentFileRef.value.name = v;
-    onUpdateFileName({
-      identity: currentFileRef.value.identity,
-      name: v,
-    });
+    onUpdateFileName(
+      {
+        identity: currentFileRef.value.identity,
+        name: v,
+      },
+      currentFileRef.value.target
+    );
   }
 };
 const handleSelectDropDownItem = (value: string) => {
-  console.log('--drop select', value);
+  // console.log('--drop select', value);
   showDropdownRef.value = false;
 };
 const handleClidkOutside = (value: boolean) => {

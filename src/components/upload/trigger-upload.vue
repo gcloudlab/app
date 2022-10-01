@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs, defineAsyncComponent } from 'vue';
+import { ref, toRefs, defineAsyncComponent, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   NUpload,
@@ -122,6 +122,7 @@ import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
 import { useStorage } from '@/utils/use-storage';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
 import { Max_Size_Per_Upload, One_GB, Upload_Url } from '@/constants';
+import { UploadTargetType } from '@/models/file';
 const CreateFolder = defineAsyncComponent(() => import('@/components/create-folder/index.vue'));
 const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 
@@ -198,7 +199,7 @@ const handleUploadFinish = (options: { file: FileInfo; event?: ProgressEvent }) 
         parentId: uploadFolder.value.id as number,
         ext: res.ext,
         name: res.name,
-        target: uploadFolder.value.name === '公共文件夹' ? 'public' : 'private',
+        target: uploadFolder.value.target as UploadTargetType,
       });
     }
   }

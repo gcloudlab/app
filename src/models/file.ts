@@ -25,6 +25,7 @@ export interface FileListData extends FileListResponseData {
   isFolder?: boolean;
   type?: string;
   icon?: FileIconType | string;
+  target?: UploadTargetType;
 }
 export type FileIconType = {
   style: string;
