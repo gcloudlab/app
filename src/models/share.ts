@@ -1,5 +1,7 @@
 export interface ShareListResponse {
   list: ShareDetailItem[];
+  msg: string;
+  code: number;
 }
 export interface ShareDetailItem {
   repository_identity: string;

@@ -26,6 +26,10 @@ export const themeOverrides: GlobalThemeOverrides = {
     colorFocusPrimary: primaryActiveColor,
     // colorFocusPrimary: primaryColor,
 
+    // textColorHoverPrimary: primaryColor,
+    // textColorFocusPrimary: primaryColor,
+    // textColorPressedPrimary: primaryColor,
+
     // textColorSuccess: '#333639',
     // textColorInfo: infoColor,
     // textColorPrimary: primaryColor,

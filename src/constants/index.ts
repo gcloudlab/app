@@ -22,4 +22,5 @@ export const EXTENDS_MAP = {
   VIDEO: ['mp4', 'avi', 'mov', 'ogg', 'webm'],
   MARKDOWN: ['md'],
   LINK: ['lnk', 'link'],
+  BAT: ['bat'],
 };

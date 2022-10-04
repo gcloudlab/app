@@ -10,6 +10,7 @@ import {
   Document20Regular,
   DocumentBulletListClock20Regular,
   DocumentLink24Regular,
+  DocumentSettings20Regular,
 } from '@vicons/fluent';
 import { shallowRef } from 'vue';
 import { EXTENDS_MAP } from '@/constants';
@@ -59,6 +60,11 @@ export const generate_file_icon = (ext: string): [type: string, icon: FileIconTy
     return ['markdown', { style: 'text-secondary', icon: shallowRef(LogoMarkdown) }];
   } else if (EXTENDS_MAP.LINK.includes(_ext)) {
     return ['link', { style: 'text-secondary', icon: shallowRef(DocumentLink24Regular) }];
+  } else if (EXTENDS_MAP.BAT.includes(_ext)) {
+    return [
+      'Windows批处理文件',
+      { style: 'text-gray-500', icon: shallowRef(DocumentSettings20Regular) },
+    ];
   } else {
     return [_ext, { style: 'text-gray-500', icon: shallowRef(Document20Regular) }];
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="share-list">
     <n-list hoverable clickable>
-      <n-list-item v-for="(share_detail, index) in data">
+      <n-list-item v-for="share_detail in data" :key="share_detail.identity">
         <n-thing title="热门分享" content-style="margin-top: 10px;">
           <template #avatar>
             <n-avatar :src="share_detail.avatar" :fallback-src="defaultAvatar" />
@@ -61,7 +61,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, toRefs } from 'vue';
+import { PropType, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
 import { ShareDetailItem } from '@/models/share';
 import { transformDate } from '@/utils/date';

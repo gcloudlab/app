@@ -4,14 +4,14 @@
     <n-drawer
       v-model:show="active"
       :width="200"
-      :height="270"
+      :height="285"
       :trap-focus="false"
       :block-scroll="false"
       placement="top"
       to="#user-info"
     >
-      <n-drawer-content>
-        <n-scrollbar style="max-height: 300px">
+      <n-drawer-content title="更新日志" closable>
+        <n-scrollbar style="height: 100%">
           <div>
             <div v-for="item in data">
               <div class="text-primary">{{ item.date }}</div>
@@ -34,6 +34,10 @@ const activate = () => {
   active.value = true;
 };
 const data = [
+  {
+    content: '「新增」用户分享历史查询',
+    date: '2022-10-04',
+  },
   {
     content: '「新增」现在，你可以保存别人的分享文件辣~',
     date: '2022-09-30',

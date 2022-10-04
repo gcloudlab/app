@@ -39,12 +39,12 @@
         <p>文件大小：{{ transformSize(file.size) }}</p>
         <p v-show="file.type === '文件夹'">文件数量：{{ file.children?.length }}</p>
         <p>文件类型：{{ file.type }}</p>
-        <p v-show="file?.owner">上传用户：{{ file.owner }}</p>
-        <p v-show="file.updated_at">修改日期：{{ file.updated_at }}</p>
+        <p v-show="file?.owner">所属用户：{{ file.owner }}</p>
+        <p v-show="file.updated_at">更新日期：{{ file.updated_at }}</p>
         <!-- Btn action -->
         <div class="flex justify-center w-full">
           <PreviewDrawer :file="file" />
-          <ShareDrawer class="flex-2" :file="file" />
+          <ShareDrawer v-if="file.target === 'private'" class="flex-2" :file="file" />
           <n-button
             class="flex-1"
             type="primary"

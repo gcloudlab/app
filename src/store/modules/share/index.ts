@@ -6,6 +6,7 @@ import {
   createShare,
   getPopularShares,
   getShareDetailByShareIdentity,
+  getUserShares,
   saveShare,
 } from '@/service/api/share';
 import useTimer from '@/hooks/useTimer';
@@ -83,6 +84,18 @@ export const useShareStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
+        onError('出错了');
+      }
+    },
+    async onGetUserShareListAction() {
+      try {
+        const res = await getUserShares();
+        if (res.data.msg === 'success') {
+          this.share_list = res.data.list;
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (e) {
         onError('出错了');
       }
     },

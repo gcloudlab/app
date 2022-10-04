@@ -30,10 +30,8 @@
     </div>
     <n-divider />
     <div class="action">
-      <p class="hover:text-primary transition-color duration-200 cursor-pointer">👻 我的分享</p>
-      <p class="hover:text-primary transition-color duration-200 cursor-pointer">😍 我的下载</p>
-      <p class="hover:text-primary transition-color duration-200 cursor-pointer">🎯 我的收藏</p>
-      <p class="hover:text-primary transition-color duration-200 cursor-pointer">🤮 回收站</p>
+      <ShareList @on-close="handleCloseShare" />
+      <n-button type="default" quaternary size="small"> 😍 我的下载 </n-button>
     </div>
 
     <n-divider />
@@ -69,11 +67,12 @@ import randomAvatar from '@/utils/random-avatar';
 import { onInfo } from '@/utils/messages';
 import { transformSize } from '@/utils/transform-size';
 import EditUser from './edit-user.vue';
+import ShareList from './user-share-list.vue';
 import UpdateLog from '@/components/update-log/index.vue';
 import { NButton, NDivider, NIcon } from 'naive-ui';
 import { LogOutOutline as LogOutIcon, LogInOutline as LogInIcon } from '@vicons/ionicons5';
 
-const emits = defineEmits(['onCloseEdit']);
+const emits = defineEmits(['onCloseEdit', 'onCloseShare']);
 const router = useRouter();
 const authStore = useAuthOutsideStore();
 const { onLogout, onChangeAvatar, onUpdateUserInfo } = useAuth();
@@ -89,6 +88,9 @@ const handleChangeAvatar = async () => {
 };
 const handleCloseEdit = () => {
   emits('onCloseEdit', false);
+};
+const handleCloseShare = () => {
+  emits('onCloseShare', false);
 };
 
 const { auth, sign_status, online_status } = storeToRefs(authStore);

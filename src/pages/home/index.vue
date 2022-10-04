@@ -5,7 +5,7 @@
       class="file-tree-bar animate__animated animate__fadeIn faster"
       :class="[isMobile() ? 'w-full' : 'w-60']"
     >
-      <n-scrollbar style="max-height: calc(100vh - 88px)">
+      <n-scrollbar style="max-height: calc(100vh - 60px)">
         <FileMenu
           @selectedKeys="handleSelectedKeys"
           @expandedKeys="handleExpandedKeys"

@@ -67,7 +67,6 @@ const tabs = ref([
   // { name: 'picture', label: '学习资料', path: '/picture' },
 ]);
 const logoUrl = ref(Logo);
-const { auth } = storeToRefs(authStore);
 </script>
 
 <style lang="scss">

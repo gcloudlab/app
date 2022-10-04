@@ -20,10 +20,15 @@ export const useShare = () => {
     await shareStore.onSaveShareBasicAction(option);
   };
 
+  const onGetUserShareList = async () => {
+    await shareStore.onGetUserShareListAction();
+  };
+
   return {
     onCreateShareRecord,
     onGetShareDetailByIndentity,
     onGetPopularShareList,
     onSaveShareBasic,
+    onGetUserShareList,
   };
 };
