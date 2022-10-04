@@ -3,7 +3,7 @@
     <template #trigger>
       <n-button type="default" quaternary size="small" @click="handleOpen"> 👻 分享记录 </n-button>
     </template>
-    <template #header> 我的历史分享</template>
+    <template #header> 历史分享记录 {{ share_list ? `(${share_list.length})` : '' }}</template>
     <n-scrollbar style="height: calc(100vh - 100px)">
       <n-list hoverable clickable>
         <n-list-item v-for="share_detail in share_list" :key="share_detail.identity">

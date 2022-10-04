@@ -38,16 +38,16 @@
                 {{ share_detail.click_num }}
               </n-button>
               <n-divider vertical />
-              {{ transformSize(share_detail.size) }}
+              <span class="text-gray-400">{{ transformSize(share_detail.size) }}</span>
               <n-divider vertical />
-              {{ transformDate(share_detail.updated_at) }}
+              <span class="text-gray-400">{{ transformDate(share_detail.updated_at) }}</span>
               <div v-if="share_detail.desc !== ''">
                 <n-divider vertical />
-                <n-popover trigger="click">
+                <n-popover trigger="click" :show-arrow="false">
                   <template #trigger>
-                    <n-button size="tiny" quaternary>留言</n-button>
+                    <n-button class="text-gray-400" size="tiny" text>留言</n-button>
                   </template>
-                  <n-p class="animate__animated animate__fadeIn faster">
+                  <n-p>
                     {{ share_detail.desc }}
                   </n-p>
                 </n-popover>

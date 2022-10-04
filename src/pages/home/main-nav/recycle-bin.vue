@@ -3,23 +3,19 @@
     <n-h5 prefix="bar" class="w-full text-primary bg-header shadow-sm rounded p-2 mt-0 mb-0">
       回收站 {{ deleted_files.length !== 0 ? `(${deleted_files.length})` : '' }}
     </n-h5>
-    <n-button
-      v-if="checked_file_ids.length > 0"
-      size="tiny"
-      @click="onInfo('肝ing...')"
-      style="margin-top: -15px; margin-left: auto"
-    >
-      还原
-    </n-button>
-    <n-button
-      v-if="checked_file_ids.length > 0"
-      type="error"
-      size="tiny"
-      @click="onInfo('肝ing...')"
-      style="margin-top: -15px; margin-left: 5px"
-    >
-      删除
-    </n-button>
+    <n-button-group class="ml-auto mt-1">
+      <n-button v-if="checked_file_ids.length > 0" size="tiny" @click="onInfo('肝ing...')">
+        还原
+      </n-button>
+      <n-button
+        v-if="checked_file_ids.length > 0"
+        type="error"
+        size="tiny"
+        @click="onInfo('肝ing...')"
+      >
+        删除
+      </n-button>
+    </n-button-group>
   </div>
 
   <n-scrollbar style="height: 100%">
@@ -56,6 +52,7 @@ import {
   NDataTable,
   DataTableColumns,
   NButton,
+  NButtonGroup,
   DataTableRowKey,
 } from 'naive-ui';
 import { transformSize } from '@/utils/transform-size';
