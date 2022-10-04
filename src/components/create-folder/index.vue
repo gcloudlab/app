@@ -54,7 +54,7 @@ const onPositiveClick = () => {
         name: folderName.value,
         parent_id: props.folder!.id as number,
       },
-      upload_target.value
+      props.folder.target as UploadTargetType
     ).then(() => {
       folderName.value = '';
       showModal.value = false;
