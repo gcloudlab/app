@@ -7,7 +7,6 @@ import type {
   UserRegisterRequestProps,
   UpdateUserInfoOptions,
 } from '@/models/auth';
-import { onError, onInfo } from '@/utils/messages';
 
 const authStore = useAuthOutsideStore();
 
