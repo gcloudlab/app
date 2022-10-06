@@ -31,7 +31,7 @@
       <div class="flex justify-between flex-none bg-green-100">
         <n-popselect
           v-model:value="uploadFolder.value"
-          placement="right"
+          :placement="placement"
           size="medium"
           scrollable
           trigger="hover"
@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs, defineAsyncComponent } from 'vue';
+import { ref, toRefs, defineAsyncComponent, PropType } from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   NUpload,
@@ -123,6 +123,7 @@ import { useStorage } from '@/utils/use-storage';
 import { FileInfo } from 'naive-ui/es/upload/src/interface';
 import { Max_Size_Per_Upload, One_GB, Upload_Url } from '@/constants';
 import { UploadTargetType } from '@/models/file';
+import { Placement } from 'vueuc/lib/binder/src/interface';
 const CreateFolder = defineAsyncComponent(() => import('@/components/create-folder/index.vue'));
 const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 
@@ -145,6 +146,10 @@ const props = defineProps({
   },
   currentFolder: {
     type: Object,
+  },
+  placement: {
+    type: String as PropType<Placement>,
+    default: 'left',
   },
 });
 const fileStore = useFileOutsideStore();

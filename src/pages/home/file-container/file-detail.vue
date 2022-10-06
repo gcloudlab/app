@@ -87,7 +87,7 @@
           </n-button>
         </n-button-group>
       </n-card>
-      <DragUpload class="w-full h-48" />
+      <DragUpload class="w-full h-48" placement="top" />
     </n-scrollbar>
   </div>
 </template>
