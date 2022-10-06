@@ -176,7 +176,7 @@ const handleRemoveUploadFile = (data: { fileList: UploadFileInfo[]; file: Upload
 const handleBeforeUpload = (data: { file: UploadFileInfo; fileList: UploadFileInfo[] }): any => {
   // console.log(data.file.file?.size);
   if (
-    authStore.auth?.name !== 'juicee' &&
+    authStore.auth?.name !== 'Juicee' &&
     data.file.file &&
     data.file.file?.size > Max_Size_Per_Upload
   ) {
