@@ -13,11 +13,9 @@ export const useCommunityStore = defineStore({
     ({
       fetching: false,
     } as CommunityStateProps),
-  getters: {
-    // register_count: state => state.register_count,
-  },
+  getters: {},
   actions: {
-    async onGetRegisterCountAction() {
+    async onGetAction() {
       try {
         this.fetching = true;
       } catch (error) {
@@ -27,7 +25,7 @@ export const useCommunityStore = defineStore({
         onError('出错了');
       }
     },
-    async onGetShareStatisticsAction() {
+    async onGetxAction() {
       try {
         this.fetching = true;
       } catch (error) {

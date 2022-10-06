@@ -26,7 +26,8 @@
             查看详情
           </n-tooltip>
           <span class="float-right">
-            {{ transformDate(share_detail.updated_at) }}
+            {{ transformDate(share_detail.updated_at) }} -
+            {{ transformSecondsToHours(share_detail.expired_time) }}
           </span>
         </n-list-item>
       </n-list>
@@ -40,7 +41,7 @@ import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useShare } from '@/hooks/useShare';
 import { useShareOutsideStore } from '@/store/modules/share';
-import { transformDate } from '@/utils/date';
+import { transformDate, transformSecondsToHours } from '@/utils/date';
 import { NButton, NList, NListItem, NScrollbar, NTooltip } from 'naive-ui';
 import Drawer from '@/components/commons/drawer/index.vue';
 import { LinkOutline } from '@vicons/ionicons5';

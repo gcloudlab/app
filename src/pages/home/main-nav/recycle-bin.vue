@@ -4,13 +4,19 @@
       回收站 {{ deleted_files.length !== 0 ? `(${deleted_files.length})` : '' }}
     </n-h5>
     <n-button-group class="ml-auto mt-1">
-      <n-button v-if="checked_file_ids.length > 0" size="tiny" @click="onInfo('肝ing...')">
+      <n-button
+        v-if="checked_file_ids.length > 0"
+        quaternary
+        size="tiny"
+        @click="onInfo('肝ing...')"
+      >
         还原
       </n-button>
       <n-button
         v-if="checked_file_ids.length > 0"
         type="error"
         size="tiny"
+        quaternary
         @click="onInfo('肝ing...')"
       >
         删除
@@ -112,13 +118,13 @@ const { deleted_files, fetching } = storeToRefs(fileStore);
   }
   .n-data-table .n-data-table-td {
     border-bottom: none;
-    background-color: #efffff3a;
+    background-color: rgb(250, 255, 255);
   }
   .n-data-table .n-data-table-td.n-data-table-td--hover {
     background-color: transparent;
   }
   .recycle-col {
-    background-color: #d0f7f73a;
+    background-color: rgb(250, 255, 255);
   }
 }
 </style>

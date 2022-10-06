@@ -19,7 +19,7 @@
     >
       <n-upload-trigger #="{ handleClick }" abstract>
         <div
-          class="w-full flex flex-col justify-center items-center text-center bg-gradient-to-t from-green-100 hover:bg-green-100 cursor-pointer transition-all duration-150"
+          class="upload-trigger w-full flex flex-col justify-center items-center text-center bg-gradient-to-t from-green-100 hover:bg-green-50 cursor-pointer"
           :class="[upload_files.length <= 0 ? 'h-5/6' : '']"
           @click="handleClick"
         >
@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, toRefs, defineAsyncComponent, watch } from 'vue';
+import { ref, toRefs, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import {
   NUpload,

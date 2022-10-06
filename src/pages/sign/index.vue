@@ -11,7 +11,7 @@
           <p class="auth_unregistered-text">GCloud是一款免费的、不限速的在线云盘.</p>
           <p class="auth_unregistered-text">它的优点有很多，比如这个那个还有内个...</p>
           <p class="auth_unregistered-text">
-            tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
+            Tips: 欢迎加入<strong class="italic">Web前端养老院(QQ群)</strong>: 982545311.
           </p>
 
           <n-button type="warning" secondary round @click="router.back()">
@@ -36,6 +36,8 @@
         <div class="auth_options-registered">
           <h1 class="auth_unregistered-title font-black tracking-wide">GCloud 云盘</h1>
           <p class="auth_registered-text">已有账号请移步登陆，左拐不送。</p>
+          <p class="auth_registered-text">所有文件均存储在腾讯对象存储COS，天知地知你知我知。</p>
+          <p class="auth_registered-text">Tips：暂不支持修改账号昵称、密码及解绑邮箱功能。</p>
           <n-button type="primary" round class="auth_registered-login" @click="onChangeToSignin">
             <template #icon>
               <n-icon><log-in-icon /></n-icon>

@@ -12,7 +12,7 @@ module.exports = {
       backgroundColor: {
         primary: '#00b0b3',
         secondary: '#009a9d',
-        tertiary: '#d0f7f73a',
+        tertiary: '#b9feff13',
         warning: '#fd7724',
         error: '#fd4f24',
         header: '#f0f0f023',

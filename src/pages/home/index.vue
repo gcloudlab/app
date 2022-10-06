@@ -29,18 +29,18 @@
             <Menu v-else />
           </template>
         </n-button>
-        <n-button class="px-1" size="small" @click="onGetFileList">
+        <n-button class="px-1 mr-3" size="small" @click="onGetFileList">
           <template #icon>
             <Refresh />
           </template>
         </n-button>
-        <n-button
+        <!-- <n-button
           class="mr-3 px-2 text-xs"
           size="small"
           :type="currentCheckedFiles.length > 0 ? 'primary' : 'default'"
         >
           下载
-        </n-button>
+        </n-button> -->
         <FileFolderRoute :routes="folder_routes" />
         <n-tag :bordered="false" size="small" type="info">
           共{{
