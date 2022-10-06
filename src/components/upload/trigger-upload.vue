@@ -19,7 +19,7 @@
     >
       <n-upload-trigger #="{ handleClick }" abstract>
         <div
-          class="upload-trigger w-full flex flex-col justify-center items-center text-center bg-gradient-to-t from-green-100 hover:bg-green-50 cursor-pointer"
+          class="upload-trigger w-full flex flex-col justify-center items-center text-center bg-gradient-to-t from-green-100 hover:bg-green-50 cursor-pointer transition-all duration-200 ease-in-out"
           :class="[upload_files.length <= 0 ? 'h-5/6' : '']"
           @click="handleClick"
         >
@@ -175,7 +175,11 @@ const handleRemoveUploadFile = (data: { fileList: UploadFileInfo[]; file: Upload
 };
 const handleBeforeUpload = (data: { file: UploadFileInfo; fileList: UploadFileInfo[] }): any => {
   // console.log(data.file.file?.size);
-  if (data.file.file && data.file.file?.size > Max_Size_Per_Upload) {
+  if (
+    authStore.auth?.name !== 'juicee' &&
+    data.file.file &&
+    data.file.file?.size > Max_Size_Per_Upload
+  ) {
     onWarning('单文件上传限制20M及以内');
     return false;
   }

@@ -30,7 +30,11 @@
       <div v-else-if="fetching" class="p-4">
         <n-skeleton text :repeat="6" :sharp="false" />
       </div>
-      <Empty v-else class="animate__animated animate__fadeIn faster" description="空空如也" />
+      <Empty
+        v-else
+        class="animate__animated animate__fadeIn faster"
+        description="快去上传文件吧~"
+      />
     </n-scrollbar>
   </div>
 </template>

@@ -12,9 +12,7 @@
       <div v-else-if="fetching" class="p-4">
         <n-skeleton class="mb-1" height="20px" :repeat="5" :sharp="false" />
       </div>
-      <!-- <Empty v-else description="敬请期待" /> -->
-      <img v-else class="w-full" :src="CTRL" alt="jntm" />
-      敬请期待
+      <Empty v-else description="敬请期待" />
     </div>
   </n-scrollbar>
 </template>
@@ -24,8 +22,7 @@ import { defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFileOutsideStore } from '@/store/modules/file';
 import { NSkeleton, NScrollbar, NH5 } from 'naive-ui';
-import CTRL from '@/assets/ctrl.gif';
-// const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
+const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
 const fileStore = useFileOutsideStore();
 
