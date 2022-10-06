@@ -47,7 +47,7 @@ export const generate_file_icon = (ext: string): [type: string, icon: FileIconTy
   } else if (EXTENDS_MAP.PPT.includes(_ext)) {
     return ['幻灯片', { style: 'text-red-400', icon: shallowRef(DocumentTextExtract20Regular) }];
   } else if (EXTENDS_MAP.PDF.includes(_ext)) {
-    return ['PDF', { style: 'text-gray-500', icon: shallowRef(DocumentPdf32Filled) }];
+    return ['PDF', { style: 'text-orange-300', icon: shallowRef(DocumentPdf32Filled) }];
   } else if (EXTENDS_MAP.ZIP.includes(_ext)) {
     return ['压缩文件', { style: 'text-primary', icon: shallowRef(FileTraySharp) }];
   } else if (EXTENDS_MAP.TXT.includes(_ext)) {
