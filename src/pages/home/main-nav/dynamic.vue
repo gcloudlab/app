@@ -9,7 +9,7 @@
   <n-scrollbar style="height: 100%">
     <div class="px-3 pt-2 animate__animated animate__fadeIn faster">
       <div v-if="0"></div>
-      <div v-else-if="fetching" class="p-4">
+      <div v-else-if="fetching_dynamic" class="p-4">
         <n-skeleton class="mb-1" height="20px" :repeat="5" :sharp="false" />
       </div>
       <Empty v-else description="敬请期待" />
@@ -26,7 +26,7 @@ const Empty = defineAsyncComponent(() => import('@/components/commons/empty/inde
 
 const fileStore = useFileOutsideStore();
 
-const { fetching } = storeToRefs(fileStore);
+const { fetching_dynamic } = storeToRefs(fileStore);
 </script>
 
 <style lang="scss" scoped></style>

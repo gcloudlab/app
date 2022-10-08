@@ -27,7 +27,7 @@
         :on-update:expanded-keys="handleExpandedKeys"
         :on-update:selected-keys="handleSelectedKeys"
       />
-      <div v-else-if="fetching" class="p-4">
+      <div v-else-if="fetching && upload_files.length === 0" class="p-4">
         <n-skeleton text :repeat="6" :sharp="false" />
       </div>
       <Empty
@@ -79,7 +79,7 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
     // },
   };
 };
-const { files_count, public_count, user_files, fetching } = storeToRefs(fileStore);
+const { files_count, public_count, user_files, fetching, upload_files } = storeToRefs(fileStore);
 </script>
 
 <style lang="scss">

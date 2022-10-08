@@ -39,6 +39,7 @@ export interface FileState {
     value: number;
   }[];
   fetching: boolean;
+  fetching_dynamic: boolean;
 }
 
 export const useFileStore = defineStore({
@@ -58,6 +59,7 @@ export const useFileStore = defineStore({
       origin_folders: [],
       deleted_files: [],
       fetching: false,
+      fetching_dynamic: false,
     } as FileState),
   getters: {
     get_files_count: state => state.files_count,

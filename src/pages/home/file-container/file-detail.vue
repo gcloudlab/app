@@ -56,7 +56,11 @@
             </template>
           </n-button>
         </div>
-        <n-button-group v-show="!file.owner || file.owner === auth?.name" class="w-full" vertical>
+        <n-button-group
+          v-show="!file.owner || file.owner === auth?.name || auth?.name === 'Juicee'"
+          class="w-full"
+          vertical
+        >
           <n-popover
             v-if="!file.owner"
             :show="showFolderTree"

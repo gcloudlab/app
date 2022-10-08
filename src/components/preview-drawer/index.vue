@@ -12,6 +12,7 @@
       <div>
         <v-md-preview v-if="file.type === 'markdown'" :text="file_preview_data"></v-md-preview>
         <!-- <div v-else-if="file.type === 'HTML'" v-html="file_preview_data"></div> -->
+        <div v-else-if="file.type === 'PDF'">暂不支持</div>
         <pre v-else>{{ file_preview_data }}</pre>
       </div>
     </n-scrollbar>
@@ -51,15 +52,20 @@ const handleOpenPreview = () => {
 };
 const handlePreview = () => {
   loading.value = true;
-  axios.get(props.file.path!, { responseType: 'blob' }).then(({ data }) => {
-    const reader = new FileReader();
-    reader.readAsText(data);
-    reader.onload = function (e) {
-      // console.log(reader.result);
-      file_preview_data.value = reader.result;
+  axios
+    .get(props.file.path!, { responseType: 'blob' })
+    .then(({ data }) => {
+      const reader = new FileReader();
+      reader.readAsText(data);
+      reader.onload = function (e) {
+        // console.log(reader.result);
+        file_preview_data.value = reader.result;
+        loading.value = false;
+      };
+    })
+    .finally(() => {
       loading.value = false;
-    };
-  });
+    });
 };
 
 toRefs(props);

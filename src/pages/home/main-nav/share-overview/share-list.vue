@@ -1,7 +1,11 @@
 <template>
   <div class="share-list">
-    <n-list hoverable clickable>
-      <n-list-item v-for="share_detail in data" :key="share_detail.identity">
+    <n-list hoverable clickable :show-divider="false">
+      <n-list-item
+        class="shadow-sm mb-1 hover:shadow"
+        v-for="share_detail in data"
+        :key="share_detail.identity"
+      >
         <n-thing title="热门分享" content-style="margin-top: 10px;">
           <template #avatar>
             <n-avatar :src="share_detail.avatar" :fallback-src="defaultAvatar" />
