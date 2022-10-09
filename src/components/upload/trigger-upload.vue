@@ -49,7 +49,7 @@
             />
             <div v-else class="text-xs text-center">右侧新建文件夹</div>
           </template>
-          <n-button quaternary type="primary" size="small">
+          <n-button :disabled="upload_files.length > 0" quaternary type="primary" size="small">
             上传到：{{ uploadFolder.name }}
           </n-button>
         </n-popselect>
@@ -231,7 +231,7 @@ const nodeProps = ({ option }: { option: TreeOption }) => {
   };
 };
 
-const { upload_files, origin_folders } = storeToRefs(fileStore);
+const { upload_files, origin_folders, uploading } = storeToRefs(fileStore);
 toRefs(props);
 </script>
 

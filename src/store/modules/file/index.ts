@@ -40,6 +40,7 @@ export interface FileState {
   }[];
   fetching: boolean;
   fetching_dynamic: boolean;
+  uploading: boolean;
 }
 
 export const useFileStore = defineStore({
@@ -60,6 +61,7 @@ export const useFileStore = defineStore({
       deleted_files: [],
       fetching: false,
       fetching_dynamic: false,
+      uploading: false,
     } as FileState),
   getters: {
     get_files_count: state => state.files_count,
@@ -210,8 +212,10 @@ export const useFileStore = defineStore({
     },
     async onUploadFilesToRepoAction(payload: SaveFileToRepoOption) {
       try {
+        this.uploading = true;
         const res = await saveFileToRepo(payload);
         if (res.data.msg === 'success') {
+          this.uploading = false;
           this.onRemoveUploadFileAction(payload);
           this.onGetFileListAction().then(() => {
             this.onJumpToFileAction({
@@ -223,6 +227,7 @@ export const useFileStore = defineStore({
             });
           });
         } else if (res.data.msg === 'exist') {
+          this.uploading = false;
           onError('已存在同名文件');
           this.upload_files.map(i => {
             if (i.name === payload.name) {
@@ -231,6 +236,7 @@ export const useFileStore = defineStore({
           });
           // this.onRemoveUploadFileAction(payload);
         } else if (res.data.msg === '容量不足') {
+          this.uploading = false;
           onWarning('嘿，你的空间不够了');
           this.upload_files.map(i => {
             if (i.name === payload.name) {
@@ -240,6 +246,7 @@ export const useFileStore = defineStore({
         }
       } catch (e) {
         onError('上传失败，请重试');
+        this.uploading = false;
       }
     },
     async onCreateFolderAction(payload: CreateFolderOption, target: UploadTargetType) {

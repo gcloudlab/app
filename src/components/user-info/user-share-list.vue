@@ -5,7 +5,7 @@
     </template>
     <template #header> 历史分享记录 {{ share_list ? `(${share_list.length})` : '' }}</template>
     <n-scrollbar style="height: calc(100vh - 100px)">
-      <n-list hoverable clickable>
+      <n-list hoverable clickable :show-divider="false">
         <n-list-item v-for="share_detail in share_list" :key="share_detail.identity">
           <span>
             {{ share_detail.name }}
