@@ -10,7 +10,7 @@
           {{ authStore.auth?.email || '注册即赠1G容量～' }}
         </div>
 
-        <div class="text-xs">
+        <div class="text-xs" v-if="authStore.auth?.name">
           <n-divider vertical />已加入{{ authStore.auth?.registration_days || 0 }}天
         </div>
       </div>

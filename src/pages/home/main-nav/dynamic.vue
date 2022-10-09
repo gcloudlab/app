@@ -7,7 +7,7 @@
     动态
   </n-h5>
   <n-scrollbar style="height: 100%">
-    <div class="px-3 pt-2 animate__animated animate__fadeIn faster">
+    <div class="dynamic-bar px-3 pt-2 animate__animated animate__fadeIn faster">
       <div v-if="0"></div>
       <div v-else-if="fetching_dynamic" class="p-4">
         <n-skeleton class="mb-1" height="20px" :repeat="5" :sharp="false" />
@@ -29,4 +29,12 @@ const fileStore = useFileOutsideStore();
 const { fetching_dynamic } = storeToRefs(fileStore);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.dynamic-bar {
+  background-image: url('../../../assets/images/pink.jpg');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.1;
+}
+</style>

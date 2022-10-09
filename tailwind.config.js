@@ -15,7 +15,7 @@ module.exports = {
         tertiary: '#b9feff13',
         warning: '#fd7724',
         error: '#fd4f24',
-        header: '#f0f0f023',
+        header: '#e2e2e221',
       },
       backgroundImage: {
         login: 'url("https://img-yesmore.vercel.app/test/wallhaven-4verz8_1920x1080.png")',

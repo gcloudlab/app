@@ -13,7 +13,7 @@
           <template #header>
             <div class="text-sm truncate">
               <span class="text-secondary">{{ share_detail.owner || '匿名用户' }}</span>
-              <span class=""> 分享了{{ share_detail.name }}</span>
+              <span> 分享了{{ share_detail.name }}</span>
             </div>
           </template>
           <template #header-extra>
@@ -104,7 +104,7 @@ toRefs(props);
     padding: 5px 5px 4px 5px;
   }
   .n-thing .n-thing-main .n-thing-header .n-thing-header__title {
-    width: 80%;
+    max-width: 275px;
   }
 }
 </style>
