@@ -23,7 +23,7 @@
           :class="[upload_files.length <= 0 ? 'h-5/6' : '']"
           @click="handleClick"
         >
-          <CloudUploadOutline class="animate-pulse w-9 text-gray-500 mt-3" />
+          <CloudUploadOutline class="animate-pulse w-9 text-gray-400 mt-3" />
           <p depth="2" class="my-1 text-sm">{{ title }}</p>
           <n-p depth="3" style="margin: 8px 0 0 0"> {{ description }} </n-p>
         </div>

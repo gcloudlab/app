@@ -1,15 +1,11 @@
 <p align="center"><img width="40%" align="center" src="https://img-yesmore.vercel.app/gcloud/gcloudx.png"></p>
 
-<p align="center">😎 简单 & 免费的开源云盘</p>
-
 <div style='' align="center">
     <img src="https://img.shields.io/github/stars/yesmore/gcloud-app.svg?logo=github&style=flat-square" alt="star"/>
 	<img src="https://img.shields.io/github/license/yesmore/gcloud-app?style=flat-square" alt="GPL"/>
 </div>
 
 ## 关于 GCloud 云盘
-
-> 项目开发中
 
 `GCloud` 是使用 Vue3 + [Go](https://golang.org/)（后端）开发的云盘应用，具备云盘的基本功能，且开源免费。
 

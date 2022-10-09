@@ -4,7 +4,7 @@
       <div
         :class="[
           ...boardClasses,
-          'flex items-center flex-1 col-auto transition-all duration-200 ease-in-out',
+          'upload-bar flex items-center flex-1 col-auto transition-all duration-200 ease-in-out',
         ]"
       >
         <TriggerUpload class="w-full h-full shadow-sm" title="单击上传" />
@@ -14,7 +14,7 @@
         />
       </div>
       <div
-        class="flex other w-full mb-2 bg-tertiary"
+        class="flex other w-full mt-1 mb-2 bg-tertiary"
         :class="[...boardClasses, isMobile() ? 'flex-col h-96' : '']"
       >
         <ShareOverview class="flex-1 shadow-sm" />
@@ -42,6 +42,7 @@ const boardClasses = ['rounded'];
 .main-nav {
   .n-h {
     font-size: 14px;
+    font-weight: 600;
   }
 }
 </style>

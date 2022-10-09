@@ -21,6 +21,7 @@
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "animate.css": "^4.1.1",
     "axios": "^0.24.0",
+    "highlight.js": "^11.6.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "naive-ui": "^2.30.8",

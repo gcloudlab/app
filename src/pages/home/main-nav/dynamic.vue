@@ -4,7 +4,7 @@
     class="text-primary bg-header shadow-sm rounded p-2 top-0 mb-0"
     style="position: sticky"
   >
-    动态
+    云盘动态
   </n-h5>
   <n-scrollbar style="height: 100%">
     <div class="dynamic-bar px-3 pt-2 animate__animated animate__fadeIn faster">

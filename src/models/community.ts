@@ -1,13 +1,12 @@
 export interface PostsBaseItem {
   title: string;
-  content: string;
   tags: string;
-  at: string;
-  link: string;
+  content: string;
+  mention: string;
 }
 
 export interface PostsFormItem extends PostsBaseItem {
-  cover: string;
+  cover?: string;
 }
 
 export interface PostsItem extends PostsBaseItem {
@@ -18,16 +17,26 @@ export interface PostsItem extends PostsBaseItem {
   click_num: number;
   owner: string;
   updated_at: string;
+  deleted_at?: string;
 }
 
-export interface PostsCommentItem {
+export interface PostsCommentBaseItem {
+  content: string;
+  mention: string;
+  reply_identity: string; // 回复用户
+  posts_identity: string; // 所属帖子
+}
+
+export interface PostsCommentFormItem extends PostsCommentBaseItem {}
+
+export interface PostsCommentItem extends PostsCommentBaseItem {
   identity: string;
-  posts_identity: string;
-  reply_to?: string;
+
+  posts_name: string;
+  reply_name: string;
   owner: string;
-  at: string;
   like: number;
   dislike: number;
-  content: string;
   updated_at: string;
+  deleted_at?: string;
 }
