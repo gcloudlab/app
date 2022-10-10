@@ -30,11 +30,11 @@ const { fetching_dynamic } = storeToRefs(fileStore);
 </script>
 
 <style lang="scss" scoped>
-.dynamic-bar {
+/* .dynamic-bar {
   background-image: url('../../../assets/images/pink.jpg');
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: cover;
   opacity: 0.1;
-}
+} */
 </style>

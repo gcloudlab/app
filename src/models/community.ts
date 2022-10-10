@@ -31,7 +31,6 @@ export interface PostsCommentFormItem extends PostsCommentBaseItem {}
 
 export interface PostsCommentItem extends PostsCommentBaseItem {
   identity: string;
-
   posts_name: string;
   reply_name: string;
   owner: string;

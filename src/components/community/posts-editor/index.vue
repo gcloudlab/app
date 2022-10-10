@@ -52,7 +52,7 @@ const props = defineProps({
   },
 });
 
-const editor_mode = ref('editable'); // or edit
+const editor_mode = ref('edit'); // or edit
 const left_toolbar = ref('undo redo clear | emoji');
 const right_toolbar = ref('preview sync-scroll fullscreen');
 const title = ref('');
