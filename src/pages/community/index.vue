@@ -20,7 +20,7 @@ const show_editor = ref(false);
 
 const handleSubmitPosts = async (value: PostsFormItem) => {
   console.log(value);
-  await onCreatePosts(value);
+  // await onCreatePosts(value);
 };
 
 onMounted(() => {

@@ -17,6 +17,10 @@ export const getPosts = (
   return axios.post('/posts/list', options);
 };
 
+export const getPostsById = (id: string): Promise<CustomResponse<PostsItem>> => {
+  return axios.post('/posts/detail', { identity: id });
+};
+
 export const updatePosts = (data: PostsFormItem): Promise<CustomResponse<BaseData>> => {
   return axios.post('/posts/update', data);
 };

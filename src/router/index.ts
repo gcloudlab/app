@@ -4,6 +4,7 @@ const Layouts = () => import('@/pages/layouts/index.vue');
 const Home = () => import('@/pages/home/index.vue');
 const Share = () => import('@/pages/share/index.vue');
 const Community = () => import('@/pages/community/index.vue');
+const Posts = () => import('@/pages/posts/index.vue');
 const Xswl = () => import('@/pages/picture/index.vue');
 const Sign = () => import('@/pages/sign/index.vue');
 const NotFound = () => import('@/pages/notfound/index.vue');
@@ -31,6 +32,11 @@ const routes: RouteRecordRaw[] = [
         path: '/community',
         name: 'community',
         component: Community,
+      },
+      {
+        path: '/p/:id',
+        name: 'posts-detail',
+        component: Posts,
       },
       {
         path: '/xswl',

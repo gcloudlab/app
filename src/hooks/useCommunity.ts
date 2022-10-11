@@ -13,9 +13,14 @@ export const useCommunity = () => {
     return await communityStore.onGetPostsAction(option);
   };
 
+  const onGetPostsDetail = async (id: string) => {
+    return await communityStore.onGetPostsDetailAction(id);
+  };
+
   return {
     communityStore,
     onCreatePosts,
     onGetPostsList,
+    onGetPostsDetail,
   };
 };
