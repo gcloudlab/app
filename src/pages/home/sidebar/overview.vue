@@ -46,12 +46,12 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
-import { useFileOutsideStore } from '@/store/modules/file';
+import { useFiles } from '@/hooks/useFiles';
 import { NDivider, NSkeleton } from 'naive-ui';
 import { transformSize } from '@/utils/transform-size';
 import ProgressView from '@/components/progress-view/index.vue';
 
-const fileStore = useFileOutsideStore();
+const { fileStore } = useFiles();
 
 const { files_count, owner_public_files, owner_public_files_size, files_size, fetching } =
   storeToRefs(fileStore);

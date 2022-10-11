@@ -55,6 +55,7 @@ export const useFiles = () => {
   };
 
   return {
+    fileStore,
     total_size: fileStore.get_total_files_size,
     onGetFileList,
     onAddToFolderRoutes,

@@ -22,7 +22,7 @@ import { DynamicTagsOption } from 'naive-ui/es/dynamic-tags/src/interface';
 const props = defineProps({
   tags: {
     type: Array as PropType<string[] | DynamicTagsOption[]>,
-    required: true,
+    // required: true,
   },
 });
 </script>

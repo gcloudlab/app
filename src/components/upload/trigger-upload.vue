@@ -114,9 +114,8 @@ import {
   TreeOption,
 } from 'naive-ui';
 import { useFiles } from '@/hooks/useFiles';
+import { useAuth } from '@/hooks/useAuthentication';
 import { CloudUploadOutline } from '@vicons/ionicons5';
-import { useFileOutsideStore } from '@/store/modules/file';
-import { useAuthOutsideStore } from '@/store/modules/auth';
 import { onError, onWarning } from '@/utils/messages';
 import { SelectBaseOption } from 'naive-ui/es/select/src/interface';
 import { useStorage } from '@/utils/use-storage';
@@ -152,9 +151,9 @@ const props = defineProps({
     default: 'left',
   },
 });
-const fileStore = useFileOutsideStore();
-const authStore = useAuthOutsideStore();
-const { total_size, onAddUploadFiles, onRemoveUploadFile, onUploadFilesToUser } = useFiles();
+const { authStore } = useAuth();
+const { fileStore, total_size, onAddUploadFiles, onRemoveUploadFile, onUploadFilesToUser } =
+  useFiles();
 const uploadRef = ref<UploadInst | null>(null);
 const fileList = ref<UploadFileInfo[]>([]);
 const uploadFolder = ref<SelectBaseOption>({

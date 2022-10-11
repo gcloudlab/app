@@ -48,17 +48,16 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { storeToRefs } from 'pinia';
 import { useRouter } from 'vue-router';
+import { useAuth } from '@/hooks/useAuthentication';
 import { NTabs, NTab, NImage } from 'naive-ui';
 import Avatar from '@/components/avatar/index.vue';
-import { useAuthOutsideStore } from '@/store/modules/auth';
 import Logo from '@/assets/gcloud.png';
 import defaultAvatar from '@/assets/logo.png';
 import GlobalNotification from '@/components/global-notification/index.vue';
 
 const router = useRouter();
-const authStore = useAuthOutsideStore();
+const { authStore } = useAuth();
 const currentRoute = computed(() => router.currentRoute.value.name ?? 'home');
 
 const tabs = ref([

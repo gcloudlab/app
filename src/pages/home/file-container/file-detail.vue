@@ -64,7 +64,7 @@
           <n-popover
             v-if="!file.owner"
             :show="showFolderTree"
-            placement="bottom"
+            placement="left"
             trigger="manual"
             @clickoutside="showFolderTree = false"
           >
@@ -99,9 +99,8 @@
 <script setup lang="ts">
 import { defineAsyncComponent, PropType, ref, toRefs, reactive } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useAuthOutsideStore } from '@/store/modules/auth';
-import { useFileOutsideStore } from '@/store/modules/file';
 import { useFiles } from '@/hooks/useFiles';
+import { useAuth } from '@/hooks/useAuthentication';
 import {
   NCard,
   NImage,
@@ -132,9 +131,8 @@ const props = defineProps({
     default: {},
   },
 });
-const fileStore = useFileOutsideStore();
-const authStore = useAuthOutsideStore();
-const { onDeleteFile, onMoveFile } = useFiles();
+const { authStore } = useAuth();
+const { fileStore, onDeleteFile, onMoveFile } = useFiles();
 const currentFileRef = ref<FileListData | null>(null);
 const showFolderTree = ref(false);
 const moveFileInfo = reactive({

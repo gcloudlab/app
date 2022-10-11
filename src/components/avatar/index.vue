@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { computed, toRefs, ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useAuthOutsideStore } from '@/store/modules/auth';
+import { useAuth } from '@/hooks/useAuthentication';
 import { NAvatar, NPopover, NBadge } from 'naive-ui';
 import defaultLogo from '@/assets/logo.png';
 import UserInfo from '@/components/user-info/index.vue';
@@ -48,7 +48,7 @@ export interface AvatarProps {
   showStatus?: boolean;
 }
 
-const authStore = useAuthOutsideStore();
+const { authStore } = useAuth();
 const { sign_status, online_status } = storeToRefs(authStore);
 
 const defaultAvatar = ref(defaultLogo);

@@ -40,7 +40,6 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useShare } from '@/hooks/useShare';
-import { useShareOutsideStore } from '@/store/modules/share';
 import { transformDate, transformSecondsToHours } from '@/utils/date';
 import { NButton, NList, NListItem, NScrollbar, NTooltip } from 'naive-ui';
 import Drawer from '@/components/commons/drawer/index.vue';
@@ -48,8 +47,7 @@ import { LinkOutline } from '@vicons/ionicons5';
 
 const emits = defineEmits(['onClose']);
 const router = useRouter();
-const shareStore = useShareOutsideStore();
-const { onGetUserShareList } = useShare();
+const { shareStore, onGetUserShareList } = useShare();
 const show = ref(false);
 
 const handleClickShareDetail = (id: string) => {

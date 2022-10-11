@@ -21,7 +21,7 @@ const emits = defineEmits(['onClear']);
 const props = defineProps({
   mention: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 

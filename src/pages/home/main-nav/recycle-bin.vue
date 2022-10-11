@@ -50,7 +50,7 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useFileOutsideStore } from '@/store/modules/file';
+import { useFiles } from '@/hooks/useFiles';
 import {
   NSkeleton,
   NScrollbar,
@@ -67,7 +67,7 @@ import { FileListData } from '@/models/file';
 import { onInfo } from '@/utils/messages';
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
-const fileStore = useFileOutsideStore();
+const { fileStore } = useFiles();
 
 const checked_file_ids = ref<string[]>([]);
 

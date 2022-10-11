@@ -49,9 +49,8 @@
 <script setup lang="ts">
 import { PropType, ref, toRefs } from 'vue';
 import { useRouter } from 'vue-router';
-import { FormInst, FormRules, NInput, NFormItem, NButton, NIcon, NForm } from 'naive-ui';
+import { FormInst, FormRules, NInput, NFormItem, NButton, NForm } from 'naive-ui';
 import { useAuth } from '@/hooks';
-import { useAuthOutsideStore } from '@/store/modules/auth';
 import { validateEmail } from '@/utils/email';
 import Loading from '@/components/commons/loading/index.vue';
 import { onWarning, onInfo, onError } from '@/utils/messages';
@@ -79,8 +78,7 @@ const emits = defineEmits(['afterSignup']);
 
 const router = useRouter();
 
-const authStore = useAuthOutsideStore();
-const { onLogin, onRegister, onGetCode } = useAuth();
+const { authStore, onLogin, onRegister, onGetCode } = useAuth();
 
 const formRef = ref<FormInst | null>(null);
 const model = ref<ModelType>({

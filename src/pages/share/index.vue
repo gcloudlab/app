@@ -104,11 +104,9 @@
 import { ref, onMounted, computed, reactive, defineAsyncComponent, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { useShareOutsideStore } from '@/store/modules/share';
-import { useFileOutsideStore } from '@/store/modules/file';
-import { useAuthOutsideStore } from '@/store/modules/auth';
 import { useShare } from '@/hooks/useShare';
 import { useFiles } from '@/hooks/useFiles';
+import { useAuth } from '@/hooks/useAuthentication';
 import defaultAvatar from '@/assets/logo.png';
 import useClipboard from 'vue-clipboard3';
 import {
@@ -132,11 +130,9 @@ import { transformSize } from '@/utils/transform-size';
 const FolderTree = defineAsyncComponent(() => import('@/components/folder-tree/index.vue'));
 
 const router = useRouter();
-const shareStore = useShareOutsideStore();
-const fileStore = useFileOutsideStore();
-const authStore = useAuthOutsideStore();
-const { onGetShareDetailByIndentity, onSaveShareBasic } = useShare();
-const { onGetFileList } = useFiles();
+const { authStore } = useAuth();
+const { shareStore, onGetShareDetailByIndentity, onSaveShareBasic } = useShare();
+const { fileStore, onGetFileList } = useFiles();
 const { toClipboard } = useClipboard();
 const current_share_file_id = ref(router.currentRoute.value.params.id as string);
 const showFolderTree = ref(false);

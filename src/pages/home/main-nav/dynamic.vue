@@ -20,12 +20,11 @@
 <script setup lang="ts">
 import { defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useFileOutsideStore } from '@/store/modules/file';
 import { NSkeleton, NScrollbar, NH5 } from 'naive-ui';
+import { useFiles } from '@/hooks/useFiles';
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
-const fileStore = useFileOutsideStore();
-
+const { fileStore } = useFiles();
 const { fetching_dynamic } = storeToRefs(fileStore);
 </script>
 

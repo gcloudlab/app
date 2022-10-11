@@ -37,7 +37,6 @@ import {
 import { onError } from '@/utils/messages';
 import { CreateShareOption } from '@/models/share';
 import { useShare } from '@/hooks/useShare';
-import { useShareOutsideStore } from '@/store/modules/share';
 import { expired_time_map } from '@/constants/expired_time';
 
 const emits = defineEmits(['onSuccess']);
@@ -48,8 +47,7 @@ const props = defineProps({
   },
 });
 
-const shareStore = useShareOutsideStore();
-const { onCreateShareRecord } = useShare();
+const { shareStore, onCreateShareRecord } = useShare();
 const formRef = ref<FormInst | null>(null);
 
 const model = ref<CreateShareOption>({

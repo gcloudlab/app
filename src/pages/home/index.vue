@@ -85,7 +85,6 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useFileOutsideStore } from '@/store/modules/file';
 import { useFiles } from '@/hooks/useFiles';
 import { FileListData } from '@/models/file';
 import { transformSize } from '@/utils/transform-size';
@@ -105,9 +104,14 @@ const FileFolderRoute = defineAsyncComponent(
 );
 const Button = defineAsyncComponent(() => import('@/components/commons/button/index.vue'));
 
-const fileStore = useFileOutsideStore();
-const { onGetFileList, onAddToFolderRoutes, onRemoveFromFolderRoutes, onJumpToFile, onDeleteFile } =
-  useFiles();
+const {
+  fileStore,
+  onGetFileList,
+  onAddToFolderRoutes,
+  onRemoveFromFolderRoutes,
+  onJumpToFile,
+  onDeleteFile,
+} = useFiles();
 const expendMenuValue = ref<TreeOption | FileListData>();
 const fileViewType = ref<'list' | 'graphical'>(isMobile() ? 'list' : 'graphical');
 const currentClickedFile = ref<FileListData>();

@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { ref, h, defineAsyncComponent } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useFileOutsideStore } from '@/store/modules/file';
+import { useFiles } from '@/hooks/useFiles';
 import { NTree, NInput, NIcon, TreeOption, NSkeleton, NScrollbar } from 'naive-ui';
 import { Folder } from '@vicons/ionicons5';
 import Button from '@/components/commons/button/index.vue';
@@ -55,7 +55,7 @@ export interface FileTreeOption {
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
 const emits = defineEmits(['checkedKeys', 'expandedKeys', 'selectedKeys', 'delete']);
-const fileStore = useFileOutsideStore();
+const { fileStore } = useFiles();
 const isChecked = ref(false);
 const pattern = ref('');
 const renderSwitcherIcon = () => h(NIcon, { class: 'text-primary' }, { default: () => h(Folder) });

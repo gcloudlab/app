@@ -46,6 +46,7 @@ export const useAuth = () => {
   };
 
   return {
+    authStore,
     token,
     onLogin,
     onLogout,

@@ -1,9 +1,12 @@
 import { defineStore } from 'pinia';
 import piniaStore from '@/store';
-import { onWarning, onError } from '@/utils/messages';
+import { onWarning, onError, onSuccess } from '@/utils/messages';
 import useTimer from '@/hooks/useTimer';
-
+import { PaginationOptions } from '@/models';
+import { createPosts, getPosts } from '@/service/api/community';
+import { PostsFormItem, PostsItem } from '@/models/community';
 export interface CommunityStateProps {
+  posts_list: PostsItem[];
   fetching: boolean;
 }
 
@@ -11,17 +14,38 @@ export const useCommunityStore = defineStore({
   id: 'global',
   state: () =>
     ({
+      posts_list: [],
       fetching: false,
     } as CommunityStateProps),
-  getters: {},
+  getters: {
+    posts_count: state => state.posts_list.length || -1,
+  },
   actions: {
-    async onGetAction() {
+    async onGetPostsAction(option?: PaginationOptions) {
       try {
         this.fetching = true;
+        const res = await getPosts(option);
+        if (res.data.msg === 'success') {
+          this.posts_list = res.data.list;
+        } else {
+          onWarning(res.data.msg);
+        }
       } catch (error) {
         useTimer(() => {
           this.fetching = false;
         }, 3);
+        onError('出错了');
+      }
+    },
+    async onCreatePostsAction(data: PostsFormItem) {
+      try {
+        const res = await createPosts(data);
+        if (res.data.msg === 'success') {
+          onSuccess('发布成功');
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (error) {
         onError('出错了');
       }
     },

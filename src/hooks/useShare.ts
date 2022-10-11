@@ -25,6 +25,7 @@ export const useShare = () => {
   };
 
   return {
+    shareStore,
     onCreateShareRecord,
     onGetShareDetailByIndentity,
     onGetPopularShareList,

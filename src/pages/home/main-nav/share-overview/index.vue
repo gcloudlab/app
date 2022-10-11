@@ -24,14 +24,12 @@
 <script setup lang="ts">
 import { defineAsyncComponent, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import { useShareOutsideStore } from '@/store/modules/share';
 import { useShare } from '@/hooks/useShare';
 import { NSkeleton, NScrollbar, NH5 } from 'naive-ui';
 const ShareList = defineAsyncComponent(() => import('./share-list.vue'));
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
-const shareStore = useShareOutsideStore();
-const { onGetPopularShareList } = useShare();
+const { shareStore, onGetPopularShareList } = useShare();
 
 onMounted(async () => {
   await onGetPopularShareList();

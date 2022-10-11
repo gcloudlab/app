@@ -25,15 +25,11 @@
 </template>
 
 <script setup lang="ts">
-// import { storeToRefs } from 'pinia';
-// import { useFileOutsideStore } from '@/store/modules/file';
 import { isMobile } from '@/utils/is-mobile';
 import RobotJson from '@/assets/lotties/robot.json';
 import TriggerUpload from '@/components/upload/trigger-upload.vue';
 import ShareOverview from './share-overview/index.vue';
 import Other from './other.vue';
-
-// const fileStore = useFileOutsideStore();
 
 const boardClasses = ['rounded'];
 </script>

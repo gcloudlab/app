@@ -22,15 +22,14 @@
 <script setup lang="ts">
 import { PropType, ref, toRefs, defineAsyncComponent, h, onBeforeUnmount } from 'vue';
 import { useRouter } from 'vue-router';
-import { useShareOutsideStore } from '@/store/modules/share';
+import { useShare } from '@/hooks/useShare';
 import { FileListData } from '@/models/file';
 import { NButton, NTag, NIcon, MessageRenderMessage, NCard, NA, MessageReactive } from 'naive-ui';
 import { transformSize } from '@/utils/transform-size';
 import { ShareSocial } from '@vicons/ionicons5';
 import ShareForm from './share-form.vue';
-import { onInfo, onSuccess } from '@/utils/messages';
+import { onInfo, onSuccess, onError } from '@/utils/messages';
 import useClipboard from 'vue-clipboard3';
-import { onError } from '../../utils/messages';
 
 const Drawer = defineAsyncComponent(() => import('@/components/commons/drawer/index.vue'));
 
@@ -41,7 +40,7 @@ const props = defineProps({
   },
 });
 const router = useRouter();
-const shareStore = useShareOutsideStore();
+const { shareStore } = useShare();
 const { toClipboard } = useClipboard();
 
 const show = ref(false);

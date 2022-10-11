@@ -293,8 +293,12 @@ export const useFileStore = defineStore({
         });
     },
     async onMoveFoderAction(payload: MoveFolderOption, target: UploadTargetType) {
-      if (payload.parent_identity === 'default') {
-        onWarning('无法移动到默认文件夹');
+      if (
+        payload.identity === payload.parent_identity ||
+        payload.parent_identity === 'default' ||
+        payload.parent_identity === 'public'
+      ) {
+        onWarning('无法移动');
         return;
       }
       try {

@@ -61,7 +61,6 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
-import { useAuthOutsideStore } from '@/store/modules/auth';
 import { useAuth } from '@/hooks';
 import { getTimeState } from '@/utils/date';
 import randomAvatar from '@/utils/random-avatar';
@@ -75,8 +74,7 @@ import { LogOutOutline as LogOutIcon, LogInOutline as LogInIcon } from '@vicons/
 
 const emits = defineEmits(['onCloseEdit', 'onCloseShare']);
 const router = useRouter();
-const authStore = useAuthOutsideStore();
-const { onLogout, onChangeAvatar, onUpdateUserInfo } = useAuth();
+const { authStore, onLogout, onChangeAvatar, onUpdateUserInfo } = useAuth();
 
 const handleLogout = () => {
   onLogout();

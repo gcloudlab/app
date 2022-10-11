@@ -1,12 +1,12 @@
 export interface PostsBaseItem {
-  title: string;
-  tags: string;
-  content: string;
-  mention: string;
+  title?: string | null;
+  tags?: string | null;
+  content?: string;
+  mention?: string;
 }
 
 export interface PostsFormItem extends PostsBaseItem {
-  cover?: string;
+  cover?: string | null;
 }
 
 export interface PostsItem extends PostsBaseItem {
@@ -21,8 +21,8 @@ export interface PostsItem extends PostsBaseItem {
 }
 
 export interface PostsCommentBaseItem {
-  content: string;
-  mention: string;
+  content?: string | null;
+  mention?: string | null;
   reply_identity: string; // 回复用户
   posts_identity: string; // 所属帖子
 }

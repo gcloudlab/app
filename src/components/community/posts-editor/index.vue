@@ -5,22 +5,22 @@
         <n-input
           v-if="showTitle"
           class="flex-1"
-          v-model:value="title"
+          v-model:value="posts_value.title"
           size="small"
           placeholder="请输入标题"
         />
         <div class="flex">
           <Mention
             v-if="showTag"
-            :mention="mention"
+            :mention="posts_value.mention"
             :on-update:value="handleUpdateMention"
-            @on-clear="mention = ''"
+            @on-clear="posts_value.mention = ''"
           />
-          <DynamicTags class="ml-1" :tags="tags" :on-update:value="handleUpdateTags" />
+          <DynamicTags class="ml-1" :on-update:value="handleUpdateTags" />
         </div>
       </div>
       <v-md-editor
-        v-model="content"
+        v-model="posts_value.content"
         :mode="editor_mode"
         :left-toolbar="left_toolbar"
         :right-toolbar="right_toolbar"
@@ -35,11 +35,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { NInput, NButton } from 'naive-ui';
-import { DynamicTagsOption } from 'naive-ui/es/dynamic-tags/src/interface';
 import DynamicTags from '@/components/commons/dynamic-tags/index.vue';
 import Mention from '@/components/commons/mention/index.vue';
+import { PostsFormItem } from '@/models/community';
+import { onWarning } from '@/utils/messages';
 
 const props = defineProps({
   showTitle: {
@@ -51,33 +52,40 @@ const props = defineProps({
     default: true,
   },
 });
+const emits = defineEmits(['onSubmit']);
 
 const editor_mode = ref('edit'); // or edit
 const left_toolbar = ref('undo redo clear | emoji');
 const right_toolbar = ref('preview sync-scroll fullscreen');
-const title = ref('');
-const tags = ref<string[] | DynamicTagsOption[]>([]);
-const content = ref(
-  ':innocent: 在这里编辑正文 (支持[Markdown](https://www.runoob.com/markdown/md-tutorial.html)语法)~'
-);
-const mention = ref('');
+const posts_value: PostsFormItem = reactive({
+  title: '',
+  tags: '',
+  content:
+    ':innocent: 在这里编辑正文 (支持[Markdown](https://www.runoob.com/markdown/md-tutorial.html)语法)~',
+  mention: '',
+  cover: null,
+});
 
 const handleEditing = (_text: string, _html: string) => {
-  console.log(title.value, content.value);
+  // console.log(posts_value.title, posts_value.content);
 };
 const handleUpdateTags = (value: string[]) => {
-  tags.value = value;
+  posts_value.tags = value.join(',');
 };
 const handleUpdateMention = (value: string) => {
-  mention.value = value;
+  posts_value.mention = value;
 };
 
 const handleValidate = (): boolean => {
+  if (posts_value.title === '') {
+    onWarning('缺少标题');
+    return false;
+  }
   return true;
 };
 const handleSubmit = () => {
   if (handleValidate()) {
-    console.log(title.value, content.value, tags.value, mention.value);
+    emits('onSubmit', posts_value);
   }
 };
 </script>
