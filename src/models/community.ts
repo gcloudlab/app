@@ -16,6 +16,7 @@ export interface PostsItem extends PostsBaseItem {
   collection: number;
   click_num: number;
   owner: string;
+  avatar: string;
   updated_at: string;
   deleted_at?: string;
 }
@@ -34,6 +35,7 @@ export interface PostsCommentItem extends PostsCommentBaseItem {
   posts_name: string;
   reply_name: string;
   owner: string;
+  avatar: string;
   like: number;
   dislike: number;
   updated_at: string;
