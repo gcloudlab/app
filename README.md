@@ -26,6 +26,14 @@
 
 ## 开发者须知
 
+### Install & Run
+
+```bash
+git clone https://github.com/gcloudlab/app.git
+npm install
+npm run dev
+```
+
 ### 开发手册
 
 详见 [GCloud 开发手册](/dev/README.md).
