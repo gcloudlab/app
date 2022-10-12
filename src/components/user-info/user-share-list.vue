@@ -3,24 +3,19 @@
     <template #trigger>
       <n-button type="default" quaternary size="small" @click="handleOpen"> 👻 分享记录 </n-button>
     </template>
-    <template #header> 历史分享记录 {{ share_list ? `(${share_list.length})` : '' }}</template>
+    <template #header> 我的分享 {{ share_list ? `(${share_list.length})` : '' }}</template>
     <n-scrollbar style="height: calc(100vh - 100px)">
       <n-list hoverable clickable :show-divider="false">
         <n-list-item v-for="share_detail in share_list" :key="share_detail.identity">
-          <span>
-            {{ share_detail.name }}
-          </span>
           <n-tooltip trigger="hover">
             <template #trigger>
               <n-button
-                quaternary
+                text
                 type="primary"
-                size="tiny"
+                size="small"
                 @click="handleClickShareDetail(share_detail.identity)"
               >
-                <template #icon>
-                  <LinkOutline />
-                </template>
+                {{ share_detail.name }}
               </n-button>
             </template>
             查看详情
@@ -43,7 +38,6 @@ import { useShare } from '@/hooks/useShare';
 import { transformDate, transformSecondsToHours } from '@/utils/date';
 import { NButton, NList, NListItem, NScrollbar, NTooltip } from 'naive-ui';
 import Drawer from '@/components/commons/drawer/index.vue';
-import { LinkOutline } from '@vicons/ionicons5';
 
 const emits = defineEmits(['onClose']);
 const router = useRouter();
