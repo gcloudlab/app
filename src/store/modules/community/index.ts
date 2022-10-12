@@ -72,16 +72,6 @@ export const useCommunityStore = defineStore({
         onError('出错了');
       }
     },
-    async onGetxAction() {
-      try {
-        this.fetching = true;
-      } catch (error) {
-        useTimer(() => {
-          this.fetching = false;
-        }, 3);
-        onError('出错了');
-      }
-    },
   },
 });
 

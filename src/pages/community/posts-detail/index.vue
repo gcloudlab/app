@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 import { useCommunity } from '@/hooks/useCommunity';
@@ -17,7 +17,7 @@ const current_posts_id = ref(router.currentRoute.value.params.id as string);
 onMounted(() => {
   if (current_posts_id.value) {
     onGetPostsDetail(current_posts_id.value).then(() => {
-      if (communityStore.posts_detail.title) {
+      if (communityStore.posts_detail?.title) {
         window.document.title = `G社 | ${communityStore.posts_detail.title}`;
       }
     });

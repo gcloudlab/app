@@ -13,7 +13,7 @@
         </n-button>
       </div>
     </div>
-    <div class="posts-main w-3/4 mr-16 ml-5">
+    <div class="posts-main shadow w-3/4 mr-16 ml-5">
       <PostsEditor class="post mb-10" v-if="show_editor" @on-submit="handleSubmitPosts" />
       <PostsList class="animate__animated animate__fadeIn faster" />
     </div>
