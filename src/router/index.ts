@@ -4,7 +4,7 @@ const Layouts = () => import('@/pages/layouts/index.vue');
 const Home = () => import('@/pages/home/index.vue');
 const Share = () => import('@/pages/share/index.vue');
 const Community = () => import('@/pages/community/index.vue');
-const Posts = () => import('@/pages/community/posts/index.vue');
+const Posts = () => import('@/pages/community/posts-detail/index.vue');
 const Xswl = () => import('@/pages/picture/index.vue');
 const Sign = () => import('@/pages/sign/index.vue');
 const NotFound = () => import('@/pages/notfound/index.vue');

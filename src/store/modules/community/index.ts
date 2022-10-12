@@ -31,8 +31,10 @@ export const useCommunityStore = defineStore({
         const res = await getPosts(option);
         if (res.data.msg === 'success') {
           this.posts_list = res.data.list;
+          this.fetching = false;
         } else {
           onWarning(res.data.msg);
+          this.fetching = false;
         }
       } catch (error) {
         useTimer(() => {
@@ -62,6 +64,7 @@ export const useCommunityStore = defineStore({
         const res = await createPosts(data);
         if (res.data.msg === 'success') {
           onSuccess('发布成功');
+          this.onGetPostsAction();
         } else {
           onWarning(res.data.msg);
         }
