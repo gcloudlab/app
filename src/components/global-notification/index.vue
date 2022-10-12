@@ -54,24 +54,22 @@ const handleSelect = (key: string) => {
 
 const getUnreadCount = () => {
   unread_count.value = 0;
-  globalStore.notifications &&
+  if (globalStore.notifications) {
     globalStore.notifications.map(item => {
       if (!globalStore.has_read_notifications.includes(item.key)) {
         unread_count.value++;
       }
     });
+  }
 };
 
 onMounted(() => {
   getUnreadCount();
 });
 
-watch(
-  () => globalStore.has_read_notifications,
-  () => {
-    getUnreadCount();
-  }
-);
+watch(globalStore, () => {
+  getUnreadCount();
+});
 </script>
 
 <style lang="scss">

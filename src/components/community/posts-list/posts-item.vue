@@ -50,7 +50,7 @@ import { NThing, NSkeleton, NAvatar, NButton, NTag } from 'naive-ui';
 import defaultAvatar from '@/assets/logo.png';
 
 const router = useRouter();
-const { communityStore, onGetPostsList } = useCommunity();
+const { communityStore } = useCommunity();
 
 const { posts_list, fetching } = storeToRefs(communityStore);
 </script>

@@ -1,9 +1,13 @@
 import { createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router';
 import { isMobile } from '@/utils/is-mobile';
+
+// import Layouts from '@/pages/layouts/index.vue';
+// import Home from '@/pages/home/index.vue';
+// import Community from '@/pages/community/index.vue';
 const Layouts = () => import('@/pages/layouts/index.vue');
 const Home = () => import('@/pages/home/index.vue');
-const Share = () => import('@/pages/share/index.vue');
 const Community = () => import('@/pages/community/index.vue');
+const Share = () => import('@/pages/share/index.vue');
 const Posts = () => import('@/pages/community/posts-detail/index.vue');
 const Xswl = () => import('@/pages/picture/index.vue');
 const Sign = () => import('@/pages/sign/index.vue');
@@ -17,11 +21,17 @@ const routes: RouteRecordRaw[] = [
     name: 'layout',
     component: Layouts,
     redirect: '/home',
+    meta: {
+      keepAlive: true,
+    },
     children: [
       {
         path: '/home',
         name: 'home',
         component: Home,
+        meta: {
+          keepAlive: true,
+        },
       },
       {
         path: '/s/:id',
@@ -32,6 +42,9 @@ const routes: RouteRecordRaw[] = [
         path: '/community',
         name: 'community',
         component: Community,
+        meta: {
+          keepAlive: true,
+        },
       },
       {
         path: '/p/:id',

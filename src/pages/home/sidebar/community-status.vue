@@ -26,10 +26,10 @@
 import { onMounted } from 'vue';
 import { NDivider, NSkeleton, NNumberAnimation } from 'naive-ui';
 import { storeToRefs } from 'pinia';
-import { useGlobalOutsideStore } from '@/store/modules/global';
-import { useRegisterCount, useShareStatistics } from '@/hooks/useGlobal';
+import { useGlobal } from '@/hooks/useGlobal';
 
-const globalStore = useGlobalOutsideStore();
+const { globalStore, useRegisterCount, useShareStatistics } = useGlobal();
+
 onMounted(() => {
   useRegisterCount();
   useShareStatistics();

@@ -86,6 +86,7 @@
 import { ref, defineAsyncComponent, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useFiles } from '@/hooks/useFiles';
+// import { useCommunity } from '@/hooks/useCommunity';
 import { FileListData } from '@/models/file';
 import { transformSize } from '@/utils/transform-size';
 import { TreeOption, NTag, NButton, NScrollbar } from 'naive-ui';
@@ -112,6 +113,7 @@ const {
   onJumpToFile,
   onDeleteFile,
 } = useFiles();
+// const { onGetPostsList } = useCommunity();
 const expendMenuValue = ref<TreeOption | FileListData>();
 const fileViewType = ref<'list' | 'graphical'>(isMobile() ? 'list' : 'graphical');
 const currentClickedFile = ref<FileListData>();
@@ -119,6 +121,7 @@ const currentCheckedFiles = ref<FileListData[]>([]);
 
 onMounted(async () => {
   await onGetFileList();
+  // await onGetPostsList();
 });
 
 const handleSelectedKeys = (value: FileListData) => {

@@ -21,9 +21,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent } from 'vue';
-import { useCommunity } from '@/hooks/useCommunity';
+import { ref, defineAsyncComponent, onMounted } from 'vue';
 import { useAuth } from '@/hooks/useAuthentication';
+import { useCommunity } from '@/hooks/useCommunity';
 import { PostsFormItem } from '@/models/community';
 import { NButton, NIcon } from 'naive-ui';
 import PostsList from '@/components/community/posts-list/index.vue';
@@ -32,22 +32,23 @@ const PostsEditor = defineAsyncComponent(
   () => import('@/components/community/posts-editor/index.vue')
 );
 
-const { onCreatePosts } = useCommunity();
+const { onCreatePosts, onGetPostsList } = useCommunity();
 const { authStore } = useAuth();
 const show_editor = ref(false);
 
 const handleSubmitPosts = async (value: PostsFormItem) => {
-  console.log(value);
-  await onCreatePosts(value);
+  // console.log(value);
+  // await onCreatePosts(value);
 };
+
+onMounted(async () => {
+  await onGetPostsList();
+});
 </script>
 
 <style lang="scss" scoped>
-.community-layout {
+.community-layout,
+.sider {
   height: calc(100vh - 100px);
-
-  .sider {
-    height: calc(100vh - 100px);
-  }
 }
 </style>

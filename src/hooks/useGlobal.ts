@@ -2,14 +2,21 @@ import { useGlobalOutsideStore } from '@/store/modules/global';
 
 export const globalStore = useGlobalOutsideStore();
 
-export const useRegisterCount = async () => {
-  await globalStore.onGetRegisterCountAction();
-};
+export const useGlobal = () => {
+  const useRegisterCount = async () => {
+    if (globalStore) await globalStore.onGetRegisterCountAction();
+  };
 
-export const useShareStatistics = async () => {
-  await globalStore.onGetShareStatisticsAction();
-};
+  const useShareStatistics = async () => {
+    if (globalStore) await globalStore.onGetShareStatisticsAction();
+  };
 
+  return {
+    globalStore,
+    useRegisterCount,
+    useShareStatistics,
+  };
+};
 export const useNotification = (action: string, key?: string) => {
   switch (action) {
     case 'SET':
