@@ -1,7 +1,7 @@
 <template>
-  <n-dynamic-tags v-model:value="tags" :max="3" v-bind="$attrs">
+  <n-dynamic-tags v-model:value="tags" :max="3" v-bind="$attrs" size="large">
     <template #trigger="{ activate, disabled }">
-      <n-button size="small" type="primary" :disabled="disabled" @click="activate()">
+      <n-button type="primary" :disabled="disabled" @click="activate()">
         <template #icon>
           <n-icon>
             <Add />

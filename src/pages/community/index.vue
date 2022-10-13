@@ -104,11 +104,9 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-.community-layout,
-.sider {
-  height: calc(100vh - 100px);
-}
-.sider {
-  min-width: 240px;
+.community-layout {
+  .sider {
+    min-width: 240px;
+  }
 }
 </style>

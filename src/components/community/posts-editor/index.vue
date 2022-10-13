@@ -1,13 +1,12 @@
 <template>
   <div class="editor-bar mt-1 animate__animated animate__fadeIn faster">
-    <div class="w-full h-56 mr-3">
+    <div class="w-full h-64 mr-3">
       <div class="header-bar flex items-center">
         <n-input
           v-if="showTitle"
           class="flex-1"
           v-model:value="posts_value.title"
-          size="small"
-          placeholder="请输入标题"
+          placeholder="请输入标题，如果标题能够表达完整内容，则正文可以为空"
         />
         <div class="flex">
           <Mention
@@ -36,17 +35,19 @@
       ></v-md-editor>
     </div>
     <div>
-      <n-button class="float-right" size="small" type="error" @click="handleCancel">取消</n-button>
-      <n-button class="float-right" size="small" @click="handleSubmit">{{
-        data ? '更新' : '发布'
-      }}</n-button>
+      <n-button-group class="float-right">
+        <n-button size="small" type="warning" @click="handleCancel"> 取消 </n-button>
+        <n-button size="small" type="primary" @click="handleSubmit">
+          {{ data ? '更新' : '发布' }}
+        </n-button>
+      </n-button-group>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, PropType } from 'vue';
-import { NInput, NButton } from 'naive-ui';
+import { NInput, NButton, NButtonGroup } from 'naive-ui';
 import DynamicTags from '@/components/commons/dynamic-tags/index.vue';
 import Mention from '@/components/commons/mention/index.vue';
 import { PostsFormItem, PostsItem } from '@/models/community';
@@ -74,7 +75,7 @@ const emits = defineEmits(['onSubmit', 'onUpdate', 'onCancel']);
 
 const editor_mode = ref('edit'); // or edit
 const left_toolbar = ref('undo redo clear | emoji');
-const right_toolbar = ref('sync-scroll preview');
+const right_toolbar = ref('preview sync-scroll ');
 const posts_value: PostsFormItem | null = reactive({
   title: props.data?.title ?? null,
   tags: props.data?.tags !== '' ? props.data?.tags : null,
