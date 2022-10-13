@@ -1,12 +1,6 @@
 <template>
   <div class="flex">
-    <n-mention
-      v-if="show_input"
-      v-bind="$attrs"
-      :options="mention_options"
-      default-value="@"
-      size="small"
-    />
+    <n-mention v-if="show_input" v-bind="$attrs" :options="mention_options" size="small" />
     <n-button size="small" :type="show_input ? 'warning' : 'default'" @click="handleChange">
       {{ show_input ? 'X' : '@' }}
     </n-button>

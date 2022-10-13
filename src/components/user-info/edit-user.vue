@@ -1,7 +1,7 @@
 <template>
   <Drawer class="edit-user" v-model:show="show" :on-after-leave="handleClose" width="60%">
     <template #trigger>
-      <n-button tertiary type="primary" size="small" @click="handleEditUserInfo">
+      <n-button disabled tertiary type="primary" size="small" @click="handleEditUserInfo">
         编辑资料
       </n-button>
     </template>

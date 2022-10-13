@@ -3,7 +3,13 @@ import piniaStore from '@/store';
 import { onWarning, onError, onSuccess } from '@/utils/messages';
 import useTimer from '@/hooks/useTimer';
 import { PaginationOptions } from '@/models';
-import { createPosts, getPosts, getPostsById } from '@/service/api/community';
+import {
+  createPosts,
+  deletePosts,
+  getPosts,
+  getPostsById,
+  updatePosts,
+} from '@/service/api/community';
 import { PostsFormItem, PostsItem } from '@/models/community';
 export interface CommunityStateProps {
   posts_list: PostsItem[];
@@ -13,7 +19,7 @@ export interface CommunityStateProps {
 }
 
 export const useCommunityStore = defineStore({
-  id: 'global',
+  id: 'community',
   state: () =>
     ({
       posts_list: [],
@@ -45,12 +51,14 @@ export const useCommunityStore = defineStore({
     },
     async onGetPostsDetailAction(id: string) {
       try {
-        this.fetching = true;
+        this.fetching_detail = true;
         const res = await getPostsById(id);
         if (res.data.msg === 'success') {
           this.posts_detail = res.data;
+          this.fetching_detail = false;
         } else {
           onWarning(res.data.msg);
+          this.fetching_detail = false;
         }
       } catch (error) {
         useTimer(() => {
@@ -64,6 +72,32 @@ export const useCommunityStore = defineStore({
         const res = await createPosts(data);
         if (res.data.msg === 'success') {
           onSuccess('发布成功');
+          this.onGetPostsAction();
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (error) {
+        onError('出错了');
+      }
+    },
+    async onUpdatePostsAction(data: PostsItem) {
+      try {
+        const res = await updatePosts(data);
+        if (res.data.msg === 'success') {
+          onSuccess('更新成功');
+          this.onGetPostsAction();
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (error) {
+        onError('出错了');
+      }
+    },
+    async onDeletePostsAction(id: string) {
+      try {
+        const res = await deletePosts(id);
+        if (res.data.msg === 'success') {
+          onSuccess('已删除');
           this.onGetPostsAction();
         } else {
           onWarning(res.data.msg);

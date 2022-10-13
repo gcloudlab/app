@@ -2,7 +2,7 @@ export interface PostsBaseItem {
   title?: string | null;
   tags?: string | null;
   content?: string;
-  mention?: string;
+  mention?: string | null;
 }
 
 export interface PostsFormItem extends PostsBaseItem {

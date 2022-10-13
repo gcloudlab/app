@@ -1,5 +1,8 @@
 <template>
-  <div class="posts-detail m-3">帖子详情: {{ communityStore.posts_detail?.title || '无' }}</div>
+  <div class="posts-detail m-3">
+    {{ communityStore.posts_detail?.title || '无' }}
+    <v-md-preview v-if="communityStore.posts_detail" :text="communityStore.posts_detail.content" />
+  </div>
 </template>
 
 <script setup lang="ts">

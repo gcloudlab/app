@@ -10,35 +10,66 @@
     </template>
     <template #header>
       <n-skeleton v-if="communityStore.fetching" text width="60%" />
-      <span v-else>
-        <span
+      <div v-else class="flex items-center">
+        <div
           class="text-primary cursor-pointer bolder hover:text-secondary"
           @click="router.push(`/p/${posts.identity}`)"
         >
           {{ posts.title || '标题' }}
-        </span>
-      </span>
+        </div>
+        <n-button-group v-if="authStore.auth?.name === posts.owner">
+          <n-button class="text-gray-400" quaternary round size="tiny" @click="onUpdate(posts)">
+            <template #icon> <Edit32Filled /></template>
+          </n-button>
+          <n-popconfirm @positive-click="onDelete(posts)" negative-text="取消" positive-text="删除">
+            <template #trigger>
+              <n-button class="text-gray-400" quaternary round size="tiny" @click="">
+                <template #icon> <TrashOutline /></template>
+              </n-button>
+            </template>
+            你确定？
+          </n-popconfirm>
+        </n-button-group>
+      </div>
     </template>
     <template #header-extra>
-      <n-button secondary round type="primary" size="tiny"> 0 </n-button>
+      <div class="flex items-center">
+        <!-- <n-button class="mr-1" secondary round type="primary" size="tiny">
+          <template #icon> <ThumbLike20Filled /></template>
+          {{ posts.like }}
+        </n-button> -->
+        <n-button secondary round size="tiny"> 0 </n-button>
+      </div>
     </template>
     <template #description>
       <n-skeleton v-if="communityStore.fetching" text width="60%" />
       <template v-else>
-        <n-tag
-          v-for="(item, index) in posts.tags?.split(',')"
-          :key="index"
-          class="mr-1"
-          size="small"
-          :bordered="false"
-          :color="{ textColor: '#999999' }"
-        >
-          {{ item }}
-        </n-tag>
-        <span class="ml-1 text-xs font-bold" style="color: #778087">
-          {{ posts.owner || '未知用户' }}
-        </span>
-        <span class="ml-2 text-gray-400 text-xs">{{ transformDate(posts.updated_at) }}</span>
+        <div class="flex items-center">
+          <template v-if="posts.tags">
+            <n-tag
+              v-for="(item, index) in posts.tags?.split(',')"
+              :key="index"
+              class="mr-1"
+              size="small"
+              :bordered="false"
+              :color="{ textColor: '#999999' }"
+            >
+              {{ item }}
+            </n-tag>
+          </template>
+
+          <span class="ml-1 text-xs font-bold" style="color: #778087">
+            {{ posts.owner || '未知用户' }}
+          </span>
+          <span class="ml-2 text-gray-400 text-xs">{{ transformDate(posts.updated_at) }}</span>
+          <n-divider vertical />
+          <n-button type="primary" size="tiny" quaternary>
+            <template #icon>
+              <EyeOutline />
+            </template>
+            {{ posts.click_num }}
+          </n-button>
+        </div>
       </template>
     </template>
   </n-thing>
@@ -47,12 +78,34 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { useCommunity } from '@/hooks/useCommunity';
+import { useAuth } from '@/hooks/useAuthentication';
 import { transformDate } from '@/utils/date';
-import { NThing, NSkeleton, NAvatar, NButton, NTag } from 'naive-ui';
+import {
+  NThing,
+  NSkeleton,
+  NAvatar,
+  NButton,
+  NTag,
+  NDivider,
+  NButtonGroup,
+  NPopconfirm,
+} from 'naive-ui';
 import defaultAvatar from '@/assets/logo.png';
+import { ThumbLike20Filled, Edit32Filled } from '@vicons/fluent';
+import { EyeOutline, TrashOutline } from '@vicons/ionicons5';
+import { PostsItem } from '@/models/community';
 
+const emits = defineEmits(['onUpdate', 'onDelete']);
 const router = useRouter();
 const { communityStore } = useCommunity();
+const { authStore } = useAuth();
+
+const onUpdate = (posts: PostsItem) => {
+  emits('onUpdate', posts);
+};
+const onDelete = (posts: PostsItem) => {
+  emits('onDelete', posts);
+};
 </script>
 
 <style lang="scss" scoped></style>
