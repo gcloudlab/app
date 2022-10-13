@@ -1,6 +1,16 @@
 <template>
-  <div class="community-layout w-full px-8 py-5 bg-header flex">
-    <div class="sider shadow rounded w-1/4 animate__animated animate__fadeIn faster">
+  <div
+    class="community-layout px-8 py-5 bg-header flex items-start justify-center"
+    :class="[isMobile() ? 'flex-col' : '']"
+  >
+    <div class="posts-main shadow w-full flex-1">
+      <PostsEditor class="post mb-10" v-if="show_editor" @on-submit="handleSubmitPosts" />
+      <PostsList class="animate__animated animate__fadeIn faster" />
+    </div>
+    <div
+      class="sider shadow rounded animate__animated animate__fadeIn faster"
+      :class="[isMobile() ? 'w-full mt-3' : 'ml-5']"
+    >
       <div class="flex flex-row items-center justif-center m-3">
         <n-icon size="25" class="text-gray-500"><PaperPlane /></n-icon>
         <n-button
@@ -13,10 +23,6 @@
         </n-button>
       </div>
     </div>
-    <div class="posts-main shadow w-3/4 mr-16 ml-5">
-      <PostsEditor class="post mb-10" v-if="show_editor" @on-submit="handleSubmitPosts" />
-      <PostsList class="animate__animated animate__fadeIn faster" />
-    </div>
   </div>
 </template>
 
@@ -25,6 +31,7 @@ import { ref, defineAsyncComponent, onMounted } from 'vue';
 import { useAuth } from '@/hooks/useAuthentication';
 import { useCommunity } from '@/hooks/useCommunity';
 import { PostsFormItem } from '@/models/community';
+import { isMobile } from '@/utils/is-mobile';
 import { NButton, NIcon } from 'naive-ui';
 import PostsList from '@/components/community/posts-list/index.vue';
 import { PaperPlane } from '@vicons/ionicons5';

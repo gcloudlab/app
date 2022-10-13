@@ -1,11 +1,10 @@
 <template>
-  <div class="posts-detail m-3">帖子详情: {{ posts_detail?.title || '无' }}</div>
+  <div class="posts-detail m-3">帖子详情: {{ communityStore.posts_detail?.title || '无' }}</div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia';
 import { useCommunity } from '@/hooks/useCommunity';
 import { NButton } from 'naive-ui';
 
@@ -23,8 +22,6 @@ onMounted(() => {
     });
   }
 });
-
-const { posts_detail } = storeToRefs(communityStore);
 </script>
 
 <style lang="scss" scoped></style>
