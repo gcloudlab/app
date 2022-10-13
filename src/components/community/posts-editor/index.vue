@@ -26,6 +26,7 @@
         </div>
       </div>
       <v-md-editor
+        class="z-10"
         v-model="posts_value.content"
         :mode="editor_mode"
         :left-toolbar="left_toolbar"
@@ -73,7 +74,7 @@ const emits = defineEmits(['onSubmit', 'onUpdate', 'onCancel']);
 
 const editor_mode = ref('edit'); // or edit
 const left_toolbar = ref('undo redo clear | emoji');
-const right_toolbar = ref('preview sync-scroll fullscreen');
+const right_toolbar = ref('sync-scroll preview');
 const posts_value: PostsFormItem | null = reactive({
   title: props.data?.title ?? null,
   tags: props.data?.tags !== '' ? props.data?.tags : null,
