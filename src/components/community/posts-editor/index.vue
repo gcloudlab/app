@@ -6,7 +6,9 @@
           v-if="showTitle"
           class="flex-1"
           v-model:value="posts_value.title"
-          placeholder="请输入标题，如果标题能够表达完整内容，则正文可以为空"
+          :placeholder="
+            mode === 'posts' ? '请输入标题，如果标题能够表达完整内容，则正文可以为空' : '在这里回复'
+          "
         />
         <div class="flex">
           <Mention
@@ -35,7 +37,7 @@
       ></v-md-editor>
     </div>
     <div>
-      <n-button-group class="float-right">
+      <n-button-group class="float-right z-10">
         <n-button size="small" type="warning" @click="handleCancel"> 取消 </n-button>
         <n-button size="small" type="primary" @click="handleSubmit">
           {{ data ? '更新' : '发布' }}
@@ -54,6 +56,10 @@ import { PostsFormItem, PostsItem } from '@/models/community';
 import { onWarning } from '@/utils/messages';
 
 const props = defineProps({
+  mode: {
+    type: String as PropType<'comment' | 'posts'>,
+    default: 'posts',
+  },
   data: {
     type: Object as PropType<PostsItem | null>,
     default: null,
@@ -71,17 +77,23 @@ const props = defineProps({
     default: true,
   },
 });
-const emits = defineEmits(['onSubmit', 'onUpdate', 'onCancel']);
+const emits = defineEmits([
+  'onSubmit',
+  'onUpdate',
+  'onCancel',
+  'onSubmitComment',
+  'onUpdateComment',
+]);
 
 const editor_mode = ref('edit'); // or edit
 const left_toolbar = ref('undo redo clear | emoji');
 const right_toolbar = ref('preview sync-scroll ');
+const placeholder =
+  ':innocent: 在这里编辑正文~ (支持[Markdown](https://www.runoob.com/markdown/md-tutorial.html)语法，戳一下右上角的眼睛试试~)';
 const posts_value: PostsFormItem | null = reactive({
   title: props.data?.title ?? null,
   tags: props.data?.tags !== '' ? props.data?.tags : null,
-  content:
-    props.data?.content ??
-    ':innocent: 在这里编辑正文~ (支持[Markdown](https://www.runoob.com/markdown/md-tutorial.html)语法，戳一下右上角的眼睛试试~)',
+  content: props.data?.content ?? (props.mode === 'posts' ? placeholder : '回复帖子'),
   mention: props.data?.mention ?? null,
   cover: null,
 });
@@ -97,19 +109,36 @@ const handleUpdateMention = (value: string) => {
 };
 
 const handleValidate = (): boolean => {
-  if (!posts_value.title) {
+  if (props.mode === 'posts' && !posts_value.title) {
     onWarning('缺少标题');
     return false;
   }
+  if (posts_value.content === placeholder || posts_value.content === '回复帖子') {
+    return false;
+  }
+
   return true;
 };
 const handleSubmit = () => {
   if (handleValidate()) {
-    if (props.data) {
-      emits('onUpdate', { ...posts_value, identity: props.data.identity });
-    } else {
-      emits('onSubmit', posts_value);
+    switch (props.mode) {
+      case 'posts':
+        if (props.data) {
+          emits('onUpdate', { ...posts_value, identity: props.data.identity });
+        } else {
+          emits('onSubmit', posts_value);
+        }
+        break;
+      case 'comment':
+        if (props.data) {
+          emits('onUpdateComment', { ...posts_value, identity: props.data.identity });
+        } else {
+          emits('onSubmitComment', posts_value);
+        }
+        break;
     }
+  } else {
+    onWarning('试试修改正文');
   }
 };
 

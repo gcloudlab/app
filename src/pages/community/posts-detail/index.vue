@@ -5,7 +5,7 @@
       <div class="title ml-2">
         <n-skeleton v-if="communityStore.fetching_detail" text width="60%" />
         <div class="title-info" v-else>
-          <span class="text-bold text-lg text-primary">{{
+          <span class="text-bolder text-lg text-primary">{{
             communityStore.posts_detail?.title || 'nb'
           }}</span>
         </div>
@@ -15,7 +15,9 @@
         <n-avatar v-else :src="communityStore.posts_detail?.avatar" :fallback-src="defaultAvatar" />
       </div>
     </div>
-    <n-divider v-if="communityStore.posts_detail?.content !== ''" />
+    <n-divider v-if="communityStore.posts_detail?.content !== ''" title-placement="center"
+      ><span class="text-gray-400 text-sm">🍥 正文</span>
+    </n-divider>
     <div class="content mt-4 p-4" v-if="communityStore.posts_detail?.content !== ''">
       <div v-if="communityStore.fetching_detail">
         <n-skeleton class="mb-2" height="25px" :repeat="6" />
@@ -63,17 +65,33 @@
         </div>
       </div>
       <div class="comment-detail"></div>
+      <div class="editor">
+        <PostsEditor
+          class="mt-5 mb-10"
+          v-if="true"
+          mode="comment"
+          :show-title="false"
+          :show-mention="false"
+          :show-tag="false"
+          @on-submit-comment="handleSubmitComment"
+          @on-update-comment="handleUpdateComment"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCommunity } from '@/hooks/useCommunity';
 import { isMobile } from '@/utils/is-mobile';
+import { onWarning } from '@/utils/messages';
 import { NButton, NButtonGroup, NSkeleton, NAvatar, NTag, NDivider } from 'naive-ui';
 import defaultAvatar from '@/assets/logo.png';
+const PostsEditor = defineAsyncComponent(
+  () => import('@/components/community/posts-editor/index.vue')
+);
 
 const router = useRouter();
 const { communityStore, onGetPostsDetail } = useCommunity();
@@ -89,10 +107,17 @@ onMounted(() => {
     });
   }
 });
+
+const handleSubmitComment = () => {
+  onWarning('暂不支持');
+};
+const handleUpdateComment = () => {};
 </script>
 
 <style lang="scss">
-.github-markdown-body {
-  padding: 0;
+.posts-container {
+  .github-markdown-body {
+    padding: 0;
+  }
 }
 </style>

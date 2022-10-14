@@ -51,7 +51,7 @@
           <n-h5 prefix="bar" class="rounded text-sm"> 今日热议 </n-h5>
           <div>
             <div
-              class="mb-1 hover:text-primary hover:underline cursor-pointer text-sm"
+              class="mb-1 text-primary hover:underline cursor-pointer text-sm"
               v-for="posts in hot_posts"
               @click="router.push(`/p/${posts.identity}`)"
             >
@@ -70,12 +70,13 @@ import { useRouter } from 'vue-router';
 import { useAuth } from '@/hooks/useAuthentication';
 import { useCommunity } from '@/hooks/useCommunity';
 import { isMobile } from '@/utils/is-mobile';
+import type { PostsFormItem, PostsItem } from '@/models/community';
+import _ from 'lodash';
+import { dateFromNow } from '@/utils/date';
 import { NButton, NIcon, NScrollbar, NH5, NDivider } from 'naive-ui';
 import { PaperPlane } from '@vicons/ionicons5';
-import type { PostsFormItem, PostsItem } from '@/models/community';
 import PostsList from '@/components/community/posts-list/index.vue';
 import Introduction from './introduction/index.vue';
-import _ from 'lodash';
 const PostsEditor = defineAsyncComponent(
   () => import('@/components/community/posts-editor/index.vue')
 );
@@ -89,7 +90,9 @@ const show_editor = ref(false);
 const update_data = ref<PostsItem | null>(null);
 
 const hot_posts = computed(() =>
-  _.sortBy(communityStore.posts_list, item => -item.click_num).slice(0, 3)
+  _.sortBy(communityStore.posts_list, item => -item.click_num)
+    .filter(i => dateFromNow(i.updated_at) <= 3)
+    .slice(0, 3)
 );
 
 const handleSubmitPosts = async (value: PostsFormItem) => {
