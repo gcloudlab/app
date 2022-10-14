@@ -1,28 +1,22 @@
 <template>
   <div class="posts-container bg-header shadow" :class="[isMobile() ? ' mx-4 my-3' : 'mx-8 my-6']">
-    <div class="posts-detail p-4 shadow">
-      <div class="head w-full flex items-center justify-start">
-        <n-button quaternary @click="router.back()"> 返回 </n-button>
-        <div class="title ml-2">
-          <n-skeleton v-if="communityStore.fetching_detail" text width="60%" />
-          <div class="title-info" v-else>
-            <span class="text-bold text-lg text-primary">{{
-              communityStore.posts_detail?.title || 'nb'
-            }}</span>
-          </div>
-        </div>
-        <div class="avatar ml-auto">
-          <n-skeleton v-if="communityStore.fetching_detail" width="40px" height="40px" />
-          <n-avatar
-            v-else
-            :src="communityStore.posts_detail?.avatar"
-            :fallback-src="defaultAvatar"
-            size="large"
-          />
+    <div class="head p-4 flex items-center justify-start">
+      <n-button quaternary @click="router.back()"> 返回 </n-button>
+      <div class="title ml-2">
+        <n-skeleton v-if="communityStore.fetching_detail" text width="60%" />
+        <div class="title-info" v-else>
+          <span class="text-bold text-lg text-primary">{{
+            communityStore.posts_detail?.title || 'nb'
+          }}</span>
         </div>
       </div>
+      <div class="avatar ml-auto">
+        <n-skeleton v-if="communityStore.fetching_detail" width="40px" height="40px" />
+        <n-avatar v-else :src="communityStore.posts_detail?.avatar" :fallback-src="defaultAvatar" />
+      </div>
     </div>
-    <div class="content mt-4 p-4">
+    <n-divider v-if="communityStore.posts_detail?.content !== ''" />
+    <div class="content mt-4 p-4" v-if="communityStore.posts_detail?.content !== ''">
       <div v-if="communityStore.fetching_detail">
         <n-skeleton class="mb-2" height="25px" :repeat="6" />
       </div>

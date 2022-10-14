@@ -43,10 +43,21 @@
           </n-button>
         </div>
         <n-divider />
-        <n-h5 prefix="bar" class="m-3 rounded text-sm"> 0条未读提醒 </n-h5>
+        <n-h5 prefix="bar" class="m-3 rounded text-sm">
+          <span class="text-primary">0</span> 条未读提醒
+        </n-h5>
         <n-divider />
-        <div class="m-3">
+        <div class="hot-list m-3">
           <n-h5 prefix="bar" class="rounded text-sm"> 今日热议 </n-h5>
+          <div>
+            <div
+              class="mb-1 hover:text-primary hover:underline cursor-pointer text-sm"
+              v-for="posts in hot_posts"
+              @click="router.push(`/p/${posts.identity}`)"
+            >
+              {{ posts.title }}
+            </div>
+          </div>
         </div>
       </n-scrollbar>
     </div>
@@ -54,7 +65,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent, onMounted } from 'vue';
+import { ref, defineAsyncComponent, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { useAuth } from '@/hooks/useAuthentication';
 import { useCommunity } from '@/hooks/useCommunity';
 import { isMobile } from '@/utils/is-mobile';
@@ -63,15 +75,22 @@ import { PaperPlane } from '@vicons/ionicons5';
 import type { PostsFormItem, PostsItem } from '@/models/community';
 import PostsList from '@/components/community/posts-list/index.vue';
 import Introduction from './introduction/index.vue';
+import _ from 'lodash';
 const PostsEditor = defineAsyncComponent(
   () => import('@/components/community/posts-editor/index.vue')
 );
 
-const { onCreatePosts, onGetPostsList, onUpdatePosts, onDeletePosts } = useCommunity();
+const router = useRouter();
 const { authStore } = useAuth();
+const { communityStore, onCreatePosts, onGetPostsList, onUpdatePosts, onDeletePosts } =
+  useCommunity();
 
 const show_editor = ref(false);
 const update_data = ref<PostsItem | null>(null);
+
+const hot_posts = computed(() =>
+  _.sortBy(communityStore.posts_list, item => -item.click_num).slice(0, 3)
+);
 
 const handleSubmitPosts = async (value: PostsFormItem) => {
   // console.log(value);
