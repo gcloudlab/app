@@ -1,5 +1,5 @@
 <template>
-  <div class="posts-container mx-8 my-6 bg-header shadow">
+  <div class="posts-container bg-header shadow" :class="[isMobile() ? ' mx-4 my-3' : 'mx-8 my-6']">
     <div class="posts-detail p-4 shadow">
       <div class="head w-full flex items-center justify-start">
         <n-button quaternary @click="router.back()"> 返回 </n-button>
@@ -77,6 +77,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCommunity } from '@/hooks/useCommunity';
+import { isMobile } from '@/utils/is-mobile';
 import { NButton, NButtonGroup, NSkeleton, NAvatar, NTag, NDivider } from 'naive-ui';
 import defaultAvatar from '@/assets/logo.png';
 
