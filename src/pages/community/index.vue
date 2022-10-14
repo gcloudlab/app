@@ -1,7 +1,7 @@
 <template>
   <div
     class="community-layout bg-header flex items-start justify-center"
-    :class="[isMobile() ? 'flex-col px-4 py-3' : 'px-8 py-5']"
+    :class="[isMobile() ? 'flex-col px-4 py-3' : 'px-8 py-6']"
   >
     <div class="posts-main shadow w-full flex-1">
       <n-scrollbar style="max-height: calc(100vh - 100px)">

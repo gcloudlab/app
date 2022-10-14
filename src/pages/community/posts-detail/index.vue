@@ -1,7 +1,75 @@
 <template>
-  <div class="posts-detail m-3">
-    {{ communityStore.posts_detail?.title || '无' }}
-    <v-md-preview v-if="communityStore.posts_detail" :text="communityStore.posts_detail.content" />
+  <div class="posts-container mx-8 my-6 bg-header shadow">
+    <div class="posts-detail p-4 shadow">
+      <div class="head w-full flex items-center justify-start">
+        <n-button quaternary @click="router.back()"> 返回 </n-button>
+        <div class="title ml-2">
+          <n-skeleton v-if="communityStore.fetching_detail" text width="60%" />
+          <div class="title-info" v-else>
+            <span class="text-bold text-lg text-primary">{{
+              communityStore.posts_detail?.title || 'nb'
+            }}</span>
+          </div>
+        </div>
+        <div class="avatar ml-auto">
+          <n-skeleton v-if="communityStore.fetching_detail" width="40px" height="40px" />
+          <n-avatar
+            v-else
+            :src="communityStore.posts_detail?.avatar"
+            :fallback-src="defaultAvatar"
+            size="large"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="content mt-4 p-4">
+      <div v-if="communityStore.fetching_detail">
+        <n-skeleton class="mb-2" height="25px" :repeat="6" />
+      </div>
+      <v-md-preview
+        v-else-if="communityStore.posts_detail && !communityStore.fetching_detail"
+        :text="communityStore.posts_detail.content"
+      />
+    </div>
+    <n-divider />
+    <div class="info flex items-center justify-between">
+      <div class="action">
+        <n-button-group size="small">
+          <n-button quaternary>👍{{ communityStore.posts_detail?.like }}</n-button>
+          <n-button quaternary>👎</n-button>
+          <n-button quaternary>❤️ 加入收藏</n-button>
+        </n-button-group>
+      </div>
+      <div class="count">
+        <n-button-group size="small">
+          <n-button class="text-gray-400" quaternary>
+            {{ communityStore.posts_detail?.click_num }}次点击
+          </n-button>
+          <n-button class="text-gray-400" quaternary>
+            {{ communityStore.posts_detail?.collection }}收藏
+          </n-button>
+        </n-button-group>
+      </div>
+    </div>
+    <n-divider />
+    <div class="comment p-4">
+      <div class="head flex justify-between">
+        <span class="text-gray-400">{{ 0 }}条回复</span>
+        <div>
+          <n-tag
+            v-for="(item, index) in communityStore.posts_detail?.tags?.split(',')"
+            :key="index"
+            class="mr-1"
+            size="small"
+            :bordered="false"
+            :color="{ textColor: '#999999' }"
+          >
+            {{ item }}
+          </n-tag>
+        </div>
+      </div>
+      <div class="comment-detail"></div>
+    </div>
   </div>
 </template>
 
@@ -9,7 +77,8 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCommunity } from '@/hooks/useCommunity';
-import { NButton } from 'naive-ui';
+import { NButton, NButtonGroup, NSkeleton, NAvatar, NTag, NDivider } from 'naive-ui';
+import defaultAvatar from '@/assets/logo.png';
 
 const router = useRouter();
 const { communityStore, onGetPostsDetail } = useCommunity();
@@ -27,4 +96,8 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.github-markdown-body {
+  padding: 0;
+}
+</style>

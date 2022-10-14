@@ -91,7 +91,7 @@ import {
   NPopconfirm,
 } from 'naive-ui';
 import defaultAvatar from '@/assets/logo.png';
-import { ThumbLike20Filled, Edit32Filled } from '@vicons/fluent';
+import { Edit32Filled } from '@vicons/fluent';
 import { EyeOutline, TrashOutline } from '@vicons/ionicons5';
 import { PostsItem } from '@/models/community';
 
