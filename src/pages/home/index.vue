@@ -115,7 +115,7 @@ const {
 } = useFiles();
 // const { onGetPostsList } = useCommunity();
 const expendMenuValue = ref<TreeOption | FileListData>();
-const fileViewType = ref<'list' | 'graphical'>(isMobile() ? 'list' : 'graphical');
+const fileViewType = ref<'list' | 'graphical'>('graphical');
 const currentClickedFile = ref<FileListData>();
 const currentCheckedFiles = ref<FileListData[]>([]);
 

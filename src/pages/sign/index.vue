@@ -52,7 +52,6 @@
       <div
         id="auth_options-forms"
         class="auth_options-forms rounded-lg"
-        style="height: 115%"
         :style="{
           width: isMobile() ? '85vw' : '',
           transform: isMobile() ? 'translate3d(0, -50%, 0)' : 'translate3d(100%, -50%, 0)',
@@ -70,7 +69,7 @@
             block
             type="primary"
             round
-            class="mt-36"
+            class="mt-36 shadow-lg"
             @click="onChangeToSignup"
           >
             <template #icon>
@@ -90,7 +89,7 @@
             block
             type="primary"
             round
-            class="mt-14"
+            class="mt-14 shadow-lg"
             @click="onChangeToSignin"
           >
             <template #icon>
