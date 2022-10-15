@@ -61,7 +61,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/sign',
     name: 'sign',
-    component: !isMobile() ? Sign : Mobile,
+    component: Sign,
   },
   {
     path: '/tsx-demo',

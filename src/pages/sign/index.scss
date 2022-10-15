@@ -127,8 +127,6 @@ $ff-medium: 500;
   left: 30px;
 
   width: calc(50% - 30px);
-  // max-height: 150%;
-  // min-height: 420px;
   background-color: $white;
   box-shadow: 10px 10px 1px #ffffff82;
   backdrop-filter: saturate(150%) blur(8px);
@@ -193,7 +191,7 @@ $ff-medium: 500;
   */
 @media screen and (max-width: 990px) {
   .auth_options-forms {
-    min-height: 410px;
+    // min-height: 410px;
 
     .forms_buttons {
       flex-direction: column;
@@ -205,14 +203,15 @@ $ff-medium: 500;
       }
     }
 
-    .auth_forms-signup,
-    .auth_forms-login {
-      top: 40px;
-    }
-
     .auth_options-registered,
     .auth_options-unregistered {
       padding: 50px 45px;
     }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .auth_options-forms {
+    min-height: 410px;
   }
 }

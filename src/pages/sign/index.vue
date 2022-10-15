@@ -1,13 +1,15 @@
 <template>
   <div
     class="auth from-cyan-500 transition-all duration-300 ease-in-out"
-    :class="[formStatus === 'signin' ? 'bg-gradient-to-r' : 'bg-gradient-to-l']"
+    :class="[
+      formStatus === 'signin' ? 'bg-gradient-to-r' : 'bg-gradient-to-l',
+      isMobile() ? 'bg-cyan-500' : '',
+    ]"
   >
-    <div class="auth_options-container">
-      <div class="auth_options-text rounded-lg shadow-md">
+    <div class="auth_options-container" :style="{ minWidth: isMobile() ? '375px' : '700px' }">
+      <div v-if="!isMobile()" class="auth_options-text rounded-lg shadow-md">
         <div class="auth_options-unregistered">
           <h1 class="auth_unregistered-title font-black tracking-wide">GCloud 云盘</h1>
-          <!-- <h2 class="leading-10">让我康康还有谁没注册😰</h2> -->
           <p class="auth_unregistered-text">GCloud是一款免费的、不限速的在线云盘.</p>
           <p class="auth_unregistered-text">它的优点有很多，比如这个那个还有内个...</p>
           <p class="auth_unregistered-text">
@@ -51,6 +53,10 @@
         id="auth_options-forms"
         class="auth_options-forms rounded-lg"
         style="height: 115%"
+        :style="{
+          width: isMobile() ? '85vw' : '',
+          transform: isMobile() ? 'translate3d(0, -50%, 0)' : 'translate3d(100%, -50%, 0)',
+        }"
         :class="{ ...formClass }"
       >
         <div v-if="formStatus === 'signin'" class="auth_forms-login">
@@ -59,6 +65,19 @@
             <Vue3Lottie class="mr-0 mt-2" :animation-data="SpaceJson" :height="50" :width="50" />
           </div>
           <InfoCollection sign-type="signin" />
+          <n-button
+            v-if="isMobile()"
+            block
+            type="primary"
+            round
+            class="mt-36"
+            @click="onChangeToSignup"
+          >
+            <template #icon>
+              <n-icon><log-in-icon /></n-icon>
+            </template>
+            去注册
+          </n-button>
         </div>
         <div v-else class="auth_forms-signup">
           <div class="flex justify-between">
@@ -66,6 +85,19 @@
             <Vue3Lottie class="mr-0 mt-2" :animation-data="SpaceJson" :height="50" :width="50" />
           </div>
           <InfoCollection sign-type="signup" @afterSignup="onChangeToSignin" />
+          <n-button
+            v-if="isMobile()"
+            block
+            type="primary"
+            round
+            class="mt-14"
+            @click="onChangeToSignin"
+          >
+            <template #icon>
+              <n-icon><log-in-icon /></n-icon>
+            </template>
+            去登陆
+          </n-button>
         </div>
         <div class="bg-board"></div>
       </div>
@@ -81,6 +113,7 @@ import { NButton, NIcon } from 'naive-ui';
 import SpaceJson from '@/assets/lotties/space.json';
 import './index.scss';
 import { LogInOutline as LogInIcon, ArrowBackOutline } from '@vicons/ionicons5';
+import { isMobile } from '@/utils/is-mobile';
 
 export type FormStatus = 'signin' | 'signup';
 
@@ -92,7 +125,7 @@ const onChangeToSignin = () => {
   formStatus.value = 'signin';
   formClass.value = {
     bounceLeft: false,
-    bounceRight: true,
+    bounceRight: !isMobile(),
   };
 };
 const onChangeToSignup = () => {
