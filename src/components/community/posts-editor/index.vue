@@ -38,7 +38,9 @@
     </div>
     <div>
       <n-button-group class="float-right z-10">
-        <n-button size="small" type="warning" @click="handleCancel"> 取消 </n-button>
+        <n-button v-if="mode === 'posts'" size="small" type="warning" @click="handleCancel">
+          取消
+        </n-button>
         <n-button size="small" type="primary" @click="handleSubmit">
           {{ data ? '更新' : '发布' }}
         </n-button>

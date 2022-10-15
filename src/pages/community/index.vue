@@ -4,7 +4,7 @@
     :class="[isMobile() ? 'flex-col px-4 py-3' : 'px-8 py-6']"
   >
     <div class="posts-main shadow w-full flex-1">
-      <n-scrollbar style="max-height: calc(100vh - 100px)">
+      <n-scrollbar style="max-height: calc(100vh - 110px)">
         <PostsEditor
           class="post mb-10"
           v-if="show_editor"
@@ -25,7 +25,7 @@
       class="sider text-sm shadow rounded animate__animated animate__fadeIn faster"
       :class="[isMobile() ? 'w-full mt-3' : 'ml-5']"
     >
-      <n-scrollbar style="max-height: calc(100vh - 100px)">
+      <n-scrollbar style="max-height: calc(100vh - 110px)">
         <div class="m-3">
           <n-h5 prefix="bar" class="rounded text-sm"> G社简介 </n-h5>
           <Introduction />
@@ -49,7 +49,7 @@
         <n-divider />
         <div class="hot-list m-3">
           <n-h5 prefix="bar" class="rounded text-sm"> 今日热议 </n-h5>
-          <div>
+          <div v-if="hot_posts">
             <div
               class="mb-1 text-primary hover:underline cursor-pointer text-sm"
               v-for="posts in hot_posts"
@@ -58,6 +58,7 @@
               {{ posts.title }}
             </div>
           </div>
+          <p v-else>快来抢沙发吧~</p>
         </div>
       </n-scrollbar>
     </div>
@@ -118,6 +119,7 @@ const handleNewPosts = () => {
 const handleOpenUpdate = (value: PostsItem) => {
   update_data.value = value;
   show_editor.value = true;
+  document.querySelector('.posts-main .n-scrollbar-content')?.scrollIntoView();
 };
 
 onMounted(async () => {

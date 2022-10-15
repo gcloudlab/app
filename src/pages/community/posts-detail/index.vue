@@ -116,7 +116,7 @@ const handleUpdateComment = () => {};
 
 <style lang="scss">
 .posts-container {
-  .github-markdown-body {
+  .content .github-markdown-body {
     padding: 0;
   }
 }
