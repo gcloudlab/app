@@ -34,10 +34,6 @@
     </template>
     <template #header-extra>
       <div class="flex items-center">
-        <!-- <n-button class="mr-1" secondary round type="primary" size="tiny">
-          <template #icon> <ThumbLike20Filled /></template>
-          {{ posts.like }}
-        </n-button> -->
         <n-button secondary round size="tiny"> 0 </n-button>
       </div>
     </template>
