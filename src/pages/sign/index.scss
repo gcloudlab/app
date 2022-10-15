@@ -165,8 +165,9 @@ $ff-medium: 500;
 
 .mobile-title {
   width: 100vw;
-  position: fixed;
-  top: 30px;
+  position: absolute;
+  top: -80px;
+  right: -30px;
   text-align: center;
 }
 
