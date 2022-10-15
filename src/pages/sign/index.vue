@@ -49,14 +49,18 @@
         </div>
       </div>
 
+      <div v-if="isMobile()" class="mobile-title" :class="{ ...formClass }">
+        <h2 class="text-gray-100">GCloud 云盘</h2>
+      </div>
+
       <div
         id="auth_options-forms"
         class="auth_options-forms rounded-lg"
+        :class="{ ...formClass }"
         :style="{
           width: isMobile() ? '85vw' : '',
           transform: isMobile() ? 'translate3d(0, -50%, 0)' : 'translate3d(100%, -50%, 0)',
         }"
-        :class="{ ...formClass }"
       >
         <div v-if="formStatus === 'signin'" class="auth_forms-login">
           <div class="flex justify-between">

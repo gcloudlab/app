@@ -141,11 +141,8 @@ $ff-medium: 500;
   .auth_forms-signup,
   .auth_forms-login {
     position: absolute;
-
     left: 40px;
-
     width: calc(100% - 80px);
-
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out, transform 0.5s ease-in-out;
@@ -164,6 +161,13 @@ $ff-medium: 500;
     opacity: 1;
     visibility: visible;
   }
+}
+
+.mobile-title {
+  width: 100vw;
+  position: fixed;
+  top: 30px;
+  text-align: center;
 }
 
 /**
@@ -186,6 +190,7 @@ $ff-medium: 500;
     animation: bounceRight 1s forwards;
   }
 }
+
 /**
   * Responsive 990px
   */
