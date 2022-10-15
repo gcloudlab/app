@@ -22,7 +22,7 @@
       </n-scrollbar>
     </div>
     <div
-      class="sider text-sm shadow rounded animate__animated animate__fadeIn faster"
+      class="sider text-sm bg-header shadow rounded animate__animated animate__fadeIn faster"
       :class="[isMobile() ? 'w-full mt-3' : 'ml-5']"
     >
       <n-scrollbar style="max-height: calc(100vh - 110px)">
