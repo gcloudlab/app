@@ -35,6 +35,10 @@ const activate = () => {
 };
 const data = [
   {
+    content: '「新增」G社可以发贴了~',
+    date: '2022-10-14',
+  },
+  {
     content: '「新增」用户分享历史查询',
     date: '2022-10-04',
   },
