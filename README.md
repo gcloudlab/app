@@ -11,7 +11,7 @@
 
 > 容量问题：注册即赠1G容量，暂无升级容量方案。（基于腾讯云对象存储 COS，详见 [COS 开通方法](<[/dev/README.md](https://github.com/yesmore/gcloud-server/blob/master/dev/README.md)>)）共个人使用、学习等。祝您体验愉快~
 
-<img src='https://img-yesmore.vercel.app/gcloud/gcloud-home.png'/>
+<img src='https://img-yesmore.vercel.app/gcloud/gcloud-app.png'/>
 
 ## 功能特性
 
