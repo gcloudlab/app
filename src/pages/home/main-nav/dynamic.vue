@@ -7,23 +7,15 @@
     云盘动态
   </n-h5>
   <n-scrollbar style="height: 100%">
-    <div class="dynamic-bar px-3 pt-2 animate__animated animate__fadeIn faster">
-      <div calss="p-4">
-        <n-timeline>
-          <n-timeline-item
-            v-for="item in data"
-            :type="(item.type as any)"
-            :content="item.content"
-            :time="item.date"
-          />
-        </n-timeline>
-      </div>
+    <div id="dynamic-bar" class="dynamic-bar px-3 pt-2 animate__animated animate__fadeIn faster">
+      <UpdateLog />
     </div>
   </n-scrollbar>
 </template>
 
 <script setup lang="ts">
-import { NTimeline, NTimelineItem, NScrollbar, NH5 } from 'naive-ui';
+import { NScrollbar, NH5 } from 'naive-ui';
+import UpdateLog from '@/components/update-log/index.vue';
 
 const data = [
   {

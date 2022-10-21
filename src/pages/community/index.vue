@@ -23,7 +23,7 @@
     </div>
     <div
       class="sider text-sm bg-header shadow rounded animate__animated animate__fadeIn faster"
-      :class="[isMobile() ? 'w-full mt-3' : 'ml-5']"
+      :class="[isMobile() ? 'w-full mt-3' : 'w-24 ml-5']"
     >
       <n-scrollbar style="max-height: calc(100vh - 110px)">
         <div class="m-3">
@@ -90,11 +90,13 @@ const { communityStore, onCreatePosts, onGetPostsList, onUpdatePosts, onDeletePo
 const show_editor = ref(false);
 const update_data = ref<PostsItem | null>(null);
 
-const hot_posts = computed(() =>
-  _.sortBy(communityStore.posts_list, item => -item.click_num)
-    .filter(i => dateFromNow(i.updated_at) <= 3)
-    .slice(0, 3)
-);
+const hot_posts = computed(() => {
+  const sort_list = _.sortBy(communityStore.posts_list, item => -item.click_num);
+  const last_n_day = (n: number) =>
+    sort_list.filter(i => dateFromNow(i.updated_at) <= n).slice(0, 3);
+  const last_three_day_list = last_n_day(3);
+  return last_three_day_list.length === 0 ? last_n_day(7) : last_three_day_list;
+});
 
 const handleSubmitPosts = async (value: PostsFormItem) => {
   // console.log(value);

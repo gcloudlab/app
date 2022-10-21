@@ -1,38 +1,17 @@
 <template>
-  <div>
-    <n-button tertiary type="primary" size="small" @click="activate"> 更新日志 </n-button>
-    <n-drawer
-      v-model:show="active"
-      :width="200"
-      :height="285"
-      :trap-focus="false"
-      :block-scroll="false"
-      placement="top"
-      to="#user-info"
-    >
-      <n-drawer-content title="更新日志" closable>
-        <n-scrollbar style="height: 100%">
-          <div>
-            <div v-for="item in data">
-              <div class="text-primary">{{ item.date }}</div>
-              <div>{{ item.content }}</div>
-              <n-divider />
-            </div>
-          </div>
-        </n-scrollbar>
-      </n-drawer-content>
-    </n-drawer>
+  <div class="text-sm">
+    <div v-for="item in data" :key="item.content">
+      <div class="text-primary">{{ item.date }}</div>
+      <div>{{ item.content }}</div>
+      <n-divider />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { NScrollbar, NDrawer, NDrawerContent, NButton, NDivider } from 'naive-ui';
+import { NDivider } from 'naive-ui';
 import { ref } from 'vue';
 
-const active = ref(false);
-const activate = () => {
-  active.value = true;
-};
 const data = [
   {
     content: '「新增」G社可以发贴了~',

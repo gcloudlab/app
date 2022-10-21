@@ -20,12 +20,11 @@
         <n-button type="primary" quaternary size="tiny" @click="onInfo('规划中~')">扩容</n-button>
       </div>
 
-      <div class="flex justify-between">
-        <EditUser :data="authStore.auth!" @on-close="handleCloseEdit" />
+      <div class="flex">
+        <EditUser class="ml-2" :data="authStore.auth!" @on-close="handleCloseEdit" />
         <n-button tertiary type="primary" size="small" @click="handleChangeAvatar">
           换个头像
         </n-button>
-        <UpdateLog />
       </div>
     </div>
     <n-divider />
@@ -68,7 +67,6 @@ import { onInfo } from '@/utils/messages';
 import { transformSize } from '@/utils/transform-size';
 import EditUser from './edit-user.vue';
 import ShareList from './user-share-list.vue';
-import UpdateLog from '@/components/update-log/index.vue';
 import { NButton, NDivider, NIcon } from 'naive-ui';
 import { LogOutOutline as LogOutIcon, LogInOutline as LogInIcon } from '@vicons/ionicons5';
 
