@@ -1,8 +1,10 @@
 <template>
   <div class="text-sm">
     <div v-for="item in data" :key="item.content">
-      <div class="text-primary">{{ item.date }}</div>
-      <div>{{ item.content }}</div>
+      <div>
+        <span class="text-primary">{{ item.date }}</span>
+        <span>{{ item.content }}</span>
+      </div>
       <n-divider />
     </div>
   </div>
@@ -10,7 +12,6 @@
 
 <script setup lang="ts">
 import { NDivider } from 'naive-ui';
-import { ref } from 'vue';
 
 const data = [
   {
