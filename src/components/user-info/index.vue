@@ -21,8 +21,8 @@
       </div>
 
       <div class="flex">
-        <EditUser class="ml-2" :data="authStore.auth!" @on-close="handleCloseEdit" />
-        <n-button tertiary type="primary" size="small" @click="handleChangeAvatar">
+        <EditUser :data="authStore.auth!" @on-close="handleCloseEdit" />
+        <n-button class="ml-2" tertiary type="primary" size="small" @click="handleChangeAvatar">
           换个头像
         </n-button>
       </div>
