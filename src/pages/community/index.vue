@@ -95,7 +95,19 @@ const hot_posts = computed(() => {
   const last_n_day = (n: number) =>
     sort_list.filter(i => dateFromNow(i.updated_at) <= n).slice(0, 3);
   const last_three_day_list = last_n_day(3);
-  return last_three_day_list.length === 0 ? last_n_day(7) : last_three_day_list;
+  const last_seven_day_list = last_n_day(7);
+
+  if (last_three_day_list.length === 0) {
+    return last_seven_day_list;
+  } else if (last_three_day_list.length < 3) {
+    return [
+      ...last_three_day_list,
+      ...last_seven_day_list.filter(
+        item => !last_three_day_list.find(i => i.identity === item.identity)
+      ),
+    ].sort((a, b) => b.click_num - a.click_num);
+  }
+  return last_three_day_list;
 });
 
 const handleSubmitPosts = async (value: PostsFormItem) => {
