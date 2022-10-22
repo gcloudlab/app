@@ -7,7 +7,7 @@
     云盘动态
   </n-h5>
   <n-scrollbar style="height: 100%">
-    <div id="dynamic-bar" class="dynamic-bar px-3 pt-2 animate__animated animate__fadeIn faster">
+    <div id="dynamic-bar" class="dynamic-bar px-4 pt-3 animate__animated animate__fadeIn faster">
       <UpdateLog />
     </div>
   </n-scrollbar>

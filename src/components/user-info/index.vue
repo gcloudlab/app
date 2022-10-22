@@ -17,7 +17,9 @@
 
       <div v-if="authStore.auth?.capacity" class="text-xs mb-2">
         我的空间：{{ transformSize(authStore.auth.capacity) }}
-        <n-button type="primary" quaternary size="tiny" @click="onInfo('规划中~')">扩容</n-button>
+        <n-button disabled type="primary" quaternary size="tiny" @click="onInfo('规划中~')"
+          >扩容</n-button
+        >
       </div>
 
       <div class="flex">

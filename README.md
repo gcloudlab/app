@@ -45,3 +45,7 @@ npm run dev
 ## License
 
 GCloud is open source software licensed as [GPL](LICENSE)
+
+---
+
+最后，晚安我的马马们。
