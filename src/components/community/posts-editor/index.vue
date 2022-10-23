@@ -53,7 +53,7 @@
           取消
         </n-button>
         <n-button size="small" type="primary" @click="handleSubmit">
-          {{ data ? '更新' : mode === 'comment' ? '评论' : '发布' }}
+          {{ data ? '更新' : mode === 'comment' ? '回复' : '发布' }}
         </n-button>
       </n-button-group>
     </div>

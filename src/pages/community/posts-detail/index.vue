@@ -74,7 +74,7 @@
           @on-update="handleOpenUpdate"
         />
       </div>
-      <div class="editor">
+      <div class="editor" :class="[is_focus ? 'reply-box-sticky' : '']">
         <PostsEditor
           class="mt-5 mb-10"
           :reply="current_reply_user_name_comment"
@@ -82,6 +82,8 @@
           :show-title="false"
           :show-mention="false"
           :show-tag="false"
+          @focusin="onFocusIn"
+          @focusout="onFocusOut"
           @on-submit-comment="handleSubmitComment"
           @on-update-comment="handleUpdateComment"
           @on-cancel-reply="handleCancelReply"
@@ -117,6 +119,7 @@ const current_posts_id = ref(router.currentRoute.value.params.id as string);
 const current_reply_user_comment = ref<string | null>(null);
 const current_reply_user_name_comment = ref<string | null>(null);
 const update_data = ref<PostsCommentItem | null>(null);
+const is_focus = ref(false);
 
 onMounted(() => {
   if (current_posts_id.value) {
@@ -164,6 +167,13 @@ const handleCancelReply = () => {
   current_reply_user_comment.value = null;
   current_reply_user_name_comment.value = null;
 };
+
+const onFocusIn = () => {
+  is_focus.value = true;
+};
+const onFocusOut = () => {
+  is_focus.value = false;
+};
 </script>
 
 <style lang="scss">
@@ -171,5 +181,11 @@ const handleCancelReply = () => {
   .content .github-markdown-body {
     padding: 0;
   }
+}
+.reply-box-sticky {
+  position: sticky;
+  bottom: -2px;
+  top: -2px;
+  transition: all 0.5s ease-in-out;
 }
 </style>

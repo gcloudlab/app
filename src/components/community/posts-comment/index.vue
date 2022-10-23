@@ -11,7 +11,10 @@
         <div v-else class="flex items-center text-xs">
           <div class="name">
             <span class="mr-2">
-              <span class="font-bold text-gray-500"> {{ comment.owner }}</span>
+              <span class="font-bold text-gray-500">
+                {{ comment.owner }}
+                {{ `${authStore.auth?.name === comment.owner ? '(我)' : ''}` }}</span
+              >
               <span
                 v-if="authStore.auth?.name === comment.owner"
                 class="ml-1 bg-gray-200 text-primary text-xs rounded"
@@ -81,7 +84,7 @@ import { useCommunity } from '@/hooks/useCommunity';
 import { useAuth } from '@/hooks/useAuthentication';
 import { dateFromNow } from '@/utils/date';
 import { NThing, NSkeleton, NAvatar, NButton, NButtonGroup, NPopconfirm, NDivider } from 'naive-ui';
-import { Edit32Filled } from '@vicons/fluent';
+// import { Edit32Filled } from '@vicons/fluent';
 import { TrashOutline } from '@vicons/ionicons5';
 import defaultAvatar from '@/assets/logo.png';
 import { PostsCommentItem } from '@/models/community';

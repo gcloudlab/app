@@ -15,6 +15,10 @@ import { NDivider } from 'naive-ui';
 
 const data = [
   {
+    content: '「新增」评论功能已上线~',
+    date: '2022-10-23',
+  },
+  {
     content: '「新增」G社可以发贴了~',
     date: '2022-10-14',
   },
