@@ -63,7 +63,7 @@
               你确定？
             </n-popconfirm>
           </n-button-group>
-          <n-button class="ml-3" circle secondary size="tiny"> {{ index }} </n-button>
+          <n-button class="ml-3" circle secondary size="tiny"> {{ index + 1 }} </n-button>
         </div>
       </template>
       <template #description>
