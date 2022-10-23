@@ -1,54 +1,60 @@
 <template>
-  <div class="posts-container bg-header shadow" :class="[isMobile() ? ' mx-4 my-3' : 'mx-8 my-6']">
-    <div class="head p-4 flex items-center justify-start">
-      <n-button quaternary @click="router.back()"> 返回 </n-button>
-      <div class="title ml-2">
-        <n-skeleton v-if="communityStore.fetching_detail" text width="60%" />
-        <div class="title-info" v-else>
-          <span class="text-bolder text-lg text-primary">{{
-            communityStore.posts_detail?.title || 'nb'
-          }}</span>
+  <div class="posts-container" :class="[isMobile() ? ' mx-4 my-3' : 'mx-8 my-6']">
+    <div class="shadow-md bg-header mb-5">
+      <div class="head p-4 flex items-center justify-start">
+        <n-button tertiary @click="router.back()"> 返回 </n-button>
+        <div class="title mx-2">
+          <n-skeleton v-if="communityStore.fetching_detail" text width="60%" />
+          <div class="title-info" v-else>
+            <span class="text-bolder text-lg text-primary">{{
+              communityStore.posts_detail?.title || 'nb'
+            }}</span>
+          </div>
+        </div>
+        <div class="avatar ml-auto">
+          <n-skeleton v-if="communityStore.fetching_detail" width="40px" height="40px" />
+          <n-avatar
+            v-else
+            size="large"
+            :src="communityStore.posts_detail?.avatar"
+            :fallback-src="defaultAvatar"
+          />
         </div>
       </div>
-      <div class="avatar ml-auto">
-        <n-skeleton v-if="communityStore.fetching_detail" width="40px" height="40px" />
-        <n-avatar v-else :src="communityStore.posts_detail?.avatar" :fallback-src="defaultAvatar" />
+      <n-divider v-if="communityStore.posts_detail?.content !== ''" title-placement="center"
+        ><span class="text-gray-400 text-sm">🍥 正文</span>
+      </n-divider>
+      <div class="content mt-4 p-4" v-if="communityStore.posts_detail?.content !== ''">
+        <div v-if="communityStore.fetching_detail">
+          <n-skeleton class="mb-2" height="25px" :repeat="6" />
+        </div>
+        <v-md-preview
+          v-else-if="communityStore.posts_detail && !communityStore.fetching_detail"
+          :text="communityStore.posts_detail.content"
+        />
+      </div>
+      <div class="info bg-gray-100 flex items-center justify-between">
+        <div class="action">
+          <n-button-group size="small">
+            <n-button quaternary>👍{{ communityStore.posts_detail?.like }}</n-button>
+            <n-button quaternary>👎</n-button>
+            <n-button quaternary>❤️ 加入收藏</n-button>
+          </n-button-group>
+        </div>
+        <div class="count">
+          <n-button-group size="small">
+            <n-button class="text-gray-400" quaternary>
+              {{ communityStore.posts_detail?.click_num }}次点击
+            </n-button>
+            <n-button class="text-gray-400" quaternary>
+              {{ communityStore.posts_detail?.collection }}收藏
+            </n-button>
+          </n-button-group>
+        </div>
       </div>
     </div>
-    <n-divider v-if="communityStore.posts_detail?.content !== ''" title-placement="center"
-      ><span class="text-gray-400 text-sm">🍥 正文</span>
-    </n-divider>
-    <div class="content mt-4 p-4" v-if="communityStore.posts_detail?.content !== ''">
-      <div v-if="communityStore.fetching_detail">
-        <n-skeleton class="mb-2" height="25px" :repeat="6" />
-      </div>
-      <v-md-preview
-        v-else-if="communityStore.posts_detail && !communityStore.fetching_detail"
-        :text="communityStore.posts_detail.content"
-      />
-    </div>
-    <n-divider />
-    <div class="info flex items-center justify-between">
-      <div class="action">
-        <n-button-group size="small">
-          <n-button quaternary>👍{{ communityStore.posts_detail?.like }}</n-button>
-          <n-button quaternary>👎</n-button>
-          <n-button quaternary>❤️ 加入收藏</n-button>
-        </n-button-group>
-      </div>
-      <div class="count">
-        <n-button-group size="small">
-          <n-button class="text-gray-400" quaternary>
-            {{ communityStore.posts_detail?.click_num }}次点击
-          </n-button>
-          <n-button class="text-gray-400" quaternary>
-            {{ communityStore.posts_detail?.collection }}收藏
-          </n-button>
-        </n-button-group>
-      </div>
-    </div>
-    <n-divider />
-    <div class="comment p-4">
+
+    <div class="comment shadow bg-header p-4">
       <div class="head flex justify-between text-sm">
         <span class="text-gray-400"
           >{{ communityStore.posts_detail_comment?.length || 0 }}条回复</span
@@ -142,7 +148,7 @@ const handleSubmitComment = (value: PostsFormItem) => {
   };
   onCreatePostsComment(comment_form_data);
   handleCancelReply();
-  console.log(value, communityStore.posts_detail);
+  // console.log(value, communityStore.posts_detail);
 };
 const handleUpdateComment = (value: PostsCommentFormItem) => {
   // handleCancelReply()

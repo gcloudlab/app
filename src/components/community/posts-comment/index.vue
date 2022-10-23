@@ -94,10 +94,13 @@ const { authStore } = useAuth();
 const { communityStore } = useCommunity();
 
 const comment_date_from_now = (date: string) => {
+  const temp_from_now_secs = dateFromNow(date, 'seconds');
   const temp_from_now_mins = dateFromNow(date, 'minutes');
   const temp_from_now_hours = dateFromNow(date, 'hours');
   const temp_from_now_days = dateFromNow(date, 'days');
-  if (temp_from_now_mins < 60) {
+  if (temp_from_now_secs < 60) {
+    return temp_from_now_secs + ' 秒前';
+  } else if (temp_from_now_mins < 60) {
     return temp_from_now_mins + ' 分钟前';
   } else if (temp_from_now_hours < 24) {
     return temp_from_now_hours + ' 小时前';
