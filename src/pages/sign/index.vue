@@ -67,7 +67,7 @@
             <Vue3Lottie class="mr-0 mt-2" :animation-data="SpaceJson" :height="50" :width="50" />
           </div>
           <InfoCollection sign-type="signin" />
-          <n-button class="mt-4 shadow" type="warning" block secondary round @click="router.back()">
+          <n-button v-if="isMobile()" class="mt-4 shadow" type="warning" block secondary round @click="router.back()">
             返回
           </n-button>
           <n-button
