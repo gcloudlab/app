@@ -34,7 +34,7 @@
     </template>
     <template #header-extra>
       <div class="flex items-center">
-        <n-button secondary round size="tiny"> 0 </n-button>
+        <n-button secondary round size="tiny"> {{ posts.reply_num }} </n-button>
       </div>
     </template>
     <template #description>

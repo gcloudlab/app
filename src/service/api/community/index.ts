@@ -39,8 +39,14 @@ export const createPostsComment = (
 
 export const getPostsComment = (
   posts_identity: string
-): Promise<CustomResponse<PostsCommentItem>> => {
-  return axios.post('/posts/comment/list', { posts_identity });
+): Promise<CustomResponse<{ list: PostsCommentItem[]; msg?: string; code?: number }>> => {
+  return axios.post('/posts/comment', { posts_identity });
+};
+
+export const updatePostsComment = (
+  data: PostsCommentFormItem
+): Promise<CustomResponse<BaseData>> => {
+  return axios.post('/posts/comment/update', data);
 };
 
 export const deletePostsComment = (id: string): Promise<CustomResponse<BaseData>> => {

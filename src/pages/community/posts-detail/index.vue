@@ -49,9 +49,11 @@
     </div>
     <n-divider />
     <div class="comment p-4">
-      <div class="head flex justify-between">
-        <span class="text-gray-400">{{ 0 }}条回复</span>
-        <div>
+      <div class="head flex justify-between text-sm">
+        <span class="text-gray-400"
+          >{{ communityStore.posts_detail_comment?.length || 0 }}条回复</span
+        >
+        <div v-if="communityStore.posts_detail?.tags">
           <n-tag
             v-for="(item, index) in communityStore.posts_detail?.tags?.split(',')"
             :key="index"
@@ -63,18 +65,26 @@
             {{ item }}
           </n-tag>
         </div>
+        <div v-else class="text-gray-400">无标签</div>
       </div>
-      <div class="comment-detail"></div>
+      <div class="comment-list">
+        <PostsCommentList
+          @on-reply="onSetReplyInfo"
+          @on-delete="handleDeleteComment"
+          @on-update="handleOpenUpdate"
+        />
+      </div>
       <div class="editor">
         <PostsEditor
           class="mt-5 mb-10"
-          v-if="true"
+          :reply="current_reply_user_name_comment"
           mode="comment"
           :show-title="false"
           :show-mention="false"
           :show-tag="false"
           @on-submit-comment="handleSubmitComment"
           @on-update-comment="handleUpdateComment"
+          @on-cancel-reply="handleCancelReply"
         />
       </div>
     </div>
@@ -86,17 +96,27 @@ import { ref, onMounted, defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCommunity } from '@/hooks/useCommunity';
 import { isMobile } from '@/utils/is-mobile';
-import { onWarning } from '@/utils/messages';
 import { NButton, NButtonGroup, NSkeleton, NAvatar, NTag, NDivider } from 'naive-ui';
 import defaultAvatar from '@/assets/logo.png';
+import { PostsCommentFormItem, PostsFormItem, PostsCommentItem } from '@/models/community';
+import PostsCommentList from '@/components/community/posts-comment/index.vue';
 const PostsEditor = defineAsyncComponent(
   () => import('@/components/community/posts-editor/index.vue')
 );
 
 const router = useRouter();
-const { communityStore, onGetPostsDetail } = useCommunity();
+const {
+  communityStore,
+  onGetPostsDetail,
+  onCreatePostsComment,
+  onGetPostsComment,
+  onDeletePostsComment,
+} = useCommunity();
 
 const current_posts_id = ref(router.currentRoute.value.params.id as string);
+const current_reply_user_comment = ref<string | null>(null);
+const current_reply_user_name_comment = ref<string | null>(null);
+const update_data = ref<PostsCommentItem | null>(null);
 
 onMounted(() => {
   if (current_posts_id.value) {
@@ -105,13 +125,45 @@ onMounted(() => {
         window.document.title = `G社 | ${communityStore.posts_detail.title}`;
       }
     });
+    onGetPostsComment(current_posts_id.value);
   }
 });
 
-const handleSubmitComment = () => {
-  onWarning('暂不支持');
+const handleSubmitComment = (value: PostsFormItem) => {
+  const comment_form_data: PostsCommentFormItem = {
+    posts_identity: current_posts_id.value,
+    reply_identity: current_reply_user_comment.value,
+    content: value.content,
+    mention: value.mention,
+    reply_name: current_reply_user_name_comment.value,
+  };
+  onCreatePostsComment(comment_form_data);
+  handleCancelReply();
+  console.log(value, communityStore.posts_detail);
 };
-const handleUpdateComment = () => {};
+const handleUpdateComment = (value: PostsCommentFormItem) => {
+  // handleCancelReply()
+  // console.log(value);
+};
+
+const handleOpenUpdate = (value: PostsCommentItem) => {
+  // console.log(value);
+  update_data.value = value;
+};
+const handleDeleteComment = (value: PostsCommentItem) => {
+  onDeletePostsComment(value.identity, value.posts_identity);
+};
+
+const onSetReplyInfo = (value: { owner_identity: string; owner: string }) => {
+  current_reply_user_comment.value = value.owner_identity;
+  current_reply_user_name_comment.value = value.owner;
+  // console.log(value);
+};
+
+const handleCancelReply = () => {
+  current_reply_user_comment.value = null;
+  current_reply_user_name_comment.value = null;
+};
 </script>
 
 <style lang="scss">

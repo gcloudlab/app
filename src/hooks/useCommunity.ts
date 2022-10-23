@@ -1,6 +1,6 @@
 import { useCommunityOutsideStore } from '@/store/modules/community';
 import { PaginationOptions } from '@/models';
-import { PostsFormItem, PostsItem } from '@/models/community';
+import { PostsCommentFormItem, PostsFormItem, PostsItem } from '@/models/community';
 
 const communityStore = useCommunityOutsideStore();
 
@@ -25,6 +25,22 @@ export const useCommunity = () => {
     return await communityStore.onDeletePostsAction(id);
   };
 
+  const onCreatePostsComment = async (data: PostsCommentFormItem) => {
+    return await communityStore.onCreatePostsCommentAction(data);
+  };
+
+  const onGetPostsComment = async (id: string) => {
+    return await communityStore.onGetPostsCommentAction(id);
+  };
+
+  const onUpdatePostsComment = async (data: PostsCommentFormItem) => {
+    return await communityStore.onUpdatePostsCommentAction(data);
+  };
+
+  const onDeletePostsComment = async (id: string, posts_id: string) => {
+    return await communityStore.onDeletePostsCommentAction(id, posts_id);
+  };
+
   return {
     communityStore,
     onCreatePosts,
@@ -32,5 +48,9 @@ export const useCommunity = () => {
     onGetPostsDetail,
     onDeletePosts,
     onUpdatePosts,
+    onCreatePostsComment,
+    onGetPostsComment,
+    onUpdatePostsComment,
+    onDeletePostsComment,
   };
 };

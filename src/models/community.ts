@@ -17,6 +17,7 @@ export interface PostsItem extends PostsBaseItem {
   click_num: number;
   owner: string;
   avatar: string;
+  reply_num: number;
   updated_at: string;
   deleted_at?: string;
 }
@@ -24,8 +25,9 @@ export interface PostsItem extends PostsBaseItem {
 export interface PostsCommentBaseItem {
   content?: string | null;
   mention?: string | null;
-  reply_identity: string; // 回复用户
+  reply_identity: string | null; // 回复用户
   posts_identity: string; // 所属帖子
+  reply_name: string | null;
 }
 
 export interface PostsCommentFormItem extends PostsCommentBaseItem {}
@@ -34,7 +36,9 @@ export interface PostsCommentItem extends PostsCommentBaseItem {
   identity: string;
   posts_name: string;
   reply_name: string;
+  reply_identity: string;
   owner: string;
+  owner_identity: string;
   avatar: string;
   like: number;
   dislike: number;

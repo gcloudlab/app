@@ -5,17 +5,28 @@ import useTimer from '@/hooks/useTimer';
 import { PaginationOptions } from '@/models';
 import {
   createPosts,
+  createPostsComment,
   deletePosts,
+  deletePostsComment,
   getPosts,
   getPostsById,
+  getPostsComment,
   updatePosts,
+  updatePostsComment,
 } from '@/service/api/community';
-import { PostsFormItem, PostsItem } from '@/models/community';
+import {
+  PostsCommentFormItem,
+  PostsCommentItem,
+  PostsFormItem,
+  PostsItem,
+} from '@/models/community';
 export interface CommunityStateProps {
   posts_list: PostsItem[];
   posts_detail: PostsItem | null;
   fetching: boolean;
   fetching_detail: boolean;
+  fetching_comment: boolean;
+  posts_detail_comment: PostsCommentItem[] | null;
 }
 
 export const useCommunityStore = defineStore({
@@ -24,8 +35,10 @@ export const useCommunityStore = defineStore({
     ({
       posts_list: [],
       posts_detail: null,
+      posts_detail_comment: null,
       fetching: false,
       fetching_detail: false,
+      fetching_comment: false,
     } as CommunityStateProps),
   getters: {
     posts_count: state => state.posts_list.length || -1,
@@ -99,6 +112,63 @@ export const useCommunityStore = defineStore({
         if (res.data.msg === 'success') {
           onSuccess('已删除');
           this.onGetPostsAction();
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (error) {
+        onError('出错了');
+      }
+    },
+    async onCreatePostsCommentAction(data: PostsCommentFormItem) {
+      try {
+        const res = await createPostsComment(data);
+        if (res.data.msg === 'success') {
+          onSuccess('评论成功');
+          this.onGetPostsCommentAction(data.posts_identity);
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (error) {
+        onError('出错了');
+      }
+    },
+    async onGetPostsCommentAction(id: string) {
+      try {
+        this.fetching_comment = true;
+        const res = await getPostsComment(id);
+        if (res.data.msg === 'success') {
+          this.posts_detail_comment = res.data.list;
+          this.fetching_comment = false;
+        } else {
+          onWarning(res.data.msg);
+          this.fetching_comment = false;
+        }
+      } catch (error) {
+        useTimer(() => {
+          this.fetching_comment = false;
+        }, 3);
+        onError('出错了');
+      }
+    },
+    async onUpdatePostsCommentAction(data: PostsCommentFormItem) {
+      try {
+        const res = await updatePostsComment(data);
+        if (res.data.msg === 'success') {
+          onSuccess('更新成功');
+          this.onGetPostsCommentAction(data.posts_identity);
+        } else {
+          onWarning(res.data.msg);
+        }
+      } catch (error) {
+        onError('出错了');
+      }
+    },
+    async onDeletePostsCommentAction(id: string, posts_id: string) {
+      try {
+        const res = await deletePostsComment(id);
+        if (res.data.msg === 'success') {
+          onSuccess('已删除');
+          this.onGetPostsCommentAction(posts_id);
         } else {
           onWarning(res.data.msg);
         }
