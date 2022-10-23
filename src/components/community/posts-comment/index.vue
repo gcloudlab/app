@@ -16,7 +16,7 @@
                 {{ `${authStore.auth?.name === comment.owner ? '(我)' : ''}` }}</span
               >
               <span
-                v-if="authStore.auth?.name === comment.owner"
+                v-if="communityStore.posts_detail?.owner === comment.owner"
                 class="ml-1 bg-gray-200 text-primary text-xs rounded"
               >
                 OP
