@@ -7,7 +7,6 @@
       :headers="headers"
       multiple
       abstract
-      directory
       show-download-button
       :max="max"
       :on-remove="handleRemoveUploadFile"
