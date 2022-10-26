@@ -23,63 +23,69 @@
       </n-scrollbar>
     </div>
     <div
-      class="sider text-sm bg-header shadow rounded animate__animated animate__fadeIn faster"
+      class="sider text-sm animate__animated animate__fadeIn faster"
       :class="[isMobile() ? 'w-full mt-3' : 'w-24 ml-5']"
     >
-      <n-scrollbar style="max-height: calc(100vh - 110px)">
-        <div class="m-3">
-          <n-h5 prefix="bar" class="rounded text-sm"> G社简介 </n-h5>
-          <Introduction />
-        </div>
-        <n-divider />
-        <div class="m-3">
-          <div class="flex flex-row items-center justif-center">
-            <n-icon size="20" class="text-primary"><PaperPlane /></n-icon>
-            <n-button
-              :disabled="!authStore.auth?.name"
-              quaternary
-              size="small"
-              @click="handleNewPosts"
-            >
-              {{ authStore.auth?.name ? (show_editor ? '取消创作' : '创作新帖子') : '登陆后发帖' }}
-            </n-button>
+      <n-scrollbar style="max-height: calc(100vh - 109px)">
+        <div class="bg-header shadow rounded py-2 mb-4">
+          <div class="m-3">
+            <n-h5 prefix="bar" class="rounded text-sm"> G社简介 </n-h5>
+            <Introduction />
           </div>
-          <div class="mt-2">
-            <n-button
-              :disabled="!authStore.auth?.name"
-              quaternary
-              size="tiny"
-              @click="show_owner_data = !show_owner_data"
-            >
-              {{ !show_owner_data ? `查看我的创作 (${owner_posts.length || 0})` : `所有创作` }}
-            </n-button>
-          </div>
-        </div>
-
-        <n-divider />
-        <n-h5 prefix="bar" class="m-3 rounded text-sm">
-          <span class="text-primary">0</span> 条未读提醒
-        </n-h5>
-        <n-divider />
-        <div class="hot-list m-3">
-          <n-h5 prefix="bar" class="rounded text-sm"> 今日热议 </n-h5>
-          <div v-if="hot_posts">
-            <div
-              class="mb-1 text-primary hover:underline cursor-pointer text-sm"
-              v-for="posts in hot_posts"
-              @click="router.push(`/p/${posts.identity}`)"
-            >
-              {{ posts.title }}
+          <n-divider />
+          <div class="m-3">
+            <div class="flex flex-row items-center justif-center">
+              <n-icon size="20" class="text-primary"><PaperPlane /></n-icon>
+              <n-button
+                :disabled="!authStore.auth?.name"
+                quaternary
+                size="small"
+                @click="handleNewPosts"
+              >
+                {{
+                  authStore.auth?.name ? (show_editor ? '取消创作' : '创作新帖子') : '登陆后发帖'
+                }}
+              </n-button>
+            </div>
+            <div class="mt-2">
+              <n-button
+                :disabled="!authStore.auth?.name"
+                quaternary
+                size="tiny"
+                @click="show_owner_data = !show_owner_data"
+              >
+                {{ !show_owner_data ? `查看我的创作 (${owner_posts.length || 0})` : `所有创作` }}
+              </n-button>
             </div>
           </div>
-          <p v-else>快来抢沙发吧~</p>
+
+          <n-divider />
+          <n-h5 prefix="bar" class="m-3 rounded text-sm">
+            <span class="text-primary">0</span> 条未读提醒
+          </n-h5>
         </div>
 
-        <n-divider />
-        <div class="tongji m-3">
-          <div>所有创作: {{ communityStore.posts_list.length || 0 }} 篇</div>
-          <div>总点击量: {{ communityStore.posts_views || 0 }} 次</div>
-          <div>总留言量: {{ communityStore.posts_comment || 0 }} 条</div>
+        <div class="bg-header shadow rounded py-2 mb-1">
+          <div class="hot-list m-3">
+            <n-h5 prefix="bar" class="rounded text-sm"> 今日热议 </n-h5>
+            <div v-if="hot_posts">
+              <div
+                class="mb-1 text-primary hover:underline cursor-pointer text-sm"
+                v-for="posts in hot_posts"
+                @click="router.push(`/p/${posts.identity}`)"
+              >
+                {{ posts.title }}
+              </div>
+            </div>
+            <p v-else>快来抢沙发吧~</p>
+          </div>
+
+          <n-divider />
+          <div class="tongji m-3">
+            <div>所有创作: {{ communityStore.posts_list.length || 0 }} 篇</div>
+            <div>总点击量: {{ communityStore.posts_views || 0 }} 次</div>
+            <div>总留言量: {{ communityStore.posts_comment || 0 }} 条</div>
+          </div>
         </div>
       </n-scrollbar>
     </div>
