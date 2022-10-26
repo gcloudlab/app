@@ -22,6 +22,7 @@ import {
 } from '@/models/community';
 export interface CommunityStateProps {
   posts_list: PostsItem[];
+  posts_list_changable: PostsItem[];
   posts_detail: PostsItem | null;
   fetching: boolean;
   fetching_detail: boolean;
@@ -34,6 +35,7 @@ export const useCommunityStore = defineStore({
   state: () =>
     ({
       posts_list: [],
+      posts_list_changable: [],
       posts_detail: null,
       posts_detail_comment: null,
       fetching: false,
@@ -42,6 +44,8 @@ export const useCommunityStore = defineStore({
     } as CommunityStateProps),
   getters: {
     posts_count: state => state.posts_list.length || -1,
+    posts_views: state => state.posts_list.reduce((total, item) => total + item.click_num, 0),
+    posts_comment: state => state.posts_list.reduce((total, item) => total + item.reply_num, 0),
   },
   actions: {
     async onGetPostsAction(option?: PaginationOptions) {
@@ -50,6 +54,7 @@ export const useCommunityStore = defineStore({
         const res = await getPosts(option);
         if (res.data.msg === 'success') {
           this.posts_list = res.data.list;
+          this.posts_list_changable = res.data.list;
           this.fetching = false;
         } else {
           onWarning(res.data.msg);

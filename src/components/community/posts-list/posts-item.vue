@@ -1,6 +1,6 @@
 <template>
   <n-thing
-    v-for="posts in communityStore.posts_list"
+    v-for="posts in communityStore.posts_list_changable"
     :key="posts.identity"
     class="shadow-sm rounded p-4 hover:shadow"
   >
@@ -72,6 +72,7 @@
 </template>
 
 <script setup lang="ts">
+import { watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCommunity } from '@/hooks/useCommunity';
 import { useAuth } from '@/hooks/useAuthentication';
@@ -91,10 +92,25 @@ import { Edit32Filled } from '@vicons/fluent';
 import { EyeOutline, TrashOutline } from '@vicons/ionicons5';
 import { PostsItem } from '@/models/community';
 
+const props = defineProps({
+  showOwnerData: {
+    type: Boolean,
+    default: false,
+  },
+});
 const emits = defineEmits(['onUpdate', 'onDelete']);
 const router = useRouter();
 const { communityStore } = useCommunity();
 const { authStore } = useAuth();
+
+watch(
+  () => props.showOwnerData,
+  () => {
+    communityStore.posts_list_changable = props.showOwnerData
+      ? communityStore.posts_list.filter(i => i.owner === authStore.auth?.name)
+      : communityStore.posts_list;
+  }
+);
 
 const onUpdate = (posts: PostsItem) => {
   emits('onUpdate', posts);

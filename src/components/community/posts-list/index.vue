@@ -6,7 +6,11 @@
         (communityStore.posts_list && communityStore.posts_list.length > 0)
       "
     >
-      <PostsItem @on-update="handleUpdate" @on-delete="handleDelete" />
+      <PostsItem
+        :show-owner-data="showOwnerData"
+        @on-update="handleUpdate"
+        @on-delete="handleDelete"
+      />
       <n-pagination
         class="m-3"
         v-model:page="current_page"
@@ -28,6 +32,12 @@ import { PostsItem as IPostsItem } from '@/models/community';
 import { NPagination } from 'naive-ui';
 const Empty = defineAsyncComponent(() => import('@/components/commons/empty/index.vue'));
 
+const props = defineProps({
+  showOwnerData: {
+    type: Boolean,
+    default: false,
+  },
+});
 const emits = defineEmits(['onUpdate', 'onDelete']);
 const { communityStore } = useCommunity();
 

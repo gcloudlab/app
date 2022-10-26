@@ -16,6 +16,7 @@
         />
         <PostsList
           class="animate__animated animate__fadeIn faster"
+          :show-owner-data="show_owner_data"
           @on-update="handleOpenUpdate"
           @on-delete="handleDeletePosts"
         />
@@ -31,17 +32,30 @@
           <Introduction />
         </div>
         <n-divider />
-        <div class="flex flex-row items-center justif-center m-3">
-          <n-icon size="25" class="text-gray-500"><PaperPlane /></n-icon>
-          <n-button
-            :disabled="!authStore.auth?.name"
-            quaternary
-            size="small"
-            @click="handleNewPosts"
-          >
-            {{ authStore.auth?.name ? (show_editor ? '取消创作' : '创作新帖子') : '登陆后发帖' }}
-          </n-button>
+        <div class="m-3">
+          <div class="flex flex-row items-center justif-center">
+            <n-icon size="20" class="text-primary"><PaperPlane /></n-icon>
+            <n-button
+              :disabled="!authStore.auth?.name"
+              quaternary
+              size="small"
+              @click="handleNewPosts"
+            >
+              {{ authStore.auth?.name ? (show_editor ? '取消创作' : '创作新帖子') : '登陆后发帖' }}
+            </n-button>
+          </div>
+          <div class="mt-2">
+            <n-button
+              :disabled="!authStore.auth?.name"
+              quaternary
+              size="tiny"
+              @click="show_owner_data = !show_owner_data"
+            >
+              {{ !show_owner_data ? `查看我的创作 (${owner_posts.length || 0})` : `所有创作` }}
+            </n-button>
+          </div>
         </div>
+
         <n-divider />
         <n-h5 prefix="bar" class="m-3 rounded text-sm">
           <span class="text-primary">0</span> 条未读提醒
@@ -60,6 +74,13 @@
           </div>
           <p v-else>快来抢沙发吧~</p>
         </div>
+
+        <n-divider />
+        <div class="tongji m-3">
+          <div>所有创作: {{ communityStore.posts_list.length || 0 }} 篇</div>
+          <div>总点击量: {{ communityStore.posts_views || 0 }} 次</div>
+          <div>总留言量: {{ communityStore.posts_comment || 0 }} 条</div>
+        </div>
       </n-scrollbar>
     </div>
   </div>
@@ -75,7 +96,7 @@ import type { PostsFormItem, PostsItem } from '@/models/community';
 import _ from 'lodash';
 import { dateFromNow } from '@/utils/date';
 import { NButton, NIcon, NScrollbar, NH5, NDivider } from 'naive-ui';
-import { PaperPlane } from '@vicons/ionicons5';
+import { PaperPlane, Pencil } from '@vicons/ionicons5';
 import PostsList from '@/components/community/posts-list/index.vue';
 import Introduction from './introduction/index.vue';
 const PostsEditor = defineAsyncComponent(
@@ -89,6 +110,7 @@ const { communityStore, onCreatePosts, onGetPostsList, onUpdatePosts, onDeletePo
 
 const show_editor = ref(false);
 const update_data = ref<PostsItem | null>(null);
+const show_owner_data = ref(false);
 
 const hot_posts = computed(() => {
   const sort_list = _.sortBy(communityStore.posts_list, item => -item.click_num);
@@ -109,6 +131,10 @@ const hot_posts = computed(() => {
   }
   return last_three_day_list;
 });
+
+const owner_posts = computed(() =>
+  communityStore.posts_list.filter(i => i.owner === authStore.auth?.name)
+);
 
 const handleSubmitPosts = async (value: PostsFormItem) => {
   // console.log(value);
