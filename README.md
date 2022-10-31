@@ -7,9 +7,9 @@
 
 ## 关于 GCloud 云盘
 
-`GCloud` 是使用 Vue3 + [Go](https://golang.org/)（后端）开发的云盘应用，具备云盘的基本功能，且开源免费。
+`GCloud` 是使用 Vue3 + Go 开发的云盘应用，具备云盘的基本功能，且开源免费。
 
-> 容量问题：注册即赠1G容量，暂无升级容量方案。（基于腾讯云对象存储 COS，详见 [COS 开通方法](<[/dev/README.md](https://github.com/yesmore/gcloud-server/blob/master/dev/README.md)>)）共个人使用、学习等。祝您体验愉快~
+> 关于容量：注册即赠1G容量，暂无升级容量方案。（基于腾讯云对象存储 COS，详见 [COS 开通方法](<[/dev/README.md](https://github.com/yesmore/gcloud-server/blob/master/dev/README.md)>)）共个人使用、学习等。祝您体验愉快~
 
 <img src='https://img-yesmore.vercel.app/gcloud/gcloud-app.png'/>
 
@@ -40,11 +40,29 @@ npm run dev
 
 ## 共建者
 
-<a href="https://github.com/yesmore"><img src="https://github.com/yesmore.png?size=50"></a> <a href="https://github.com/tinyflake"><img src="https://github.com/tinyflake.png?size=50"></a> <a href="https://github.com/lysimportant"><img src="https://github.com/lysimportant.png?size=50"></a>
+<div style="display:flex">
+<a href='https://github.com/yesmore'>
+ <code><img width='40px' src='https://avatars.githubusercontent.com/u/89140804?v=4' alt=''/></code></a>
+&nbsp;
+<a href='https://github.com/tinyflake'>
+ <code><img width='40px' src='https://avatars.githubusercontent.com/u/87841684?v=4' alt=''/></code></a>
+</div>
+
 
 ## License
 
-GCloud is open source software licensed as [GPL](LICENSE)
+GCloud is open source software licensed as [GPL](LICENSE).
+
+## 请我吃辣条
+
+<p align="center">
+  <table border="0">
+    <tr>
+        <th  align="center"><img width='200px' src='https://raw.githubusercontent.com/yesmore/img/master/img/81E3D2890C073A52E045D9E49457C3ED.jpg' alt='wx'/> <p>微信</p> </th>
+        <th align="center"><img width='200px' src='https://cdn.jsdelivr.net/gh/yesmore/img/img/849E2934286ACA620B988C523AEBC92B.jpg' alt='zfb'/> <p>支付宝</p> </th>
+    </tr>    
+  </table>
+</p>
 
 ---
 
