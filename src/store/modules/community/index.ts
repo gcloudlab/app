@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
 import piniaStore from '@/store';
-import { onWarning, onError, onSuccess } from '@/utils/messages';
+import { onWarning, onError, onSuccess, onInfo } from '@/utils/messages';
 import useTimer from '@/hooks/useTimer';
 import { PaginationOptions } from '@/models';
 import {
   createPosts,
   createPostsComment,
+  createPostsFeedback,
   deletePosts,
   deletePostsComment,
   getPosts,
@@ -17,6 +18,7 @@ import {
 import {
   PostsCommentFormItem,
   PostsCommentItem,
+  PostsFeedbackCreate,
   PostsFormItem,
   PostsItem,
 } from '@/models/community';
@@ -177,6 +179,23 @@ export const useCommunityStore = defineStore({
         } else {
           onWarning(res.data.msg);
         }
+      } catch (error) {
+        onError('出错了');
+      }
+    },
+    async onCreatePostsFeedbackAction(data: PostsFeedbackCreate) {
+      try {
+        const res = await createPostsFeedback(data);
+        if (res.data.msg === 'error') {
+          onWarning(res.data.msg);
+          return;
+        } else if (res.data.code === 405) {
+          onInfo('已取消');
+        } else if (res.data.msg === 'success') {
+        }
+        this.posts_detail!.ilike = res.data.ilike;
+        this.posts_detail!.dislike = res.data.dislike;
+        this.posts_detail!.collection = res.data.collect;
       } catch (error) {
         onError('出错了');
       }

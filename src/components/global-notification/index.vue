@@ -1,5 +1,5 @@
 <template>
-  <div class="notification">
+  <div class="global-notification">
     <n-popover :show="show" :show-arrow="false" placement="bottom-end" trigger="manual">
       <template #trigger>
         <n-badge :dot="unread_count > 0" :processingt="unread_count > 0">
@@ -73,7 +73,7 @@ watch(globalStore, () => {
 </script>
 
 <style lang="scss">
-.notification {
+.global-notification {
   .n-badge .n-badge-sup {
     left: 18px;
     top: 4px;

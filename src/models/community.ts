@@ -11,7 +11,7 @@ export interface PostsFormItem extends PostsBaseItem {
 
 export interface PostsItem extends PostsBaseItem {
   identity: string;
-  like: number;
+  ilike: number;
   dislike: number;
   collection: number;
   click_num: number;
@@ -40,8 +40,14 @@ export interface PostsCommentItem extends PostsCommentBaseItem {
   owner: string;
   owner_identity: string;
   avatar: string;
-  like: number;
+  ilike: number;
   dislike: number;
   updated_at: string;
   deleted_at?: string;
+}
+
+export type FeedbackType = 'ilike' | 'dislike' | 'collect';
+export interface PostsFeedbackCreate {
+  posts_identity: string;
+  type: FeedbackType;
 }

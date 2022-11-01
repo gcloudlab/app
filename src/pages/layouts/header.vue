@@ -26,6 +26,7 @@
         {{ item.label }}
       </n-tab>
       <template #suffix>
+        <Notification />
         <GlobalNotification />
         <p
           v-if="!authStore.sign_status"
@@ -55,6 +56,7 @@ import Avatar from '@/components/avatar/index.vue';
 import Logo from '@/assets/gcloud.png';
 import defaultAvatar from '@/assets/logo.png';
 import GlobalNotification from '@/components/global-notification/index.vue';
+import Notification from '@/components/notification/index.vue';
 
 const router = useRouter();
 const { authStore } = useAuth();

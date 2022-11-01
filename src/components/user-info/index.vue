@@ -32,7 +32,8 @@
     <n-divider />
     <div class="action flex flex-col items-start">
       <ShareList @on-close="handleCloseShare" />
-      <n-button type="default" quaternary size="small"> 😍 我的收藏 </n-button>
+      <n-button type="default" quaternary size="small"> 😍 我的点赞 </n-button>
+      <n-button type="default" quaternary size="small"> 🦄 我的收藏 </n-button>
       <n-button type="default" quaternary size="small"> 🎯 历史浏览 </n-button>
     </div>
 

@@ -36,9 +36,11 @@
       <div class="info bg-gray-100 flex items-center justify-between">
         <div class="action">
           <n-button-group size="small">
-            <n-button quaternary>👍{{ communityStore.posts_detail?.like }}</n-button>
-            <n-button quaternary>👎</n-button>
-            <n-button quaternary>❤️ 加入收藏</n-button>
+            <n-button quaternary @click="handleLike"
+              >👍{{ communityStore.posts_detail?.ilike }}</n-button
+            >
+            <n-button quaternary @click="handleDislike">👎</n-button>
+            <n-button quaternary @click="handleCollect">❤️ 加入收藏</n-button>
           </n-button-group>
         </div>
         <div class="count">
@@ -119,6 +121,7 @@ const {
   onCreatePostsComment,
   onGetPostsComment,
   onDeletePostsComment,
+  onCreatePostsFeedback,
 } = useCommunity();
 
 const current_posts_id = ref(router.currentRoute.value.params.id as string);
@@ -172,6 +175,16 @@ const onSetReplyInfo = (value: { owner_identity: string; owner: string }) => {
 const handleCancelReply = () => {
   current_reply_user_comment.value = null;
   current_reply_user_name_comment.value = null;
+};
+
+const handleLike = async () => {
+  await onCreatePostsFeedback({ posts_identity: current_posts_id.value, type: 'ilike' });
+};
+const handleDislike = async () => {
+  await onCreatePostsFeedback({ posts_identity: current_posts_id.value, type: 'dislike' });
+};
+const handleCollect = async () => {
+  await onCreatePostsFeedback({ posts_identity: current_posts_id.value, type: 'collect' });
 };
 
 const onFocusIn = () => {

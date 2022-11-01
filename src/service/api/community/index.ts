@@ -2,6 +2,7 @@ import axios from '@/service/axios';
 import {
   PostsCommentFormItem,
   PostsCommentItem,
+  PostsFeedbackCreate,
   PostsFormItem,
   PostsItem,
 } from '@/models/community';
@@ -53,4 +54,12 @@ export const deletePostsComment = (id: string): Promise<CustomResponse<BaseData>
   return axios.delete('/posts/comment/delete', {
     data: { identity: id },
   });
+};
+
+export const createPostsFeedback = (
+  data: PostsFeedbackCreate
+): Promise<
+  CustomResponse<{ ilike: number; dislike: number; collect: number; msg?: string; code?: number }>
+> => {
+  return axios.post('/posts/feedback/create', data);
 };
