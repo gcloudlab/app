@@ -3,8 +3,8 @@
     <Header />
     <n-scrollbar style="max-height: calc(100vh - 60px)">
       <router-view />
-      <Footer />
     </n-scrollbar>
+    <Footer />
   </div>
 </template>
 
