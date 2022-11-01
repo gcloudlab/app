@@ -37,7 +37,7 @@
         >
           <template #empty>
             <span class="text-xs text-primary">
-              {{ origin_folders.length === 0 ? '建议新建文件夹' : '单文件上传限制10MB' }}</span
+              {{ origin_folders.length === 0 ? '建议新建文件夹' : '单文件上传限制20MB' }}</span
             >
           </template>
           <template #action>
@@ -158,6 +158,7 @@ const fileList = ref<UploadFileInfo[]>([]);
 const uploadFolder = ref<SelectBaseOption>({
   id: props.currentFolder?.value ?? 0,
   name: props.currentFolder?.label ?? '默认文件夹',
+  target: 'private',
 });
 const uploadAction = ref(Upload_Url);
 const headers = {

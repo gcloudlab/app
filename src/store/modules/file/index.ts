@@ -218,12 +218,18 @@ export const useFileStore = defineStore({
           this.uploading = false;
           this.onRemoveUploadFileAction(payload);
           this.onGetFileListAction().then(() => {
+            if (payload.parentId === 0 && payload.target === 'private') {
+              this.onRefreshFolderAction('default');
+            } else if (payload.parentId === 0 && payload.target === 'public') {
+              this.onRefreshFolderAction('public');
+            }
             this.onJumpToFileAction({
               parent_id: payload.parentId,
-              id: -1,
+              id: 0,
               identity: payload.repositoryIdentity,
               name: payload.name,
               size: 0,
+              target: payload.target,
             });
           });
         } else if (res.data.msg === 'exist') {
@@ -253,8 +259,13 @@ export const useFileStore = defineStore({
       try {
         const res = await createFolder(payload, target);
         if (res.data.msg === 'success') {
-          await this.onGetFileListAction();
-        } else if (res.data.msg === '文件名已存在') {
+          onSuccess('创建成功');
+          await this.onGetFileListAction().then(() => {
+            if (target === 'public') {
+              this.onRefreshFolderAction(target);
+            }
+          });
+        } else if (res.data.msg === 'exits') {
           onWarning('文件夹已存在');
         }
       } catch (e) {
@@ -273,6 +284,7 @@ export const useFileStore = defineStore({
         onError(`${error}`);
       }
     },
+    // TODO(bug): 删除和移动文件夹无法实时更新
     async onDeleteFileAction(files: FileListData[], target: UploadTargetType) {
       Promise.allSettled(
         files.map(file => (file !== null ? deleteFile(file.identity, target) : null))
@@ -281,9 +293,15 @@ export const useFileStore = defineStore({
           if (res.find(i => (i as any).value?.data?.msg === 'success')) {
             this.onGetFileListAction().then(() => {
               files.map(file => {
+                if (file.parent_id === 0) {
+                  this.onRefreshFolderAction(file.target === 'private' ? 'default' : 'public');
+                } else if (file.type === '文件夹') {
+                  // this.folder_routes = [...this.folder_routes.slice(0, 1)];
+                }
                 file && this.onJumpToFileAction(file);
               });
             });
+            onSuccess('已删除');
           } else {
             onWarning('删除失败');
           }
@@ -306,6 +324,9 @@ export const useFileStore = defineStore({
         if (res.data.msg === 'success') {
           onSuccess('已保存');
           this.onGetFileListAction().then(() => {
+            if (payload.file.parent_id === 0) {
+              this.onRefreshFolderAction(payload.file.target === 'private' ? 'default' : 'public');
+            }
             this.onJumpToFileAction({ ...payload.file });
           });
         } else {
@@ -313,6 +334,15 @@ export const useFileStore = defineStore({
         }
       } catch (error) {
         onError(`出错了: ${error}`);
+      }
+    },
+    onRefreshFolderAction(identity: string) {
+      const other_folders = ['default', 'public', 0];
+      if (other_folders.includes(identity)) {
+        this.folder_routes = [
+          { id: -1, name: '主菜单', size: -1, parent_id: 0, identity: 'root' },
+          ...this.user_files.filter(i => i.identity === identity),
+        ];
       }
     },
   },
