@@ -66,7 +66,7 @@ export const useCommunityStore = defineStore({
         useTimer(() => {
           this.fetching = false;
         }, 3);
-        onError('出错了');
+        onError(`出错了: ${error}`);
       }
     },
     async onGetPostsDetailAction(id: string) {
@@ -84,7 +84,7 @@ export const useCommunityStore = defineStore({
         useTimer(() => {
           this.fetching_detail = false;
         }, 3);
-        onError('出错了');
+        onError(`出错了: ${error}`);
       }
     },
     async onCreatePostsAction(data: PostsFormItem) {
@@ -97,7 +97,7 @@ export const useCommunityStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     async onUpdatePostsAction(data: PostsItem) {
@@ -110,7 +110,7 @@ export const useCommunityStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     async onDeletePostsAction(id: string) {
@@ -123,7 +123,7 @@ export const useCommunityStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     async onCreatePostsCommentAction(data: PostsCommentFormItem) {
@@ -136,7 +136,7 @@ export const useCommunityStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     async onGetPostsCommentAction(id: string) {
@@ -154,7 +154,7 @@ export const useCommunityStore = defineStore({
         useTimer(() => {
           this.fetching_comment = false;
         }, 3);
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     async onUpdatePostsCommentAction(data: PostsCommentFormItem) {
@@ -167,7 +167,7 @@ export const useCommunityStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     async onDeletePostsCommentAction(id: string, posts_id: string) {
@@ -180,7 +180,7 @@ export const useCommunityStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     async onCreatePostsFeedbackAction(data: PostsFeedbackCreate) {
@@ -197,7 +197,7 @@ export const useCommunityStore = defineStore({
         this.posts_detail!.dislike = res.data.dislike;
         this.posts_detail!.collection = res.data.collect;
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
     },
   },

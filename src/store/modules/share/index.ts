@@ -43,9 +43,9 @@ export const useShareStore = defineStore({
         this.fetching = false;
       } catch (error) {
         useTimer(() => {
-          onError('出错了');
           this.fetching = false;
         }, 3);
+        onError(`${error}`);
       }
       this.fetching = false;
     },
@@ -58,7 +58,7 @@ export const useShareStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     async onGetShareDetailByIndentityAction(id: string) {
@@ -71,7 +71,7 @@ export const useShareStore = defineStore({
           onError(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
       this.fetching = false;
     },
@@ -84,7 +84,7 @@ export const useShareStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     async onGetUserShareListAction() {
@@ -96,7 +96,7 @@ export const useShareStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (e) {
-        onError('出错了');
+        onError(`${e}`);
       }
     },
   },

@@ -245,7 +245,7 @@ export const useFileStore = defineStore({
           });
         }
       } catch (e) {
-        onError('上传失败，请重试');
+        onError(`上传失败: ${e}`);
         this.uploading = false;
       }
     },
@@ -258,7 +258,7 @@ export const useFileStore = defineStore({
           onWarning('文件夹已存在');
         }
       } catch (e) {
-        onError('创建失败，请重试');
+        onError(`创建失败: ${e}`);
       }
     },
     async onUpdateFileNameAction(payload: UpdateFileNameOption, target: UploadTargetType) {
@@ -270,7 +270,7 @@ export const useFileStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('请重试');
+        onError(`${error}`);
       }
     },
     async onDeleteFileAction(files: FileListData[], target: UploadTargetType) {
@@ -288,8 +288,8 @@ export const useFileStore = defineStore({
             onWarning('删除失败');
           }
         })
-        .catch(() => {
-          onError(`出错了`);
+        .catch(e => {
+          onError(`${e}`);
         });
     },
     async onMoveFoderAction(payload: MoveFolderOption, target: UploadTargetType) {
@@ -312,7 +312,7 @@ export const useFileStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`出错了: ${error}`);
       }
     },
   },

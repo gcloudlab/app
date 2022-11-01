@@ -50,7 +50,7 @@ export const useGlobalStore = defineStore({
           this.register_count = 0;
           this.fetching = false;
         }, 3);
-        onError('出错了');
+        onError(`${error}`);
       }
     },
     onSetNotificationsStatusAction(key: string) {
@@ -76,7 +76,7 @@ export const useGlobalStore = defineStore({
           this.share_count = 0;
           this.fetching = false;
         }, 3);
-        onError('出错了');
+        onError(`${error}`);
       }
     },
   },

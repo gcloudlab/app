@@ -71,7 +71,7 @@ export const useAuthStore = defineStore({
         }
       } catch (error) {
         this.sign_status = false;
-        onError();
+        onError(`${error}`);
       }
     },
     onLogoutAction() {
@@ -98,7 +98,7 @@ export const useAuthStore = defineStore({
         onError(res.data.msg);
         return false;
       } catch (error) {
-        onError('出错了');
+        onError(`出错了: ${error}`);
         return false;
       }
     },
@@ -113,7 +113,7 @@ export const useAuthStore = defineStore({
         return true;
       } catch (error) {
         this.sign_status = false;
-        onError('获取验证码失败');
+        onError(`出错了: ${error}`);
       }
     },
     async onRefreshTokenAction() {
@@ -186,7 +186,7 @@ export const useAuthStore = defineStore({
           onWarning(res.data.msg);
         }
       } catch (error) {
-        onError('出错了');
+        onError(`出错了: ${error}`);
       }
     },
   },
