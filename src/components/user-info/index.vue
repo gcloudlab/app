@@ -10,7 +10,7 @@
           {{ authStore.auth?.email || '注册即赠1G容量～' }}
         </div>
 
-        <div class="text-xs" v-if="authStore.auth?.name">
+        <div class="text-xs" v-if="authStore.sign_status">
           <n-divider vertical />已加入{{ authStore.auth?.registration_days || 0 }}天
         </div>
       </div>
@@ -38,12 +38,7 @@
 
     <n-divider />
     <div class="sign-action flex">
-      <n-button
-        v-if="sign_status && online_status"
-        type="default"
-        size="small"
-        @click="handleLogout"
-      >
+      <n-button v-if="authStore.sign_status" type="default" size="small" @click="handleLogout">
         <template #icon>
           <n-icon><LogOutIcon /></n-icon>
         </template>
@@ -61,7 +56,6 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { storeToRefs } from 'pinia';
 import { useAuth } from '@/hooks';
 import { getTimeState } from '@/utils/date';
 import randomAvatar from '@/utils/random-avatar';
@@ -91,8 +85,6 @@ const handleCloseEdit = () => {
 const handleCloseShare = () => {
   emits('onCloseShare', false);
 };
-
-const { auth, sign_status, online_status } = storeToRefs(authStore);
 </script>
 
 <style lang="scss" scoped></style>

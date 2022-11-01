@@ -89,7 +89,7 @@
               :node-props="nodeProps"
             />
             <div v-else class="text-xs text-center">
-              {{ authStore.auth?.name ? '请先新建文件夹' : '未登陆' }}
+              {{ authStore.sign_status ? '请先新建文件夹' : '未登陆' }}
             </div>
           </n-popover>
           <!-- <n-button size="small"> 预览 </n-button>
@@ -180,7 +180,7 @@ const handleOpenSaveFolder = () => {
 };
 
 const handleSaveFile = async () => {
-  if (!authStore.auth?.name) {
+  if (!authStore.sign_status) {
     onWarning('请先登录');
     return;
   }

@@ -20,9 +20,8 @@
 - ✨ 纯 Go 开发（后端）
 - 👻 用户隐私安全
 - 🎨 **不限速**
-- ...
 
-详见文档 [API](/docs/API.md).
+<!-- 详见文档 [API](/docs/API.md). -->
 
 ## 开发者须知
 
@@ -48,21 +47,21 @@ npm run dev
  <code><img width='40px' src='https://avatars.githubusercontent.com/u/87841684?v=4' alt=''/></code></a>
 </div>
 
-
-## License
-
-GCloud is open source software licensed as [GPL](LICENSE).
-
 ## 请我吃辣条
 
 <p align="center">
   <table border="0">
     <tr>
-        <th  align="center"><img width='200px' src='https://raw.githubusercontent.com/yesmore/img/master/img/81E3D2890C073A52E045D9E49457C3ED.jpg' alt='wx'/> <p>微信</p> </th>
+        <th  align="center"><img width='200px' src='https://cdn.jsdelivr.net/gh/yesmore/img/img/81E3D2890C073A52E045D9E49457C3ED.jpg' alt='wx'/> <p>微信</p> </th>
         <th align="center"><img width='200px' src='https://cdn.jsdelivr.net/gh/yesmore/img/img/849E2934286ACA620B988C523AEBC92B.jpg' alt='zfb'/> <p>支付宝</p> </th>
     </tr>    
   </table>
 </p>
+
+## License
+
+GCloud is open source software licensed as [GPL](LICENSE).
+
 
 ---
 

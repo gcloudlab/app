@@ -37,19 +37,19 @@
             <div class="flex flex-row items-center justif-center">
               <n-icon size="20" class="text-primary"><PaperPlane /></n-icon>
               <n-button
-                :disabled="!authStore.auth?.name"
+                :disabled="!authStore.sign_status"
                 quaternary
                 size="small"
                 @click="handleNewPosts"
               >
                 {{
-                  authStore.auth?.name ? (show_editor ? '取消创作' : '创作新帖子') : '登陆后发帖'
+                  authStore.sign_status ? (show_editor ? '取消创作' : '创作新帖子') : '登陆后发帖'
                 }}
               </n-button>
             </div>
             <div class="mt-2">
               <n-button
-                :disabled="!authStore.auth?.name"
+                :disabled="!authStore.sign_status"
                 quaternary
                 size="tiny"
                 @click="show_owner_data = !show_owner_data"
@@ -102,7 +102,7 @@ import type { PostsFormItem, PostsItem } from '@/models/community';
 import _ from 'lodash';
 import { dateFromNow } from '@/utils/date';
 import { NButton, NIcon, NScrollbar, NH5, NDivider } from 'naive-ui';
-import { PaperPlane, Pencil } from '@vicons/ionicons5';
+import { PaperPlane } from '@vicons/ionicons5';
 import PostsList from '@/components/community/posts-list/index.vue';
 import Introduction from './introduction/index.vue';
 const PostsEditor = defineAsyncComponent(
@@ -127,6 +127,8 @@ const hot_posts = computed(() => {
 
   if (last_three_day_list.length === 0) {
     return last_seven_day_list;
+  } else if (last_seven_day_list.length === 0) {
+    return sort_list.slice(0, 5);
   } else if (last_three_day_list.length < 5) {
     return [
       ...last_three_day_list,
@@ -160,11 +162,16 @@ const handleDeletePosts = async (value: PostsItem) => {
 const handleNewPosts = () => {
   update_data.value = null;
   show_editor.value = !show_editor.value;
+  onScrollToTop();
 };
 
 const handleOpenUpdate = (value: PostsItem) => {
   update_data.value = value;
   show_editor.value = true;
+  onScrollToTop();
+};
+
+const onScrollToTop = () => {
   document.querySelector('.posts-main .n-scrollbar-content')?.scrollIntoView();
 };
 

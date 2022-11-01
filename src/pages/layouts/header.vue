@@ -28,7 +28,7 @@
       <template #suffix>
         <GlobalNotification />
         <p
-          v-if="!authStore.auth?.name"
+          v-if="!authStore.sign_status"
           class="mr-4 mt-3 animate-pulse cursor-pointer text-primary text-sm hover:text-secondary"
           @click="router.push('/sign')"
         >
