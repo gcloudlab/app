@@ -152,14 +152,6 @@ const handleChangeViewType = () => {
 };
 
 const { folder_routes, files_size, public_size } = storeToRefs(fileStore);
-
-// watch(
-//   folder_routes,
-//   (newValue, oldValue) => {
-//     console.log('folder_routes', newValue, oldValue);
-//   },
-//   { deep: true }
-// );
 </script>
 
 <style lang="scss" scoped>

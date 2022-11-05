@@ -11,7 +11,21 @@
 
 > 关于容量：注册即赠1G容量，暂无升级容量方案。（基于腾讯云对象存储 COS，详见 [COS 开通方法](<[/dev/README.md](https://github.com/yesmore/gcloud-server/blob/master/dev/README.md)>)）共个人使用、学习等。祝您体验愉快~
 
-<img src='https://img-yesmore.vercel.app/gcloud/gcloud-app.png'/>
+<table style="border:none">
+<tr>
+<td  colspan="2" align='center'><img  src='https://raw.githubusercontents.com/yesmore/img/main/gcloud/gcloud-app.png'/></td>
+<td  colspan="2" align='center'><img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-pc-c.png'/></td>
+</tr>
+<tr>
+<td align='center'><img  src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-home.png'/></td>
+<td align='center'><img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-c.png'/></td>
+<td align='center'><img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-posts.png'/></td>
+<td align='center'><img  src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-signin.png'/></td>
+</tr>
+</table>
+
+
+
 
 ## 功能特性
 
@@ -52,11 +66,12 @@ npm run dev
 <p align="center">
   <table border="0">
     <tr>
-        <th  align="center"><img width='200px' src='https://cdn.jsdelivr.net/gh/yesmore/img/img/81E3D2890C073A52E045D9E49457C3ED.jpg' alt='wx'/> <p>微信</p> </th>
-        <th align="center"><img width='200px' src='https://cdn.jsdelivr.net/gh/yesmore/img/img/849E2934286ACA620B988C523AEBC92B.jpg' alt='zfb'/> <p>支付宝</p> </th>
+        <th  align="center"><img width='200px' src='https://raw.githubusercontents.com/yesmore/img/master/img/81E3D2890C073A52E045D9E49457C3ED.jpg' alt='wx'/> <p>微信</p> </th>
+        <th align="center"><img width='200px' src='https://raw.githubusercontents.com/yesmore/img/master/img/849E2934286ACA620B988C523AEBC92B.jpg' alt='zfb'/> <p>支付宝</p> </th>
     </tr>    
   </table>
 </p>
+
 
 ## License
 
