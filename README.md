@@ -11,21 +11,22 @@
 
 > 关于容量：注册即赠1G容量，暂无升级容量方案。（基于腾讯云对象存储 COS，详见 [COS 开通方法](<[/dev/README.md](https://github.com/yesmore/gcloud-server/blob/master/dev/README.md)>)）共个人使用、学习等。祝您体验愉快~
 
+<img  src='https://raw.githubusercontents.com/yesmore/img/main/gcloud/gcloud-app.png'/>
+
+<img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-pc-c.png'/>
+
+<img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-pc-signin.png'/>
+
 <table style="border:none">
 <tr>
-<td  colspan="2" align='center'><img  src='https://raw.githubusercontents.com/yesmore/img/main/gcloud/gcloud-app.png'/></td>
-<td  colspan="2" align='center'><img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-pc-c.png'/></td>
+<td align='center'><img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-posts.png'/></td>
+<td align='center'><img  src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-signin.png'/></td>
 </tr>
 <tr>
 <td align='center'><img  src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-home.png'/></td>
 <td align='center'><img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-c.png'/></td>
-<td align='center'><img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-posts.png'/></td>
-<td align='center'><img  src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-signin.png'/></td>
 </tr>
 </table>
-
-
-
 
 ## 功能特性
 
