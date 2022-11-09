@@ -125,6 +125,11 @@ const { deleted_files, fetching } = storeToRefs(fileStore);
   }
   .recycle-col {
     background-color: rgb(250, 255, 255);
+    font-size: 13px;
+    .n-data-table-td {
+      padding-top: 3px;
+      padding-bottom: 3px;
+    }
   }
 }
 </style>

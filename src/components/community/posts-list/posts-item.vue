@@ -12,7 +12,7 @@
       <n-skeleton v-if="communityStore.fetching" text width="60%" />
       <div v-else class="flex items-center">
         <div
-          class="text-primary cursor-pointer bolder hover:text-secondary"
+          class="posts-title cursor-pointer bolder hover:text-secondary"
           @click="router.push(`/p/${posts.identity}`)"
         >
           {{ posts.title || '标题' }}
@@ -120,4 +120,9 @@ const onDelete = (posts: PostsItem) => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.posts-title {
+  color: #778087;
+  transition: color 0.3s;
+}
+</style>

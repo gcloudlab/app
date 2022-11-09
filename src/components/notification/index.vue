@@ -2,9 +2,9 @@
   <div class="notification">
     <n-badge>
       <n-icon
-        class="mr-4 mt-1 text-primary cursor-pointer hover:text-gray-500"
+        class="mr-4 text-primary cursor-pointer hover:text-gray-500"
         :component="Mail20Regular"
-        size="24"
+        size="23"
       />
     </n-badge>
   </div>

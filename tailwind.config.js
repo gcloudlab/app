@@ -8,6 +8,7 @@ module.exports = {
         secondary: '#009a9d',
         warning: '#fd7724',
         error: '#fd4f24',
+        tertiary: '#b9feff13',
       },
       backgroundColor: {
         primary: '#00b0b3',

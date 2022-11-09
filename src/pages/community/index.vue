@@ -29,7 +29,7 @@
       <n-scrollbar style="max-height: calc(100vh - 109px)">
         <div class="bg-header shadow rounded py-2 mb-4">
           <div class="m-3">
-            <n-h5 prefix="bar" class="rounded text-sm"> G社简介 </n-h5>
+            <n-h5 prefix="bar" class="rounded text-sm"> G社是啥捏 </n-h5>
             <Introduction />
           </div>
           <n-divider />
@@ -54,7 +54,9 @@
                 size="tiny"
                 @click="show_owner_data = !show_owner_data"
               >
-                {{ !show_owner_data ? `查看我的创作 (${owner_posts.length || 0})` : `所有创作` }}
+                {{
+                  !show_owner_data ? `查看我的创作 (${owner_posts.length || 0})` : `查看所有创作`
+                }}
               </n-button>
             </div>
           </div>
@@ -125,9 +127,7 @@ const hot_posts = computed(() => {
   const last_three_day_list = last_n_day(3);
   const last_seven_day_list = last_n_day(7);
 
-  if (last_three_day_list.length === 0) {
-    return last_seven_day_list;
-  } else if (last_seven_day_list.length === 0) {
+  if (last_seven_day_list.length === 0) {
     return sort_list.slice(0, 5);
   } else if (last_three_day_list.length < 5) {
     return [

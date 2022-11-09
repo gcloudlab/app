@@ -9,6 +9,7 @@
       >
         <TriggerUpload class="w-full h-full shadow-sm" title="单击上传" />
         <Vue3Lottie
+          v-if="!isMobile()"
           class="robot w-1/5 bg-gradient-to-t from-green-100"
           :animation-data="RobotJson"
         />

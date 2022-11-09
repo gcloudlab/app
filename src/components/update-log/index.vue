@@ -1,7 +1,7 @@
 <template>
   <div class="text-sm">
     <div
-      class="mb-4 flex justify-between hover:text-secondary"
+      class="mb-3 flex justify-between hover:text-secondary"
       v-for="item in data"
       :key="item.content"
     >

@@ -12,8 +12,8 @@
         <div v-if="popular_share_list && popular_share_list.length > 0">
           <ShareList :data="popular_share_list" />
         </div>
-        <div v-else-if="fetching" class="p-2">
-          <n-skeleton class="mb-2" height="20px" :repeat="10" :sharp="false" />
+        <div v-else-if="fetching" class="p-1">
+          <n-skeleton class="mb-2" height="35px" :repeat="8" :sharp="false" />
         </div>
         <Empty v-else description="空空如也" />
       </div>
