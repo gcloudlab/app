@@ -12,6 +12,14 @@
       <div>
         <v-md-preview v-if="file.type === 'markdown'" :text="file_preview_data"></v-md-preview>
         <!-- <div v-else-if="file.type === 'HTML'" v-html="file_preview_data"></div> -->
+        <div v-else-if="['文档', '表格', '幻灯片'].includes(file.type!)">
+          <iframe
+            :src="`https://view.officeapps.live.com/op/view.aspx?src=${file.path}`"
+            frameborder="0"
+            width="100%"
+            height="700px"
+          ></iframe>
+        </div>
         <div v-else-if="file.type === 'PDF'">暂不支持</div>
         <pre v-else>{{ file_preview_data }}</pre>
       </div>

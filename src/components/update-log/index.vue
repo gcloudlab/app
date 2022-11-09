@@ -16,6 +16,11 @@
 <script setup lang="ts">
 const data = [
   {
+    type: '🦄 新增',
+    content: '支持预览office文件啦~',
+    date: '2022-11-01',
+  },
+  {
     type: '🌈 优化',
     content: '优化请求提示信息',
     date: '2022-11-01',
