@@ -13,7 +13,7 @@
             <div class="name">
               <span class="mr-2">
                 <span class="font-bold text-gray-500">
-                  {{ comment.owner }}
+                  {{ comment.owner || '匿名用户' }}
                   {{ `${authStore.auth?.name === comment.owner ? '(我)' : ''}` }}</span
                 >
                 <span

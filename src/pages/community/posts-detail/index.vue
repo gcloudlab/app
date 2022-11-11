@@ -59,21 +59,26 @@
     <div class="comment shadow bg-header p-4">
       <div class="head flex justify-between text-sm">
         <span class="text-gray-400"
-          >{{ communityStore.posts_detail_comment?.length || 0 }}条回复</span
-        >
-        <div v-if="communityStore.posts_detail?.tags">
-          <n-tag
-            v-for="(item, index) in communityStore.posts_detail?.tags?.split(',')"
-            :key="index"
-            class="mr-1"
-            size="small"
-            :bordered="false"
-            :color="{ textColor: '#999999' }"
-          >
-            {{ item }}
-          </n-tag>
+          >{{ communityStore.posts_detail_comment?.length || 0 }}条回复
+        </span>
+        <div>
+          <span class="text-gray-400 mr-3">{{
+            transformDateTime(communityStore.posts_detail?.updated_at!)
+          }}</span>
+          <template v-if="communityStore.posts_detail?.tags">
+            <n-tag
+              v-for="(item, index) in communityStore.posts_detail?.tags?.split(',')"
+              :key="index"
+              class="mr-1"
+              size="small"
+              :bordered="false"
+              :color="{ textColor: '#999999' }"
+            >
+              {{ item }}
+            </n-tag>
+          </template>
+          <span v-else class="text-gray-400">无标签</span>
         </div>
-        <div v-else class="text-gray-400">无标签</div>
       </div>
       <div class="comment-list">
         <PostsCommentList
@@ -106,6 +111,7 @@ import { ref, onMounted, defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCommunity } from '@/hooks/useCommunity';
 import { isMobile } from '@/utils/is-mobile';
+import { transformDateTime } from '@/utils/date';
 import { NButton, NButtonGroup, NSkeleton, NAvatar, NTag, NDivider } from 'naive-ui';
 import defaultAvatar from '@/assets/logo.png';
 import { PostsCommentFormItem, PostsFormItem, PostsCommentItem } from '@/models/community';
