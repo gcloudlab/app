@@ -107,7 +107,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, defineAsyncComponent } from 'vue';
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { useCommunity } from '@/hooks/useCommunity';
 import { isMobile } from '@/utils/is-mobile';
@@ -140,11 +140,15 @@ onMounted(() => {
   if (current_posts_id.value) {
     onGetPostsDetail(current_posts_id.value).then(() => {
       if (communityStore.posts_detail?.title) {
-        window.document.title = `G社 | ${communityStore.posts_detail.title}`;
+        window.document.title = `${communityStore.posts_detail.title} | G社 `;
       }
     });
     onGetPostsComment(current_posts_id.value);
   }
+});
+
+onUnmounted(() => {
+  window.document.title = 'GCloud 云盘';
 });
 
 const handleSubmitComment = (value: PostsFormItem) => {
