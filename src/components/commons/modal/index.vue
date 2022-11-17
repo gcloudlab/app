@@ -11,6 +11,7 @@
       :title="modalTitle"
       :show-icon="showIcon"
       :positive-button-props="{ type: 'primary' }"
+      :auto-focus="true"
     >
       <slot></slot>
     </n-modal>

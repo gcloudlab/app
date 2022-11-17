@@ -28,9 +28,6 @@
             class="auth_unregistered-signup ml-3"
             @click="onChangeToSignup"
           >
-            <template #icon>
-              <n-icon><log-in-icon /></n-icon>
-            </template>
             去注册
           </n-button>
         </div>
@@ -41,9 +38,6 @@
           <p class="auth_registered-text">所有文件均存储在腾讯对象存储COS，天知地知你知我知。</p>
           <p class="auth_registered-text">Tips：暂不支持修改账号昵称、密码及解绑邮箱功能。</p>
           <n-button type="primary" round class="auth_registered-login" @click="onChangeToSignin">
-            <template #icon>
-              <n-icon><log-in-icon /></n-icon>
-            </template>
             去登陆
           </n-button>
         </div>
@@ -67,7 +61,15 @@
             <Vue3Lottie class="mr-0 mt-2" :animation-data="SpaceJson" :height="50" :width="50" />
           </div>
           <InfoCollection sign-type="signin" />
-          <n-button v-if="isMobile()" class="mt-4 shadow" type="warning" block secondary round @click="router.back()">
+          <n-button
+            v-if="isMobile()"
+            class="mt-4 shadow"
+            type="warning"
+            block
+            secondary
+            round
+            @click="router.back()"
+          >
             返回
           </n-button>
           <n-button
@@ -78,9 +80,6 @@
             class="mt-24 shadow-lg"
             @click="onChangeToSignup"
           >
-            <template #icon>
-              <n-icon><log-in-icon /></n-icon>
-            </template>
             去注册
           </n-button>
         </div>
@@ -98,9 +97,6 @@
             class="mt-14 shadow-lg"
             @click="onChangeToSignin"
           >
-            <template #icon>
-              <n-icon><log-in-icon /></n-icon>
-            </template>
             去登陆
           </n-button>
         </div>

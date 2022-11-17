@@ -2,7 +2,7 @@
   <div class="share-list">
     <n-list hoverable clickable :show-divider="false">
       <n-list-item
-        class="shadow-sm mb-1 hover:shadow"
+        class="shadow-xs mb-1 hover:shadow"
         v-for="share_detail in data"
         :key="share_detail.identity"
       >

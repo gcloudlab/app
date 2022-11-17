@@ -45,6 +45,7 @@ const generateTree = (list: FileListData[] | any, target: UploadTargetType) => {
     children[i.id] = [];
   });
 
+  // meta
   list.map((row: FileListData) => {
     const [type, icon] = generate_file_icon(row.ext!);
     row.type = type;

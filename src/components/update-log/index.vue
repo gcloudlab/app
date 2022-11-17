@@ -16,9 +16,14 @@
 <script setup lang="ts">
 const data = [
   {
+    type: '✨ 功能',
+    content: '悄咪咪上线图集 /doge',
+    date: '2022-11-17',
+  },
+  {
     type: '🦄 新增',
     content: '支持预览office文件啦~',
-    date: '2022-11-01',
+    date: '2022-11-08',
   },
   {
     type: '🌈 优化',

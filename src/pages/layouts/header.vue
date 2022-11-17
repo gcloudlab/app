@@ -65,7 +65,7 @@ const currentRoute = computed(() => router.currentRoute.value.name ?? 'home');
 const tabs = ref([
   { name: 'home', label: '主页', path: '/home' },
   { name: 'community', label: 'G社', path: '/community' },
-  // { name: 'picture', label: '学习资料', path: '/picture' },
+  { name: 'picture', label: '图集', path: '/xswl' },
 ]);
 const logoUrl = ref(Logo);
 </script>

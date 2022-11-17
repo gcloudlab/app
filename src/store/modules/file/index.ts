@@ -91,6 +91,10 @@ export const useFileStore = defineStore({
           result.map((item: FileListData) => {
             if (item.name === '公共文件夹') {
               item.children = public_result;
+              item.size = public_result.reduce(
+                (total: number, item: FileListData) => total + item.size,
+                0
+              );
             }
           });
           this.user_files = result;
