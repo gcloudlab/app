@@ -1,6 +1,6 @@
 <p align="center"><img width="40%" align="center" src="https://img-yesmore.vercel.app/gcloud/gcloudx.png"></p>
 
-<div style='' align="center">
+<div align="center">
     <img src="https://img.shields.io/github/stars/yesmore/gcloud-app.svg?logo=github&style=flat-square" alt="star"/>
 	<img src="https://img.shields.io/github/license/yesmore/gcloud-app?style=flat-square" alt="GPL"/>
 </div>
@@ -9,7 +9,7 @@
 
 `GCloud` 是使用 Vue3 + Go 开发的云盘应用，具备云盘的基本功能，且开源免费。
 
-> 关于容量：注册即赠1G容量，暂无升级容量方案。（基于腾讯云对象存储 COS，详见 [COS 开通方法](<[/dev/README.md](https://github.com/yesmore/gcloud-server/blob/master/dev/README.md)>)）共个人使用、学习等。祝您体验愉快~
+> 关于容量：注册即赠1G容量，暂无升级容量方案（基于腾讯云对象存储 COS，详见 [COS 开通方法](https://github.com/gcloudlab/disk-server/blob/master/docs/README.md#%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8-cos-%E9%85%8D%E7%BD%AE)）。此项目仅供学习使用。祝您体验愉快~
 
 <img  src='https://raw.githubusercontents.com/yesmore/img/main/gcloud/gcloud-app.png'/>
 
