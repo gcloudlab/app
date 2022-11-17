@@ -1,6 +1,6 @@
 <template>
   <div class="overview">
-    <n-divider class="text-sm m-0" title-placement="left"> 🤖 总览 </n-divider>
+    <n-divider class="text-sm m-0" title-placement="left"> 🤖 用户总览 </n-divider>
     <div
       v-if="files_count !== -1 || !fetching"
       class="pb-2 animate__animated animate__fadeIn faster"
