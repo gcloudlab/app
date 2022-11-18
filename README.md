@@ -9,7 +9,7 @@
 
 `GCloud` 是使用 Vue3 + Go 开发的云盘应用，具备云盘的基本功能，且开源免费。
 
-> 关于容量：注册即赠1G容量，暂无升级容量方案（基于腾讯云对象存储 COS，详见 [COS 开通方法](https://github.com/gcloudlab/disk-server/blob/master/docs/README.md#%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8-cos-%E9%85%8D%E7%BD%AE)）。此项目仅供学习使用。祝您体验愉快~
+## 应用截图
 
 <img  src='https://raw.githubusercontents.com/yesmore/img/main/gcloud/gcloud-app.png'/>
 
@@ -31,6 +31,7 @@
 ## 功能特性
 
 - 🎯 支持邮箱注册，安全保障
+- 🦄 注册即赠1G免费容量
 - 🚀 文件秒传/下载/分享/转存/软删除...
 - 😎 文件预览功能 (Markdown/文本/视频/音频/图片/office等)
 - 🤖 社区论坛功能 (发帖/评论/点赞/收藏)
@@ -38,7 +39,7 @@
 - 👻 用户隐私安全
 - 🎨 **不限速** 
 
-<!-- 详见文档 [API](/docs/API.md). -->
+> 关于容量：注册即赠1G容量，暂无升级容量方案（基于腾讯云对象存储 COS，详见 [COS 开通方法](https://github.com/gcloudlab/disk-server/blob/master/docs/README.md#%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%82%A8-cos-%E9%85%8D%E7%BD%AE)）。此项目仅供学习使用。祝您体验愉快~
 
 ## 开发者须知
 
