@@ -1,9 +1,5 @@
 import { createRouter, RouteRecordRaw, createWebHashHistory } from 'vue-router';
-import { isMobile } from '@/utils/is-mobile';
 
-// import Layouts from '@/pages/layouts/index.vue';
-// import Home from '@/pages/home/index.vue';
-// import Community from '@/pages/community/index.vue';
 const Layouts = () => import('@/pages/layouts/index.vue');
 const Home = () => import('@/pages/home/index.vue');
 const Community = () => import('@/pages/community/index.vue');
@@ -12,7 +8,6 @@ const Posts = () => import('@/pages/community/posts-detail/index.vue');
 const Xswl = () => import('@/pages/picture/index.vue');
 const Sign = () => import('@/pages/sign/index.vue');
 const NotFound = () => import('@/pages/notfound/index.vue');
-const TsxDemo = () => import('@/pages/tsx-demo');
 const Mobile = () => import('@/components/mobile/index.vue');
 
 const routes: RouteRecordRaw[] = [
@@ -62,11 +57,6 @@ const routes: RouteRecordRaw[] = [
     path: '/sign',
     name: 'sign',
     component: Sign,
-  },
-  {
-    path: '/tsx-demo',
-    name: 'tsxDemo',
-    component: TsxDemo,
   },
   {
     path: '/:cathchAll(.*)',
