@@ -6,13 +6,12 @@
           v-for="(item, index) in pictures?.photoList"
           :key="index"
           class="picture-item mx-0.5 mb-0.5 mt-2"
-          style="width: 200px; height: 200px"
         >
           <n-image
             class="picture-i animate__animated animate__fadeIn faster shadow-lg rounded"
             :src="item"
-            width="200"
-            height="200"
+            :width="isMobile() ? 350 : 200"
+            :height="isMobile() ? 350 : 200"
             object-fit="cover"
             lazy
             :fallback-src="Logo"
@@ -34,6 +33,7 @@
 <script setup lang="ts">
 import usePicture, { PictureResponse } from '@/hooks/usePicture';
 import { onMounted, ref } from 'vue';
+import { isMobile } from '@/utils/is-mobile';
 import { NImage, NSkeleton, NScrollbar } from 'naive-ui';
 import Menu from './menu.vue';
 import defaultLogo from '@/assets/ctrl.gif';
