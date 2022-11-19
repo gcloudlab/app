@@ -17,7 +17,7 @@
             :fallback-src="Logo"
           >
             <template #placeholder>
-              <div style="width: 200px; height: 200px; margin-top: -15px">
+              <div class="img-placeholder">
                 <n-skeleton width="100%" height="100%" :sharp="false" size="large" />
               </div>
             </template>
@@ -63,6 +63,18 @@ const handleSelect = (option: any) => {
     &:hover {
       transform: scale(1.01);
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .img-placeholder {
+    margin-top: -15px;
+    width: 200px;
+    height: 200px;
+  }
+  @media screen and (max-width: 410px) {
+    .img-placeholder {
+      width: 350px;
+      height: 350px;
     }
   }
 }
