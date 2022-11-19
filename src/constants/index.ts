@@ -23,4 +23,5 @@ export const EXTENDS_MAP = {
   MARKDOWN: ['md'],
   LINK: ['lnk', 'link'],
   BAT: ['bat'],
+  EXE: ['exe'],
 };

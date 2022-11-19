@@ -36,7 +36,7 @@
       <div class="info bg-gray-100 flex items-center justify-between">
         <div class="action">
           <n-button-group size="small">
-            <n-button quaternary @click="handleLike"
+            <n-button color="#009a9d" quaternary @click="handleLike"
               >👍{{ communityStore.posts_detail?.ilike }}</n-button
             >
             <n-button quaternary @click="handleDislike">👎</n-button>

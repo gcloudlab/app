@@ -1,4 +1,11 @@
-import { Folder, LogoMarkdown, FileTraySharp, LogoHtml5, LogoCss3 } from '@vicons/ionicons5';
+import {
+  Folder,
+  LogoMarkdown,
+  FileTraySharp,
+  LogoHtml5,
+  LogoCss3,
+  LogoWindows,
+} from '@vicons/ionicons5';
 import {
   DocumentTextExtract20Regular,
   DocumentChevronDouble20Regular,
@@ -65,6 +72,8 @@ export const generate_file_icon = (ext: string): [type: string, icon: FileIconTy
       'Windows批处理文件',
       { style: 'text-gray-500', icon: shallowRef(DocumentSettings20Regular) },
     ];
+  } else if (EXTENDS_MAP.EXE.includes(_ext)) {
+    return ['Windows应用程序', { style: 'text-secondary', icon: shallowRef(LogoWindows) }];
   } else {
     return [_ext, { style: 'text-gray-500', icon: shallowRef(Document20Regular) }];
   }
