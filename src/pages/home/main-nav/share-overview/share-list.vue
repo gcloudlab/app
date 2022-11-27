@@ -39,7 +39,7 @@
                 <template #icon>
                   <EyeOutline />
                 </template>
-                {{ share_detail.click_num }}
+                <span class="SmileySans text-xs">{{ share_detail.click_num }}</span>
               </n-button>
               <n-divider vertical />
               <span class="text-gray-400">{{ transformSize(share_detail.size) }}</span>
@@ -51,7 +51,7 @@
                   <template #trigger>
                     <n-button class="text-gray-400" size="tiny" text>留言</n-button>
                   </template>
-                  <n-p>
+                  <n-p class="SmileySans">
                     {{ share_detail.desc }}
                   </n-p>
                 </n-popover>

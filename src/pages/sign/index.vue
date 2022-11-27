@@ -9,7 +9,7 @@
     <div class="auth_options-container" :style="{ minWidth: isMobile() ? '375px' : '700px' }">
       <div v-if="!isMobile()" class="auth_options-text rounded-lg shadow-md">
         <div class="auth_options-unregistered">
-          <h1 class="auth_unregistered-title font-black tracking-wide">GCloud 云盘</h1>
+          <h1 class="auth_unregistered-title font-black tracking-wide SmileySans">GCloud 云盘</h1>
           <p class="auth_unregistered-text">GCloud是一款免费的、不限速的在线云盘.</p>
           <p class="auth_unregistered-text">它的优点有很多，比如这个那个还有内个...</p>
           <p class="auth_unregistered-text">
@@ -33,7 +33,7 @@
         </div>
 
         <div class="auth_options-registered">
-          <h1 class="auth_unregistered-title font-black tracking-wide">GCloud 云盘</h1>
+          <h1 class="auth_unregistered-title font-black tracking-wide SmileySans">GCloud 云盘</h1>
           <p class="auth_registered-text">已有账号请移步登陆，左拐不送。</p>
           <p class="auth_registered-text">所有文件均存储在腾讯对象存储COS，天知地知你知我知。</p>
           <p class="auth_registered-text">Tips：暂不支持修改账号昵称、密码及解绑邮箱功能。</p>
@@ -53,11 +53,11 @@
         }"
       >
         <div v-if="isMobile()" class="mobile-title" :class="{ ...formClass }">
-          <h2 class="text-gray-100">GCloud 云盘</h2>
+          <h2 class="text-gray-100 SmileySans">GCloud 云盘</h2>
         </div>
         <div v-if="formStatus === 'signin'" class="auth_forms-login">
           <div class="flex justify-between">
-            <h1 class="text-2xl antialiased font-mono font-extrabold">Sign In</h1>
+            <h1 class="text-2xl antialiased font-mono font-extrabold SmileySans">Sign In</h1>
             <Vue3Lottie class="mr-0 mt-2" :animation-data="SpaceJson" :height="50" :width="50" />
           </div>
           <InfoCollection sign-type="signin" />
@@ -85,7 +85,7 @@
         </div>
         <div v-else class="auth_forms-signup">
           <div class="flex justify-between">
-            <h1 class="text-2xl antialiased font-mono font-extrabold">Sign Up</h1>
+            <h1 class="text-2xl antialiased font-mono font-extrabold SmileySans">Sign Up</h1>
             <Vue3Lottie class="mr-0 mt-2" :animation-data="SpaceJson" :height="50" :width="50" />
           </div>
           <InfoCollection sign-type="signup" @afterSignup="onChangeToSignin" />

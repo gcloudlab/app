@@ -1,6 +1,11 @@
 <template>
   <n-breadcrumb>
-    <n-breadcrumb-item v-for="folder in routes" :key="folder.id" @click="handleClickFolder(folder)">
+    <n-breadcrumb-item
+      class="SmileySans"
+      v-for="folder in routes"
+      :key="folder.id"
+      @click="handleClickFolder(folder)"
+    >
       {{ folder.name }}
     </n-breadcrumb-item>
   </n-breadcrumb>
@@ -26,9 +31,14 @@ const handleClickFolder = (folder: FileListData) => {
     onRemoveFromFolderRoutes();
   }
   onJumpToFolder(folder);
-}
+};
 
 toRefs(props);
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.n-breadcrumb-item {
+  height: 20px;
+  line-height: 20px;
+}
+</style>

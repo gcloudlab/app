@@ -29,7 +29,7 @@
       <n-skeleton v-if="fetching" text width="100%" :repeat="3" />
       <div v-else>
         <n-p>{{ copy_info }}</n-p>
-        <n-p v-if="share_detail.desc !== ''" class="p-3 bg-gray-100">
+        <n-p v-if="share_detail.desc !== ''" class="p-3 bg-gray-100 SmileySans">
           留言：{{ share_detail.desc }}
         </n-p>
       </div>

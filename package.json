@@ -13,6 +13,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@chinese-fonts/dyh": "^1.1.0",
     "@kangc/v-md-editor": "^2.3.15",
     "@types/file-saver": "^2.0.5",
     "@types/qs": "^6.9.7",

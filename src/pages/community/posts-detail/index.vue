@@ -22,7 +22,7 @@
         </div>
       </div>
       <n-divider v-if="communityStore.posts_detail?.content !== ''" title-placement="center"
-        ><span class="text-gray-400 text-sm">🍥 正文</span>
+        ><span class="text-gray-400 text-sm SmileySans">🍥 正文</span>
       </n-divider>
       <div class="content mt-4 p-4" v-if="communityStore.posts_detail?.content !== ''">
         <div v-if="communityStore.fetching_detail">

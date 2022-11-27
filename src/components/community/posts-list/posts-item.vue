@@ -17,13 +17,13 @@
         >
           {{ posts.title || '标题' }}
         </div>
-        <n-button-group v-if="authStore.auth?.name === posts.owner">
-          <n-button class="text-gray-400" quaternary round size="tiny" @click="onUpdate(posts)">
+        <n-button-group v-if="authStore.auth?.name === posts.owner" class="ml-1">
+          <n-button class="text-gray-400" quaternary size="tiny" @click="onUpdate(posts)">
             <template #icon> <Edit32Filled /></template>
           </n-button>
           <n-popconfirm @positive-click="onDelete(posts)" negative-text="取消" positive-text="删除">
             <template #trigger>
-              <n-button class="text-gray-400" quaternary round size="tiny" @click="">
+              <n-button class="text-gray-400" quaternary size="tiny" @click="">
                 <template #icon> <TrashOutline /></template>
               </n-button>
             </template>
@@ -63,7 +63,7 @@
             <template #icon>
               <EyeOutline />
             </template>
-            {{ posts.click_num }}
+            <span class="SmileySans text-xs">{{ posts.click_num }}</span>
           </n-button>
         </div>
       </template>

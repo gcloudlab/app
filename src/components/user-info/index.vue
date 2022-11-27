@@ -1,13 +1,13 @@
 <template>
   <div id="user-info" class="user-info">
     <div class="user">
-      <h3>
+      <div class="text-lg font-bold mb-2">
         {{ getTimeState() }},
         <span class="text-primary">{{ authStore.auth?.name || '游客' }}</span>
-      </h3>
-      <div class="flex items-center mb-2">
+      </div>
+      <div class="flex flex-wrap SmileySans items-center mb-2">
         <div class="text-xs">
-          {{ authStore.auth?.email || '注册即赠1G容量～' }}
+          {{ authStore.auth?.email || '注册即赠免费容量～' }}
         </div>
 
         <div class="text-xs" v-if="authStore.sign_status">
@@ -16,7 +16,7 @@
       </div>
 
       <div v-if="authStore.auth?.capacity" class="text-xs mb-2">
-        我的空间：{{ transformSize(authStore.auth.capacity) }}
+        我的空间：<span class="SmileySans">{{ transformSize(authStore.auth.capacity) }}</span>
         <n-button disabled type="primary" quaternary size="tiny" @click="onInfo('规划中~')"
           >扩容</n-button
         >

@@ -1,5 +1,5 @@
 <template>
-  <div class="introduction text-gray-400 text-sm flex flex-col">
+  <div class="introduction text-gray-400 text-sm flex flex-col SmileySans">
     <n-gradient-text
       v-for="item in list"
       :gradient="{

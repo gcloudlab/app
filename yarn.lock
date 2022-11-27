@@ -288,6 +288,11 @@
   resolved "https://registry.npmmirror.com/@braintree/sanitize-url/-/sanitize-url-3.1.0.tgz#8ff71d51053cd5ee4981e5a501d80a536244f7fd"
   integrity sha512-GcIY79elgB+azP74j8vqkiXz8xLFfIzbQJdlwOPisgbKT00tviJQuEghOXSMVxJ00HoYJbGswr4kcllUc4xCcg==
 
+"@chinese-fonts/dyh@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmmirror.com/@chinese-fonts/dyh/-/dyh-1.1.0.tgz#fe581e979b7f025588854a13c564a1cfce60a06d"
+  integrity sha512-aR2HMwlTmYLNuo412wVF/Sahfm8waD1cdqbEG66/X/l6sJbJlVSm0BOIjH72iVhteWOAEEWRHk3oXYMoDBKE3Q==
+
 "@css-render/plugin-bem@^0.15.10":
   version "0.15.11"
   resolved "https://registry.npmmirror.com/@css-render/plugin-bem/-/plugin-bem-0.15.11.tgz#250b853704af1fbb935b8fcd987839dcc9c95ce2"
