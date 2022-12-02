@@ -32,7 +32,7 @@
         </n-button-group>
       </div>
     </template>
-    <template #header-extra>
+    <template #header-extra v-if="posts.reply_num > 0">
       <div class="flex items-center">
         <n-button secondary round size="tiny"> {{ posts.reply_num }} </n-button>
       </div>
