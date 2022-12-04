@@ -37,8 +37,9 @@ toRefs(props);
 </script>
 
 <style lang="scss">
-.n-breadcrumb-item {
+.n-breadcrumb-item .n-breadcrumb-item__link,
+.n-breadcrumb-item .n-breadcrumb-item__separator {
   height: 20px;
-  line-height: 20px;
+  line-height: 24px;
 }
 </style>

@@ -9,7 +9,8 @@
  */
 
 html {
-  line-height: 1.15; /* 1 */
+  line-height: 1.2; /* 1 */
+  filter: grayscale(1);
   -webkit-text-size-adjust: 100%; /* 2 */
 }
 
@@ -22,7 +23,7 @@ html {
 
 body {
   margin: 0;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 /**
