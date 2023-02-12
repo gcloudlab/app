@@ -47,8 +47,9 @@
 
 ```bash
 git clone https://github.com/gcloudlab/app.git
-npm install
-npm run dev
+
+yarn 
+yarn dev
 ```
 
 ### 开发手册
