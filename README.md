@@ -47,7 +47,17 @@
 
 ```bash
 git clone https://github.com/gcloudlab/app.git
+```
 
+**修改环境变量**
+
+启动前，须创建 `.env.development` 和 `.env.production` 文件，内容参考 `.env.example`。
+
+注意，请勿直接使用本项目线上api接口。
+
+**本地启动**
+
+```bash
 yarn 
 yarn dev
 ```
