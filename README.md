@@ -9,24 +9,12 @@
 
 `GCloud` 是使用 Vue3 + Go 开发的云盘应用，具备云盘的基本功能，且开源免费。
 
+> 后端仓库：[https://github.com/gcloudlab/disk-server](https://github.com/gcloudlab/disk-server)
+
 ## 应用截图
 
 <img  src='https://raw.githubusercontents.com/yesmore/img/main/gcloud/gcloud-app.png'/>
 
-<img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-pc-c.png'/>
-
-<img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-pc-signin.png'/>
-
-<table style="border:none">
-<tr>
-<td align='center'><img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-posts.png'/></td>
-<td align='center'><img  src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-signin.png'/></td>
-</tr>
-<tr>
-<td align='center'><img  src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-home.png'/></td>
-<td align='center'><img src='https://raw.githubusercontents.com/yesmore/img/master/gcloud/gcloud-mobile-c.png'/></td>
-</tr>
-</table>
 
 ## 功能特性
 
@@ -64,7 +52,7 @@ yarn dev
 
 ### 开发手册
 
-详见 [GCloud 开发手册](/dev/README.md).
+详见 [GCloud 开发手册](https://github.com/gcloudlab/disk-server/tree/master/docs).
 
 ## 共建者
 
