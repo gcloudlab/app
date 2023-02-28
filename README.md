@@ -14,7 +14,7 @@
 > 接口地址：[https://gcloud-3224266014.b4a.run](https://gcloud-3224266014.b4a.run)
 
 > **Warning**
-> 禁止使用此接口从事违法犯罪活动， 
+> 禁止使用此接口从事违法犯罪活动
 
 附云盘后端仓库：[https://github.com/gcloudlab/disk-server](https://github.com/gcloudlab/disk-server)
 
