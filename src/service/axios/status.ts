@@ -1,4 +1,17 @@
-export type StatusType = 400 | 401 | 403 | 404 | 408 | 413 | 500 | 501 | 502 | 503 | 504 | 505;
+export type StatusType =
+  | 400
+  | 401
+  | 403
+  | 404
+  | 408
+  | 413
+  | 500
+  | 501
+  | 502
+  | 503
+  | 504
+  | 505
+  | 506;
 const statusMap = {
   400: '请求错误',
   401: '请登录',
@@ -12,8 +25,9 @@ const statusMap = {
   503: '服务不可用',
   504: '网络超时',
   505: 'http版本不支持该请求',
+  506: 'Unknown',
 };
 
 export const showMessage = (status: StatusType): string => {
-  return statusMap[status] || '未知错误';
+  return statusMap[status] || 'Unknown';
 };

@@ -30,6 +30,11 @@ axiosInstance.interceptors.response.use(
       useStorage('token', response.data.token);
     }
 
+    if (!response.status) {
+      onError(showMessage(506 as StatusType));
+      return Promise.reject(response);
+    }
+
     if (response.status === 200) {
       return Promise.resolve(response);
     }
