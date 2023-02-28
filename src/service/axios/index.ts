@@ -12,7 +12,7 @@ axios.defaults.headers.post['Access-Control-Allow-Origin-Type'] = '*';
 
 const axiosInstance: AxiosInstance = axios.create({
   // baseURL: import.meta.env.VITE_APP_BASE_URL + '/', // Proxy 本地开发使用
-  baseURL: 'https://gcloud.aoau.top', // 生产环境使用
+  baseURL: 'https://gcloud-3224266014.b4a.run', // 生产环境使用，注意，本接口免费提供，方便开发者调试
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json;charset=UTF-8',

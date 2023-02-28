@@ -9,7 +9,14 @@
 
 `GCloud` 是使用 Vue3 + Go 开发的云盘应用，具备云盘的基本功能，且开源免费。
 
-> 后端仓库：[https://github.com/gcloudlab/disk-server](https://github.com/gcloudlab/disk-server)
+> 更新：为方便开发时调试，已部署后端接口供开发者本地调试使用，无需关心跨域等配置，直接上手开发前端；可以使用此接口开发其他项目，不保障稳定性~
+> 
+> 接口地址：[https://gcloud-3224266014.b4a.run](https://gcloud-3224266014.b4a.run)
+
+> **Warning**
+> 禁止使用此接口从事违法犯罪活动， 
+
+附云盘后端仓库：[https://github.com/gcloudlab/disk-server](https://github.com/gcloudlab/disk-server)
 
 ## 应用截图
 
@@ -40,8 +47,6 @@ git clone https://github.com/gcloudlab/app.git
 **修改环境变量**
 
 启动前，须创建 `.env.development` 和 `.env.production` 文件，内容参考 `.env.example`。
-
-注意，请勿直接使用本项目线上api接口。
 
 **本地启动**
 
